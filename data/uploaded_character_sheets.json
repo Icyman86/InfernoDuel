@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "source_upload": "Character sheets.zip",
+  "extraction_date": "2026-10-27",
+  "total_files": 8,
+  "purpose": "UNEDITED_ORIGINAL_CHARACTER_SHEETS_NOT_READY_TO_ANIMATE",
+  "items": [
+    {
+      "source_filename": "SharkByte Fighting Game Character Sheet.png",
+      "path": "assets/originals/character_sheets_2026-10-27/SharkByte Fighting Game Character Sheet.png",
+      "slug": "sharkbyte",
+      "fighters": [
+        "SharkByte"
+      ],
+      "kind": "character_sheet",
+      "width": 1448,
+      "height": 1086,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "f20b9cf535a82b832d096fd305c4b2f9855381e2801a9aad0c071135d2919dea",
+      "note": "Pose-/aanvalreferentie; geen transparante animaties"
+    },
+    {
+      "source_filename": "Spinegrin_ Inferno Duel Character Sheet.png",
+      "path": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
+      "slug": "spinegrin",
+      "fighters": [
+        "Spinegrin"
+      ],
+      "kind": "character_sheet",
+      "width": 1448,
+      "height": 1086,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "875da534e27b231a91c02bc00b183920affc12d0507f3df608449f20f9c737d0",
+      "note": "Pose-/aanvalreferentie; geen transparante animaties"
+    },
+    {
+      "source_filename": "Chainveil_ Inferno Duel Character Sheet.png",
+      "path": "assets/originals/character_sheets_2026-10-27/Chainveil_ Inferno Duel Character Sheet.png",
+      "slug": "chainveil",
+      "fighters": [
+        "Chainveil"
+      ],
+      "kind": "character_sheet",
+      "width": 1448,
+      "height": 1086,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "c29617dc5bf2702b00ccf8b1ad9b419ff5a4288f4bbd070fb9a7c915c96ff913",
+      "note": "Pose-/aanvalreferentie; geen transparante animaties"
+    },
+    {
+      "source_filename": "Dark Fantasy Fighting Game Character Sheet.png",
+      "path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "slug": "classic_trio",
+      "fighters": [
+        "Bullet",
+        "Nachtelf",
+        "PoisonBoy"
+      ],
+      "kind": "ensemble_character_sheet",
+      "width": 1536,
+      "height": 1024,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "794197ee96f519baf41181005dcb723f6b536f046feffd2c4d80c64a6de254ff",
+      "note": "Gezamenlijke Bullet/Warlock/PoisonBoy concept-sheet; geen losse animaties"
+    },
+    {
+      "source_filename": "WhatsApp Image 2026-10-25 at 18.59.15.jpeg",
+      "path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 18.59.15.jpeg",
+      "slug": "cheese_rat",
+      "fighters": [
+        "Cheese Rat"
+      ],
+      "kind": "move_reference_sheet",
+      "width": 1536,
+      "height": 1024,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "943737feb46f12533792ce5ce9c58289fc0bed357d8950be98273893f32340d1",
+      "note": "Cheese Rat: artwork, basisaanvallen, specials en supers"
+    },
+    {
+      "source_filename": "WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
+      "path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
+      "slug": "lava_stone",
+      "fighters": [
+        "Lava Stone"
+      ],
+      "kind": "move_reference_sheet",
+      "width": 1312,
+      "height": 1199,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "81713733ba9cf1b97a9478aa672b58b8b34d47c94a9109fd4fb0ad874b2ad2d7",
+      "note": "Lava Stone: artwork, basisaanvallen, specials en supers"
+    },
+    {
+      "source_filename": "WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
+      "path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
+      "slug": "crystal_fang",
+      "fighters": [
+        "Crystal Fang"
+      ],
+      "kind": "move_reference_sheet",
+      "width": 1214,
+      "height": 1295,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "a4b8c7c78ad57e860f450cd2ad17919deec838ae6841e73d835ed08d0825cff2",
+      "note": "Crystal Fang: artwork, basisaanvallen, specials en supers"
+    },
+    {
+      "source_filename": "WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
+      "path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
+      "slug": "phoenix_reign",
+      "fighters": [
+        "Phoenix Reign"
+      ],
+      "kind": "move_reference_sheet",
+      "width": 1214,
+      "height": 1295,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "f9da2cd583d11abb63a07b442d8d1bf5c96d34533e28ba60a6880dcf871682c9",
+      "note": "Phoenix Reign: artwork, basisaanvallen, specials en supers"
+    }
+  ]
+}

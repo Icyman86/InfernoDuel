@@ -1,0 +1,143 @@
+{
+  "schema_version": 2,
+  "story_locked_versus_all_available_until_story_implemented": true,
+  "fighters": [
+    {
+      "id": "sharkbyte",
+      "display_name": "SharkByte",
+      "archetype": "rushdown",
+      "special": "Fin Dash",
+      "ultimate": "Abyssal Frenzy",
+      "story_status": "unlocked",
+      "sprite_ready": false,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/SharkByte Fighting Game Character Sheet.png",
+      "reference_art_available": true
+    },
+    {
+      "id": "bullet",
+      "display_name": "Bullet",
+      "archetype": "bruiser",
+      "special": "Bull Charge",
+      "ultimate": "Stampede Breaker",
+      "story_status": "story_unlock",
+      "sprite_ready": false,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "reference_art_available": true
+    },
+    {
+      "id": "nachtelf",
+      "display_name": "Nachtelf",
+      "archetype": "zoner",
+      "special": "Ember Bolt",
+      "ultimate": "Infernal Rift",
+      "story_status": "story_unlock",
+      "sprite_ready": false,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "reference_art_available": true
+    },
+    {
+      "id": "poisonboy",
+      "display_name": "PoisonBoy",
+      "archetype": "status",
+      "special": "Toxic Splash",
+      "ultimate": "Venom Cataclysm",
+      "story_status": "story_unlock",
+      "sprite_ready": false,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "reference_art_available": true
+    },
+    {
+      "id": "spinegrin",
+      "display_name": "Spinegrin",
+      "archetype": "ranged",
+      "special": "Arm-Spike Volley",
+      "ultimate": "Spineburst",
+      "story_status": "story_unlock",
+      "sprite_ready": false,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
+      "reference_art_available": true
+    },
+    {
+      "id": "chainveil",
+      "display_name": "Chainveil",
+      "archetype": "grappler",
+      "special": "Chain Lash",
+      "ultimate": "Iron Widow",
+      "story_status": "story_unlock",
+      "sprite_ready": false,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/Chainveil_ Inferno Duel Character Sheet.png",
+      "reference_art_available": true
+    },
+    {
+      "id": "cheese_rat",
+      "display_name": "Cheese Rat",
+      "archetype": "speed_mixup",
+      "special": "Cheese Ball / Cheese Trap",
+      "ultimate": "King of the Cheese",
+      "story_status": "pending_story_design",
+      "sprite_ready": false,
+      "reference_art_available": true,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 18.59.15.jpeg",
+      "additional_moves": [
+        "Cheese Slide",
+        "Tail Spin",
+        "Rat Rush",
+        "Cheese Storm"
+      ]
+    },
+    {
+      "id": "lava_stone",
+      "display_name": "Lava Stone",
+      "archetype": "power_defense",
+      "special": "Lava Shield / Stone Spikes",
+      "ultimate": "Metal Beast Mode",
+      "story_status": "pending_story_design",
+      "sprite_ready": false,
+      "reference_art_available": true,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
+      "additional_moves": [
+        "Metal Armor",
+        "Lava Burst",
+        "Earthquake",
+        "Lava Ascension"
+      ]
+    },
+    {
+      "id": "crystal_fang",
+      "display_name": "Crystal Fang",
+      "archetype": "rushdown",
+      "special": "Crystal Dash / Crystal Spikes",
+      "ultimate": "Full Moon Rage",
+      "story_status": "pending_story_design",
+      "sprite_ready": false,
+      "reference_art_available": true,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
+      "additional_moves": [
+        "Shatter Shield",
+        "Lunar Howl",
+        "Diamond Transformation",
+        "Crystal Storm"
+      ]
+    },
+    {
+      "id": "phoenix_reign",
+      "display_name": "Phoenix Reign",
+      "archetype": "fire_aerial",
+      "special": "Phoenix Dash / Fire Tornado",
+      "ultimate": "Phoenix Rising",
+      "story_status": "pending_story_design",
+      "sprite_ready": false,
+      "reference_art_available": true,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
+      "additional_moves": [
+        "Heat Wave",
+        "Rebirth",
+        "Solar Flare",
+        "Inferno Wings",
+        "Eternal Flame"
+      ]
+    }
+  ],
+  "roster_count": 10,
+  "reference_images_are_animation_sprites": false
+}

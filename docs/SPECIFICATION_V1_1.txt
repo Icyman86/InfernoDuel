@@ -1,0 +1,142 @@
+INFERNO DUEL: LEGENDS
+Game Design Brief • Godot 4 • Linux-first • Local Versus 2P / één toetsenbord
+27 oktober 2026  |  Versie 1.1  |  Credits: Rens de Gee en Ted Sondervan
+DOEL: bouw eerst een volledig speelbare offline Linux-fightinggame waarin twee spelers gelijktijdig op één toetsenbord vechten. Android is pas een latere stap.
+1. Speelbare eerste versie
+Native Godot 4 (GDScript), Linux x86_64, 1280×720, Compatibility renderer, 60 FPS als richtlijn. Hoofdmenu → Local Versus → Fighter Select → Arena Select → Fight → Result → Rematch/Main Menu. Daarnaast Solo vs CPU, Options en een Fighter Gallery. Story Mode is zichtbaar als preview tot de verhaalfase.
+2. Characters en stijl
+Fighter
+Uiterlijk / identiteit
+Kenmerk
+SharkByte
+Donkerblauwe haaienmens; leren jasje, witte broek
+Snelle dash + Abyssal Frenzy
+Bullet
+Stiervechter uit oorspronkelijke game
+Charge + Stampede Breaker
+Nachtelf
+Warlock met vuurmagie / elemental
+Ember Bolt + Infernal Rift
+PoisonBoy
+Giftige vechter, bestaand fighter-art ontwerp
+Toxic Splash + Venom Cataclysm
+Spinegrin
+Eenogige alien, geelgroene schubben, rugindicator
+Arm-Spike Volley + Spineburst
+Chainveil
+Gothic vrouw met leer, kant en kettingen
+Chain Lash + Iron Widow
+Cheese Rat
+Zwarte rat in kaasprint-overhemd, jeans, rood-zwarte sneakers.
+Cheese Ball, Cheese Trap, King of the Cheese
+Lava Stone
+Stenen/lava humanoid met metalen huid en scheuren van vuur.
+Lava Shield, Stone Spikes, Metal Beast Mode
+Crystal Fang
+Donkere kristalweerwolf met felle roze shards.
+Crystal Dash, Crystal Spikes, Full Moon Rage
+Phoenix Reign
+Gevederde mensachtige feniks met vleugels en zwart leer.
+Fire Tornado, Rebirth, Phoenix Rising
+
+Fighter-art stijl B: hoge detaillering, donkere fantasie, sterke silhouetten en overtuigende animaties. Alle aanwezige bronbeelden zijn conceptueel referentiemateriaal totdat individuele animatieframes gevalideerd zijn.
+3. Besturing — twee spelers op één toetsenbord
+Actie
+Speler 1
+Speler 2
+Links / rechts
+A / D
+← / →
+Spring
+W
+↑
+Blokkeer
+S
+↓
+Light attack
+F
+I
+Heavy attack
+G
+O
+Special attack
+H
+P
+Ultimate
+J
+L
+Pauze
+Esc (gedeeld)
+Esc (gedeeld)
+
+Geen online multiplayer, geen split-screen en geen om-en-om toetsen. Beide inputstreams blijven onafhankelijk; hardware-keyboard ghosting moet met echte simultane keycombinaties getest worden.
+4. Uiterlijk van de menu’s
+Main Menu
+Breedbeeld 16:9. Achtergrond: gebroken infernale citadel, bewegende rook en gloeiende scheuren. Groot gecentreerd logo INFERNO DUEL: LEGENDS met ivoor, oranje en diep-rode tinten. Verticale knoppen: LOCAL VERSUS (gouden primaire actie), SOLO VS CPU, STORY MODE, FIGHTERS, OPTIONS, QUIT. Onderin zichtbaar: Made by Rens de Gee en Ted Sondervan.
+Character Select
+Bovenaan CHOOSE YOUR FIGHTER. P1 cyan paneel links en P2 oranje paneel rechts. Midden een adaptief 5×2 rooster met tien fighters (SharkByte, Bullet, Nachtelf, PoisonBoy, Spinegrin, Chainveil, Cheese Rat, Lava Stone, Crystal Fang, Phoenix Reign). De twee spelers kunnen onafhankelijk kiezen. In de eerste Linux-proef zijn twee fighters volledig speelbaar; resterende slots zijn duidelijk als prototype / COMING SOON gemarkeerd.
+Arena / HUD
+Eerste arena: INFERNAL CITADEL (parallax, stenen ruïnes, lava, rook). HUD: P1 health/meter links, P2 rechts, timer en ROUND centraal. Fight area groot en vrij. Combo-feedback en KO-overlay zonder visuele vervuiling.
+Pause / Result / Options
+Esc: RESUME, RESTART MATCH, OPTIONS, MAIN MENU, met bevestiging bij destructieve acties. Result: P1 WINS/P2 WINS/DRAW, 2-1 score, REMATCH/CHARACTER SELECT/MAIN MENU. Options: geluid, fullscreen, window, control legend, reset defaults.
+5. Kernspelregels
+100 HP, 60-seconden rounds, twee gewonnen rounds winnen de match. Light 6, Heavy 12, Special 16, Ultimate 30 schade als startwaarden. Specials eigen cooldown, ultimate kost 100 meter. Block reduceert schade. Hitboxes, hitstun, knockback, 3-hit combo, projectielen en round management zijn in v0.1 speelbaar en eerlijk geprogrammeerd.
+6. Ontwikkelvolgorde
+Mijlpaal
+Oplevering
+M0
+Godot-project, F5 start menu, credits, projectstructuur
+M1
+2 onafhankelijke fighters + 2P op één keyboard in één arena
+M2
+Complete versus-match: select, HUD, input, attack, KO, rematch, solo AI
+M3
+Gevalideerde sprite-animaties, unieke specials, effects en polish
+M4
+Linux x86_64 export + handleiding; daarna story/Android afzonderlijk
+
+7. Assets — beperking
+Op 27 oktober zijn acht echte bronbeelden uit Character sheets.zip aangeleverd en ongewijzigd in dit Codex-pakket opgenomen. Het zijn opgemaakte character- en movesheets, geen losse transparante animaties. Andere oude bibliotheekbeelden die niet opnieuw zijn aangeleverd, ontbreken nog. De exacte paden en SHA-256-hashes staan in data/uploaded_character_sheets.json.
+8. Acceptatietests
+Controleer F5, menu, één volledige best-of-three match, twee mensen tegelijk op hetzelfde fysieke toetsenbord, menu/escape/focus, HP/timer/hitboxes, character select, solo CPU, rematch en bekende asset-gaten. Rapporteer exact wat werkelijk is getest.
+Voor gedetailleerde instructies zijn de Markdown-bestanden in docs/ leidend. Dit document is de leesbare samenvatting voor het ontwikkelteam.
+
+Addendum — bronbeelden en moves (27 oktober 2026)
+De oorspronkelijke ZIP bevatte nog geen echte afbeeldingen. Deze editie heeft acht ongewijzigde afbeeldingen uit Character sheets.zip. Ze vertegenwoordigen tien fighters, omdat één blad Bullet, Nachtelf/Warlock en PoisonBoy gezamenlijk toont.
+Bronbeeld
+Fighter(s)
+Status
+SharkByte Fighting Game Character Sheet.png
+SharkByte
+Concept-/movesheet; geen animatieframes
+Spinegrin_ Inferno Duel Character Sheet.png
+Spinegrin
+Concept-/movesheet; geen animatieframes
+Chainveil_ Inferno Duel Character Sheet.png
+Chainveil
+Concept-/movesheet; geen animatieframes
+Dark Fantasy Fighting Game Character Sheet.png
+Bullet, Nachtelf, PoisonBoy
+Concept-/movesheet; geen animatieframes
+WhatsApp Image 2026-10-25 at 18.59.15.jpeg
+Cheese Rat
+Concept-/movesheet; geen animatieframes
+WhatsApp Image 2026-10-25 at 19.53.45.jpeg
+Lava Stone
+Concept-/movesheet; geen animatieframes
+WhatsApp Image 2026-10-27 at 20.17.30.jpeg
+Crystal Fang
+Concept-/movesheet; geen animatieframes
+WhatsApp Image 2026-10-27 at 20.18.10.jpeg
+Phoenix Reign
+Concept-/movesheet; geen animatieframes
+Specials en supers nieuwe fighters
+Cheese Rat
+Specials: Cheese Slide, Cheese Ball, Tail Spin, Cheese Trap. Supers: Rat Rush, Cheese Storm, King of the Cheese.
+Lava Stone
+Specials: Lava Shield, Stone Spikes, Metal Armor, Lava Burst. Supers: Earthquake, Lava Ascension, Metal Beast Mode.
+Crystal Fang
+Specials: Crystal Dash, Shatter Shield, Lunar Howl, Crystal Spikes. Supers: Full Moon Rage, Diamond Transformation, Crystal Storm.
+Phoenix Reign
+Specials: Phoenix Dash, Fire Tornado, Heat Wave, Rebirth. Supers: Phoenix Rising, Solar Flare, Inferno Wings, Eternal Flame.
+Ontwerpconstraint: eerst Linux, twee spelers op één fysiek toetsenbord. De A/B/X/Y/R-iconen op de referentiebladen zijn niet de daadwerkelijke Linux-controls. Bewaar de originele beelden, maak animaties later als gecontroleerde losse transparante frames.

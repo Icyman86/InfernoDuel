@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bfaev7g6lx1kr"
+
+[deps]
+
+files=["res://data/asset_manifest.type.translation", "res://data/asset_manifest.fighter.translation", "res://data/asset_manifest.included.translation"]
+
+source_file="res://data/asset_manifest.csv"
+dest_files=["res://data/asset_manifest.type.translation", "res://data/asset_manifest.fighter.translation", "res://data/asset_manifest.included.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/combat/attack_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "ultimate"
+damage = 30
+startup = 0.26
+active = 0.34
+recovery = 0.6
+reach = 200
+knockback = 280
+hitstun = 0.45
+meter_gain = 0
+cooldown = 0
+meter_cost = 100

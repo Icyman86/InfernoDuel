@@ -1,0 +1,27 @@
+{
+  "local_versus_shared_keyboard": true,
+  "player_1": {
+    "move_left": "A",
+    "move_right": "D",
+    "jump": "W",
+    "block": "S",
+    "light": "F",
+    "heavy": "G",
+    "special": "H",
+    "ultimate": "J"
+  },
+  "player_2": {
+    "move_left": "Left",
+    "move_right": "Right",
+    "jump": "Up",
+    "block": "Down",
+    "light": "I",
+    "heavy": "O",
+    "special": "P",
+    "ultimate": "L"
+  },
+  "global": {
+    "pause": "Escape"
+  },
+  "note": "Actual key ghosting depends on physical keyboard; allow rebinding in v0.2"
+}

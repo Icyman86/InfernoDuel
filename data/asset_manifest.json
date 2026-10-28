@@ -1,0 +1,232 @@
+{
+  "status": "PARTIALLY_BUNDLED_WITH_USER_UPLOAD",
+  "reason": "8 source images from user-supplied Character sheets.zip are included; most older library references still unavailable. Check data/uploaded_character_sheets.json.",
+  "verified_library_items": [
+    {
+      "filename": "SharkByte Fighting Game Character Sheet.png",
+      "category": "character_sheet",
+      "fighter": "SharkByte",
+      "included": true,
+      "path": "assets/originals/character_sheets_2026-10-27/SharkByte Fighting Game Character Sheet.png"
+    },
+    {
+      "filename": "Spinegrin: Inferno Duel Character Sheet.png",
+      "category": "character_sheet",
+      "fighter": "Spinegrin",
+      "included": false
+    },
+    {
+      "filename": "Chainveil: Inferno Duel Character Sheet.png",
+      "category": "character_sheet",
+      "fighter": "Chainveil",
+      "included": false
+    },
+    {
+      "filename": "Inferno_FighterArt_Bullet.png",
+      "category": "fighter_art",
+      "fighter": "Bullet",
+      "included": false
+    },
+    {
+      "filename": "Inferno_FighterArt_Nachtelf.png",
+      "category": "fighter_art",
+      "fighter": "Nachtelf",
+      "included": false
+    },
+    {
+      "filename": "Inferno_FighterArt_Poisonboy.png",
+      "category": "fighter_art",
+      "fighter": "PoisonBoy",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Bullet_Sprite_Vergelijking.png",
+      "category": "sprite_comparison",
+      "fighter": "Bullet",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Nachtelf_Sprite_Vergelijking.png",
+      "category": "sprite_comparison",
+      "fighter": "Nachtelf",
+      "included": false
+    },
+    {
+      "filename": "Inferno_PoisonBoy_Sprite_Vergelijking.png",
+      "category": "sprite_comparison",
+      "fighter": "PoisonBoy",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Bullet_Sprite_Vergelijking(1).png",
+      "category": "sprite_comparison_duplicate",
+      "fighter": "Bullet",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Nachtelf_Sprite_Vergelijking(1).png",
+      "category": "sprite_comparison_duplicate",
+      "fighter": "Nachtelf",
+      "included": false
+    },
+    {
+      "filename": "Inferno_PoisonBoy_Sprite_Vergelijking(1).png",
+      "category": "sprite_comparison_duplicate",
+      "fighter": "PoisonBoy",
+      "included": false
+    },
+    {
+      "filename": "Dark Fantasy Fighting Game Character Sheet.png",
+      "category": "character_sheet",
+      "fighter": "Ensemble",
+      "included": true,
+      "path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png"
+    },
+    {
+      "filename": "Dark Fantasy Fighting Game Character Sheet(1).png",
+      "category": "character_sheet",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Dark Fantasy Fighting Game Character Sheet(2).png",
+      "category": "character_sheet",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Dark Fantasy Fighter Roster Sheet.png",
+      "category": "roster",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Inferno Fighters Character Sheet.png",
+      "category": "roster",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Infernal Fighters: Bullet, Nachtelf, PoisonBoy.png",
+      "category": "roster",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Dark Fantasy Fighting Game Character Showcase.png",
+      "category": "character_showcase",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Infernal Fighting Game Character Showcase.png",
+      "category": "character_showcase",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Inferno Duel: Legends Game UI Showcase.png",
+      "category": "ui_reference",
+      "fighter": "Menus",
+      "included": false
+    },
+    {
+      "filename": "Inferno Duel Legends: Clash of Champions.png",
+      "category": "ui_reference",
+      "fighter": "Menus",
+      "included": false
+    },
+    {
+      "filename": "Inferno Duel: Neon Legends Showcase.png",
+      "category": "ui_reference",
+      "fighter": "Menus",
+      "included": false
+    },
+    {
+      "filename": "Inferno Duel: Legends Promotional Game Poster.png",
+      "category": "promo_reference",
+      "fighter": "Menus",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Legends_Gameplay.png",
+      "category": "gameplay_reference",
+      "fighter": "Arena",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Legends_Gameplay(1).png",
+      "category": "gameplay_reference_duplicate",
+      "fighter": "Arena",
+      "included": false
+    },
+    {
+      "filename": "Neon Demon in the Infernal Citadel.png",
+      "category": "character_reference",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Neon Warden of the Infernal Citadel.png",
+      "category": "character_reference",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Infernal Green-Haired Character Showcase.png",
+      "category": "character_reference",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "Neon Skull Streetwear Character Sheet.png",
+      "category": "character_reference",
+      "fighter": "Ensemble",
+      "included": false
+    },
+    {
+      "filename": "inferno_duel_fight.png",
+      "category": "gameplay_reference",
+      "fighter": "Legacy",
+      "included": false
+    },
+    {
+      "filename": "Dark Elf Warlock Before the Infernal Titan.png",
+      "category": "character_reference",
+      "fighter": "Nachtelf",
+      "included": false
+    }
+  ],
+  "extra_archives": [
+    {
+      "filename": "Inferno_FighterArt_Concepts.zip",
+      "category": "concept_archive",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Duel_Legends_Android.html",
+      "category": "legacy_html",
+      "included": false
+    },
+    {
+      "filename": "inferno_duel_android.html",
+      "category": "legacy_html",
+      "included": false
+    },
+    {
+      "filename": "inferno_duel.html",
+      "category": "legacy_html",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Duel_Legends_Android_PWA.zip",
+      "category": "legacy_archive",
+      "included": false
+    },
+    {
+      "filename": "Inferno_Duel_Android_PWA.zip",
+      "category": "legacy_archive",
+      "included": false
+    }
+  ]
+}
