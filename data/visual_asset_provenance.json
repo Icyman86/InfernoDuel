@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-28",
+  "source_reference_manifest": "data/uploaded_character_sheets.json",
+  "originals_modified": false,
+  "derived_assets": [
+    {
+      "path": "assets/sprites/bullet/actions.png",
+      "sha256": "4fe64a98132fa17cd028cd25f885886178fb4ed727c1e2d4d5d355a304575b21",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/bullet/core.png",
+      "sha256": "6e50174bcfdb76b5ffb6b2c2fbd9fae368498002a6b60b8e276e46113cf83790",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/bullet/walk.png",
+      "sha256": "b3527c477ad22dbc2d2cce36e530adefb27fc4415b4b8a137bbcc869439d048a",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/sharkbyte/actions.png",
+      "sha256": "44f823675c23380a6b58e5dc26d66e43b18c8d77c214c7e78d04d67c15662230",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "sharkbyte",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/sharkbyte/core.png",
+      "sha256": "8bc8442ab166cae7421dc82d001dddf332466750d9fea939d79c2a7b2a43925a",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "sharkbyte",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/sharkbyte/walk.png",
+      "sha256": "b9d394286babc0769e968c5b4fadd7906a8909a8a39963a4170094b9d4c64701",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "sharkbyte",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/arenas/infernal_citadel.png",
+      "sha256": "728233b90b1c613c8f9af66117993d1a02e55487310ff5184876b68e5bdc116c",
+      "kind": "generated_arena_plate",
+      "reference": "Infernal Citadel design specification",
+      "original_user_file": false
+    }
+  ]
+}

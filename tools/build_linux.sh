@@ -20,7 +20,7 @@ exec ./InfernoDuel.x86_64 --main-pack InfernoDuel.pck "$@"
 PLAY
 chmod +x builds/linux/PLAY.sh
 cat > builds/linux/README.txt <<'README'
-INFERNO DUEL: LEGENDS — Linux prototype v0.1
+INFERNO DUEL: LEGENDS — Linux visual build v0.2
 Made by Rens de Gee en Ted Sondervan
 
 Run ./PLAY.sh on a Linux x86_64 desktop with OpenGL 3.3 support.
@@ -33,9 +33,11 @@ ESC pauses. F3 displays hitboxes. Win two rounds to win a match.
 Select: P1 WASD + F ready / G undo. P2 arrows + I ready / O undo.
 Mouse: choose the P1/P2 edit button before clicking a fighter.
 
-SharkByte and Bullet are playable geometric prototypes. Eight fighters are
-coming soon. The gallery contains original concept sheets, not animations.
-Story, final character animation, music and Android are later milestones.
+SharkByte and Bullet have reference-derived illustrated sprite animation sets.
+All ten roster slots have original-sheet avatars; eight fighters are coming soon.
+The citadel, menus and HUD have new artwork. Original reference sheets remain
+unaltered in the gallery. Sprite keyframes were generated from those references.
+Story, expanded movesets, music and Android are later milestones.
 Two-person physical keyboard / ghosting testing is still required.
 README
 printf 'Built: %s/builds/linux/PLAY.sh\n' "$PWD"

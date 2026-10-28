@@ -65,14 +65,31 @@ func show_menu() -> void:
 	route = "menu"
 	new_screen()
 	var shade := ColorRect.new()
-	shade.color = Color(0.02,0.01,0.03,0.3)
+	shade.color = Color(0.012,0.008,0.023,0.62)
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	screen.add_child(UI.place(shade,0,0,1280,720))
-	screen.add_child(UI.place(UI.label("I N F E R N O",66,UI.IVORY,true),80,74,1120,92))
-	screen.add_child(UI.place(UI.label("DUEL : LEGENDS",36,UI.GOLD,true),80,164,1120,54))
-	screen.add_child(UI.place(UI.label("E N T E R   T H E   A R E N A",18,UI.MUTED),80,230,1120,30))
+	var side := ColorRect.new()
+	side.color = Color(0.018,0.012,0.032,0.6)
+	side.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	screen.add_child(UI.place(side,0,0,610,720))
+	screen.add_child(UI.place(UI.label("O N E   A R E N A .   T E N   L E G E N D S .",16,UI.GOLD),65,50,550,32))
+	var title := UI.label("INFERNO",69,UI.IVORY,true)
+	title.add_theme_constant_override("outline_size",5)
+	title.add_theme_color_override("font_outline_color",Color("241420"))
+	screen.add_child(UI.place(title,45,95,600,100))
+	screen.add_child(UI.place(UI.label("D U E L : L E G E N D S",29,UI.GOLD,true),45,189,600,53))
+	screen.add_child(UI.place(UI.label("ENTER THE CITADEL",16,UI.MUTED),65,258,550,25))
+	for i in [1,0]:
+		var hero := FighterVisual.new()
+		hero.profile = roster[i]
+		hero.accent = UI.CYAN if i == 0 else UI.ORANGE
+		hero.target_height = 420 if i == 0 else 370
+		hero.preview_pose = "guard" if i == 0 else "idle"
+		hero.position = Vector2(832 if i == 0 else 1089,648 if i == 0 else 610)
+		hero.scale.x = -1 if i == 1 else 1
+		screen.add_child(hero)
 	var buttons := VBoxContainer.new()
-	UI.place(buttons,440,293,400,340)
+	UI.place(buttons,140,311,390,320)
 	screen.add_child(buttons)
 	buttons.add_child(UI.button("LOCAL VERSUS",func(): show_select(false),true))
 	buttons.add_child(UI.button("SOLO VS CPU",func(): show_select(true)))
@@ -81,8 +98,8 @@ func show_menu() -> void:
 	buttons.add_child(UI.button("OPTIONS",func(): show_options("menu")))
 	buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
-	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",18,UI.IVORY),40,669,770,30))
-	screen.add_child(UI.place(UI.label("LINUX PROTOTYPE v0.1",18,UI.MUTED),890,669,350,30))
+	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
+	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  v0.2",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	end_match()
@@ -104,6 +121,10 @@ func show_arena() -> void:
 	route = "arena"
 	new_screen()
 	screen.add_child(UI.place(UI.label("CHOOSE ARENA",40,UI.IVORY,true),40,65,1200,70))
+	for i in 2:
+		var portrait := FighterPortrait.new()
+		portrait.setup(roster[selected[i]])
+		screen.add_child(UI.place(portrait,110 if i == 0 else 980,230,190,220))
 	var panel := UI.panel()
 	UI.place(panel,340,230,600,220)
 	screen.add_child(panel)
@@ -169,6 +190,12 @@ func show_result(score: Array[int]) -> void:
 	route = "result"
 	var box := make_overlay()
 	var winner := 0 if score[0] > score[1] else 1
+	var hero := FighterVisual.new()
+	hero.profile = roster[selected[winner]]
+	hero.target_height = 330
+	hero.position = Vector2(198,590)
+	hero.accent = UI.CYAN if winner == 0 else UI.ORANGE
+	overlay.add_child(hero)
 	box.add_child(UI.label("P%d WINS" % (winner+1),44,UI.GOLD,true))
 	box.add_child(UI.label(roster[selected[winner]].display_name.to_upper(),26,UI.IVORY))
 	box.add_child(UI.label("%d : %d" % [score[0],score[1]],40,UI.IVORY,true))

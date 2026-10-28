@@ -78,3 +78,42 @@ Only SharkByte and Bullet are playable. Combat characters and arena are explicit
 geometric prototypes; supplied sheets are only gallery references. No validated
 sprite animation, final music/voice, complete ten-fighter move sets, rebinding,
 Story campaign, Android build, or production export-template validation yet.
+
+# Visual build v0.2 — 28 October 2026
+
+This update supersedes the v0.1 geometric-renderer and missing-animation notes
+above. SharkByte and Bullet now use illustrated reference-derived sprite sets;
+all ten roster fighters have distinct original-sheet avatars. See ART_PIPELINE.md.
+
+| Required check | Current outcome |
+| --- | --- |
+| Original source hashes | PASS: 8/8 unchanged |
+| Editor import + gameplay/flow suite | PASS: 70 checks, zero failures, exit 0 |
+| Sprite/avatar suite | PASS: 103 checks, zero failures, exit 0 |
+| Rendered Linux integration | PASS: 9 checks, zero failures, exit 0 |
+| Deterministic animation showcase | PASS: recorded 496 frames at 30 FPS, 16.5 seconds; all ten animation states shown |
+
+No script errors, runtime errors or leaked-instance warnings occurred in the final
+required checks. The virtual-display V-Sync warning remains the same platform
+limitation as in v0.1. The showcase is a scripted artwork review rather than a
+human-played match. Renderer telemetry averaged about 10 ms GPU and 2 ms CPU per
+recorded frame on llvmpipe; this is not a frame-rate guarantee for another machine.
+
+Visual review covered the original likeness references, alpha cutouts, portrait
+identity/cropping, frame isolation, idle/walk, block, jump, light/heavy timing,
+special/ultimate silhouettes, hit reactions, KO and both player facings. Generated
+frames with clipped silhouettes/adjacent-art contamination were replaced or
+isolated using texture meshes before integration. The six-frame walk replaces the
+first four-step walk attempt. No original character sheet was edited.
+
+The revised hurtbox height, strike height and body separation match the larger
+rendered characters; the full combat suite remains green. Actual physical keyboard
+rollover, two-human play and real speaker output still require manual testing.
+Eight characters have avatars but are not yet playable. More artist-authored
+in-betweens and a final likeness/animation review remain useful follow-up work.
+
+The final v0.2 native engine + PCK bundle also booted outside the editor (exit 0),
+and its X11 menu → avatars → arena → simultaneous movement/attacks → pause flow
+was exercised without runtime errors. Package evidence and implementation hashes
+are included in the release's `validation/` directory. The native bundle uses the
+full installed Godot engine; a stripped export-template build is still untested.

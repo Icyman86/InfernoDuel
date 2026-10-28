@@ -10,56 +10,98 @@ var mouse_player := 0
 var cards: Array[Button] = []
 var previews: Array[Label] = []
 var ready_buttons: Array[Button] = []
-var hint: Label
 var cursor_buttons: Array[Button] = []
+var hero_holders: Array[Control] = []
+var hero_names: Array[Label] = []
+var hero_ids: Array[String] = ["",""]
+var badges: Array[Label] = []
+var hint: Label
 
 func _ready() -> void:
 	theme = UI.theme()
-	add_child(UI.place(UI.label("CHOOSE YOUR FIGHTER",36,UI.IVORY,true),40,40,1200,54))
-	add_child(UI.place(UI.label("TEN LEGENDS. TWO READY FOR THE ARENA.",18,UI.MUTED),40,101,1200,28))
+	var shade := ColorRect.new()
+	shade.color = Color(0.015,0.012,0.026,0.83)
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(UI.place(shade,0,0,1280,720))
+	add_child(UI.place(UI.label("THE CITADEL AWAITS",16,UI.GOLD),300,32,680,28))
+	add_child(UI.place(UI.label("CHOOSE YOUR FIGHTER",33,UI.IVORY,true),290,66,700,50))
+	add_child(UI.place(UI.label("SOLO  /  CPU EASY" if solo else "LOCAL VERSUS  /  ONE KEYBOARD",16,UI.MUTED),300,122,680,25))
 	for i in 10:
+		var index := i
 		var f: Dictionary = roster[i]
-		var text: String = "%s\n%s\n%s" % [f.display_name.to_upper(),f.archetype.replace("_"," "),"PLAYABLE PROTOTYPE" if i < 2 else "COMING SOON"]
-		var b := UI.button(text,func(): choose(mouse_player,i))
-		UI.place(b,60+(i%5)*234,155+(i/5)*116,224,106)
-		b.add_theme_font_size_override("font_size",18)
+		var b := UI.button("",func(): choose(mouse_player,index))
+		UI.place(b,300+(i%5)*138,174+(i/5)*185,130,173)
+		b.clip_contents = true
 		add_child(b)
+		var portrait := FighterPortrait.new()
+		portrait.setup(f)
+		b.add_child(UI.place(portrait,3,3,124,128))
+		if i >= 2: portrait.modulate = Color(0.68,0.62,0.66)
+		var stripe := ColorRect.new()
+		stripe.color = Color(f.accent)
+		stripe.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(UI.place(stripe,3,126,124,2))
+		var name_label := UI.label(f.display_name.to_upper().replace(" ","\n"),16,UI.IVORY)
+		if not " " in f.display_name: name_label.text = f.display_name.to_upper()
+		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		b.add_child(UI.place(name_label,2,131,126,40))
+		var badge := UI.label("",14,UI.GOLD)
+		badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(UI.place(badge,4,7,122,21))
+		badges.append(badge)
 		cards.append(b)
+	add_child(UI.place(UI.label("SELECT YOUR LEGEND",16,UI.MUTED),300,556,680,28))
+	add_child(UI.place(UI.label("SharkByte & Bullet playable  ·  Eight fighters in development",16,UI.MUTED),280,588,720,26))
 	for i in 2:
 		var p := i
-		var x := 60+i*600
+		var x := 34+i*1004
 		var c := UI.CYAN if i == 0 else UI.ORANGE
-		var cursor := UI.button("MOUSE EDITS P%d%s" % [i+1," / CPU" if solo and i == 1 else ""],func():
+		var panel := UI.panel()
+		panel.add_theme_stylebox_override("panel",UI.style(Color(0.035,0.03,0.055,0.8),Color(c,0.3)))
+		add_child(UI.place(panel,x,165,208,389))
+		var player_label := UI.label("PLAYER ONE" if i == 0 else ("CPU OPPONENT" if solo else "PLAYER TWO"),16,c)
+		add_child(UI.place(player_label,x-10,120,228,30))
+		var name_label := UI.label("",23,c,true)
+		add_child(UI.place(name_label,x-15,170,238,44))
+		hero_names.append(name_label)
+		var holder := Control.new()
+		UI.place(holder,x,222,208,255)
+		holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(holder)
+		hero_holders.append(holder)
+		var preview := UI.label("",16,UI.IVORY)
+		preview.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		add_child(UI.place(preview,x+4,480,200,65))
+		previews.append(preview)
+		var cursor := UI.button("EDIT P%d%s" % [p+1," / CPU" if solo and p == 1 else ""],func():
 			mouse_player=p
 			refresh())
-		UI.place(cursor,x,403,560,42)
-		add_child(cursor)
+		cursor.add_theme_font_size_override("font_size",16)
+		add_child(UI.place(cursor,x,565,208,40))
 		cursor_buttons.append(cursor)
-		var preview := UI.label("",20,c)
-		UI.place(preview,x,458,560,96)
-		add_child(preview)
-		previews.append(preview)
 		var ready_button := UI.button("READY",func(): confirm(p),true)
-		UI.place(ready_button,x,561,420,44)
-		add_child(ready_button)
+		add_child(UI.place(ready_button,x,613,148,43))
 		ready_buttons.append(ready_button)
-		add_child(UI.place(UI.button("UNDO",func():
+		var undo := UI.button("↶",func():
 			ready_players[p]=false
-			refresh()),x+432,561,128,44))
-	hint = UI.label("P1  W A S D · F ready · G undo     |     P2  Arrows · I ready · O undo",18,UI.MUTED)
-	UI.place(hint,50,623,1180,30)
-	add_child(hint)
-	add_child(UI.place(UI.button("BACK",func(): back_requested.emit()),60,666,160,40))
+			refresh())
+		undo.tooltip_text = "Undo ready: G / O"
+		add_child(UI.place(undo,x+156,613,52,43))
+	hint = UI.label("P1  W A S D · F ready · G undo       /       P2  Arrows · I ready · O undo",17,UI.MUTED)
+	add_child(UI.place(hint,220,675,1000,28))
+	add_child(UI.place(UI.button("BACK",func(): back_requested.emit()),34,675,150,38))
 	refresh()
 
 func choose(player: int, index: int) -> void:
 	if ready_players[player]: return
 	selected[player] = index
+	Sound.play("confirm")
 	refresh()
 
 func confirm(player: int) -> void:
 	if selected[player] >= 2:
-		hint.text = "COMING SOON · Choose SharkByte or Bullet for this prototype."
+		hint.text = "IN DEVELOPMENT · Choose SharkByte or Bullet to fight."
 		return
 	ready_players[player] = true
 	Sound.play("confirm")
@@ -68,16 +110,41 @@ func confirm(player: int) -> void:
 
 func refresh() -> void:
 	for i in 10:
-		var color := Color("59424a")
-		if selected[0] == i: color = UI.CYAN
-		if selected[1] == i: color = UI.ORANGE
+		var color := Color("473944")
+		var badge := ""
+		if selected[0] == i:
+			color = UI.CYAN
+			badge = "P1"
+		if selected[1] == i:
+			color = UI.ORANGE
+			badge += "   CPU" if solo else "   P2"
 		if selected[0] == i and selected[1] == i: color = UI.GOLD
-		cards[i].add_theme_stylebox_override("normal",UI.style(Color("19131e"),color,2))
+		cards[i].add_theme_stylebox_override("normal",UI.style(Color("15111a"),color,2))
+		badges[i].text = badge.strip_edges() if badge != "" else ("COMING SOON" if i >= 2 else "")
+		badges[i].add_theme_color_override("font_color",color if badge != "" else UI.MUTED)
 	for p in 2:
 		var f: Dictionary = roster[selected[p]]
-		previews[p].text = "%s%s\n%s  /  %s\n%s" % [f.display_name," · CPU EASY" if solo and p == 1 else "",f.special,f.ultimate,"GEOMETRIC PROTOTYPE" if selected[p] < 2 else "PROFILE IN DEVELOPMENT"]
-		ready_buttons[p].text = "READY ✓" if ready_players[p] else "P%d READY" % (p+1)
-		cursor_buttons[p].modulate = UI.GOLD if mouse_player == p else Color.WHITE
+		hero_names[p].text = f.display_name.to_upper().replace(" ","\n")
+		previews[p].text = "%s\n%s" % [f.special,f.ultimate]
+		ready_buttons[p].text = "READY ✓" if ready_players[p] else "READY"
+		cursor_buttons[p].modulate = (UI.CYAN if p == 0 else UI.ORANGE) if mouse_player == p else Color.WHITE
+		if hero_ids[p] != f.id:
+			for child in hero_holders[p].get_children():
+				hero_holders[p].remove_child(child)
+				child.queue_free()
+			hero_ids[p] = f.id
+			if selected[p] < 2:
+				var figure := FighterVisual.new()
+				figure.profile = f
+				figure.accent = UI.CYAN if p == 0 else UI.ORANGE
+				figure.target_height = 240
+				figure.position = Vector2(104,250)
+				figure.scale.x = 1 if p == 0 else -1
+				hero_holders[p].add_child(figure)
+			else:
+				var portrait := FighterPortrait.new()
+				portrait.setup(f)
+				hero_holders[p].add_child(UI.place(portrait,9,10,190,228))
 
 func handle_key(code: int) -> void:
 	for p in 2:

@@ -37,3 +37,12 @@ the optional native package. See `ASSET_REPORT.md` for the next art tasks.
 Validated transparent animation frames, all ten unique movesets, final arena art,
 recorded audio/music, balance and physical-keyboard acceptance testing, and a
 small release-template Linux export. Story, rebinding, and Android remain later work.
+
+## v0.2 visual renderer
+
+`FighterVisual` is a separate Node2D renderer attached to each shared fighter. It
+loads source textures and per-frame UV meshes/pivots from `data/sprite_atlases.json`.
+The controller retains combat ownership; rendering reads its state. `FighterPortrait`
+creates AtlasTexture views of the immutable source sheets and is reused across
+selection, HUD, arena and gallery. `HitBurst` provides bounded transient impact FX.
+The v0.1 mannequin and geometric citadel descriptions above are historical.

@@ -9,9 +9,18 @@
       "special": "Fin Dash",
       "ultimate": "Abyssal Frenzy",
       "story_status": "unlocked",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/SharkByte Fighting Game Character Sheet.png",
-      "reference_art_available": true
+      "reference_art_available": true,
+      "portrait_region": [
+        1019,
+        523,
+        199,
+        218
+      ],
+      "accent": "49c4d7",
+      "animation_atlas": "assets/sprites/sharkbyte/core.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
     },
     {
       "id": "bullet",
@@ -20,9 +29,18 @@
       "special": "Bull Charge",
       "ultimate": "Stampede Breaker",
       "story_status": "story_unlock",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
-      "reference_art_available": true
+      "reference_art_available": true,
+      "portrait_region": [
+        59,
+        1,
+        229,
+        278
+      ],
+      "accent": "f16444",
+      "animation_atlas": "assets/sprites/bullet/core.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
     },
     {
       "id": "nachtelf",
@@ -33,7 +51,14 @@
       "story_status": "story_unlock",
       "sprite_ready": false,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
-      "reference_art_available": true
+      "reference_art_available": true,
+      "portrait_region": [
+        571,
+        1,
+        230,
+        278
+      ],
+      "accent": "e14f65"
     },
     {
       "id": "poisonboy",
@@ -44,7 +69,14 @@
       "story_status": "story_unlock",
       "sprite_ready": false,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
-      "reference_art_available": true
+      "reference_art_available": true,
+      "portrait_region": [
+        1072,
+        0,
+        230,
+        280
+      ],
+      "accent": "80c66b"
     },
     {
       "id": "spinegrin",
@@ -55,7 +87,14 @@
       "story_status": "story_unlock",
       "sprite_ready": false,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
-      "reference_art_available": true
+      "reference_art_available": true,
+      "portrait_region": [
+        1019,
+        512,
+        198,
+        233
+      ],
+      "accent": "b7d448"
     },
     {
       "id": "chainveil",
@@ -66,7 +105,14 @@
       "story_status": "story_unlock",
       "sprite_ready": false,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Chainveil_ Inferno Duel Character Sheet.png",
-      "reference_art_available": true
+      "reference_art_available": true,
+      "portrait_region": [
+        1019,
+        503,
+        195,
+        231
+      ],
+      "accent": "df5487"
     },
     {
       "id": "cheese_rat",
@@ -83,7 +129,14 @@
         "Tail Spin",
         "Rat Rush",
         "Cheese Storm"
-      ]
+      ],
+      "portrait_region": [
+        29,
+        299,
+        199,
+        184
+      ],
+      "accent": "e6b249"
     },
     {
       "id": "lava_stone",
@@ -100,7 +153,14 @@
         "Lava Burst",
         "Earthquake",
         "Lava Ascension"
-      ]
+      ],
+      "portrait_region": [
+        22,
+        331,
+        210,
+        192
+      ],
+      "accent": "f46b35"
     },
     {
       "id": "crystal_fang",
@@ -117,7 +177,14 @@
         "Lunar Howl",
         "Diamond Transformation",
         "Crystal Storm"
-      ]
+      ],
+      "portrait_region": [
+        34,
+        350,
+        200,
+        202
+      ],
+      "accent": "f04eae"
     },
     {
       "id": "phoenix_reign",
@@ -135,7 +202,14 @@
         "Solar Flare",
         "Inferno Wings",
         "Eternal Flame"
-      ]
+      ],
+      "portrait_region": [
+        27,
+        356,
+        198,
+        191
+      ],
+      "accent": "ffb44a"
     }
   ],
   "roster_count": 10,

@@ -9,10 +9,10 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Download Linux prototype
 
-[Download Linux v0.1.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.1.0/releases/v0.1.0/InfernoDuel-Linux-v0.1.tar.gz)
+[Download Linux v0.2.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.2.0/releases/v0.2.0/InfernoDuel-Linux-v0.2.tar.xz)
 
 Extract the archive and run `InfernoDuel-Linux/PLAY.sh`. Godot does not need to
-be installed separately. This is the two-fighter geometric prototype described
+be installed separately. This is the two-fighter illustrated build described
 below; Linux x86_64 and OpenGL 3.3 are required.
 
 ## Play / F5
@@ -30,10 +30,17 @@ cd InfernoDuel
 ./tools/run.sh
 ```
 
-SharkByte and Bullet are playable geometric prototypes. The other eight roster
-slots are marked COMING SOON; all ten original designs are viewable in FIGHTERS.
-The supplied sheets are not validated animation frames. Final fighter art and
-animation are the next milestone, not part of this prototype's presentation.
+SharkByte and Bullet now use illustrated sprite animation sets based on the
+supplied character sheets. All ten fighters have individual portrait avatars in
+selection, with animated previews for the two playable fighters. The remaining
+eight roster slots are marked COMING SOON. Menu, arena, HUD and results have
+been updated to use the new artwork.
+
+[Watch the animation preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.2.0/releases/v0.2.0/InfernoDuel-AnimationPreview-v0.2.mp4)
+
+The preview is a deterministic animation showcase, not a human-played match.
+Original sheets are preserved byte-for-byte; new sprite art is reference-guided
+generated work. See `docs/ART_PIPELINE.md` for provenance and remaining polish.
 
 ## Controls — one shared keyboard
 
@@ -67,7 +74,7 @@ Try light → light → heavy, or cancel a landed light's recovery into special.
 ```
 
 This verifies all eight artwork SHA-256 hashes, imports the project, checks for
-engine/script errors, and runs the automated integration/combat suite. For
+engine/script errors, and runs the 70 integration/combat plus 103 artwork/animation checks. For
 rendered tests on a Linux desktop:
 
 ```bash

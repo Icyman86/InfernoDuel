@@ -59,3 +59,13 @@ Status: source files are **never modified**.
 2. `assets/sprites/bullet/`: same frame/pivot/silhouette validation; original shared sheet remains untouched.
 3. `scenes/combat/fighter.tscn`: add AnimatedSprite2D once frames have been reviewed; keep the combat/hitbox controller independent of rendering.
 4. Add final Infernal Citadel artwork, licensed/owned music and voices, then expand the remaining eight combat profiles.
+
+## Visual update v0.2 — 28 October 2026
+
+The runtime placeholder status above describes v0.1. In v0.2, SharkByte and Bullet
+have illustrated reference-derived sprite atlases, thirty indexed keys each, with
+state/timing-driven playback. These are new generated derivatives, not original
+animation frames found in the ZIP. All ten fighters have distinct original-sheet
+portrait crops, with animated previews for the two playable fighters. Original
+files remain unchanged. New citadel artwork, menu heroes, HUD portraits, impact
+FX and result art are integrated. See `ART_PIPELINE.md` and the provenance manifest.

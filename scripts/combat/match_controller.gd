@@ -24,6 +24,8 @@ var names: Array[Label] = []
 var combos: Array[Label] = []
 var diagnostics: Label
 var debug_boxes := false
+var meter_labels: Array[Label] = []
+var round_tokens: Array[Label] = []
 
 func _ready() -> void:
 	for i in 2:
@@ -41,41 +43,60 @@ func _make_hud() -> void:
 	hud = Control.new()
 	hud.theme = UI.theme()
 	add_child(hud)
+	var top := ColorRect.new()
+	top.color = Color(0.018,0.014,0.03,0.82)
+	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hud.add_child(UI.place(top,0,0,1280,140))
 	for i in 2:
-		var x := 48.0 if i == 0 else 770.0
+		var x := 134.0 if i == 0 else 748.0
 		var c := UI.CYAN if i == 0 else UI.ORANGE
-		var name_label := UI.label("",22,c)
-		UI.place(name_label,x,30,462,34)
-		hud.add_child(name_label)
+		var portrait_frame := UI.panel()
+		portrait_frame.add_theme_stylebox_override("panel",UI.style(Color("17131b"),c,2))
+		hud.add_child(UI.place(portrait_frame,34 if i == 0 else 1162,34,84,88))
+		var portrait := FighterPortrait.new()
+		portrait.setup(profiles[i])
+		portrait_frame.add_child(portrait)
+		var name_label := UI.label("",21,UI.IVORY)
+		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if i == 0 else HORIZONTAL_ALIGNMENT_RIGHT
+		hud.add_child(UI.place(name_label,x,30,398,30))
 		names.append(name_label)
 		var hp_bar := UI.bar(c)
-		UI.place(hp_bar,x,70,462,27)
+		hud.add_child(UI.place(hp_bar,x,65,398,24))
 		if i == 1: hp_bar.fill_mode = ProgressBar.FILL_END_TO_BEGIN
-		hud.add_child(hp_bar)
 		health.append(hp_bar)
 		var meter_bar := UI.bar(UI.GOLD,0)
-		UI.place(meter_bar,x,106,462,9)
-		hud.add_child(meter_bar)
+		hud.add_child(UI.place(meter_bar,x,96,398,7))
+		if i == 1: meter_bar.fill_mode = ProgressBar.FILL_END_TO_BEGIN
 		meters.append(meter_bar)
+		var meter_text := UI.label("",14,UI.MUTED)
+		meter_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if i == 0 else HORIZONTAL_ALIGNMENT_RIGHT
+		hud.add_child(UI.place(meter_text,x,109,398,23))
+		meter_labels.append(meter_text)
+		var tokens := UI.label("◇ ◇",22,c)
+		hud.add_child(UI.place(tokens,421 if i == 0 else 749,23,112,40))
+		round_tokens.append(tokens)
 		var combo_label := UI.label("",28,c,true)
-		UI.place(combo_label,x,165,462,80)
-		hud.add_child(combo_label)
+		hud.add_child(UI.place(combo_label,95 if i == 0 else 780,163,405,75))
 		combos.append(combo_label)
-	timer_label = UI.label("60",48,UI.GOLD,true)
-	UI.place(timer_label,548,24,184,65)
-	hud.add_child(timer_label)
-	round_label = UI.label("ROUND 1",18,UI.MUTED)
-	UI.place(round_label,535,98,210,28)
-	hud.add_child(round_label)
+	var timer_panel := UI.panel()
+	timer_panel.add_theme_stylebox_override("panel",UI.style(Color("17111c"),Color("806044"),2))
+	hud.add_child(UI.place(timer_panel,577,22,126,93))
+	timer_label = UI.label("60",47,UI.GOLD,true)
+	hud.add_child(UI.place(timer_label,575,28,130,64))
+	round_label = UI.label("ROUND 1",14,UI.MUTED)
+	hud.add_child(UI.place(round_label,568,95,144,25))
 	announcement = UI.label("3",64,UI.GOLD,true)
-	UI.place(announcement,140,258,1000,140)
-	hud.add_child(announcement)
-	var footer := UI.label("P1  A D · W · S · F G H J          ESC  PAUSE          P2  ← → · ↑ · ↓ · I O P L",18,UI.IVORY)
-	UI.place(footer,30,651,1220,28)
-	hud.add_child(footer)
-	diagnostics = UI.label("GEOMETRIC PROTOTYPES · ANIMATIEFRAMES NOG NIET BESCHIKBAAR · F3 hitboxes",18,UI.MUTED)
-	UI.place(diagnostics,30,686,1220,26)
-	hud.add_child(diagnostics)
+	announcement.add_theme_constant_override("outline_size",8)
+	announcement.add_theme_color_override("font_outline_color",Color("130b15"))
+	hud.add_child(UI.place(announcement,100,230,1080,145))
+	var footer_bg := ColorRect.new()
+	footer_bg.color = Color(0.02,0.015,0.03,0.84)
+	footer_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hud.add_child(UI.place(footer_bg,0,675,1280,45))
+	hud.add_child(UI.place(UI.label("P1  A D · W · S · F G H J",16,UI.CYAN),35,684,420,28))
+	hud.add_child(UI.place(UI.label("ESC  PAUSE   /   F3  HITBOXES",14,UI.MUTED),455,684,370,28))
+	hud.add_child(UI.place(UI.label("P2  ← → · ↑ · ↓ · I O P L",16,UI.ORANGE),825,684,420,28))
+
 
 func start_round(keep_meter := true) -> void:
 	for projectile in projectiles: projectile.queue_free()
@@ -135,7 +156,14 @@ func advance_fight(delta: float, inputs: Array[Dictionary]) -> void:
 		var source: DuelFighter = event.source
 		var target: DuelFighter = event.target
 		var move: AttackData = event.move
+		var was_blocking := target.guarding
 		var clean_hit := target.receive_hit(move,event.x)
+		var burst := HitBurst.new()
+		burst.position = target.position + Vector2((1 if event.x > target.position.x else -1)*23,-175)
+		burst.color = UI.CYAN if was_blocking and not clean_hit else UI.GOLD
+		burst.blocked = was_blocking and not clean_hit
+		burst.seed_angle = remaining
+		add_child(burst)
 		source.meter = mini(100,source.meter+move.meter_gain)
 		if clean_hit:
 			source.combo += 1
@@ -150,8 +178,8 @@ func advance_fight(delta: float, inputs: Array[Dictionary]) -> void:
 func _resolve_bodies() -> void:
 	if absf(fighters[0].position.y-fighters[1].position.y) > 130: return
 	var distance := fighters[1].position.x - fighters[0].position.x
-	if absf(distance) < 60:
-		var correction := (60.0-absf(distance))*0.5
+	if absf(distance) < 86:
+		var correction := (86.0-absf(distance))*0.5
 		var direction := 1.0 if distance >= 0 else -1.0
 		fighters[0].position.x = clampf(fighters[0].position.x - correction*direction,DuelFighter.LEFT,DuelFighter.RIGHT)
 		fighters[1].position.x = clampf(fighters[1].position.x + correction*direction,DuelFighter.LEFT,DuelFighter.RIGHT)
@@ -186,7 +214,9 @@ func update_hud() -> void:
 	for i in 2:
 		health[i].value = fighters[i].hp
 		meters[i].value = fighters[i].meter
-		names[i].text = "%s · %s   %s   %d HP" % ["CPU" if solo and i == 1 else "P%d" % (i+1),profiles[i].display_name.to_upper(),"◆".repeat(wins[i])+"◇".repeat(2-wins[i]),fighters[i].hp]
+		names[i].text = "%s  /  %s" % ["CPU" if solo and i == 1 else "P%d" % (i+1),profiles[i].display_name.to_upper()]
+		round_tokens[i].text = "◆ ".repeat(wins[i])+"◇ ".repeat(2-wins[i])
+		meter_labels[i].text = "%d HP    /    SUPER %d%%" % [fighters[i].hp,fighters[i].meter]
 		var info := ""
 		if fighters[i].combo >= 2: info = "%d HIT COMBO\n" % fighters[i].combo
 		if fighters[i].meter >= 100: info += "ULTIMATE READY"
