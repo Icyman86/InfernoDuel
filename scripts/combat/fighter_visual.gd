@@ -108,6 +108,17 @@ func _update_pose() -> void:
 
 func _draw() -> void:
 	if metadata.is_empty(): return
-	if actor and actor.attack and actor.attack.id in ["special","ultimate"] and actor.is_active() and current_texture:
+	if actor and actor.attack and actor.is_active() and actor.attack_kind(actor.attack.id) in ["chain","chain_super"]:
+		var reach := actor.attack.reach
+		var chain_color := Color("dfa9c5")
+		for strand in (2 if actor.attack.id == "ultimate" else 1):
+			var points := PackedVector2Array()
+			for i in 24:
+				var t := float(i)/23
+				var p := Vector2(20+t*reach,-175+sin(t*PI*3+clock*16+strand)*12+strand*22)
+				points.append(p)
+				draw_arc(p,4.0,0,TAU,8,Color(chain_color,0.95),1.5,true)
+			draw_polyline(points,Color(0.95,0.2,0.48,0.35),3,true)
+	if actor and actor.attack and actor.attack.id in ["special","ultimate"] and actor.attack_kind(actor.attack.id) not in ["chain","chain_super"] and actor.is_active() and current_texture:
 		for i in range(3,0,-1):
 			draw_texture_rect(current_texture,Rect2(-current_pivot*sprite.scale.x-Vector2(i*17,0),current_texture.get_size()*sprite.scale.x),false,Color(accent,0.07*(4-i)))

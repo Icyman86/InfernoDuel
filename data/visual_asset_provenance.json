@@ -4,6 +4,253 @@
   "originals_modified": false,
   "derived_assets": [
     {
+      "path": "assets/arenas/infernal_citadel.png",
+      "sha256": "728233b90b1c613c8f9af66117993d1a02e55487310ff5184876b68e5bdc116c",
+      "kind": "generated_arena_plate",
+      "reference": "Infernal Citadel design specification",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/bullet.ogv",
+      "sha256": "48bebba1a9b0df1a1989e5b2a14c570ebc66f8910272492c58d8e202fbda2613",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "classic_trio",
+      "original_user_file": false,
+      "key_art": "assets/intros/bullet_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/bullet_poses.png",
+      "sha256": "c7640da505d7ab83582353875dbd41b0ba182b50587653fbef68bff921c626f1",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/chainveil.ogv",
+      "sha256": "ca2891c1fea1efec6a4be3532f7d5cf04a8b25ca23e6cf46e1f5e8d9d9c963ae",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "chainveil",
+      "original_user_file": false,
+      "key_art": "assets/intros/chainveil_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/chainveil_poses.png",
+      "sha256": "3dfef8248d3c982cf2b4c42326b93b810d45ca088de9772a198b3817945b7163",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "chainveil",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/cheese_rat.ogv",
+      "sha256": "9db8f0264777eb897cbef29c6417ea87049e939e2bae0df5db2c736fd12b7fb6",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "cheese_rat",
+      "original_user_file": false,
+      "key_art": "assets/intros/cheese_rat_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/cheese_rat_poses.png",
+      "sha256": "7344553e4f96b0057d83fce2bcead0ee7d69efbff3522ca9ed01d96ed5f7abae",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "cheese_rat",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/crystal_fang.ogv",
+      "sha256": "f26f770a385120594959c909aa2f45d8d1a873f14ae0cae7427babccd9b768a4",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "crystal_fang",
+      "original_user_file": false,
+      "key_art": "assets/intros/crystal_fang_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/crystal_fang_poses.png",
+      "sha256": "2cbc21e714540b0f8abaa58a8bc9d71111ece9ac94c3ee6232be35a3a831d851",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "crystal_fang",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/lava_stone.ogv",
+      "sha256": "e70c955a87aab78488dfbadbc341fca22f049ef1a130cf081972251902559aab",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "lava_stone",
+      "original_user_file": false,
+      "key_art": "assets/intros/lava_stone_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/lava_stone_poses.png",
+      "sha256": "06adcf79dbfc6c2ca5d5790615bcf7b0f1f17776d4081b34b57faa35cb4acd56",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "lava_stone",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/nachtelf.ogv",
+      "sha256": "9162e4844bb0fdc771f245ebfb8c831ab7e2267033eea4b15ebbaab1631db753",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "classic_trio",
+      "original_user_file": false,
+      "key_art": "assets/intros/nachtelf_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/nachtelf_poses.png",
+      "sha256": "2d0092ad84628e848463e3ff963da80a231333c8c2ed04e260fccdaf86c1c386",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/phoenix_reign.ogv",
+      "sha256": "0ff7942f321e5f617c97de05f62c7b85a1cd666c3e565c294117fe8fefc3b5f6",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "phoenix_reign",
+      "original_user_file": false,
+      "key_art": "assets/intros/phoenix_reign_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/phoenix_reign_poses.png",
+      "sha256": "7bc35ecc1922e2802f17aa721a69fb8aa70c25921fd5f72f5b6ef517e314cefe",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "phoenix_reign",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/poisonboy.ogv",
+      "sha256": "b46ad174b39787895c5bf4281fbc704c3df7081acbbd62d5e73742166ac3e68d",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "classic_trio",
+      "original_user_file": false,
+      "key_art": "assets/intros/poisonboy_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/poisonboy_poses.png",
+      "sha256": "a8d0d52fe4fe57a0b591176a9907ff503fb82e6adcb6b5f3194d2a925b9f1e75",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/sharkbyte.ogv",
+      "sha256": "fb8e5b18effb4342749ef5d69b4b9a5630f256e575015962294be6d526d2c66f",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "sharkbyte",
+      "original_user_file": false,
+      "key_art": "assets/intros/sharkbyte_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/sharkbyte_poses.png",
+      "sha256": "62171b6a429aef7c8657828192666f86375e7950d0e79b1237ce4b4e7d1824a8",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "sharkbyte",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/intros/spinegrin.ogv",
+      "sha256": "0ab0b6b484226511f4b93ee55f68d2943ba13ba25a73ff58c5ca358c0413a15d",
+      "kind": "rendered_cinematic_theora_vorbis",
+      "reference": "spinegrin",
+      "original_user_file": false,
+      "key_art": "assets/intros/spinegrin_poses.png",
+      "timeline": "scripts/ui/intro_cinematic.gd",
+      "render_tool": "tools/render_intros.sh",
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "frame_count": 193,
+      "duration_seconds": 6.433333
+    },
+    {
+      "path": "assets/intros/spinegrin_poses.png",
+      "sha256": "4f04e5f8f883e7b1fd7210238593d780f73dcb460e61d5f00d2cec53c0b0736e",
+      "kind": "reference_guided_generated_intro_key_art",
+      "reference": "spinegrin",
+      "original_user_file": false
+    },
+    {
       "path": "assets/sprites/bullet/actions.png",
       "sha256": "4fe64a98132fa17cd028cd25f885886178fb4ed727c1e2d4d5d355a304575b21",
       "kind": "reference_guided_generated_sprite_atlas",
@@ -20,6 +267,48 @@
     {
       "path": "assets/sprites/bullet/walk.png",
       "sha256": "b3527c477ad22dbc2d2cce36e530adefb27fc4415b4b8a137bbcc869439d048a",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/chainveil/actions.png",
+      "sha256": "7ec6741f424d07cd9aab862f6850b8e58f8c7f23654d3a77ed62521fee637c7b",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "chainveil",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/chainveil/core.png",
+      "sha256": "ef07ffa6662020d0144e2eb98209a14f2c86e5bbf35c0b96801c5f3b3ec5c719",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "chainveil",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/cheese_rat/actions.png",
+      "sha256": "a06a208cdf97de2b24620218ca99965db96a693ab20fae72fcf07599552772a7",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "cheese_rat",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/cheese_rat/core.png",
+      "sha256": "10393135e8954020f8be299100749dd6b88f1a144c997aa0f5e1af42261eb051",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "cheese_rat",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/poisonboy/actions.png",
+      "sha256": "435fb6891af1a9c6846d4b9baf7efe7d4aaf2ddc201447f388517ed42ed8b350",
+      "kind": "reference_guided_generated_sprite_atlas",
+      "reference": "classic_trio",
+      "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/poisonboy/core.png",
+      "sha256": "e347fb2cc9f974712ec414ce16cc7d85fa3ad8e0027e5ae37647e3014bcc1001",
       "kind": "reference_guided_generated_sprite_atlas",
       "reference": "classic_trio",
       "original_user_file": false
@@ -44,13 +333,15 @@
       "kind": "reference_guided_generated_sprite_atlas",
       "reference": "sharkbyte",
       "original_user_file": false
-    },
-    {
-      "path": "assets/arenas/infernal_citadel.png",
-      "sha256": "728233b90b1c613c8f9af66117993d1a02e55487310ff5184876b68e5bdc116c",
-      "kind": "generated_arena_plate",
-      "reference": "Infernal Citadel design specification",
-      "original_user_file": false
     }
-  ]
+  ],
+  "gallery_views": {
+    "source": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+    "method": "AtlasTexture views; original image unchanged",
+    "resources": [
+      "assets/reference/bullet_sheet.tres",
+      "assets/reference/nachtelf_sheet.tres",
+      "assets/reference/poisonboy_sheet.tres"
+    ]
+  }
 }

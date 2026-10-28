@@ -9,10 +9,10 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Download Linux prototype
 
-[Download Linux v0.2.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.2.0/releases/v0.2.0/InfernoDuel-Linux-v0.2.tar.xz)
+[Download Linux v0.3.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-Linux-v0.3.tar.xz)
 
 Extract the archive and run `InfernoDuel-Linux/PLAY.sh`. Godot does not need to
-be installed separately. This is the two-fighter illustrated build described
+be installed separately. This is the five-fighter illustrated build described
 below; Linux x86_64 and OpenGL 3.3 are required.
 
 ## Play / F5
@@ -30,17 +30,21 @@ cd InfernoDuel
 ./tools/run.sh
 ```
 
-SharkByte and Bullet now use illustrated sprite animation sets based on the
-supplied character sheets. All ten fighters have individual portrait avatars in
-selection, with animated previews for the two playable fighters. The remaining
-eight roster slots are marked COMING SOON. Menu, arena, HUD and results have
-been updated to use the new artwork.
+SharkByte, Bullet, **PoisonBoy, Chainveil and Cheese Rat** are playable, with
+illustrated sprite animation and animated selection previews. All ten fighters
+have their own portrait avatars. The other five slots are marked COMING SOON.
 
-[Watch the animation preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.2.0/releases/v0.2.0/InfernoDuel-AnimationPreview-v0.2.mp4)
+In **FIGHTERS**, Bullet, Nachtelf and PoisonBoy each display their own column of
+the supplied shared sheet. Every fighter has a **PLAY INTRO** button: a short
+720p film opens on their footwear and ends with a kick toward camera. Crystal
+Fang and Phoenix Reign retain their original claw feet. BACK/Esc returns to the
+same fighter; REPLAY starts the film again.
 
-The preview is a deterministic animation showcase, not a human-played match.
-Original sheets are preserved byte-for-byte; new sprite art is reference-guided
-generated work. See `docs/ART_PIPELINE.md` for provenance and remaining polish.
+[Watch an intro preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-IntroPreview-v0.3.mp4)
+
+Original sheets are preserved byte-for-byte. New sprites and intro key art are
+reference-guided generated work. The intros use illustrated key poses, camera
+motion and impact effects. See `docs/ART_PIPELINE.md` for provenance and limits.
 
 ## Controls — one shared keyboard
 
@@ -64,8 +68,14 @@ F3 shows combat hitboxes. Focus loss automatically pauses the fight.
 Rounds last 60 seconds with 100 HP. Win two rounds to win the match. Equal HP
 at timeout or double KO replays the round. Light/heavy/special/ultimate deal
 6/12/16/30 damage. Grounded guard facing the attacker reduces damage by 75%.
-Special cooldown is 1.5 seconds; meter persists between rounds, not rematches.
+Special cooldown is 1.5 seconds (Cheese Rat: 1.4); meter persists between rounds, not rematches.
 Try light → light → heavy, or cancel a landed light's recovery into special.
+
+PoisonBoy throws Toxic Splash and a larger Venom Cataclysm projectile. Chainveil's
+Chain Lash and Iron Widow have extended reach and pull the opponent closer.
+Cheese Rat throws Cheese Ball; hold **backward + special** to place Cheese Trap
+instead. His ultimate is King of the Cheese. Traps expire after four seconds;
+each fighter can have at most three active projectiles/traps.
 
 ## Validate
 
@@ -74,14 +84,18 @@ Try light → light → heavy, or cancel a landed light's recovery into special.
 ```
 
 This verifies all eight artwork SHA-256 hashes, imports the project, checks for
-engine/script errors, and runs the 70 integration/combat plus 103 artwork/animation checks. For
+engine/script errors, and runs 70 integration/combat, 229 artwork/animation and
+45 fighter-expansion checks. It also decodes all ten intro films with FFmpeg
+(install `ffmpeg` for this validation step). For
 rendered tests on a Linux desktop:
 
 ```bash
 godot --path . --audio-driver Dummy tests/visual.tscn
+godot --path . --audio-driver Dummy tests/expansion_visual.tscn
 ```
 
-Rendered screenshots are written to `/tmp/inferno-visual/`. Tests do not establish
+Rendered screenshots are written to `/tmp/inferno-visual/` and `/tmp/inferno-v03-visual/`.
+Tests do not establish
 physical keyboard rollover, audio-device quality, or real two-person playability.
 See `docs/TEST_LOG.md` for exact results and the manual checklist.
 
@@ -92,14 +106,20 @@ See `docs/TEST_LOG.md` for exact results and the manual checklist.
 ./builds/linux/PLAY.sh
 ```
 
-The script builds the game PCK and bundles the installed Linux Godot executable,
-so the resulting folder can run without Godot installed. This is a native Linux
-package using the full editor engine, **not a stripped production export**.
-With matching official export templates installed, the included `Linux` preset
-also supports `godot --headless --path . --export-release Linux builds/InfernoDuel.x86_64`.
-The template-export path has not been tested here because templates are absent.
+The script builds the game PCK. Set `GODOT_LINUX_TEMPLATE` to the official matching
+`linux_release.x86_64` export template to bundle the smaller release engine; the
+cloud default is `/workspace/.runtime/godot/linux_release.x86_64`. Versions must
+match exactly. Without that file the script falls back to the installed editor
+engine and records the choice in the package README. The published v0.3 bundle
+uses the official Godot 4.6.3 Linux release template and adjacent PCK.
 
-No external services, credentials, or package-manager dependencies are needed.
+To rebuild the intro movies, install FFmpeg, use a graphical display and run
+`./tools/render_intros.sh`. Movie Maker renders the deterministic cinematic
+timeline at 30 FPS before Theora/Vorbis encoding. Optional authoring tool
+`tools/index_intro_art.py` uses Pillow, NumPy and SciPy to index alpha meshes;
+these Python packages are not needed to play or run the normal tests.
+
+No external services or credentials are needed to play or test the game.
 On restricted cloud hosts use writable XDG data/config/cache directories when
 invoking Godot, e.g. `XDG_DATA_HOME=/workspace/.runtime/data` (and similarly
 `XDG_CONFIG_HOME`, `XDG_CACHE_HOME`). A graphical desktop/OpenGL 3.3 is required

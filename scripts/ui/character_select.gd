@@ -36,7 +36,7 @@ func _ready() -> void:
 		var portrait := FighterPortrait.new()
 		portrait.setup(f)
 		b.add_child(UI.place(portrait,3,3,124,128))
-		if i >= 2: portrait.modulate = Color(0.68,0.62,0.66)
+		if not f.get("playable",false): portrait.modulate = Color(0.68,0.62,0.66)
 		var stripe := ColorRect.new()
 		stripe.color = Color(f.accent)
 		stripe.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -52,7 +52,7 @@ func _ready() -> void:
 		badges.append(badge)
 		cards.append(b)
 	add_child(UI.place(UI.label("SELECT YOUR LEGEND",16,UI.MUTED),300,556,680,28))
-	add_child(UI.place(UI.label("SharkByte & Bullet playable  ·  Eight fighters in development",16,UI.MUTED),280,588,720,26))
+	add_child(UI.place(UI.label("FIVE FIGHTERS READY  ·  Five more in development",16,UI.MUTED),280,588,720,26))
 	for i in 2:
 		var p := i
 		var x := 34+i*1004
@@ -100,8 +100,8 @@ func choose(player: int, index: int) -> void:
 	refresh()
 
 func confirm(player: int) -> void:
-	if selected[player] >= 2:
-		hint.text = "IN DEVELOPMENT · Choose SharkByte or Bullet to fight."
+	if not roster[selected[player]].get("playable",false):
+		hint.text = "IN DEVELOPMENT · Choose a highlighted playable fighter."
 		return
 	ready_players[player] = true
 	Sound.play("confirm")
@@ -120,7 +120,7 @@ func refresh() -> void:
 			badge += "   CPU" if solo else "   P2"
 		if selected[0] == i and selected[1] == i: color = UI.GOLD
 		cards[i].add_theme_stylebox_override("normal",UI.style(Color("15111a"),color,2))
-		badges[i].text = badge.strip_edges() if badge != "" else ("COMING SOON" if i >= 2 else "")
+		badges[i].text = badge.strip_edges() if badge != "" else ("COMING SOON" if not roster[i].get("playable",false) else "")
 		badges[i].add_theme_color_override("font_color",color if badge != "" else UI.MUTED)
 	for p in 2:
 		var f: Dictionary = roster[selected[p]]
@@ -133,7 +133,7 @@ func refresh() -> void:
 				hero_holders[p].remove_child(child)
 				child.queue_free()
 			hero_ids[p] = f.id
-			if selected[p] < 2:
+			if f.get("playable",false):
 				var figure := FighterVisual.new()
 				figure.profile = f
 				figure.accent = UI.CYAN if p == 0 else UI.ORANGE

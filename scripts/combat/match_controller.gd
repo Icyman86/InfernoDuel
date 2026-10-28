@@ -201,6 +201,12 @@ func finish_round() -> void:
 	Sound.play("round")
 
 func _spawn_projectile(fighter: DuelFighter, move: AttackData) -> void:
+	var owned: Array[DuelProjectile] = []
+	for existing in projectiles:
+		if existing.source == fighter: owned.append(existing)
+	if owned.size() >= 3:
+		projectiles.erase(owned[0])
+		owned[0].queue_free()
 	var projectile := DuelProjectile.new()
 	projectile.setup(fighter,move)
 	add_child(projectile)

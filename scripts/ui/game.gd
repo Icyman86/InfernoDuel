@@ -14,6 +14,7 @@ var solo := false
 var route := "menu"
 var option_origin := "menu"
 var modal: ConfirmationDialog
+var gallery_index := 0
 
 func _ready() -> void:
 	roster = JSON.parse_string(FileAccess.get_file_as_string("res://data/fighters.json")).fighters
@@ -99,7 +100,7 @@ func show_menu() -> void:
 	buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  v0.2",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  v0.3",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	end_match()
@@ -229,8 +230,20 @@ func show_gallery() -> void:
 	route = "gallery"
 	var gallery := Gallery.new()
 	gallery.roster = roster
+	gallery.current = gallery_index
+	gallery.intro_requested.connect(show_fighter_intro)
 	gallery.back_requested.connect(show_menu)
 	screen = gallery
+	stage.add_child(screen)
+
+func show_fighter_intro(index: int) -> void:
+	gallery_index = index
+	clear_screen()
+	route = "intro"
+	var player := FighterIntroPlayer.new()
+	player.profile = roster[index]
+	player.back_requested.connect(show_gallery)
+	screen = player
 	stage.add_child(screen)
 
 func show_story() -> void:
@@ -273,6 +286,7 @@ func _input(event: InputEvent) -> void:
 				if option_origin == "pause": show_pause()
 				else: show_menu()
 			"select", "story", "gallery": show_menu()
+			"intro": show_gallery()
 			"arena": show_select(solo)
 		get_viewport().set_input_as_handled()
 	elif route == "select":

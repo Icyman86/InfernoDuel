@@ -1,48 +1,60 @@
-# Prototype architecture
+# Prototype architecture — v0.3
 
 Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 `scenes/main.tscn` is the F5 entry point. No network services or secrets are needed.
 
-- `scripts/core/input_router.gd`: reads physical key events using `data/input_layouts.json`. Each player owns separate held and edge-triggered state. Focus loss, countdown, pause, rounds, and scene changes clear input.
-- `scripts/ui/game.gd`: screen transitions, confirmation dialogs, focus-loss pause, shared 1280×720 stage. Separate character select, gallery, options, UI theme, and procedural arena scripts keep each responsibility contained.
-- `scenes/combat/fighter.tscn` and `fighter_controller.gd`: shared deterministic movement, facing, attack lifecycle, block, hitstun, cooldown, meter, and temporary mannequin rendering. Two profiles use different dash speeds. Real character animations remain unimplemented.
-- `data/attacks/*.tres`: reusable `AttackData` resources define startup, active, recovery, damage, reach, knockback, hitstun, meter, and cooldown. A 120 ms late-recovery input buffer supports chaining. A successful light may cancel recovery into light/heavy/special. Three consecutive hits grant brief defender escape immunity.
-- `scenes/combat/match.tscn` and `match_controller.gd`: countdown, 60-second rounds, first-to-two wins, timeout/draw retry, HUD, CPU routing, and projectile lifecycle. Meter persists between rounds; rematch resets everything.
-- `ai_controller.gd`: Easy CPU generates the same input dictionary consumed by a human-controlled fighter. No direct HP manipulation or unlimited meter.
-- `projectile.gd`: Bullet's ultimate travels as a ground shock; SharkByte's ultimate uses a close-range hitbox. Specials are Fin Dash and Bull Charge. These are starting interpretations for the two prototype movesets, not complete final movesets.
-- `settings.gd`: volume buses and fullscreen/window configuration stored in `user://settings.cfg`.
-- `sound.gd`: original synthesized placeholder SFX; no music recording is bundled. Music bus/slider is prepared and labeled accordingly.
+- `scripts/core/input_router.gd` reads physical keys from `data/input_layouts.json`.
+  Each player owns held and edge-triggered state. Focus loss, countdown, pause,
+  rounds and transitions clear inputs.
+- `scripts/ui/game.gd` routes menu, character select, arena, gallery, intro, options,
+  pause and results on a logical 1280×720 stage. Gallery index survives intro playback.
+- `fighter_controller.gd` owns deterministic movement, facing, attack lifecycle,
+  blocking, hitstun, cooldowns and meter. Each fighter duplicates base `AttackData`
+  resources before applying data-driven overrides, avoiding shared-state mutations.
+- `data/attacks/*.tres` defines startup, active, recovery, damage, reach, knockback,
+  hitstun, meter and cooldown. A 120 ms recovery buffer supports chaining. A landed
+  light can cancel recovery; three consecutive hits grant brief escape immunity.
+- `data/fighters.json` marks five fighters playable and stores movement speeds,
+  special/ultimate kinds and overrides. Playability is not inferred from roster index.
+- `match_controller.gd` handles countdown, 60-second rounds, first-to-two wins,
+  timeout/draw retry, HUD, CPU routing and projectiles. Meter persists between
+  rounds; rematch resets it. At most three active projectiles/traps per owner.
+- `ai_controller.gd` emits the same input dictionary as human input. No direct
+  damage manipulation or unlimited meter is used.
+- `projectile.gd` implements Bullet ground shock, PoisonBoy toxic orb/venom cloud,
+  and Cheese Rat cheese ball/trap/king. Backward + special chooses Cheese Trap.
+  Traps last four seconds and hit the enemy once. Chainveil uses extended melee
+  ranges and negative knockback to pull targets. SharkByte retains his dash/melee.
+- `settings.gd` stores volume/fullscreen preferences in `user://settings.cfg`.
+  `sound.gd` synthesizes bounded short SFX. Recorded music and voices are absent.
 
-## Collision model
+## Collision and presentation
 
-This small two-fighter prototype uses explicit world-space Rect2 hurtboxes,
-attack boxes, and projectile boxes instead of physics collision-layer nodes.
-Bodies resolve overlap separately. Arena decorations have no collision.
-Each physics tick first moves both fighters, then collects all eligible hit events,
-then applies them. This preserves same-tick trades, including double KO.
-One melee hit per activation and one hit per projectile prevent repeated damage.
-F3 toggles visible hurtboxes and active melee hitboxes for tuning.
+World-space Rect2 hurtboxes, melee boxes and projectile boxes define combat.
+Bodies resolve overlap separately. Each physics tick moves both fighters, collects
+eligible hits, then applies them to preserve same-tick trades and double KOs.
+Each melee activation/projectile hits once. F3 displays tuning boxes.
 
-## Assets
+`FighterVisual` reads controller state and selects textured UV meshes and pivots
+from `data/sprite_atlases.json`. It does not own damage or movement. `FighterPortrait`
+creates views of immutable source sheets; the gallery uses separate AtlasTexture
+views for Bullet, Nachtelf and PoisonBoy. `HitBurst` supplies transient impact FX.
 
-All eight original sheets remain byte-identical and appear only as complete
-reference sheets in the gallery. Combat geometry is deliberately labeled as a
-prototype. No automatic cropping, synthesized character sprites, or final animation
-claims. JSON retains all ten fighters; only indices 0/1 are enabled in v0.1.
-DejaVu fonts are bundled with their license. Godot's MIT license accompanies
-the optional native package. See `ASSET_REPORT.md` for the next art tasks.
+`FighterIntroPlayer` plays a bundled OGV using VideoStreamPlayer and the SFX bus.
+REPLAY restarts it; BACK/Esc returns to the same gallery fighter. `IntroCinematic`
+is an authoring-only deterministic camera/key-art timeline used by Movie Maker.
+See `ART_PIPELINE.md` for artwork provenance and the film generation commands.
 
-## Scope still ahead
+## Packaging and remaining scope
 
-Validated transparent animation frames, all ten unique movesets, final arena art,
-recorded audio/music, balance and physical-keyboard acceptance testing, and a
-small release-template Linux export. Story, rebinding, and Android remain later work.
+`tools/build_linux.sh` exports a PCK and pairs it with an exactly matching official
+Linux release template, or falls back to the editor engine if none is supplied.
+The published v0.3 uses the official 4.6.3 Linux release template. The executable
+and PCK share the InfernoDuel basename, allowing standard adjacent-pack discovery.
+The wrapper changes to its own folder before launching. Authoring intro PNGs,
+tests, tools, docs and release archives are excluded from the pack.
 
-## v0.2 visual renderer
-
-`FighterVisual` is a separate Node2D renderer attached to each shared fighter. It
-loads source textures and per-frame UV meshes/pivots from `data/sprite_atlases.json`.
-The controller retains combat ownership; rendering reads its state. `FighterPortrait`
-creates AtlasTexture views of the immutable source sheets and is reused across
-selection, HUD, arena and gallery. `HitBurst` provides bounded transient impact FX.
-The v0.1 mannequin and geometric citadel descriptions above are historical.
+All eight original sheets remain unchanged. DejaVu fonts, Godot's MIT license and
+third-party notices accompany the native package. Five remaining combat sets,
+expanded move lists, final balance, music/voices, physical-keyboard acceptance,
+Story, rebinding and Android are later milestones.

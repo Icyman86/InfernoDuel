@@ -34,8 +34,15 @@ var flash := 0.0
 var anim_time := 0.0
 var show_hitboxes := false
 var visual: FighterVisual
+var moves: Dictionary = {}
+var attack_variant := ""
 
 func _ready() -> void:
+	var overrides: Dictionary = profile.get("combat",{}).get("overrides",{})
+	for id in ATTACKS:
+		var move: AttackData = moves.get(id,ATTACKS[id]).duplicate()
+		for field in overrides.get(id,{}): move.set(field,overrides[id][field])
+		moves[id] = move
 	visual = FighterVisual.new()
 	visual.profile = profile
 	visual.actor = self
@@ -60,6 +67,7 @@ func reset_at(x: float, keep_meter := false) -> void:
 	received_chain = 0
 	received_time = 0.0
 	flash = 0.0
+	attack_variant = ""
 	queue_redraw()
 
 func grounded() -> bool:
@@ -88,7 +96,7 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 		if requested != "" and attack.duration() - attack_time <= 0.12:
 			buffered = requested
 			buffer_time = 0.12
-		if not emitted and attack.id == "ultimate" and profile.get("id") == "bullet" and is_active():
+		if not emitted and is_projectile_attack(attack.id) and is_active():
 			emitted = true
 			projectile_requested.emit(self, attack)
 		# A landed light can cancel its recovery into a follow-up; startup/active are never skipped.
@@ -100,14 +108,16 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 				requested = buffered
 				buffered = ""
 	if not attack and stun == 0.0 and not guarding and hp > 0:
-		if requested != "": begin_attack(requested)
+		if requested != "":
+			attack_variant = "trap" if requested == "special" and profile.get("id") == "cheese_rat" and float(input.get("axis",0))*facing < 0 else ""
+			begin_attack(requested)
 		if not attack:
-			velocity.x = float(input.get("axis", 0)) * (330.0 if profile.get("id") == "sharkbyte" else 285.0)
+			velocity.x = float(input.get("axis", 0)) * float(profile.get("combat",{}).get("speed",285.0))
 			if input.get("jump", false) and grounded(): velocity.y = -700.0
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, delta * 1100)
-	if attack and attack.id == "special" and is_active():
-		velocity.x = facing * (620.0 if profile.get("id") == "sharkbyte" else 500.0)
+	if attack and attack.id == "special" and attack_kind("special") == "dash" and is_active():
+		velocity.x = facing * float(profile.get("combat",{}).get("dash_speed",500.0))
 	if not grounded() or velocity.y < 0: velocity.y += 1800.0 * delta
 	position += velocity * delta
 	position.x = clampf(position.x, LEFT, RIGHT)
@@ -118,7 +128,7 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 
 func begin_attack(id: String) -> bool:
 	if not ATTACKS.has(id) or attack or stun > 0 or guarding or hp <= 0: return false
-	var move: AttackData = ATTACKS[id]
+	var move: AttackData = moves.get(id,ATTACKS[id])
 	if id == "special" and special_cooldown > 0: return false
 	if meter < move.meter_cost: return false
 	meter -= move.meter_cost
@@ -142,9 +152,15 @@ func hitbox() -> Rect2:
 
 func pending_hit(target: DuelFighter) -> bool:
 	if not is_active() or hit_connected: return false
-	# Bullet's ultimate is a traveling ground shock, never also a melee hit.
-	if attack.id == "ultimate" and profile.get("id") == "bullet": return false
+	# Projectile attacks apply their hit once through their projectile, never twice.
+	if is_projectile_attack(attack.id): return false
 	return hitbox().intersects(target.hurtbox()) and target.immunity <= 0.0 and target.hp > 0
+
+func attack_kind(id: String) -> String:
+	return profile.get("combat",{}).get(id+"_kind","melee")
+
+func is_projectile_attack(id: String) -> bool:
+	return attack_kind(id) in ["ground_shock","toxic_orb","venom_cloud","cheese_ball","cheese_king"]
 
 func receive_hit(move: AttackData, attacker_x: float) -> bool:
 	if immunity > 0.0 or hp <= 0: return false

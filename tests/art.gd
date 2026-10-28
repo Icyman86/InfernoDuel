@@ -29,6 +29,7 @@ func run() -> void:
 	for id in data:
 		var fighter_data: Dictionary = data[id]
 		var count := 0
+		var unique_frames := {}
 		for atlas_id in ["core","actions","walk"]:
 			var texture: Texture2D = load("res://"+fighter_data[atlas_id].path)
 			var image := texture.get_image()
@@ -36,8 +37,9 @@ func run() -> void:
 			for frame in fighter_data[atlas_id].frames:
 				var r: Array = frame.rect
 				check(Rect2(Vector2.ZERO,texture.get_size()).encloses(Rect2(r[0],r[1],r[2],r[3])) and frame.polygon.size() >= 3,id+" "+atlas_id+" frame %d has a bounded textured mesh" % count)
+				unique_frames[fighter_data[atlas_id].path+str(frame.rect)] = true
 				count += 1
-		check(count == 30,id+" has thirty indexed pose keys")
+		check(unique_frames.size() == int(fighter_data.get("unique_frame_count",30)),id+" has its complete unique pose set")
 		var profile: Dictionary
 		for candidate in roster:
 			if candidate.id == id: profile = candidate

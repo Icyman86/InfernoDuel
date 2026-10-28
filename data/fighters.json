@@ -20,7 +20,25 @@
       ],
       "accent": "49c4d7",
       "animation_atlas": "assets/sprites/sharkbyte/core.png",
-      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "playable": true,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-27/SharkByte Fighting Game Character Sheet.png",
+      "intro": {
+        "video_path": "assets/intros/sharkbyte.ogv",
+        "shoe_region": [
+          1342,
+          824,
+          87,
+          178
+        ],
+        "art_path": "assets/intros/sharkbyte_poses.png"
+      },
+      "combat": {
+        "speed": 330,
+        "dash_speed": 620,
+        "special_kind": "dash",
+        "ultimate_kind": "melee"
+      }
     },
     {
       "id": "bullet",
@@ -40,7 +58,25 @@
       ],
       "accent": "f16444",
       "animation_atlas": "assets/sprites/bullet/core.png",
-      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "playable": true,
+      "gallery_art_path": "assets/reference/bullet_sheet.tres",
+      "intro": {
+        "video_path": "assets/intros/bullet.ogv",
+        "shoe_region": [
+          26,
+          575,
+          150,
+          70
+        ],
+        "art_path": "assets/intros/bullet_poses.png"
+      },
+      "combat": {
+        "speed": 285,
+        "dash_speed": 500,
+        "special_kind": "dash",
+        "ultimate_kind": "ground_shock"
+      }
     },
     {
       "id": "nachtelf",
@@ -58,7 +94,19 @@
         230,
         278
       ],
-      "accent": "e14f65"
+      "accent": "e14f65",
+      "playable": false,
+      "gallery_art_path": "assets/reference/nachtelf_sheet.tres",
+      "intro": {
+        "video_path": "assets/intros/nachtelf.ogv",
+        "shoe_region": [
+          580,
+          565,
+          150,
+          77
+        ],
+        "art_path": "assets/intros/nachtelf_poses.png"
+      }
     },
     {
       "id": "poisonboy",
@@ -67,7 +115,7 @@
       "special": "Toxic Splash",
       "ultimate": "Venom Cataclysm",
       "story_status": "story_unlock",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
       "reference_art_available": true,
       "portrait_region": [
@@ -76,7 +124,26 @@
         230,
         280
       ],
-      "accent": "80c66b"
+      "accent": "80c66b",
+      "playable": true,
+      "gallery_art_path": "assets/reference/poisonboy_sheet.tres",
+      "intro": {
+        "video_path": "assets/intros/poisonboy.ogv",
+        "shoe_region": [
+          1080,
+          573,
+          185,
+          72
+        ],
+        "art_path": "assets/intros/poisonboy_poses.png"
+      },
+      "combat": {
+        "speed": 305,
+        "special_kind": "toxic_orb",
+        "ultimate_kind": "venom_cloud"
+      },
+      "animation_atlas": "assets/sprites/poisonboy/core.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
     },
     {
       "id": "spinegrin",
@@ -94,7 +161,19 @@
         198,
         233
       ],
-      "accent": "b7d448"
+      "accent": "b7d448",
+      "playable": false,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
+      "intro": {
+        "video_path": "assets/intros/spinegrin.ogv",
+        "shoe_region": [
+          1320,
+          817,
+          112,
+          183
+        ],
+        "art_path": "assets/intros/spinegrin_poses.png"
+      }
     },
     {
       "id": "chainveil",
@@ -103,7 +182,7 @@
       "special": "Chain Lash",
       "ultimate": "Iron Widow",
       "story_status": "story_unlock",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Chainveil_ Inferno Duel Character Sheet.png",
       "reference_art_available": true,
       "portrait_region": [
@@ -112,7 +191,36 @@
         195,
         231
       ],
-      "accent": "df5487"
+      "accent": "df5487",
+      "playable": true,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-27/Chainveil_ Inferno Duel Character Sheet.png",
+      "intro": {
+        "video_path": "assets/intros/chainveil.ogv",
+        "shoe_region": [
+          1318,
+          817,
+          113,
+          178
+        ],
+        "art_path": "assets/intros/chainveil_poses.png"
+      },
+      "combat": {
+        "speed": 300,
+        "special_kind": "chain",
+        "ultimate_kind": "chain_super",
+        "overrides": {
+          "special": {
+            "reach": 230,
+            "knockback": -280
+          },
+          "ultimate": {
+            "reach": 275,
+            "knockback": -340
+          }
+        }
+      },
+      "animation_atlas": "assets/sprites/chainveil/core.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
     },
     {
       "id": "cheese_rat",
@@ -121,7 +229,7 @@
       "special": "Cheese Ball / Cheese Trap",
       "ultimate": "King of the Cheese",
       "story_status": "pending_story_design",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_available": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 18.59.15.jpeg",
       "additional_moves": [
@@ -136,7 +244,31 @@
         199,
         184
       ],
-      "accent": "e6b249"
+      "accent": "e6b249",
+      "playable": true,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 18.59.15.jpeg",
+      "intro": {
+        "video_path": "assets/intros/cheese_rat.ogv",
+        "shoe_region": [
+          276,
+          568,
+          266,
+          192
+        ],
+        "art_path": "assets/intros/cheese_rat_poses.png"
+      },
+      "combat": {
+        "speed": 355,
+        "special_kind": "cheese_ball",
+        "ultimate_kind": "cheese_king",
+        "overrides": {
+          "special": {
+            "cooldown": 1.4
+          }
+        }
+      },
+      "animation_atlas": "assets/sprites/cheese_rat/core.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
     },
     {
       "id": "lava_stone",
@@ -160,7 +292,19 @@
         210,
         192
       ],
-      "accent": "f46b35"
+      "accent": "f46b35",
+      "playable": false,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
+      "intro": {
+        "video_path": "assets/intros/lava_stone.ogv",
+        "shoe_region": [
+          173,
+          700,
+          500,
+          190
+        ],
+        "art_path": "assets/intros/lava_stone_poses.png"
+      }
     },
     {
       "id": "crystal_fang",
@@ -184,7 +328,19 @@
         200,
         202
       ],
-      "accent": "f04eae"
+      "accent": "f04eae",
+      "playable": false,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
+      "intro": {
+        "video_path": "assets/intros/crystal_fang.ogv",
+        "shoe_region": [
+          274,
+          786,
+          443,
+          165
+        ],
+        "art_path": "assets/intros/crystal_fang_poses.png"
+      }
     },
     {
       "id": "phoenix_reign",
@@ -209,7 +365,19 @@
         198,
         191
       ],
-      "accent": "ffb44a"
+      "accent": "ffb44a",
+      "playable": false,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
+      "intro": {
+        "video_path": "assets/intros/phoenix_reign.ogv",
+        "shoe_region": [
+          276,
+          802,
+          420,
+          145
+        ],
+        "art_path": "assets/intros/phoenix_reign_poses.png"
+      }
     }
   ],
   "roster_count": 10,

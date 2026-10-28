@@ -43,7 +43,7 @@ Status: source files are **never modified**.
 | inferno_duel_fight.png | OPTIONAL_NOT_PROVIDED |  |
 | Dark Elf Warlock Before the Infernal Titan.png | OPTIONAL_NOT_PROVIDED |  |
 
-## Runtime implementation — 27 October 2026
+## Historical v0.1 runtime implementation — 27 October 2026
 
 - All eight original source images pass `tools/verify_assets.py` (8/8). No original was edited, cropped, recompressed, or replaced.
 - All ten gallery entries display their corresponding complete original reference sheet. Bullet, Nachtelf, and PoisonBoy intentionally share one sheet.
@@ -69,3 +69,22 @@ animation frames found in the ZIP. All ten fighters have distinct original-sheet
 portrait crops, with animated previews for the two playable fighters. Original
 files remain unchanged. New citadel artwork, menu heroes, HUD portraits, impact
 FX and result art are integrated. See `ART_PIPELINE.md` and the provenance manifest.
+
+## Current fighter expansion v0.3 — 28 October 2026
+
+This section supersedes the historical placeholder and two-fighter status above.
+PoisonBoy, Chainveil and Cheese Rat now join SharkByte and Bullet as playable
+illustrated fighters. New sets have 24 unique pose keys each; the first two retain
+30 each. All five have animated previews and all ten have individual portraits.
+
+Bullet, Nachtelf and PoisonBoy each have a dedicated AtlasTexture gallery view of
+their own source column. All ten roster entries have a real 720p, 30 FPS intro film
+with footwear close-up and front kick toward camera. Crystal Fang/Phoenix Reign
+retain original claw feet. Generated key art and cinematic derivatives are labeled
+in `data/visual_asset_provenance.json`; no supplied image was modified.
+
+The published Linux bundle uses the official Godot 4.6.3 Linux release template.
+Source integrity remains 8/8 SHA-256 matches. See `ART_PIPELINE.md` for the authoring
+pipeline and `TEST_LOG.md` for validation. The remaining five combat characters,
+extra move variants, animation in-betweens, final music/voices and balance remain
+future work; the old v0.1 Next art tasks list is historical.

@@ -1,72 +1,82 @@
-# Visual update v0.2 — 28 October 2026
+# Illustrated fighter expansion v0.3 — 28 October 2026
 
-## What changed
+## Source integrity and provenance
 
-The geometric fighter renderer has been replaced by illustrated alpha-textured
-animation sets for SharkByte and Bullet. Bullet now follows the actual supplied
-human design: tattooed man, long reddish hair, red skull tank and black trousers.
-He is not rendered as a horned bull. SharkByte retains his navy shark body, blue
-fins/tail, leather jacket, white trousers and dark shoes.
+All eight supplied character/move sheets remain byte-identical under
+`assets/originals/character_sheets_2026-10-27/`. `tools/verify_assets.py` checks
+all eight original SHA-256 hashes. The ZIP provided composed reference sheets,
+not transparent animation frames. Runtime sprites and intro key art are new
+reference-guided generated derivatives, not original animation extracted from
+the upload. `data/visual_asset_provenance.json` records paths, references and hashes.
 
-All ten roster entries have individual portraits extracted at runtime via
-`AtlasTexture` coordinates into their original sheets. No original image has been
-edited. The two playable fighters have animated selection previews. Portraits also
-appear in the HUD, arena selection and gallery navigation; results show the winner.
+The original SharkByte and Bullet sprites from v0.2 are retained. New PoisonBoy,
+Chainveil and Cheese Rat sets follow the supplied green/black streetwear, gothic
+black/red outfit with platform boots, and black rat/yellow cheese shirt designs.
+Cheese Rat's red shoes have plain uppers and black laces/soles, without brand logos.
+The Infernal Citadel plate is newly generated artwork matching the design brief.
 
-The Infernal Citadel uses a new detailed illustrated arena plate with animated
-embers and subtle living lava light. Menu and selection overlays preserve contrast.
-Impact bursts, special afterimages, hit flash, team rim accents and a ground shock
-replace the most conspicuous geometric effect placeholders.
+## Selection and individual gallery sheets
 
-## Provenance and source integrity
+All ten fighters use distinct original-sheet portrait regions in selection, HUD
+and gallery navigation. The five playable fighters have animated selection previews.
+Bullet, Nachtelf and PoisonBoy now have separate `AtlasTexture` resources under
+`assets/reference/`, each displaying only their own column of the shared source
+sheet. This changes the gallery view without editing or duplicating source pixels.
 
-New files in `assets/sprites/` are **reference-guided generated derivatives**, made
-with the image-generation tool using the actual user-supplied SharkByte and classic
-trio sheets. They are not pre-existing animation files from the user's ZIP. The
-arena plate is newly generated to match the Infernal Citadel brief.
+## Combat animation
 
-The ZIP contained composed character/move sheets, not separate transparent runtime
-frames. Original files under `assets/originals/character_sheets_2026-10-27/` remain
-byte-identical; `python3 tools/verify_assets.py` still verifies all eight SHA-256s.
-`data/visual_asset_provenance.json` records derived-asset hashes and references.
+SharkByte and Bullet each have 30 indexed pose keys across `core.png`, `walk.png`
+and `actions.png`. Their dedicated six-key walk replaces the retained four old
+walk keys. PoisonBoy, Chainveil and Cheese Rat each have 24 unique indexed keys:
+16 core poses (idle, four-step walk, light and heavy) plus eight action poses
+(block, jump, dash/special, ultimate, hit and KO). Their walk metadata aliases the
+four core walk frames; those aliases are not counted as extra artwork.
 
-## Sprite animation and rendering
+`data/sprite_atlases.json` stores source rectangles, ground pivots, texture scale
+and convex silhouette meshes. Meshes isolate adjacent atlas figures. Indexing
+reads source alpha and produces metadata without repainting images. Incorrectly
+overlapping Chainveil poses were replaced with a spaced atlas before indexing.
 
-Each fighter has three alpha PNG atlases:
+`FighterVisual` reads the controller's state. Anticipation, extension and recovery
+keys follow attack timing; the heavy extension coincides with the active hitbox.
+Idle and walk loop; block, airborne, stun and KO have dedicated silhouettes.
+World movement, breathing, impact flash and chain/projectile effects add motion.
+Pause freezes animation. Team colors use a subtle rim to retain outfit colors.
 
-- `core.png`: four idle keys, four retained legacy walk keys, four punch keys and
-  four heavy-kick keys. The old four-step walk is retained as source material but
-  replaced in playback by the dedicated six-frame cycle.
-- `walk.png`: six contact/down/passing keys for locomotion.
-- `actions.png`: block, jump, two dash poses, two ultimate poses, hit reaction and KO.
+These are keyed illustrated animations. Twenty-four or thirty pose keys do not
+mean that each action has that many separately drawn in-between frames. Extra
+in-betweens, consistent face/volume review and foot-slide polish remain useful.
+Five roster fighters still have avatars, sheets and intros rather than combat sets.
 
-There are 30 indexed pose keys per fighter, 60 total. A pose key is not a promise
-of 30 separate fully hand-drawn in-between frames for every action. Idle and walk
-loop; attacks use authored anticipation/extension/recovery keys. Grounding, hit
-reaction, secondary breathing and the world movement supply additional motion.
+## Ten intro films
 
-`data/sprite_atlases.json` records per-frame source rectangles, ground pivots,
-texture scale and convex silhouette meshes. Meshes isolate neighbouring characters
-when their rectangular bounding boxes overlap. Opaque-pixel component analysis
-confirmed that no other character lies within each frame mesh. This indexing reads
-images and produces metadata; it does not repaint or rewrite the art.
+Every fighter has an individual `assets/intros/<id>.ogv`: 193 frames at 30 FPS,
+1280×720, about 6.43 seconds, Theora video and Vorbis synthesized SFX. Each film
+opens with a footwear close-up, cuts to the fighter, raises the knee and drives
+a foreshortened front kick toward camera with the sole prominently framed.
+Crystal Fang and Phoenix Reign retain their original claw feet, as explicitly
+chosen by the user. Their close-ups and camera kicks show claws and foot pads.
 
-`FighterVisual` selects poses from the controller's state. Attack art progresses
-through startup, active and recovery phases, so the full-extension heavy frame
-coincides with an active hitbox. KO, guard, jump and stun have dedicated silhouettes.
-Pause freezes the visual clock. Team colors affect a subtle rim, preserving outfits.
-Hurtbox height, strike height and body spacing were adjusted for the taller artwork.
+Each `<id>_poses.png` contains four reference-guided key-art views. The deterministic
+`intro_cinematic.gd` timeline supplies shot changes, camera moves, impact zoom,
+flash, citadel backdrop, typography and sound. These are motion-comic cinematics
+with moving key art, not fully drawn frame-by-frame character animation.
 
-## Checks and remaining art review
+`tools/index_intro_art.py` writes UV metadata to `data/intro_atlases.json` from the
+alpha silhouettes. `tools/render_intros.sh` runs the Godot Movie Maker test scene
+and encodes its AVI/WAV output using FFmpeg. Authoring PNGs, test scenes and tools
+are excluded from the shipped PCK; the actual OGV movies are bundled for native
+`VideoStreamPlayer` playback. REPLAY resets decoding; leaving the screen stops it.
 
-`tests/art.tscn` adds 103 checks covering all ten portrait regions, distinct crops,
-alpha transparency, bounded frame meshes, all animation states, attack-frame timing,
-KO/guard selection and pause. Existing 70 combat/flow tests and nine rendered
-integration checks remain required. The deterministic `tests/showcase.tscn` can be
-recorded with Godot Movie Maker to review every state in motion.
+## Validation and next art review
 
-These are first integrated illustrated animation sets. Artist review of likeness,
-frame-to-frame volume, foot sliding, facial consistency and extra in-betweens is
-still useful; this is not a claim of final studio animation quality. The other eight
-fighters have avatars and reference art, but are not yet complete combat characters.
-Physical two-player keyboard and actual audio tests remain outstanding.
+`tests/art.tscn` checks all ten portraits, atlas alpha, mesh bounds and pose/state
+selection (229 checks). `tests/expansion_visual.tscn` renders the three individual
+gallery sheets, decodes all ten films through their actual buttons, checks replay,
+completion and returning to the same fighter, and renders the three new combat
+sprites. `tools/verify_intros.py` fully decodes frame counts and compares footwear
+and kick frames across all ten movies. See `TEST_LOG.md` for results and limits.
+
+Original reference likeness, costume consistency, silhouette isolation and camera
+framing were reviewed from rendered screenshots. Physical two-player keyboard,
+real speaker output, balance and final artist review remain outstanding.

@@ -2,3 +2,5 @@
 builds/*
 !builds/.gitkeep
 *.tmp
+__pycache__/
+*.pyc
