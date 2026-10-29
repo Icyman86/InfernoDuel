@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 				InputRouter.held[0].move_left = true
 				InputRouter.pressed[0].light = true
 			elif duel.phase_time < 1.5 and once("countdown"):
-				check(duel.fighters[1].position.x == 890 and duel.fighters[0].hp == 100,"guest input cannot move or attack during the host countdown")
+				check(duel.fighters[1].position.x == 890 and duel.fighters[0].hp == DuelFighter.MAX_HEALTH,"guest input cannot move or attack during the host countdown")
 		if duel.phase == "fight" and fight_started < 0:
 			fight_started = elapsed
 			check(game.networked and not duel.solo,"session starts a genuine two-device fight without CPU")
@@ -95,8 +95,8 @@ func _process(delta: float) -> void:
 			else:
 				if t >= 3.2 and once("heavy"): InputRouter.pressed[0].heavy = true
 				if t >= 3.9 and once("damage"):
-					check(duel.fighters[0].hp == 78,"guest movement, light and projectile damage reach authoritative host")
-					check(duel.fighters[1].hp == 88,"host attack applies authoritative guest damage")
+					check(duel.fighters[0].hp == DuelFighter.MAX_HEALTH - 22,"guest movement, light and projectile damage reach authoritative host")
+					check(duel.fighters[1].hp == DuelFighter.MAX_HEALTH - 12,"host attack applies authoritative guest damage")
 					capture("fight")
 			if true in OnlineSession.pause_flags:
 				if paused_at < 0:
@@ -115,7 +115,7 @@ func _process(delta: float) -> void:
 			elif paused_at >= 0 and not resumed:
 				resumed = true
 				check(game.route == "fight" and not duel.stopped,"both resume votes restart the shared fight")
-				if role == "guest": check(duel.fighters[0].hp == 78 and duel.fighters[1].hp == 88,"guest renders the host's exact health state")
+				if role == "guest": check(duel.fighters[0].hp == DuelFighter.MAX_HEALTH - 22 and duel.fighters[1].hp == DuelFighter.MAX_HEALTH - 12,"guest renders the host's exact health state")
 			if role == "host" and resumed and t > 6 and duel.phase == "fight":
 				# Two normal round transitions; only the test fixture sets final KO HP.
 				if once("ko_"+str(duel.round_number)):
@@ -124,7 +124,7 @@ func _process(delta: float) -> void:
 		check(game.route == "result" and game.match_node.wins == [2,0],"host and guest agree on the best-of-three result")
 		OnlineSession.request_rematch()
 	if OnlineSession.epoch == 2 and once("epoch2"):
-		check(game.route == "fight" and game.match_node.phase == "countdown" and game.match_node.fighters[0].hp == 100,"mutual rematch starts a fresh synchronized match generation")
+		check(game.route == "fight" and game.match_node.phase == "countdown" and game.match_node.fighters[0].hp == DuelFighter.MAX_HEALTH,"mutual rematch starts a fresh synchronized match generation")
 		if role == "host":
 			await get_tree().create_timer(.7).timeout
 			game.show_menu()

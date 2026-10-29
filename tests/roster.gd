@@ -56,7 +56,7 @@ func run() -> void:
 				if move.kind == "cheese_trap" and not trap_placed and not duel.projectiles.is_empty():
 					target.position.x = duel.projectiles[0].position.x
 					trap_placed = true
-			check(target.hp == 100 - move.damage, profile.id + "/" + id + " applies its exact damage once (including volleys)")
+			check(target.hp == DuelFighter.MAX_HEALTH - move.damage, profile.id + "/" + id + " applies its exact damage once (including volleys)")
 			check(hero.meter <= 100 - move.meter_cost + move.meter_gain * 3, profile.id + "/" + id + " respects its meter cost")
 			if move.armor_time > 0: check(armor_seen, profile.id + "/" + id + " activates temporary armor")
 			if move.empower_time > 0: check(power_seen, profile.id + "/" + id + " activates empowered attacks")
@@ -88,11 +88,11 @@ func run() -> void:
 	var hero := duel.fighters[0]
 	hero.armor_time = 2.0
 	hero.receive_hit(DuelFighter.ATTACKS.heavy, 900)
-	check(hero.hp == 94, "Lava Stone armor halves an incoming 12-damage heavy")
+	check(hero.hp == DuelFighter.MAX_HEALTH - 6, "Lava Stone armor halves an incoming 12-damage heavy")
 	hero.reset_at(400)
 	hero.immunity = 1.0
 	hero.receive_hit(DuelFighter.ATTACKS.ultimate, 900)
-	check(hero.hp == 100, "temporary invulnerability prevents damage")
+	check(hero.hp == DuelFighter.MAX_HEALTH, "temporary invulnerability prevents damage")
 	hero.immunity = 0
 	hero.empower_time = 2.0
 	hero.begin_attack("light")
@@ -120,17 +120,17 @@ func run() -> void:
 	for tick in 15:
 		var inputs: Array[Dictionary] = [{"light": true, "block": true} if tick == 0 else {}, {}]
 		duel.advance_fight(DT, inputs)
-	check(duel.fighters[1].hp == 100, "jumping over Low Cheese Swipe evades its genuine low hitbox")
+	check(duel.fighters[1].hp == DuelFighter.MAX_HEALTH, "jumping over Low Cheese Swipe evades its genuine low hitbox")
 	game.selected.assign([9, 0])
 	game.start_match()
 	duel = game.match_node
 	duel.set_physics_process(false)
 	hero = duel.fighters[0]
-	hero.hp = 98
+	hero.hp = DuelFighter.MAX_HEALTH - 2
 	hero.meter = 100
 	hero.begin_attack("rebirth")
 	for tick in 25: hero.step(DT, {}, duel.fighters[1])
-	check(hero.hp == 100 and hero.meter == 65, "Rebirth caps healing at 100 and spends 35 meter")
+	check(hero.hp == DuelFighter.MAX_HEALTH and hero.meter == 65, "Rebirth caps healing at maximum health and spends 35 meter")
 	hero.reset_at(400)
 	hero.stun = .4
 	hero.meter = 100

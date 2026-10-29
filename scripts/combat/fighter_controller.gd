@@ -1,6 +1,8 @@
 class_name DuelFighter
 extends Node2D
 signal projectile_requested(fighter: DuelFighter, attack: AttackData)
+const MAX_HEALTH := 200
+const RECEIVED_METER_RATIO := 0.35
 const FLOOR := 590.0
 const LEFT := 70.0
 const RIGHT := 1210.0
@@ -12,7 +14,7 @@ const ATTACKS := {
 var player := 0
 var profile: Dictionary = {}
 var tint := Color("49c4d7")
-var hp := 100
+var hp := MAX_HEALTH
 var meter := 0
 var facing := 1
 var velocity := Vector2.ZERO
@@ -40,6 +42,10 @@ var armor_time := 0.0
 var empower_time := 0.0
 var jump_buffer := 0.0
 var coyote_time := 0.0
+var walk_distance := 0.0
+var locomotion_speed := 0.0
+var step_start_x := 0.0
+var last_walk_delta := 0.0
 
 func _ready() -> void:
 	moves = MoveCatalog.build(profile, ATTACKS)
@@ -52,7 +58,7 @@ func _ready() -> void:
 func reset_at(x: float, keep_meter := false) -> void:
 	position = Vector2(x, FLOOR)
 	velocity = Vector2.ZERO
-	hp = 100
+	hp = MAX_HEALTH
 	if not keep_meter: meter = 0
 	facing = 1 if player == 0 else -1
 	guarding = false
@@ -72,6 +78,9 @@ func reset_at(x: float, keep_meter := false) -> void:
 	empower_time = 0.0
 	jump_buffer = 0.0
 	coyote_time = 0.0
+	walk_distance = 0
+	locomotion_speed = 0
+	last_walk_delta = 0
 	reset_physics_interpolation()
 	if is_instance_valid(visual): visual.reset_motion()
 	queue_redraw()
@@ -80,6 +89,9 @@ func grounded() -> bool:
 	return position.y >= FLOOR - 0.1
 
 func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
+	step_start_x = position.x
+	last_walk_delta = 0
+	locomotion_speed = 0
 	anim_time += delta
 	armor_time = maxf(0.0, armor_time - delta)
 	empower_time = maxf(0.0, empower_time - delta)
@@ -115,7 +127,7 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 			armor_time = maxf(armor_time, attack.armor_time)
 			empower_time = maxf(empower_time, attack.empower_time)
 			if not attack.escape_stun: immunity = maxf(immunity, attack.invulnerable_time)
-			hp = mini(100, hp + attack.heal)
+			hp = mini(MAX_HEALTH, hp + attack.heal)
 		# A landed light can cancel its recovery into a follow-up; startup/active are never skipped.
 		if attack.slot == "light" and hit_connected and attack_time >= attack.startup + attack.active and requested != "" and moves[requested].slot in ["light", "heavy", "special"]:
 			attack = null
@@ -145,6 +157,10 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 	if position.y >= FLOOR:
 		position.y = FLOOR
 		velocity.y = 0
+	if not attack and stun <= 0 and not guarding and grounded():
+		last_walk_delta = position.x-step_start_x
+		walk_distance += last_walk_delta
+		locomotion_speed = last_walk_delta/maxf(delta,.00001)
 	queue_redraw()
 
 func begin_attack(id: String) -> bool:
@@ -209,6 +225,7 @@ func receive_hit(move: AttackData, attacker_x: float) -> bool:
 		velocity.x = -toward * move.knockback * 0.25
 		Sound.play("block")
 	else:
+		meter = mini(100,meter+maxi(1,int(ceil(damage*RECEIVED_METER_RATIO))))
 		stun = move.hitstun
 		velocity.x = -toward * move.knockback
 		attack = null

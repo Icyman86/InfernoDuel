@@ -19,6 +19,7 @@ var offset := Vector2.ZERO
 var stretch := Vector2.ONE
 var lean := 0.0
 var direction := 1.0
+var previous_travel := 0.0
 
 func configure(id: String) -> void:
 	if catalogue.is_empty(): catalogue = JSON.parse_string(FileAccess.get_file_as_string("res://data/movement_animations.json"))
@@ -33,6 +34,7 @@ func reset() -> void:
 	last_direction = 0
 	stopped_for = 1
 	direction = 1
+	previous_travel = 0
 	initialized = false
 	offset = Vector2.ZERO
 	stretch = Vector2.ONE
@@ -42,7 +44,7 @@ func play(name: String) -> void:
 	clip = name
 	age = 0
 
-func update(delta: float, speed: float, vertical: float, grounded: bool, facing: int, guarding: bool, locked := false) -> void:
+func update(delta: float, speed: float, vertical: float, grounded: bool, facing: int, guarding: bool, locked := false, travel := INF) -> void:
 	clock += delta
 	age += delta
 	var moving := absf(speed) > 18
@@ -72,13 +74,19 @@ func update(delta: float, speed: float, vertical: float, grounded: bool, facing:
 	var weight := clampf(absf(speed)/285.0,0.0,1.4) if grounded and not guarding and not locked else 0.0
 	blend_speed = lerpf(blend_speed,weight,1-exp(-delta*18))
 	# Walk phase is distance-driven, so partial thumbstick input does not skate.
-	gait += absf(speed)*delta/float(profile.stride) * (-1.0 if speed*facing < 0 else 1.0) if grounded and not locked else 0.0
+	if is_finite(travel):
+		if grounded and not locked: gait += (travel-previous_travel)*facing/float(profile.stride)
+		previous_travel = travel
+	else:
+		gait += absf(speed)*delta/float(profile.stride)*(-1.0 if speed*facing < 0 else 1.0) if grounded and not locked else 0.0
 	direction = signf(speed*facing) if moving else direction
 	var curve := sample(clip,age)
 	offset = Vector2(curve.x,curve.y)
 	stretch = Vector2(curve.z,curve.w)
-	var wave := sin(gait*TAU)
-	offset.x += wave*float(profile.sway)*blend_speed*.25
+	if moving and grounded and clip in ["idle","backstep"]:
+		stretch = Vector2.ONE
+		offset = Vector2.ZERO
+	if grounded: offset = Vector2.ZERO
 	if clip == "land":
 		stretch.y = 1.0+(stretch.y-1.0)*float(profile.land)/.085
 	if clip == "idle" and blend_speed < .1:

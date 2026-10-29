@@ -49,7 +49,7 @@ func capture() -> Dictionary:
 	var fighters: Array = []
 	for f in duel.fighters:
 		fighters.append({"p":[f.position.x,f.position.y],"v":[f.velocity.x,f.velocity.y],
-			"hp":f.hp,"meter":f.meter,"facing":f.facing,"guard":f.guarding,"stun":f.stun,
+			"travel":f.walk_distance,"locomotion":f.locomotion_speed,"hp":f.hp,"meter":f.meter,"facing":f.facing,"guard":f.guarding,"stun":f.stun,
 			"immunity":f.immunity,"cooldown":f.special_cooldown,"armor":f.armor_time,
 			"power":f.empower_time,"flash":f.flash,"combo":f.combo,"combo_time":f.combo_time,
 			"attack":f.attack.id if f.attack else "","attack_time":f.attack_time})
@@ -82,6 +82,7 @@ func apply_snapshot(snapshot: Dictionary) -> void:
 		var f := duel.fighters[i]
 		var data: Dictionary = state.fighters[i]
 		var damage: bool = int(data.hp) < f.hp
+		f.locomotion_speed = data.get("locomotion",0.0)
 		f.hp = data.hp
 		f.meter = data.meter
 		f.facing = data.facing
@@ -100,6 +101,8 @@ func apply_snapshot(snapshot: Dictionary) -> void:
 		var target := Vector2(data.p[0],data.p[1])
 		if teleport or f.position.distance_to(target) > 180:
 			f.position = target
+			f.walk_distance = data.get("travel",0.0)
+			f.visual.reset_motion()
 			f.reset_physics_interpolation()
 		if damage:
 			var burst := HitBurst.new()
@@ -132,6 +135,7 @@ func interpolate(delta: float) -> void:
 	for i in 2:
 		var f := duel.fighters[i]
 		var data: Dictionary = state.fighters[i]
+		f.walk_distance = lerpf(f.walk_distance,float(data.get("travel",f.walk_distance)),alpha)
 		f.position = f.position.lerp(Vector2(data.p[0],data.p[1]),alpha)
 		if f.attack:
 			f.attack_time = minf(f.attack_time+delta, f.attack.duration()-0.001)

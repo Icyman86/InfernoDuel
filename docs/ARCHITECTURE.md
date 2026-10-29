@@ -1,4 +1,4 @@
-# Prototype architecture — V8 / v0.8.0
+# Prototype architecture — V9 / v0.9.0
 
 Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 `scenes/main.tscn` is the F5 entry point. No network services or secrets are needed.
@@ -128,3 +128,28 @@ requires both votes and increments an epoch to reject prior-match packets.
 An eight-second gameplay heartbeat timeout stops lost sessions. Disconnects
 close the ENet peer on a deferred call, outside SceneMultiplayer's packet poll.
 See NETWORK.md for endpoint reachability and testing limits.
+
+## V9 whole attacks, planted gait and ultimate readability
+
+ActionPoseFields loads 49 clip timelines and 266 compressed RGBA8 motion-vector
+fields from data/action_motion_fields.json. Anticipation/chamber reaches extension
+at semantic progress .45, contact spans .45–.65, then recovery returns to the idle
+key. FighterVisual maps startup/active/recovery to those phases, smooths each
+interval and binds the cached union mesh/field in the existing one-pass shader.
+Support-foot pivots plus a clip root offset preserve resting position. The 3D
+presentation copies the same field parameters to a spatial shader and fits the
+whole signature envelope once, keeping a fixed support location on the rings.
+
+The controller records walk_distance only for grounded free locomotion; the match
+corrects it after push-box resolution. FighterMotion advances gait from that
+ledger, rather than commanded speed. Network snapshots include the ledger and
+locomotion speed; guests smooth travel with position. Strides span two steps,
+torso anchors reduce lateral snapping, grounded offsets are zero and extra body
+bounce/deformation is reduced. No movement data determines collision or damage.
+
+DuelFighter.MAX_HEALTH is 200 (reset, healing cap and health HUD). Clean hits grant
+the defender ceil(actual_damage*.35) meter; blocking retains four and all paths
+cap at 100. CombatChrome draws bounded angular HUD plates. UltimateGauge uses a
+small canvas shader with a gold pulse/streak at 100; TouchControls adds a matching
+ULT halo. Gauge/touch clocks pause with combat. The ready state follows actual
+meter, so spending or a new round updates it without separate readiness flags.

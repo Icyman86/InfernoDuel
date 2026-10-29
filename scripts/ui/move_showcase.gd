@@ -78,7 +78,7 @@ func _physics_process(delta: float) -> void:
 	var inputs: Array[Dictionary] = [command, {}]
 	advance_fight(delta, inputs)
 	step_count += 1
-	damage_done = 100 - fighters[1].hp
+	damage_done = DuelFighter.MAX_HEALTH - fighters[1].hp
 	var label := "%d DAMAGE  ·  %d / 100 METER  ·  %d HP" % [damage_done, fighters[0].meter, fighters[0].hp]
 	if fighters[0].armor_time > 0: label += "  ·  ARMOR"
 	if fighters[0].empower_time > 0: label += "  ·  POWER UP"

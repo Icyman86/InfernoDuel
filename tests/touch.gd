@@ -82,7 +82,7 @@ func run() -> void:
 	for tick in 25:
 		inputs = [InputRouter.sample(0), {}]
 		game.match_node.advance_fight(1.0 / 60.0, inputs)
-	check(game.match_node.fighters[1].hp == 94, "touch light attack damages the opponent exactly once")
+	check(game.match_node.fighters[1].hp == DuelFighter.MAX_HEALTH - 6, "touch light attack damages the opponent exactly once")
 	contact(2, "move_right")
 	contact(0, "move_right", false)
 	check(InputRouter.sample(0).axis == 0, "a second finger cannot steal the owned thumbstick")

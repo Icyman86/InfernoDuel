@@ -52,7 +52,7 @@ func run() -> void:
 	press(KEY_I)
 	await get_tree().create_timer(0.2).timeout
 	await capture("04-fight")
-	check(duel.fighters[0].hp < 100 and duel.fighters[1].hp < 100,"simultaneous attacks trade in real physics loop")
+	check(duel.fighters[0].hp < DuelFighter.MAX_HEALTH and duel.fighters[1].hp < DuelFighter.MAX_HEALTH,"simultaneous attacks trade in real physics loop")
 	press(KEY_ESCAPE)
 	await capture("05-pause")
 	var t := duel.remaining

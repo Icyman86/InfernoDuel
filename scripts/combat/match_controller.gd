@@ -19,7 +19,7 @@ var announcement: Label
 var timer_label: Label
 var round_label: Label
 var health: Array[ProgressBar] = []
-var meters: Array[ProgressBar] = []
+var meters: Array[UltimateGauge] = []
 var names: Array[Label] = []
 var combos: Array[Label] = []
 var diagnostics: Label
@@ -45,10 +45,8 @@ func _make_hud() -> void:
 	hud = Control.new()
 	hud.theme = UI.theme()
 	add_child(hud)
-	var top := ColorRect.new()
-	top.color = Color(0.025,0.04,0.07,0.88)
-	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hud.add_child(UI.place(top,0,0,1280,140))
+	var chrome := CombatChrome.new()
+	hud.add_child(chrome)
 	for i in 2:
 		var x := 134.0 if i == 0 else 748.0
 		var c := UI.CYAN if i == 0 else UI.ORANGE
@@ -65,6 +63,7 @@ func _make_hud() -> void:
 		hud.add_child(UI.place(name_label,x,30,398,30))
 		names.append(name_label)
 		var hp_bar := UI.bar(c)
+		hp_bar.max_value = DuelFighter.MAX_HEALTH
 		for layer in ["background","fill"]:
 			var health_style := hp_bar.get_theme_stylebox(layer).duplicate()
 			health_style.set_corner_radius_all(10)
@@ -74,13 +73,15 @@ func _make_hud() -> void:
 		hud.add_child(UI.place(hp_bar,x,65,398,24))
 		if i == 1: hp_bar.fill_mode = ProgressBar.FILL_END_TO_BEGIN
 		health.append(hp_bar)
-		var meter_bar := UI.bar(UI.GOLD,0)
-		hud.add_child(UI.place(meter_bar,x,96,398,7))
-		if i == 1: meter_bar.fill_mode = ProgressBar.FILL_END_TO_BEGIN
+		var meter_bar := UltimateGauge.new()
+		meter_bar.accent = c
+		meter_bar.reversed = i == 1
+		meter_bar.duel = self
+		hud.add_child(UI.place(meter_bar,x-4,93,406,25))
 		meters.append(meter_bar)
 		var meter_text := UI.label("",14,UI.MUTED)
 		meter_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if i == 0 else HORIZONTAL_ALIGNMENT_RIGHT
-		hud.add_child(UI.place(meter_text,x,109,398,23))
+		hud.add_child(UI.place(meter_text,x,118,398,23))
 		meter_labels.append(meter_text)
 		var tokens := UI.label("○ ○",22,c)
 		hud.add_child(UI.place(tokens,421 if i == 0 else 749,23,112,40))
@@ -159,6 +160,15 @@ func _physics_process(delta: float) -> void:
 func advance_fight(delta: float, inputs: Array[Dictionary]) -> void:
 	for i in 2: fighters[i].step(delta,inputs[i],fighters[1-i])
 	_resolve_bodies()
+	# Correct visual travel after push-box resolution. Feet do not cycle while
+	# pushing into another fighter or an arena boundary.
+	for f in fighters:
+		if f.last_walk_delta != 0:
+			var actual := f.position.x-f.step_start_x
+			if actual*f.last_walk_delta < 0: actual = 0
+			f.walk_distance += actual-f.last_walk_delta
+			f.last_walk_delta = actual
+			f.locomotion_speed = actual/maxf(delta,.00001)
 	# Collect all hit events BEFORE applying damage, preserving same-tick trades.
 	var events: Array[Dictionary] = []
 	for i in 2:
@@ -248,7 +258,8 @@ func update_hud() -> void:
 		var owner := "YOU" if local_network_slot == i else ("CPU" if solo and i == 1 else "P%d" % (i+1))
 		names[i].text = "%s  /  %s" % [owner,profiles[i].display_name.to_upper()]
 		round_tokens[i].text = "● ".repeat(wins[i])+"○ ".repeat(2-wins[i])
-		meter_labels[i].text = "%d HP    /    SUPER %d%%" % [fighters[i].hp,fighters[i].meter]
+		meter_labels[i].text = "%d / %d HP   ·   %s" % [fighters[i].hp,DuelFighter.MAX_HEALTH,"ULTIMATE READY" if fighters[i].meter >= 100 else "ULT %d%%" % fighters[i].meter]
+		meter_labels[i].add_theme_color_override("font_color",UI.GOLD if fighters[i].meter >= 100 else UI.MUTED)
 		if fighters[i].armor_time > 0: meter_labels[i].text += "  ARMOR %.1fs" % fighters[i].armor_time
 		if fighters[i].empower_time > 0: meter_labels[i].text += "  POWER %.1fs" % fighters[i].empower_time
 		var info := ""

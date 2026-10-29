@@ -13,8 +13,9 @@ var elapsed := 0.0
 var finished := false
 var cached_key := ""
 var hero_scale := 1.0
+var stage_offset := 0.0
 var accent := Color("55d9ef")
-var front_material: StandardMaterial3D
+var front_material: ShaderMaterial
 var mesh_cache: Dictionary = {}
 signal completed
 
@@ -83,11 +84,8 @@ func _ready() -> void:
 	edge = MeshInstance3D.new()
 	rig.add_child(edge)
 	rig.add_child(face)
-	front_material = StandardMaterial3D.new()
-	front_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
-	front_material.alpha_scissor_threshold = .12
-	front_material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	front_material.roughness = .8
+	front_material = ShaderMaterial.new()
+	front_material.shader = preload("res://assets/shaders/presentation.gdshader")
 	face.material_override = front_material
 	edge.material_override = solid(accent.darkened(.73))
 	visual = FighterVisual.new()
@@ -98,20 +96,26 @@ func _ready() -> void:
 	# Drive once from this timeline; the hidden 2D node must not advance again.
 	visual.set_process(false)
 	# Supplementary bite/kick silhouettes can extend far beyond the idle pivot.
-	# Fit the whole authored entrance once, then center each pose on the podium.
-	var widest := 0.0
-	var tallest := 0.0
-	for pose in ["idle","heavy"]:
-		var animation: Dictionary = visual.metadata.animations[pose]
-		var source: String = animation.get("atlas","core")
-		var scale_factor := visual.pixels_to_world*float(visual.metadata[source].get("scale",1.0))/80.0
-		for index in animation.frames:
-			var frame: Dictionary = visual.metadata[source].frames[index]
-			var bounds := Rect2(Vector2(frame.polygon[0][0],frame.polygon[0][1]),Vector2.ZERO)
-			for point in frame.polygon: bounds = bounds.expand(Vector2(point[0],point[1]))
-			widest = maxf(widest,bounds.size.x*scale_factor)
-			tallest = maxf(tallest,bounds.size.y*scale_factor)
-	hero_scale = minf(1.0,minf(3.8/maxf(widest,.01),3.55/maxf(tallest,.01)))
+	# Fit the whole authored entrance once, keep the support foot fixed on the podium.
+	var envelope := Rect2(Vector2.ZERO,Vector2.ZERO)
+	var first := true
+	var frames: Array = []
+	if ActionPoseFields.available(profile.id,"heavy"):
+		var clip: Dictionary = ActionPoseFields.data.profiles[profile.id].clips.heavy
+		for descriptor in clip["keys"]:
+			frames.append([visual.action_frame(descriptor,"heavy"),Vector2(clip.root_offset[0],clip.root_offset[1])*visual.target_height/float(ActionPoseFields.data.body_height)])
+	var idle_animation: Dictionary = visual.metadata.animations.idle
+	frames.append([visual.frame_data(idle_animation.get("atlas","core"),idle_animation.frames[0]),Vector2.ZERO])
+	for entry in frames:
+		var frame: Dictionary = entry[0]
+		for point in frame.vertices:
+			var world_point: Vector2 = ((point-Vector2(frame.pivot))*float(frame.scale)+Vector2(entry[1]))/80.0
+			if first:
+				envelope = Rect2(world_point,Vector2.ZERO)
+				first = false
+			else: envelope = envelope.expand(world_point)
+	hero_scale = minf(1.0,minf(3.8/maxf(envelope.size.x,.01),3.55/maxf(envelope.size.y,.01)))
+	stage_offset = -envelope.get_center().x*hero_scale
 	replay()
 
 func replay() -> void:
@@ -122,7 +126,7 @@ func replay() -> void:
 func build_mesh() -> void:
 	var sprite := visual.sprite
 	if not sprite or sprite.polygon.size() < 3: return
-	var key := visual.last_key
+	var key: String = sprite.get_meta("frame_key",visual.last_key)
 	if key == cached_key: return
 	cached_key = key
 	if not mesh_cache.has(key):
@@ -145,9 +149,13 @@ func build_mesh() -> void:
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
 		var walls := SurfaceTool.new()
 		walls.begin(Mesh.PRIMITIVE_TRIANGLES)
-		for i in vertices.size():
-			var a := vertices[i]
-			var b := vertices[(i+1)%vertices.size()]
+		var boundary: PackedVector2Array = sprite.get_meta("frame_data").vertices
+		var scale_factor: float = sprite.get_meta("frame_data").scale/80.0
+		for i in boundary.size():
+			var p_a: Vector2 = (boundary[i]-visual.current_pivot)*scale_factor
+			var p_b: Vector2 = (boundary[(i+1)%boundary.size()]-visual.current_pivot)*scale_factor
+			var a := Vector3(p_a.x,-p_a.y,.075)
+			var b := Vector3(p_b.x,-p_b.y,.075)
 			var back_a := a-Vector3(0,0,.15)
 			var back_b := b-Vector3(0,0,.15)
 			for v in [a,back_a,b,b,back_a,back_b]: walls.add_vertex(v)
@@ -155,7 +163,10 @@ func build_mesh() -> void:
 		mesh_cache[key] = [mesh,walls.commit(),sprite.texture]
 	face.mesh = mesh_cache[key][0]
 	edge.mesh = mesh_cache[key][1]
-	front_material.albedo_texture = mesh_cache[key][2]
+	front_material.set_shader_parameter("base_texture",mesh_cache[key][2])
+	for parameter in ["overlay_texture","motion_field","overlay_uv","overlay_bounds","source_bounds","flow_uv","flow_pixel_uv","flow_canvas_size","flow_range"]:
+		var value: Variant = visual.material_fx.get_shader_parameter(parameter)
+		if value != null: front_material.set_shader_parameter(parameter,value)
 
 func _process(delta: float) -> void:
 	elapsed += delta
@@ -165,11 +176,13 @@ func _process(delta: float) -> void:
 	visual.preview_progress = progress if visual.preview_pose == "heavy" else 0.0
 	visual._update_pose(delta)
 	build_mesh()
+	front_material.set_shader_parameter("flow_blend",visual.material_fx.get_shader_parameter("flow_blend"))
+	front_material.set_shader_parameter("flow_mix",visual.action_blend)
 	var swing := sin(progress*PI) if visual.preview_pose == "heavy" else 0.0
 	var camera_time := minf(elapsed,2.8)
 	var idle_time := maxf(0.0,elapsed-2.8)
 	rig.rotation.y = sin(camera_time*1.5)*.1-swing*.16+sin(idle_time*1.4)*.012
-	rig.position.x = swing*.15-face.mesh.get_aabb().get_center().x*hero_scale if face.mesh else 0.0
+	rig.position.x = stage_offset+swing*.08+visual.support_anchor.x/80.0*hero_scale if face.mesh else 0.0
 	rig.scale = Vector3(hero_scale*visual.motion.stretch.x,hero_scale*visual.motion.stretch.y,hero_scale)
 	camera.position = Vector3(1.2*cos(camera_time*.65),2.1,7.5-swing*.35)
 	camera.look_at(Vector3(0,1.65,0))

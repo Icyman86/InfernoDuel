@@ -11,6 +11,7 @@ var stick_fingers: Dictionary = {}
 var input_generation := -1
 var local_team := 0
 var match_state: DuelMatch
+var glow_clock := 0.0
 const DEADZONE := .17
 
 static func safe_rect(viewport: Viewport) -> Rect2:
@@ -74,6 +75,7 @@ func release_all() -> void:
 	queue_redraw()
 
 func _process(_delta: float) -> void:
+	if not is_instance_valid(match_state) or not match_state.stopped: glow_clock += _delta
 	if input_generation != InputRouter.generation: release_all()
 	if visible: queue_redraw()
 
@@ -164,6 +166,11 @@ func _draw() -> void:
 		var color := UI.CYAN if (b.player+local_team)%2 == 0 else UI.ORANGE
 		if b.action == "ultimate": color = UI.GOLD
 		var lock := cooldown(b)
+		if b.action == "ultimate" and fighter_for(b.player) and lock == 0:
+			var pulse := .65+.35*sin(glow_clock*5.5)
+			for layer in range(4,0,-1):
+				draw_circle(b.center,b.radius+layer*3,Color(UI.GOLD,.035*pulse))
+			draw_arc(b.center,b.radius+7,0,TAU,64,Color(UI.GOLD,.8*pulse),3,true)
 		draw_circle(b.center,b.radius+5,Color(.01,.02,.04,.3))
 		draw_circle(b.center,b.radius,Color(color,.6) if down else Color(.035,.065,.10,.85))
 		draw_arc(b.center,b.radius,0,TAU,64,Color(color,.85 if lock == 0 else .28),2,true)

@@ -69,7 +69,7 @@ func run() -> void:
 			tick(hero,rival,{})
 			observed[view.motion_state] = true
 		check(observed.has("rise") and observed.has("apex") and observed.has("fall") and observed.has("land"),profile.id+" animates takeoff, apex, falling and landing through a real jump")
-		check(hero.position.y == DuelFighter.FLOOR and hero.hp == 100 and hero.meter == 0,profile.id+" movement animation does not change floor collision, HP or meter")
+		check(hero.position.y == DuelFighter.FLOOR and hero.hp == DuelFighter.MAX_HEALTH and hero.meter == 0,profile.id+" movement animation does not change floor collision, HP or meter")
 		hero.reset_at(350)
 		view._process(DT)
 		tick(hero,rival,{"block":true})

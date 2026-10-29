@@ -9,7 +9,7 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Android APK — phones and tablets
 
-[Download Android V8 (0.8.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.8.0-android/releases/android-v0.8.0/InfernoDuel-Android-v0.8.0.apk)
+[Download Android V9 (0.9.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.9.0-android/releases/android-v0.9.0/InfernoDuel-Android-v0.9.0.apk)
 
 Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
 multitouch. Install the APK from your browser/downloads; allow installation from
@@ -79,22 +79,28 @@ the original references and existing films. The old movement tour, dummy and
 executable move list are removed. This is a 2.5D art presentation, not ten new
 fully modelled/rigged 3D characters.
 
-All ten fighters have continuous movement rendering targeting **60 FPS**. The
-existing authored walk poses are aligned using 54 precomputed bidirectional
-motion fields; the GPU draws intermediate poses in a single layer instead of
-holding each drawing. Distance-driven gait follows analog thumbstick speed and
-reverses while backstepping. Per-character motion profiles add start, brake,
-pivot, rise/apex/fall/landing and guard-entry/exit clips. Foot-pivot transforms,
-small arm/torso motions and smooth facing changes reduce hard transitions. Pose
-geometry and motion textures are cached, and movement resets with rounds/pause.
+V9 extends continuous animation to **49 whole attack clips** across all ten
+fighters. Another 266 bidirectional fields align anticipation, chamber, extension,
+contact and recovery, returning to idle around a planted support foot. Smooth
+in-betweens render throughout the move, including the Fighters podium signature.
+Walking uses 54 re-analyzed fields with steadier torso anchors, a longer two-step
+stride and less body bounce. Gait follows actual displacement after arena and
+opponent collision, so pushing against a blocked path stops the foot cycle.
+Start, brake, pivot, jump/landing and guard transitions remain per character.
 
-This interpolates and animates existing artwork; it does not add 60 independently
-hand-drawn images per second. Fast limb occlusions can still show interpolation
-artifacts. Physics remains at 60 Hz, with unchanged attacks, hitboxes and costs.
-Native resolution is retained; the 60-FPS cap is a target, not a guarantee for
-all devices. Real-phone performance and animation feel still need acceptance.
+Combat now uses angular dark armor panels and animated energy gauges. A full
+ultimate meter pulses gold along with the ULT touch button. Each fighter starts
+with **200 HP**. Clean incoming damage grants **35% of the damage as meter,
+rounded up**; guarding retains its existing four meter. Attack gains, costs,
+damage, collision and 60-Hz physics retain their documented values. Meter caps at
+100, supers spend 100, and the ready glow turns off when the meter is spent.
 
-[Watch the scripted V8 movement preview (60-fps video)](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.8.0-android/releases/android-v0.8.0/InfernoDuel-MovementPreview-v0.8.0.mp4)
+This animates existing artwork using derived motion fields; it does not add
+independently hand-drawn frames. Limb occlusion/warping artifacts can remain.
+Native resolution is retained and the render cap targets 60 FPS. Real-phone
+frame pacing, performance and animation feel still need acceptance.
+
+[Watch the scripted V9 combat animation preview (60-fps video)](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.9.0-android/releases/android-v0.9.0/InfernoDuel-CombatPreview-v0.9.0.mp4)
 
 [Watch an intro preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-IntroPreview-v0.3.mp4)
 
@@ -121,9 +127,10 @@ READY button. Both players may choose the same fighter.
 Menus: W/S or arrows, F/I/Enter confirm, Esc back; mouse also supported.
 F3 shows combat hitboxes. Focus loss automatically pauses the fight.
 
-Rounds last 60 seconds with 100 HP. Win two rounds to win the match. Equal HP
+Rounds last 60 seconds with 200 HP. Win two rounds to win the match. Equal HP
 at timeout or double KO replays the round. Light/heavy/special/ultimate deal
 6/12/16/30 base damage; named variants have their own values in data/move_sets.json. Grounded guard facing the attacker reduces damage by 75%.
+Taking clean damage also fills meter (35%, rounded up); blocking grants four.
 Special cooldown is 1.5 seconds (Cheese Rat: 1.4); meter persists between rounds, not rematches.
 Try light → light → heavy, or cancel a landed light's recovery into special.
 
@@ -160,14 +167,16 @@ godot --path . --audio-driver Dummy tests/visual.tscn
 godot --path . --audio-driver Dummy tests/expansion_visual.tscn
 ./tools/test_touch.sh
 ./tools/test_gallery.sh
-TEST_NETWORK_RENDERED=1 ./tools/test_v8.sh
+TEST_NETWORK_RENDERED=1 ./tools/test_v9.sh
 ```
 
 Rendered screenshots are written to `/tmp/inferno-visual/`, `/tmp/inferno-v03-visual/`,
 `/tmp/inferno-touch/`, `/tmp/inferno-roster-visual/` and `/tmp/inferno-v6-visual/`.
 The session/UI suite checks native framebuffer sizes, Android routes, session-code parsing
 six-character LAN discovery, modern touch UI and real multi-process ENet gameplay. The V8 additions test all ten movement transitions, real GPU opacity and
-persistent podiums. ./tools/benchmark_motion.sh measures actual monotonic frame
+persistent podiums. V9 adds all 49 attack clips, support-foot continuity, collision
+gait stops, 200-HP balance and normal-input ultimate earning/spending checks.
+./tools/benchmark_motion.sh measures actual monotonic frame
 intervals against V7 at 720p and wide native resolution (requires the V7 tag).
 The graphical network repeat is optional;
 the default network run is headless. No public relay service is required or bundled.
@@ -197,8 +206,8 @@ these Python packages are not needed to play or run the normal tests.
 
 No external services or credentials are needed to play or test the game.
 Every published update gets a new version, Android versionCode, APK path and Git
-tag; published APKs/tags are retained instead of overwritten. This update is V8,
-version 0.8.0 / Android code 800.
+tag; published APKs/tags are retained instead of overwritten. This update is V9,
+version 0.9.0 / Android code 900.
 On restricted cloud hosts use writable XDG data/config/cache directories when
 invoking Godot, e.g. `XDG_DATA_HOME=/workspace/.runtime/data` (and similarly
 `XDG_CONFIG_HOME`, `XDG_CACHE_HOME`). A graphical desktop/OpenGL 3.3 is required

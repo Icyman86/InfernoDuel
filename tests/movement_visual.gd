@@ -85,7 +85,7 @@ func finish_pair() -> void:
 		var id: String = duel.fighters[i].profile.id
 		check(observed[i].has("start") and observed[i].has("brake") and observed[i].has("pivot"),id+" renders start, reverse and brake through its actual controller")
 		check(observed[i].has("rise") and observed[i].has("apex") and observed[i].has("fall") and observed[i].has("land"),id+" renders the full jump and landing sequence")
-		check(duel.fighters[i].hp == 100 and duel.fighters[i].position.y == DuelFighter.FLOOR,id+" returns to the floor without changing health")
+		check(duel.fighters[i].hp == DuelFighter.MAX_HEALTH and duel.fighters[i].position.y == DuelFighter.FLOOR,id+" returns to the floor without changing health")
 
 func _process(delta: float) -> void:
 	if not running: return

@@ -95,22 +95,22 @@ func run() -> void:
 	check(a.position.x < x and b.position.x > 650,"fighters move simultaneously")
 	fresh()
 	ticks(8,{"light":true},{"light":true})
-	check(a.hp == 94 and b.hp == 94,"same-tick light attacks trade for six damage each")
-	check(a.meter == 7 and b.meter == 7,"hit meter accrues independently")
+	check(a.hp == DuelFighter.MAX_HEALTH - 6 and b.hp == DuelFighter.MAX_HEALTH - 6,"same-tick light attacks trade for six damage each")
+	check(a.meter == 10 and b.meter == 10,"hit meter accrues independently")
 	ticks(8)
-	check(a.hp == 94 and b.hp == 94,"one hit per attack activation")
+	check(a.hp == DuelFighter.MAX_HEALTH - 6 and b.hp == DuelFighter.MAX_HEALTH - 6,"one hit per attack activation")
 	fresh()
 	for i in 16: match_node.advance_fight(DT,[{"heavy":i==0},{"block":true}])
-	check(b.hp == 97 and b.meter == 4,"ground guard reduces heavy damage by 75 percent")
+	check(b.hp == DuelFighter.MAX_HEALTH - 3 and b.meter == 4,"ground guard reduces heavy damage by 75 percent")
 	fresh()
 	b.guarding = true
 	b.facing = 1
 	b.receive_hit(DuelFighter.ATTACKS.light,a.position.x)
-	check(b.hp == 94,"guard does not protect the fighter's back")
+	check(b.hp == DuelFighter.MAX_HEALTH - 6,"guard does not protect the fighter's back")
 	fresh()
 	a.position.x = 200
 	ticks(20,{"heavy":true})
-	check(b.hp == 100,"out-of-range hitboxes miss")
+	check(b.hp == DuelFighter.MAX_HEALTH,"out-of-range hitboxes miss")
 	fresh()
 	a.begin_attack("special")
 	check(a.special_cooldown == 1.5,"special starts independent cooldown")
@@ -132,18 +132,18 @@ func run() -> void:
 	check(not a.begin_attack("ultimate"),"ultimate requires full meter")
 	a.meter = 100
 	ticks(25,{"ultimate":true})
-	check(a.meter == 0 and b.hp == 70,"ultimate consumes meter and deals thirty damage")
+	check(a.meter == 0 and b.hp == DuelFighter.MAX_HEALTH - 30,"ultimate consumes meter and deals thirty damage")
 	fresh()
 	b.meter = 100
 	ticks(70,{}, {"ultimate":true})
-	check(a.hp == 70 and b.meter == 0,"Bullet ultimate projectile collides exactly once")
+	check(a.hp == DuelFighter.MAX_HEALTH - 30 and b.meter == 0,"Bullet ultimate projectile collides exactly once")
 	fresh()
 	a.position.x = 560
 	b.position.x = 625
 	ticks(18,{"light":true})
 	ticks(18,{"light":true})
 	ticks(20,{"heavy":true})
-	check(b.hp == 76 and a.combo == 3,"light-light-heavy connects as three-hit combo")
+	check(b.hp == DuelFighter.MAX_HEALTH - 24 and a.combo == 3,"light-light-heavy connects as three-hit combo")
 	check(b.immunity > 0,"third hit grants escape immunity against infinite stun")
 	fresh()
 	ticks(1,{"jump":true})
@@ -176,7 +176,7 @@ func run() -> void:
 	ticks(1)
 	check(match_node.phase == "round_over" and match_node.wins[0] == 1,"timeout awards healthier fighter")
 	match_node.start_round()
-	check(a.meter == 42 and a.hp == 100,"meter persists but health resets between rounds")
+	check(a.meter == 42 and a.hp == DuelFighter.MAX_HEALTH,"meter persists but health resets between rounds")
 	match_node.phase = "fight"
 	match_node.remaining = 0
 	match_node.finish_round()
@@ -203,7 +203,7 @@ func run() -> void:
 	game.start_match()
 	match_node = game.match_node
 	match_node.set_physics_process(false)
-	check(match_node.wins == [0,0] and match_node.fighters[0].hp == 100 and match_node.fighters[0].meter == 0,"rematch resets score health and meter")
+	check(match_node.wins == [0,0] and match_node.fighters[0].hp == DuelFighter.MAX_HEALTH and match_node.fighters[0].meter == 0,"rematch resets score health and meter")
 	match_node.wins[0] = 1
 	game.show_pause()
 	find_button(game.overlay,"RESTART MATCH").pressed.emit()
@@ -237,7 +237,7 @@ func run() -> void:
 		if cpu.get("axis",0) != 0: cpu_moved = true
 		if cpu.get("light",false) or cpu.get("heavy",false) or cpu.get("special",false): cpu_attacked = true
 		match_node.advance_fight(DT,[{},cpu])
-	check(cpu_moved and cpu_attacked and match_node.fighters[0].hp < 100,"easy CPU approaches and damages player")
+	check(cpu_moved and cpu_attacked and match_node.fighters[0].hp < DuelFighter.MAX_HEALTH,"easy CPU approaches and damages player")
 	# CPU completes a full match with normal HP and timers against a passive player.
 	match_node.start_round(false)
 	match_node.wins.assign([0,0])
@@ -253,7 +253,7 @@ func run() -> void:
 	fresh()
 	match_node.fighters[0].meter = 35
 	ticks(8,{"light":true},{"light":true})
-	check(match_node.fighters[0].hp == 94 and match_node.fighters[1].hp == 94 and match_node.fighters[1].meter == 7,"mirror match keeps each instance's combat state separate")
+	check(match_node.fighters[0].hp == DuelFighter.MAX_HEALTH - 6 and match_node.fighters[1].hp == DuelFighter.MAX_HEALTH - 6 and match_node.fighters[1].meter == 10,"mirror match keeps each instance's combat state separate")
 	Settings.sfx = 0.42
 	Settings.save()
 	var config := ConfigFile.new()

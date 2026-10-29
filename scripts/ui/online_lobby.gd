@@ -15,7 +15,7 @@ func _ready() -> void:
 	add_child(UI.place(shade,0,0,1280,720))
 	add_child(UI.place(UI.label("PLAY TOGETHER",17,UI.CYAN),70,44,1140,32))
 	add_child(UI.place(UI.label("ONE CODE. ONE DUEL.",42,UI.IVORY,true),60,88,1160,65))
-	add_child(UI.place(UI.label("The host keeps the session open · Two devices on the same Wi-Fi · V8",19,UI.MUTED),65,166,1150,38))
+	add_child(UI.place(UI.label("The host keeps the session open · Two devices on the same Wi-Fi · V9",19,UI.MUTED),65,166,1150,38))
 	for x in [70,670]:
 		var panel := UI.panel()
 		panel.add_theme_stylebox_override("panel",UI.style(Color("131827"),Color("2b344b"),1))

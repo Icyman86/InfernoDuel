@@ -1,3 +1,30 @@
+# V9 continuous whole attacks — 29 October 2026
+
+All ten fighters now use 49 full attack timelines: idle → anticipation → chamber
+→ extension/contact → recovery → idle. tools/build_action_fields.py analyzes
+masked existing atlas poses and chooses a rear support-foot pivot. It writes 266
+bidirectional RGBA8 vector fields, zlib/base64 compressed, plus timestamps/pivots
+and root offsets to data/action_motion_fields.json. At render time the one-pass
+shader aligns adjacent poses with eased interpolation; contact is held through
+the actual active interval. It adds continuous derived in-betweens rather than
+independently drawn raster frames. Existing PNGs and all original art remain
+byte-for-byte unchanged. Limb occlusions can still warp or reveal pose changes.
+
+Both action and walk authoring use tools/pose_field_utils.py: OpenCV DIS optical
+flow, a normalized 640×448 analysis canvas and 96×72 vector grids. Python/Pillow,
+NumPy and opencv-python-headless 4.11.0.86 are authoring-only dependencies. Run
+python3 tools/build_action_fields.py and python3 tools/build_walk_fields.py to
+regenerate metadata. The game and normal builds use committed JSON directly.
+Walk fields were re-analyzed with stable torso/ground anchors; gait strides now
+span two steps, grounded offsets are removed and extra bounce is reduced.
+
+The Fighters podium uses the same motion field in a spatial shader. Its fixed
+support position and full-signature camera envelope retain the same world, lit
+character and rings throughout the entrance and idle. The V9 preview records all
+ten fighters' heavy moves in scripted slow motion plus the ultimate-ready HUD
+fixture at 60 video frames/sec. It does not establish real-device performance.
+The separate balance tests earn and spend meter through normal combat input.
+
 # V8 persistent podiums and continuous movement — 29 October 2026
 
 Fighters now retains the same 3D character, lighting, pedestal and luminous rings

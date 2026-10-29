@@ -1,3 +1,89 @@
+# V9 whole attacks, planted movement and ultimate readiness — 29 October 2026
+
+V9 / 0.9.0, Android code 900. All ten fighters now render continuous whole-attack
+in-betweens across 49 clips, including anticipation, chamber, extension/contact,
+recovery and idle return. Another 266 bidirectional vector fields and fixed
+support-foot pivots supplement the existing artwork. Walking's 54 fields were
+re-analyzed around steady torso/ground anchors; strides cover two steps, grounded
+whole-body offsets are removed and extra bounce is reduced. Gait now follows
+resolved locomotion distance, including opponent/wall collision and guest state.
+The persistent 3D podium uses the same interpolated signature and rings.
+
+Combat has angular dark HUD panels, animated energy gauges and a gold pulse at
+100 meter, matched by the ULT touch halo. HP is 200 for all fighters, round reset,
+healing cap and HUD. Clean incoming damage grants ceil(actual_damage × .35)
+meter, while blocking retains four; the cap and ultimate cost remain 100.
+
+| Final required check | Result and scope |
+| --- | --- |
+| Immutable art / intro media | PASS — eight source hashes unchanged; ten complete intro decodes |
+| Core / art / expansion / roster | PASS — 70 + 494 + 45 + 287 = 896 assertions; all 69 moves and ten full CPU matches |
+| Touch / persistent 3D gallery | PASS — 38 + 92 rendered assertions |
+| Linux / intro rendering | PASS — 9 + 31 assertions |
+| Codes / network / resolution / modern UI | PASS — 53 + 25 + 20 + 10 assertions |
+| Real rendered network repeat | PASS — same 25 assertions, three actual Godot processes |
+| Movement / GPU compositing | PASS — 121 + 37 assertions, all ten fighters |
+| New whole-attack / balance checks | PASS — 160 assertions, all 49 clips, decoded fields, actual heavy poses, fixed feet, normal-input ultimate earn/spend/hit, collision gait, HP and ready/pause UI |
+| New rendered attack / gold gauge checks | PASS — 20 assertions, all ten fighters, distinct rendered attack images and actual GPU pixels of the golden bar |
+| Native Linux release engine + PCK | PASS — OS keyboard menu/Fighters/select/arena/fight, actual visible damage, pause and normal Quit; no installed editor needed |
+| Android export / payload / CRC / signing | PASS — ARM64+x86_64; new compiled motion/UI scripts and shaders; 49 clips / 266 action fields; v2/v3 signatures and 16-KiB native alignment |
+| Android manifest / retained certificate | PASS — 0.9.0 / code 900; min API 24 / target 36; same V4–V8 development certificate |
+| Combat preview | PASS — full decode, 1280×720, 60 FPS, 1,111 frames / 18.516667 seconds |
+| Physical Android / two-device Wi-Fi | NOT RUN — no attached device; no Android runtime, digitizer, thermal or frame-rate acceptance claimed |
+
+There are **1,512 distinct successful automated source assertions**. The repeated
+network run and direct quality rerun are additional executions. Media, original
+hashes, export/signing and native package checks are separate. Final required
+runs contain no script/engine errors or leaked instances. The software display's
+unsupported V-Sync warning is unchanged. Tests and video scripts are excluded
+from the APK. Final logs, sample screenshots and the native smoke helper are in
+releases/android-v0.9.0/validation/.
+
+## Ultimate availability
+
+Each fighter starts from normal 200 HP and zero meter, walks to the opponent and
+uses only ordinary heavy/movement input. No meter/HP fixtures or repositioning
+are used in the balance loop. All ten reach 100 meter after nine heavy hits while
+the target still has 92 HP, then spend 100 and land their default ultimate.
+The sequence including approach and ultimate completes in 7.85–8.25 simulated
+seconds. Resulting target HP is 62 normally, 66 for Lava Stone and 64 for Crystal
+Fang, reflecting existing per-move damage. Separate checks cover incoming meter,
+guarding, healing cap and reset. This establishes basic availability, not human
+competitive balance. The video uses a ready-meter UI fixture and slow-motion
+heavy attacks; its charged meters are not evidence of earning meter in combat.
+
+## Frame pacing and animation limits
+
+Separate final V9 runs use the native Linux X11 window, llvmpipe software renderer,
+two fighters walking/reversing, a two-second warm-up and six-second sample window.
+Actual intervals use monotonic Time.get_ticks_usec(), not fixed video cadence.
+No other GPU test or video recording runs concurrently with these measurements.
+
+| Native size | Actual average FPS | Median frame | p95 | p99 |
+| --- | ---: | ---: | ---: | ---: |
+| 1280×720 | 59.87 | 16.664 ms | 19.587 ms | 22.075 ms |
+| 2400×1080 | 43.62 | 21.601 ms | 31.676 ms | 35.924 ms |
+
+The wide software-rendered workload still misses the 60-FPS budget. These short
+runs are not a controlled speedup comparison or physical Android measurements.
+Engine delta/process diagnostics in the raw JSON are not CPU or phone metrics.
+The 60-FPS Movie Maker recording is offline animation review, not a live benchmark.
+Native resolution and the 60-FPS cap remain; device frame pacing needs testing.
+Motion-aligned existing illustrations provide continuous in-betweens, not new
+independently hand-drawn frames. Limb disocclusion/warping can still be visible.
+
+## Published package
+
+APK size: 153,018,490 bytes. SHA-256:
+01991a370360af3a38bfc869cadfdd132cc00c3c642186a96c26482c5b4cce24.
+The APK uses the retained development certificate and is a sideload preview.
+V9 must be installed on both peers. Same-Wi-Fi six-character direct sessions,
+native resolution, ten fighters, 69 moves and all ten films are retained.
+Different networks / 4G / 5G still need a relay/NAT traversal service; none is
+bundled. Previous published versions and tags are preserved.
+
+---
+
 # V8 persistent rings and continuous movement — 29 October 2026
 
 V8 / 0.8.0, Android code 800. Fighters retains the same lit 3D character, world,

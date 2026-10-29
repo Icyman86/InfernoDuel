@@ -70,3 +70,15 @@ CollisionLayers gescheiden (fighter body, hurtbox, attack hitbox, projectile, ar
 4. Menu na KO/Rematch: geen stuck movement door aangehouden toetsen.
 5. P1/P2 kiezen in character select tegelijk een fighter; input gaat naar correct paneel.
 6. Both on same character: beide incarnaties onafhankelijk HP/special/meter/animatie.
+
+## V9 speelbare balans en presentatie
+
+Iedere fighter start nu met 200 HP; genezing is ook begrensd op 200. Ontvangen
+schade levert ceil(schade × 0,35) ultimate-meter op, naast de bestaande meter uit
+raken en blokkeren. Blokkeren geeft vier meter. De grens blijft 100 en een
+ultimate kost 100. Bij een volle meter gloeien de balk en ULT-touchknop goud.
+Alle tien fighters kunnen in een normale start vanuit nul meter met negen zware
+hits hun ultimate opladen voordat de tegenstander KO gaat (92 HP resterend).
+Dit is een geautomatiseerde inputtest, geen volledige multiplayer-balansclaim.
+Alle 49 aanvalclips hebben doorlopende tussenbeelden voor voorbereiding,
+uitstrekking en herstel. Het spel gebruikt dezelfde damage, hitboxes en timing.

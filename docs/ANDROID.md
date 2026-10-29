@@ -1,6 +1,6 @@
-# Android V8 / 0.8.0
+# Android V9 / 0.9.0
 
-V8 uses the native device resolution and modernizes the combat controls and
+V9 uses the native device resolution and modernizes the combat controls and
 Fighters screen. The hosting device creates a temporary session with six random
 letters/numbers; the other device connects with only that code. IP addresses are
 absent from the UI. No external server needs to be hosted for same-Wi-Fi play.
@@ -10,7 +10,7 @@ absent from the UI. No external server needs to be hosted for same-Wi-Fi play.
 Download the APK in README. Android 7.0+ (API 24), a 64-bit ARM or x86_64 Android
 OS, OpenGL ES 3.0 and multitouch are required. Target SDK: 36. Landscape phones
 and tablets are supported; 32-bit Android is not. This sideload preview uses the
-retained v0.4/v0.5/v0.6/v0.7 development certificate and versionCode 800 for in-place
+retained v0.4–v0.8 development certificate and versionCode 900 for in-place
 updates. It is not a Play Store release; private production signing is separate.
 
 CONNECT · SESSION CODE: host taps CREATE SESSION and shares six characters.
@@ -38,14 +38,19 @@ from the existing validated atlases (2.5D), not fully modelled skeletal characte
 REPLAY PRESENTATION, ORIGINAL SHEET and PLAY INTRO remain available. The old
 move-lab animation tour and executable move list have been removed.
 
-V8 adds per-character start/brake/backstep/pivot, jump rise/apex/fall/landing and
-block entry/exit animation clips. A one-pass GPU shader aligns adjacent authored
-walk poses with precomputed bidirectional motion vectors and renders intermediate
-poses continuously. Distance-driven gait responds to analog speed; foot pivots
-anchor scaling/lean and geometry/motion textures are cached. This is derived
-animation from the existing artwork, not 60 new hand-drawn frames. Some occlusion
-warping remains possible. Attack timing, hitboxes and physics are unchanged.
-The render cap targets 60 FPS; real-device frame rates are unverified.
+V9 adds continuous anticipation, chamber, extension/contact and recovery for all
+49 authored attack clips, using 266 bidirectional motion fields and planted
+support-foot pivots. The same motion rendering drives the podium signature.
+Walking's 54 fields use steadier torso anchors; two-step stride lengths, lower
+bounce and resolved-distance gait reduce skating/hopping, including wall and
+opponent contact. Existing start/brake/pivot/jump/guard clips remain.
+Angular combat panels and animated ultimate gauges pulse gold at 100 meter,
+along with the ULT touch button. Every fighter has 200 HP. Clean incoming damage
+also grants ceil(damage × 0.35) meter; guard grants four and meter caps at 100.
+Normal attack costs, damage, hitboxes and 60-Hz physics remain as documented.
+This is derived animation from existing artwork, not new hand-drawn frames.
+Some occlusion warping remains possible. The render cap targets 60 FPS;
+real-device frame rates are unverified.
 
 The viewport tracks real surface pixels; the logical arena preserves proportions
 inside the safe rectangle. No fixed 1280×720 render target is forced. Normal
@@ -85,7 +90,7 @@ keystores out of Git. Fetching the published APK through a checkout requires Git
 
 Run ./tools/test.sh for gameplay/artwork/roster and films, ./tools/test_touch.sh
 for injected multitouch, ./tools/test_gallery.sh for all ten presentations and
-idle transitions, and TEST_NETWORK_RENDERED=1 ./tools/test_v8.sh for room codes,
+idle transitions, and TEST_NETWORK_RENDERED=1 ./tools/test_v9.sh for room codes,
 real broadcast discovery/ENet processes, native framebuffers and mobile UI.
 Graphical tests need DISPLAY; headless tests are not native Android execution.
 
@@ -101,4 +106,4 @@ room create/join/cancel, owned touch movement and attacks, pause/background,
 results/rematch/disconnect, real multitouch, cutouts, speakers, thermals and frame
 rate at native resolution. Linux/loopback results do not establish those results.
 Different Wi-Fi networks / 4G / 5G generally need a relay or NAT traversal service;
-none is hosted or included in V8. Every update gets its own version/code/path/tag.
+none is hosted or included in V9. Every update gets its own version/code/path/tag.

@@ -21,19 +21,22 @@ static func prime(id: String) -> void:
 	for index in data.profiles[id].size(): texture(id,index)
 
 static func bind(material: ShaderMaterial, id: String, index: int, base: Dictionary, next: Dictionary, height: float) -> void:
-	material.set_shader_parameter("motion_field",texture(id,index))
-	var canvas := Vector2(data.canvas[0],data.canvas[1])
-	var foot := Vector2(data.foot[0],data.foot[1])
+	bind_texture(material,texture(id,index),base,next,height,data)
+
+static func bind_texture(material: ShaderMaterial, field: Texture2D, base: Dictionary, next: Dictionary, height: float, config: Dictionary) -> void:
+	material.set_shader_parameter("motion_field",field)
+	var canvas := Vector2(config.canvas[0],config.canvas[1])
+	var foot := Vector2(config.foot[0],config.foot[1])
 	var size_a: Vector2 = base.texture.get_size()
 	var size_b: Vector2 = next.texture.get_size()
-	var a: float = float(base.scale)*float(data.body_height)/height
-	var b: float = float(next.scale)*float(data.body_height)/height
+	var a: float = float(base.scale)*float(config.body_height)/height
+	var b: float = float(next.scale)*float(config.body_height)/height
 	var scale_uv := size_a*a/canvas
 	var offset_uv: Vector2 = (foot-(Vector2(base.origin)+Vector2(base.pivot))*a)/canvas
 	material.set_shader_parameter("flow_uv",Vector4(scale_uv.x,scale_uv.y,offset_uv.x,offset_uv.y))
 	material.set_shader_parameter("flow_pixel_uv",Vector4(1.0/(a*size_a.x),1.0/(a*size_a.y),1.0/(b*size_b.x),1.0/(b*size_b.y)))
 	material.set_shader_parameter("flow_canvas_size",canvas)
-	material.set_shader_parameter("flow_range",float(data.range))
+	material.set_shader_parameter("flow_range",float(config.range))
 	var lo: Vector2 = base.origin/size_a
 	var hi: Vector2 = (Vector2(base.origin)+Vector2(base.extent))/size_a
 	material.set_shader_parameter("source_bounds",Vector4(lo.x,lo.y,hi.x,hi.y))

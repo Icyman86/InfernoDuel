@@ -36,6 +36,9 @@ var facing_target := 1.0
 var turn_age := 1.0
 var cycle_blend := 0.0
 var motion_state := "idle"
+var action_blend := 0.0
+var support_anchor := Vector2.ZERO
+var previous_action := false
 
 func _ready() -> void:
 	if art_cache.is_empty(): art_cache = JSON.parse_string(FileAccess.get_file_as_string(ART_DATA_PATH))
@@ -68,6 +71,7 @@ func _ready() -> void:
 	if actor:
 		var walk: Dictionary = metadata.animations.walk
 		WalkPoseFields.prime(profile.id)
+		ActionPoseFields.prime(profile.id)
 		if not WalkPoseFields.available(profile.id): rig_geometry(frame_data(walk.get("atlas","core"),walk.frames[0]))
 		shown_facing = actor.facing
 		facing_from = actor.facing
@@ -94,6 +98,10 @@ func frame_data(source: String, index: int) -> Dictionary:
 	var key := source+str(index)
 	if not geometry_cache.has(key):
 		var frame: Dictionary = metadata[source].frames[index]
+		var pivot := Vector2(frame.pivot[0],frame.pivot[1])
+		if source == str(metadata.animations.walk.get("atlas","core")) and WalkPoseFields.available(profile.id):
+			var anchor: Array = WalkPoseFields.data.get("anchors",{}).get(profile.id,{}).get(str(index),frame.pivot)
+			pivot = Vector2(anchor[0],anchor[1])
 		var r: Array = frame.rect
 		var vertices := PackedVector2Array()
 		var uvs := PackedVector2Array()
@@ -107,10 +115,22 @@ func frame_data(source: String, index: int) -> Dictionary:
 		texture.filter_clip = true
 		texture_cache[key] = texture
 		geometry_cache[key] = {"key":key,"vertices":vertices,"uv":uvs,"texture":atlases[source],
-			"pivot":Vector2(frame.pivot[0],frame.pivot[1]),"origin":Vector2(r[0],r[1]),"extent":Vector2(r[2],r[3]),
+			"pivot":pivot,"origin":Vector2(r[0],r[1]),"extent":Vector2(r[2],r[3]),
 			"scale":pixels_to_world*float(metadata[source].get("scale",1.0)),
 			"height":float(metadata.base_height)/float(metadata[source].get("scale",1.0))}
 		geometry_builds += 1
+	return geometry_cache[key]
+
+func action_frame(descriptor: Dictionary, animation: String) -> Dictionary:
+	var raw := frame_data(descriptor.atlas,int(descriptor.index))
+	var key: String = raw.key+"@"+animation
+	if not geometry_cache.has(key):
+		var copy := raw.duplicate()
+		copy.key = key
+		copy.pivot = Vector2(descriptor.pivot[0],descriptor.pivot[1])
+		copy.flow_meshes = {}
+		geometry_cache[key] = copy
+		texture_cache[key] = texture_cache[raw.key]
 	return geometry_cache[key]
 
 func rig_geometry(data: Dictionary) -> void:
@@ -158,7 +178,7 @@ func assign_frame(node: Polygon2D, data: Dictionary, rigged := false) -> void:
 		node.material.set_shader_parameter("body_height_pixels",data.height)
 		geometry_assignments += 1
 
-func assign_flow_frame(base: Dictionary, next: Dictionary) -> void:
+func assign_flow_frame(base: Dictionary, next: Dictionary, action: Dictionary = {}) -> void:
 	var key: String = base.key+"-flow-"+next.key
 	if sprite.get_meta("frame_key","") == key: return
 	if not base.has("flow_meshes"): base.flow_meshes = {}
@@ -181,7 +201,10 @@ func assign_flow_frame(base: Dictionary, next: Dictionary) -> void:
 	material_fx.set_shader_parameter("pivot_pixels",base.pivot)
 	material_fx.set_shader_parameter("body_height_pixels",base.height)
 	blend_coverage(base,next)
-	WalkPoseFields.bind(material_fx,profile.id,frame_number,base,next,target_height)
+	if action.is_empty():
+		WalkPoseFields.bind(material_fx,profile.id,frame_number,base,next,target_height)
+	else:
+		WalkPoseFields.bind_texture(material_fx,ActionPoseFields.texture(profile.id,action.pair),base,next,target_height,ActionPoseFields.data)
 	geometry_assignments += 1
 
 func blend_coverage(base: Dictionary, overlay: Dictionary) -> void:
@@ -212,17 +235,16 @@ func _update_pose(delta := 0.0) -> void:
 		elif actor.attack:
 			state = actor.attack.animation
 			var move := actor.attack
-			var impact := 0.5 if state in ["heavy","strike"] else 0.25
 			if actor.attack_time < move.startup:
-				progress = impact*actor.attack_time/move.startup
+				progress = .45*actor.attack_time/move.startup
 			elif actor.is_active():
-				progress = impact+(.75-impact)*(actor.attack_time-move.startup)/move.active
+				progress = .45+.20*(actor.attack_time-move.startup)/move.active
 			else:
-				progress = .75+.249*(actor.attack_time-move.startup-move.active)/move.recovery
+				progress = .65+.35*(actor.attack_time-move.startup-move.active)/move.recovery
 		elif not actor.grounded(): state = "jump"
-		elif absf(actor.velocity.x) > 18: state = "walk"
+		elif absf(actor.locomotion_speed) > 18: state = "walk"
 		else: state = "idle"
-		if delta > 0: motion.update(delta,actor.velocity.x,actor.velocity.y,actor.grounded(),actor.facing,actor.guarding,locked)
+		if delta > 0: motion.update(delta,actor.locomotion_speed,actor.velocity.y,actor.grounded(),actor.facing,actor.guarding,locked,actor.walk_distance)
 		if float(actor.facing) != facing_target:
 			facing_from = shown_facing
 			facing_target = actor.facing
@@ -235,6 +257,8 @@ func _update_pose(delta := 0.0) -> void:
 		previous_material.set_shader_parameter("hit_flash",flash)
 	elif delta > 0:
 		motion.update(delta,200.0 if state == "walk" else 0.0,0.0,state != "jump",1,state == "guard",state not in ["idle","walk","jump","guard"])
+	if state == "idle" and previous_action: clock = 0.0
+	previous_action = actor.attack != null if actor else progress > 0 and state not in ["idle","walk","jump","guard","hit","ko"]
 	motion_state = motion.clip
 	var animation: Dictionary = metadata.animations.get(state,metadata.animations.idle)
 	var indices: Array = animation.frames
@@ -253,8 +277,23 @@ func _update_pose(delta := 0.0) -> void:
 		frame_number = int(phase)%indices.size()
 	var source: String = animation.get("atlas","core")
 	var data := frame_data(source,indices[frame_number])
+	var action := {}
+	if progress >= 0 and ActionPoseFields.available(profile.id,state):
+		action = ActionPoseFields.sample(profile.id,state,progress)
+		data = action_frame(action.base,state)
+		frame_number = int(action.base.frame)
+	support_anchor = Vector2.ZERO
 	material_fx.set_shader_parameter("flow_blend",flowing)
-	if cyclic:
+	if not action.is_empty():
+		var next := action_frame(action.next,state)
+		assign_flow_frame(data,next,action)
+		action_blend = action.mix
+		support_anchor = Vector2(action.offset)*target_height/float(ActionPoseFields.data.body_height)
+		material_fx.set_shader_parameter("flow_blend",true)
+		material_fx.set_shader_parameter("flow_mix",action_blend)
+		material_fx.set_shader_parameter("pose_alpha",1.0)
+		previous_sprite.visible = false
+	elif cyclic:
 		# Blend toward the next authored key for the ENTIRE interval. There is no
 		# static hold between keys, even on four-key legacy walk cycles.
 		var next := frame_data(source,indices[(frame_number+1)%indices.size()])
@@ -301,7 +340,7 @@ func _update_pose(delta := 0.0) -> void:
 		var frame: Dictionary = node.get_meta("frame_data",data)
 		node.scale = Vector2.ONE*float(frame.scale)*stretch
 		# Scale around the foot pivot, not the atlas rectangle's top-left.
-		node.position = -Vector2(frame.pivot)*node.scale+offset
+		node.position = -Vector2(frame.pivot)*node.scale+offset+support_anchor
 		node.rotation = 0
 		node.material.set_shader_parameter("gait_phase",motion.gait*TAU)
 		node.material.set_shader_parameter("walk_weight",motion.blend_speed if not locked else 0.0)
