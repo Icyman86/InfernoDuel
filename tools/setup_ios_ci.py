@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import subprocess
 import urllib.request
 import zipfile
 
@@ -31,8 +32,7 @@ def fetch(kind):
     return path
 
 
-with zipfile.ZipFile(fetch('macos')) as archive:
-    archive.extractall(downloads)
+subprocess.run(['ditto', '-x', '-k', str(fetch('macos')), str(downloads)], check=True)
 binary = downloads / 'Godot.app/Contents/MacOS/Godot'
 binary.chmod(0o755)
 templates = Path.home() / 'Library/Application Support/Godot/export_templates' / (lock['version'] + '.stable')

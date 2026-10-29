@@ -8,7 +8,12 @@ De Android-APK werkt niet op een iPhone.
 
 ## Welk bestand heb je nodig?
 
-Open de [iPhone 0.9 release](https://github.com/Icyman86/InfernoDuel/releases/tag/v0.9.0-ios)
+Er is nog geen IPA beschikbaar zolang de Mac-build niet is gestart en geslaagd.
+De Linux-cloudomgeving heeft wel het complete Xcode-project geëxporteerd en
+gecontroleerd, maar kan de Mac-build niet via de GitHub-API starten (Forbidden).
+De eigenaar kan de build met de stappen hieronder in GitHub starten.
+
+Open na een geslaagde build de [iPhone 0.9 release](https://github.com/Icyman86/InfernoDuel/releases/tag/v0.9.0-ios)
 en download **InfernoDuel-iPhone-v0.9.0-unsigned.ipa** uit Assets.
 Deze verschijnt uitsluitend nadat de automatische Mac-build is geslaagd.
 Het woord `unsigned` hoort erbij: AltStore voegt jouw eigen ondertekening toe.
@@ -88,14 +93,28 @@ sessiecode overbrugd. CPU-spel heeft geen lokaal-netwerktoestemming nodig.
 ## Als er nog geen IPA bij de release staat
 
 Bekijk [de iPhone-builds in GitHub Actions](https://github.com/Icyman86/InfernoDuel/actions/workflows/ios.yml).
+Meld je aan met het account dat toegang heeft tot de repository. Kies
+**Run workflow**, laat **Use workflow from: main** staan en gebruik
+**release_tag: v0.9.0-ios**. Kies nogmaals **Run workflow**. De workflow haalt
+die vaste broncode-tag op, bouwt op een Mac en maakt na geslaagde controle de
+bovenstaande release met IPA aan. Wacht op een groen vinkje; bij een rood kruis
+open je de mislukte stap voor de concrete melding. Als Actions voor de repository
+is uitgeschakeld, moet de eigenaar die eerst inschakelen.
+
 Alleen een geslaagde Mac/Xcode-build kan een echte IPA produceren. De workflow
 bouwt zonder Apple-wachtwoorden, certificaten of provisioningprofielen; AltStore
 doet de uiteindelijke ondertekening op jouw computer. Een mislukte of niet gestarte
 build is geen installeerbare release.
 
-Een Mac met Xcode kan vanuit de broncode ook `python3 tools/setup_ios_ci.py` en
-vervolgens, met de getoonde GODOT_BIN, `./tools/build_ios.sh` uitvoeren. Dat levert
-dezelfde unsigned IPA op. Een geëxporteerd `.xcodeproj` kun je daarnaast in Xcode
+Een Mac met Xcode kan vanuit de broncode ook dit uitvoeren:
+
+```bash
+python3 tools/setup_ios_ci.py
+export GODOT_BIN="$PWD/builds/ios-tools/Godot.app/Contents/MacOS/Godot"
+./tools/build_ios.sh
+```
+
+Dat levert dezelfde unsigned IPA op. Een geëxporteerd `.xcodeproj` kun je daarnaast in Xcode
 openen, jouw eigen Personal Team kiezen bij Signing & Capabilities en rechtstreeks
 op je aangesloten iPhone draaien. Vervang daarvoor de export-placeholder voor
 het team door jouw echte team; `0000000000` is geen Apple-certificaat of account.
