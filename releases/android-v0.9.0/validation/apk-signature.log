@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Godot, OU=Godot Engine, O=Stichting Godot, C=NL
+Signer #1 certificate SHA-256 digest: bf325c42dd009bd6a6309692bfbbf46a9b3448a807a8718a284e0b8a8c5ab48c
+Signer #1 certificate SHA-1 digest: 9e574b8b542d3a912e0e6be8d9fe6efc43c954e9
+Signer #1 certificate MD5 digest: 50b9d4235b3c0b22d8526d91f035561b
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: 22cedcec400fc8719e3b85f2c5686f8e635fdfef219139f16bd8d4a266d77bca
+Signer #1 public key SHA-1 digest: 763ad072ce9d5a161a3dfccee18b0c5ffa1c7516
+Signer #1 public key MD5 digest: 772a4cb6c53051ad6f1c2c8f5bbb5b09

@@ -1,0 +1,23 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+CAPTURE 01-menu
+CAPTURE 02-select
+PASS keyboard opens local versus
+CAPTURE 03-arena
+PASS native input flow confirms both players
+PASS both input streams move fighters in rendered match
+CAPTURE 04-fight
+PASS simultaneous attacks trade in real physics loop
+CAPTURE 05-pause
+PASS rendered pause holds timer
+CAPTURE 06-options
+PASS options has keyboard focus
+PASS fullscreen applies
+CAPTURE 07-gallery
+PASS gallery has keyboard focus
+CAPTURE 08-resized
+PASS render surface follows the actual window resolution while logical UI scales
+VISUAL RESULT: 0 failed

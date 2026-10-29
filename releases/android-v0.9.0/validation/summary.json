@@ -1,0 +1,18 @@
+{
+  "version": "0.9.0",
+  "version_code": 900,
+  "source_commit": "1585cef923872b11d5282d90c7ff2d10a608e6e9",
+  "distinct_automated_assertions": 1512,
+  "quality_assertions": 160,
+  "quality_visual_assertions": 20,
+  "attack_clips": 49,
+  "action_motion_fields": 266,
+  "walk_motion_fields": 54,
+  "max_health": 200,
+  "incoming_meter_ratio": 0.35,
+  "original_artwork_changed": false,
+  "native_linux_smoke": "passed",
+  "physical_android": "not run; no device attached",
+  "release_video": "scripted slow-motion heavy moves and ready-meter UI fixture; offline 60-fps rendering, not live phone performance",
+  "certificate_sha256": "bf325c42dd009bd6a6309692bfbbf46a9b3448a807a8718a284e0b8a8c5ab48c"
+}

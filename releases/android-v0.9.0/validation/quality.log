@@ -1,0 +1,173 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS sharkbyte starts with 200 HP and zero meter
+PASS sharkbyte/light has continuous anticipation, extension and recovery samples
+PASS sharkbyte/heavy has continuous anticipation, extension and recovery samples
+PASS sharkbyte/special has continuous anticipation, extension and recovery samples
+PASS sharkbyte/ultimate has continuous anticipation, extension and recovery samples
+PASS sharkbyte actual heavy renders continuous poses around a fixed support foot
+PASS sharkbyte heavy returns to its resting animation
+PASS sharkbyte earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE sharkbyte ready target HP=92 after ultimate=62 elapsed=7.93333333333288
+PASS sharkbyte incoming heavy grants five meter without changing its damage
+PASS sharkbyte blocking retains quarter damage and four meter
+PASS sharkbyte feet stop cycling when both fighters push against each other
+PASS sharkbyte wall contact produces no skating or whole-body hopping
+PASS sharkbyte half health and a ready ultimate are represented correctly in the HUD
+PASS sharkbyte ultimate glow requires a fully charged meter
+PASS sharkbyte ultimate animation freezes on pause
+PASS bullet starts with 200 HP and zero meter
+PASS bullet/light has continuous anticipation, extension and recovery samples
+PASS bullet/heavy has continuous anticipation, extension and recovery samples
+PASS bullet/special has continuous anticipation, extension and recovery samples
+PASS bullet/ultimate has continuous anticipation, extension and recovery samples
+PASS bullet actual heavy renders continuous poses around a fixed support foot
+PASS bullet heavy returns to its resting animation
+PASS bullet earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE bullet ready target HP=92 after ultimate=62 elapsed=8.11666666666621
+PASS bullet incoming heavy grants five meter without changing its damage
+PASS bullet blocking retains quarter damage and four meter
+PASS bullet feet stop cycling when both fighters push against each other
+PASS bullet wall contact produces no skating or whole-body hopping
+PASS bullet half health and a ready ultimate are represented correctly in the HUD
+PASS bullet ultimate glow requires a fully charged meter
+PASS bullet ultimate animation freezes on pause
+PASS nachtelf starts with 200 HP and zero meter
+PASS nachtelf/light has continuous anticipation, extension and recovery samples
+PASS nachtelf/heavy has continuous anticipation, extension and recovery samples
+PASS nachtelf/special has continuous anticipation, extension and recovery samples
+PASS nachtelf/ultimate has continuous anticipation, extension and recovery samples
+PASS nachtelf actual heavy renders continuous poses around a fixed support foot
+PASS nachtelf heavy returns to its resting animation
+PASS nachtelf earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE nachtelf ready target HP=92 after ultimate=62 elapsed=8.08333333333287
+PASS nachtelf incoming heavy grants five meter without changing its damage
+PASS nachtelf blocking retains quarter damage and four meter
+PASS nachtelf feet stop cycling when both fighters push against each other
+PASS nachtelf wall contact produces no skating or whole-body hopping
+PASS nachtelf half health and a ready ultimate are represented correctly in the HUD
+PASS nachtelf ultimate glow requires a fully charged meter
+PASS nachtelf ultimate animation freezes on pause
+PASS poisonboy starts with 200 HP and zero meter
+PASS poisonboy/light has continuous anticipation, extension and recovery samples
+PASS poisonboy/heavy has continuous anticipation, extension and recovery samples
+PASS poisonboy/special has continuous anticipation, extension and recovery samples
+PASS poisonboy/ultimate has continuous anticipation, extension and recovery samples
+PASS poisonboy actual heavy renders continuous poses around a fixed support foot
+PASS poisonboy heavy returns to its resting animation
+PASS poisonboy earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE poisonboy ready target HP=92 after ultimate=62 elapsed=8.03333333333288
+PASS poisonboy incoming heavy grants five meter without changing its damage
+PASS poisonboy blocking retains quarter damage and four meter
+PASS poisonboy feet stop cycling when both fighters push against each other
+PASS poisonboy wall contact produces no skating or whole-body hopping
+PASS poisonboy half health and a ready ultimate are represented correctly in the HUD
+PASS poisonboy ultimate glow requires a fully charged meter
+PASS poisonboy ultimate animation freezes on pause
+PASS spinegrin starts with 200 HP and zero meter
+PASS spinegrin/light has continuous anticipation, extension and recovery samples
+PASS spinegrin/heavy has continuous anticipation, extension and recovery samples
+PASS spinegrin/special has continuous anticipation, extension and recovery samples
+PASS spinegrin/ultimate has continuous anticipation, extension and recovery samples
+PASS spinegrin actual heavy renders continuous poses around a fixed support foot
+PASS spinegrin heavy returns to its resting animation
+PASS spinegrin earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE spinegrin ready target HP=92 after ultimate=62 elapsed=7.99999999999955
+PASS spinegrin incoming heavy grants five meter without changing its damage
+PASS spinegrin blocking retains quarter damage and four meter
+PASS spinegrin feet stop cycling when both fighters push against each other
+PASS spinegrin wall contact produces no skating or whole-body hopping
+PASS spinegrin half health and a ready ultimate are represented correctly in the HUD
+PASS spinegrin ultimate glow requires a fully charged meter
+PASS spinegrin ultimate animation freezes on pause
+PASS chainveil starts with 200 HP and zero meter
+PASS chainveil/light has continuous anticipation, extension and recovery samples
+PASS chainveil/heavy has continuous anticipation, extension and recovery samples
+PASS chainveil/special has continuous anticipation, extension and recovery samples
+PASS chainveil/ultimate has continuous anticipation, extension and recovery samples
+PASS chainveil actual heavy renders continuous poses around a fixed support foot
+PASS chainveil heavy returns to its resting animation
+PASS chainveil earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE chainveil ready target HP=92 after ultimate=62 elapsed=8.04999999999954
+PASS chainveil incoming heavy grants five meter without changing its damage
+PASS chainveil blocking retains quarter damage and four meter
+PASS chainveil feet stop cycling when both fighters push against each other
+PASS chainveil wall contact produces no skating or whole-body hopping
+PASS chainveil half health and a ready ultimate are represented correctly in the HUD
+PASS chainveil ultimate glow requires a fully charged meter
+PASS chainveil ultimate animation freezes on pause
+PASS cheese_rat starts with 200 HP and zero meter
+PASS cheese_rat/light has continuous anticipation, extension and recovery samples
+PASS cheese_rat/heavy has continuous anticipation, extension and recovery samples
+PASS cheese_rat/special has continuous anticipation, extension and recovery samples
+PASS cheese_rat/ultimate has continuous anticipation, extension and recovery samples
+PASS cheese_rat actual heavy renders continuous poses around a fixed support foot
+PASS cheese_rat heavy returns to its resting animation
+PASS cheese_rat earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE cheese_rat ready target HP=92 after ultimate=62 elapsed=7.84999999999955
+PASS cheese_rat incoming heavy grants five meter without changing its damage
+PASS cheese_rat blocking retains quarter damage and four meter
+PASS cheese_rat feet stop cycling when both fighters push against each other
+PASS cheese_rat wall contact produces no skating or whole-body hopping
+PASS cheese_rat half health and a ready ultimate are represented correctly in the HUD
+PASS cheese_rat ultimate glow requires a fully charged meter
+PASS cheese_rat ultimate animation freezes on pause
+PASS lava_stone starts with 200 HP and zero meter
+PASS lava_stone/light has continuous anticipation, extension and recovery samples
+PASS lava_stone/heavy has continuous anticipation, extension and recovery samples
+PASS lava_stone/special has continuous anticipation, extension and recovery samples
+PASS lava_stone/ultimate has continuous anticipation, extension and recovery samples
+PASS lava_stone/strike has continuous anticipation, extension and recovery samples
+PASS lava_stone/slam has continuous anticipation, extension and recovery samples
+PASS lava_stone/power has continuous anticipation, extension and recovery samples
+PASS lava_stone actual heavy renders continuous poses around a fixed support foot
+PASS lava_stone heavy returns to its resting animation
+PASS lava_stone earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE lava_stone ready target HP=92 after ultimate=66 elapsed=8.24999999999953
+PASS lava_stone incoming heavy grants five meter without changing its damage
+PASS lava_stone blocking retains quarter damage and four meter
+PASS lava_stone feet stop cycling when both fighters push against each other
+PASS lava_stone wall contact produces no skating or whole-body hopping
+PASS lava_stone half health and a ready ultimate are represented correctly in the HUD
+PASS lava_stone ultimate glow requires a fully charged meter
+PASS lava_stone ultimate animation freezes on pause
+PASS crystal_fang starts with 200 HP and zero meter
+PASS crystal_fang/light has continuous anticipation, extension and recovery samples
+PASS crystal_fang/heavy has continuous anticipation, extension and recovery samples
+PASS crystal_fang/special has continuous anticipation, extension and recovery samples
+PASS crystal_fang/ultimate has continuous anticipation, extension and recovery samples
+PASS crystal_fang/strike has continuous anticipation, extension and recovery samples
+PASS crystal_fang/slam has continuous anticipation, extension and recovery samples
+PASS crystal_fang/power has continuous anticipation, extension and recovery samples
+PASS crystal_fang actual heavy renders continuous poses around a fixed support foot
+PASS crystal_fang heavy returns to its resting animation
+PASS crystal_fang earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE crystal_fang ready target HP=92 after ultimate=64 elapsed=7.86666666666622
+PASS crystal_fang incoming heavy grants five meter without changing its damage
+PASS crystal_fang blocking retains quarter damage and four meter
+PASS crystal_fang feet stop cycling when both fighters push against each other
+PASS crystal_fang wall contact produces no skating or whole-body hopping
+PASS crystal_fang half health and a ready ultimate are represented correctly in the HUD
+PASS crystal_fang ultimate glow requires a fully charged meter
+PASS crystal_fang ultimate animation freezes on pause
+PASS phoenix_reign starts with 200 HP and zero meter
+PASS phoenix_reign/light has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/heavy has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/special has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/ultimate has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/peck has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/wing_beat has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/rebirth has continuous anticipation, extension and recovery samples
+PASS phoenix_reign actual heavy renders continuous poses around a fixed support foot
+PASS phoenix_reign heavy returns to its resting animation
+PASS phoenix_reign earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE phoenix_reign ready target HP=92 after ultimate=62 elapsed=8.09999999999954
+PASS phoenix_reign incoming heavy grants five meter without changing its damage
+PASS phoenix_reign blocking retains quarter damage and four meter
+PASS phoenix_reign feet stop cycling when both fighters push against each other
+PASS phoenix_reign wall contact produces no skating or whole-body hopping
+PASS phoenix_reign half health and a ready ultimate are represented correctly in the HUD
+PASS phoenix_reign ultimate glow requires a fully charged meter
+PASS phoenix_reign ultimate animation freezes on pause
+PASS all 49 authored attack clips have continuous motion fields
+QUALITY RESULT: 160 passed, 0 failed

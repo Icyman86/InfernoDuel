@@ -1,0 +1,4 @@
+PASS native release-engine + PCK menu and character showcase render
+PASS native keyboard select/fight and attacks apply visible damage
+PASS native pause renders
+NATIVE PACKAGE RESULT: workflow passed, normal exit 0, no engine/script errors

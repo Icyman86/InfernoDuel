@@ -1,0 +1,19 @@
+{
+  "average_actual_fps": 59.8662797426183,
+  "baseline": false,
+  "cached_geometry_builds": 17,
+  "frames": 359,
+  "median_cpu_process_ms": 20.479,
+  "median_engine_delta_ms": 16.666,
+  "median_frame_ms": 16.664,
+  "p95_cpu_process_ms": 32.087,
+  "p95_frame_ms": 19.587,
+  "p99_frame_ms": 22.075,
+  "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "scope": "Linux X11 software-rendered scripted movement; not physical Android acceptance",
+  "size": [
+    1280,
+    720
+  ],
+  "target_fps": 60
+}

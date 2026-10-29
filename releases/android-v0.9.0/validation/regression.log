@@ -1,0 +1,525 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS codes normalize case, copied spacing and separators
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS remote input is clamped and cannot carry health changes
+PASS network input preserves partial thumbstick movement
+PASS non-numeric remote movement is rejected
+PASS non-finite remote movement is rejected
+PASS string input cannot masquerade as an attack button
+PASS Android menu has session-code connection
+PASS Android menu has no local-versus or shared-tablet option
+PASS offline CPU play remains available
+PASS Android cannot enter local versus through the selection API
+PASS connection UI accepts only six symbols and has no address picker
+PASS session text entry does not lose F/S/I to menu shortcuts
+PASS bad code shows a usable error instead of starting a fake match
+PASS rendering uses the actual surface size with no fixed-resolution target
+PASS guest cannot choose or ready the opponent's fighter
+SESSION RESULT: 53 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS host real UDP host opens and produces a session code
+PASS host connection enters owned fighter selection
+PASS host guest input cannot move or attack during the host countdown
+PASS host session starts a genuine two-device fight without CPU
+PASS host guest movement, light and projectile damage reach authoritative host
+PASS host host attack applies authoritative guest damage
+PASS host pause propagates to both gameplay and UI
+PASS host network pause freezes the authoritative timer
+PASS host one resume vote cannot override the other player's pause
+PASS host both resume votes restart the shared fight
+PASS host host and guest agree on the best-of-three result
+PASS host mutual rematch starts a fresh synchronized match generation
+PASS host leaving closes the host session
+NETWORK PEER RESULT: {"failed":0,"passed":13,"role":"host"}
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS bad real client starts a session-code connection
+PASS bad unknown six-character code times out without a match
+NETWORK PEER RESULT: {"failed":0,"passed":2,"role":"bad"}
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS guest real client starts a session-code connection
+PASS guest connection enters owned fighter selection
+PASS guest session starts a genuine two-device fight without CPU
+PASS guest pause propagates to both gameplay and UI
+PASS guest network pause freezes the authoritative timer
+PASS guest both resume votes restart the shared fight
+PASS guest guest renders the host's exact health state
+PASS guest host and guest agree on the best-of-three result
+PASS guest mutual rematch starts a fresh synchronized match generation
+PASS guest host disconnect stops the guest match and shows a recoverable connection screen
+NETWORK PEER RESULT: {"failed":0,"passed":10,"role":"guest"}
+NETWORK RESULT: 25 passed, 0 failed; three real Godot processes
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS host real UDP host opens and produces a session code
+PASS host connection enters owned fighter selection
+PASS host guest input cannot move or attack during the host countdown
+PASS host session starts a genuine two-device fight without CPU
+PASS host guest movement, light and projectile damage reach authoritative host
+PASS host host attack applies authoritative guest damage
+PASS host pause propagates to both gameplay and UI
+PASS host network pause freezes the authoritative timer
+PASS host one resume vote cannot override the other player's pause
+PASS host both resume votes restart the shared fight
+PASS host host and guest agree on the best-of-three result
+PASS host mutual rematch starts a fresh synchronized match generation
+PASS host leaving closes the host session
+NETWORK PEER RESULT: {"failed":0,"passed":13,"role":"host"}
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS bad real client starts a session-code connection
+PASS bad unknown six-character code times out without a match
+NETWORK PEER RESULT: {"failed":0,"passed":2,"role":"bad"}
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS guest real client starts a session-code connection
+PASS guest connection enters owned fighter selection
+PASS guest session starts a genuine two-device fight without CPU
+PASS guest pause propagates to both gameplay and UI
+PASS guest network pause freezes the authoritative timer
+PASS guest both resume votes restart the shared fight
+PASS guest guest renders the host's exact health state
+PASS guest host and guest agree on the best-of-three result
+PASS guest mutual rematch starts a fresh synchronized match generation
+PASS guest host disconnect stops the guest match and shows a recoverable connection screen
+NETWORK PEER RESULT: {"failed":0,"passed":10,"role":"guest"}
+NETWORK RESULT: 25 passed, 0 failed; three real Godot processes
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+RESOLUTION OBSERVED requested=(960, 540) framebuffer=(960, 540) viewport=(960.0, 540.0) root=(960.0, 540.0) window=(960, 540) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (960, 540) native pixels
+PASS logical arena stays correctly proportioned inside (960, 540)
+RESOLUTION OBSERVED requested=(1280, 720) framebuffer=(1280, 720) viewport=(1280.0, 720.0) root=(1280.0, 720.0) window=(1280, 720) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1280, 720) native pixels
+PASS logical arena stays correctly proportioned inside (1280, 720)
+RESOLUTION OBSERVED requested=(1920, 1080) framebuffer=(1920, 1080) viewport=(1920.0, 1080.0) root=(1920.0, 1080.0) window=(1920, 1080) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1920, 1080) native pixels
+PASS logical arena stays correctly proportioned inside (1920, 1080)
+RESOLUTION OBSERVED requested=(2560, 1440) framebuffer=(2560, 1440) viewport=(2560.0, 1440.0) root=(2560.0, 1440.0) window=(2560, 1440) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (2560, 1440) native pixels
+PASS logical arena stays correctly proportioned inside (2560, 1440)
+RESOLUTION OBSERVED requested=(1280, 800) framebuffer=(1280, 800) viewport=(1280.0, 800.0) root=(1280.0, 800.0) window=(1280, 800) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1280, 800) native pixels
+PASS logical arena stays correctly proportioned inside (1280, 800)
+RESOLUTION OBSERVED requested=(1024, 768) framebuffer=(1024, 768) viewport=(1024.0, 768.0) root=(1024.0, 768.0) window=(1024, 768) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1024, 768) native pixels
+PASS logical arena stays correctly proportioned inside (1024, 768)
+RESOLUTION OBSERVED requested=(2400, 1080) framebuffer=(2400, 1080) viewport=(2400.0, 1080.0) root=(2400.0, 1080.0) window=(2400, 1080) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (2400, 1080) native pixels
+PASS logical arena stays correctly proportioned inside (2400, 1080)
+PASS Android session-code screen renders
+PASS options display real surface dimensions
+PASS resolution readout refreshes after device/window size changes
+PASS Android local-versus route is replaced by session connect
+PASS Android solo remains playable independently of networking
+PASS Android fight renders one thumbstick and seven circular buttons instead of shared controls
+V6 VISUAL RESULT: 20 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS CREATE SESSION displays an actual six-character hosted invitation
+PASS no visible label, button or input exposes a network address
+PASS CANCEL removes the live room and permits another session
+PASS one thumbstick, block, basic attack, four surrounding skills and pause fit (1280, 720)
+PASS all circular combat targets remain inside the native safe area at (1280, 720)
+PASS one thumbstick, block, basic attack, four surrounding skills and pause fit (2400, 1080)
+PASS all circular combat targets remain inside the native safe area at (2400, 1080)
+PASS one thumbstick, block, basic attack, four surrounding skills and pause fit (1024, 768)
+PASS all circular combat targets remain inside the native safe area at (1024, 768)
+PASS skill readiness rings track actual cooldown and meter state
+V7 UI RESULT: 10 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS sharkbyte enters its start movement clip through real input
+PASS sharkbyte renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS sharkbyte reuses warmed walk geometry instead of rebuilding it each render
+PASS sharkbyte plays an actual stop/brake transition
+PASS sharkbyte has a reverse gait when moving away from the opponent
+PASS sharkbyte reverses direction with a pivot animation
+PASS sharkbyte animates takeoff, apex, falling and landing through a real jump
+PASS sharkbyte movement animation does not change floor collision, HP or meter
+PASS sharkbyte eases into block
+PASS sharkbyte eases out of block
+PASS sharkbyte freezes movement clips while paused
+PASS sharkbyte round reset clears old movement phases
+PASS bullet enters its start movement clip through real input
+PASS bullet renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS bullet reuses warmed walk geometry instead of rebuilding it each render
+PASS bullet plays an actual stop/brake transition
+PASS bullet has a reverse gait when moving away from the opponent
+PASS bullet reverses direction with a pivot animation
+PASS bullet animates takeoff, apex, falling and landing through a real jump
+PASS bullet movement animation does not change floor collision, HP or meter
+PASS bullet eases into block
+PASS bullet eases out of block
+PASS bullet freezes movement clips while paused
+PASS bullet round reset clears old movement phases
+PASS nachtelf enters its start movement clip through real input
+PASS nachtelf renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS nachtelf reuses warmed walk geometry instead of rebuilding it each render
+PASS nachtelf plays an actual stop/brake transition
+PASS nachtelf has a reverse gait when moving away from the opponent
+PASS nachtelf reverses direction with a pivot animation
+PASS nachtelf animates takeoff, apex, falling and landing through a real jump
+PASS nachtelf movement animation does not change floor collision, HP or meter
+PASS nachtelf eases into block
+PASS nachtelf eases out of block
+PASS nachtelf freezes movement clips while paused
+PASS nachtelf round reset clears old movement phases
+PASS poisonboy enters its start movement clip through real input
+PASS poisonboy renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS poisonboy reuses warmed walk geometry instead of rebuilding it each render
+PASS poisonboy plays an actual stop/brake transition
+PASS poisonboy has a reverse gait when moving away from the opponent
+PASS poisonboy reverses direction with a pivot animation
+PASS poisonboy animates takeoff, apex, falling and landing through a real jump
+PASS poisonboy movement animation does not change floor collision, HP or meter
+PASS poisonboy eases into block
+PASS poisonboy eases out of block
+PASS poisonboy freezes movement clips while paused
+PASS poisonboy round reset clears old movement phases
+PASS spinegrin enters its start movement clip through real input
+PASS spinegrin renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS spinegrin reuses warmed walk geometry instead of rebuilding it each render
+PASS spinegrin plays an actual stop/brake transition
+PASS spinegrin has a reverse gait when moving away from the opponent
+PASS spinegrin reverses direction with a pivot animation
+PASS spinegrin animates takeoff, apex, falling and landing through a real jump
+PASS spinegrin movement animation does not change floor collision, HP or meter
+PASS spinegrin eases into block
+PASS spinegrin eases out of block
+PASS spinegrin freezes movement clips while paused
+PASS spinegrin round reset clears old movement phases
+PASS chainveil enters its start movement clip through real input
+PASS chainveil renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS chainveil reuses warmed walk geometry instead of rebuilding it each render
+PASS chainveil plays an actual stop/brake transition
+PASS chainveil has a reverse gait when moving away from the opponent
+PASS chainveil reverses direction with a pivot animation
+PASS chainveil animates takeoff, apex, falling and landing through a real jump
+PASS chainveil movement animation does not change floor collision, HP or meter
+PASS chainveil eases into block
+PASS chainveil eases out of block
+PASS chainveil freezes movement clips while paused
+PASS chainveil round reset clears old movement phases
+PASS cheese_rat enters its start movement clip through real input
+PASS cheese_rat renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS cheese_rat reuses warmed walk geometry instead of rebuilding it each render
+PASS cheese_rat plays an actual stop/brake transition
+PASS cheese_rat has a reverse gait when moving away from the opponent
+PASS cheese_rat reverses direction with a pivot animation
+PASS cheese_rat animates takeoff, apex, falling and landing through a real jump
+PASS cheese_rat movement animation does not change floor collision, HP or meter
+PASS cheese_rat eases into block
+PASS cheese_rat eases out of block
+PASS cheese_rat freezes movement clips while paused
+PASS cheese_rat round reset clears old movement phases
+PASS lava_stone enters its start movement clip through real input
+PASS lava_stone renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS lava_stone reuses warmed walk geometry instead of rebuilding it each render
+PASS lava_stone plays an actual stop/brake transition
+PASS lava_stone has a reverse gait when moving away from the opponent
+PASS lava_stone reverses direction with a pivot animation
+PASS lava_stone animates takeoff, apex, falling and landing through a real jump
+PASS lava_stone movement animation does not change floor collision, HP or meter
+PASS lava_stone eases into block
+PASS lava_stone eases out of block
+PASS lava_stone freezes movement clips while paused
+PASS lava_stone round reset clears old movement phases
+PASS crystal_fang enters its start movement clip through real input
+PASS crystal_fang renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS crystal_fang reuses warmed walk geometry instead of rebuilding it each render
+PASS crystal_fang plays an actual stop/brake transition
+PASS crystal_fang has a reverse gait when moving away from the opponent
+PASS crystal_fang reverses direction with a pivot animation
+PASS crystal_fang animates takeoff, apex, falling and landing through a real jump
+PASS crystal_fang movement animation does not change floor collision, HP or meter
+PASS crystal_fang eases into block
+PASS crystal_fang eases out of block
+PASS crystal_fang freezes movement clips while paused
+PASS crystal_fang round reset clears old movement phases
+PASS phoenix_reign enters its start movement clip through real input
+PASS phoenix_reign renders motion-aligned authored walking poses in one pass at 60 render steps
+PASS phoenix_reign reuses warmed walk geometry instead of rebuilding it each render
+PASS phoenix_reign plays an actual stop/brake transition
+PASS phoenix_reign has a reverse gait when moving away from the opponent
+PASS phoenix_reign reverses direction with a pivot animation
+PASS phoenix_reign animates takeoff, apex, falling and landing through a real jump
+PASS phoenix_reign movement animation does not change floor collision, HP or meter
+PASS phoenix_reign eases into block
+PASS phoenix_reign eases out of block
+PASS phoenix_reign freezes movement clips while paused
+PASS phoenix_reign round reset clears old movement phases
+PASS continuous motion remains consistent at 60 and 120 render samples
+MOTION RESULT: 121 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+POSE BLEND GPU PIXEL (1.0, 1.0, 1.0, 1.0)
+PASS GPU pose compositing stays opaque halfway through a movement blend
+PASS rings and the same lit character remain live after the entrance
+PASS pair 1 has active continuous gait deformation
+PASS sharkbyte renders start, reverse and brake through its actual controller
+PASS sharkbyte renders the full jump and landing sequence
+PASS sharkbyte returns to the floor without changing health
+PASS bullet renders start, reverse and brake through its actual controller
+PASS bullet renders the full jump and landing sequence
+PASS bullet returns to the floor without changing health
+PASS pair 2 has active continuous gait deformation
+PASS nachtelf renders start, reverse and brake through its actual controller
+PASS nachtelf renders the full jump and landing sequence
+PASS nachtelf returns to the floor without changing health
+PASS poisonboy renders start, reverse and brake through its actual controller
+PASS poisonboy renders the full jump and landing sequence
+PASS poisonboy returns to the floor without changing health
+PASS pair 3 has active continuous gait deformation
+PASS spinegrin renders start, reverse and brake through its actual controller
+PASS spinegrin renders the full jump and landing sequence
+PASS spinegrin returns to the floor without changing health
+PASS chainveil renders start, reverse and brake through its actual controller
+PASS chainveil renders the full jump and landing sequence
+PASS chainveil returns to the floor without changing health
+PASS pair 4 has active continuous gait deformation
+PASS cheese_rat renders start, reverse and brake through its actual controller
+PASS cheese_rat renders the full jump and landing sequence
+PASS cheese_rat returns to the floor without changing health
+PASS lava_stone renders start, reverse and brake through its actual controller
+PASS lava_stone renders the full jump and landing sequence
+PASS lava_stone returns to the floor without changing health
+PASS pair 5 has active continuous gait deformation
+PASS crystal_fang renders start, reverse and brake through its actual controller
+PASS crystal_fang renders the full jump and landing sequence
+PASS crystal_fang returns to the floor without changing health
+PASS phoenix_reign renders start, reverse and brake through its actual controller
+PASS phoenix_reign renders the full jump and landing sequence
+PASS phoenix_reign returns to the floor without changing health
+MOVEMENT VISUAL RESULT: 37 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS sharkbyte starts with 200 HP and zero meter
+PASS sharkbyte/light has continuous anticipation, extension and recovery samples
+PASS sharkbyte/heavy has continuous anticipation, extension and recovery samples
+PASS sharkbyte/special has continuous anticipation, extension and recovery samples
+PASS sharkbyte/ultimate has continuous anticipation, extension and recovery samples
+PASS sharkbyte actual heavy renders continuous poses around a fixed support foot
+PASS sharkbyte heavy returns to its resting animation
+PASS sharkbyte earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE sharkbyte ready target HP=92 after ultimate=62 elapsed=7.93333333333288
+PASS sharkbyte incoming heavy grants five meter without changing its damage
+PASS sharkbyte blocking retains quarter damage and four meter
+PASS sharkbyte feet stop cycling when both fighters push against each other
+PASS sharkbyte wall contact produces no skating or whole-body hopping
+PASS sharkbyte half health and a ready ultimate are represented correctly in the HUD
+PASS sharkbyte ultimate glow requires a fully charged meter
+PASS sharkbyte ultimate animation freezes on pause
+PASS bullet starts with 200 HP and zero meter
+PASS bullet/light has continuous anticipation, extension and recovery samples
+PASS bullet/heavy has continuous anticipation, extension and recovery samples
+PASS bullet/special has continuous anticipation, extension and recovery samples
+PASS bullet/ultimate has continuous anticipation, extension and recovery samples
+PASS bullet actual heavy renders continuous poses around a fixed support foot
+PASS bullet heavy returns to its resting animation
+PASS bullet earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE bullet ready target HP=92 after ultimate=62 elapsed=8.11666666666621
+PASS bullet incoming heavy grants five meter without changing its damage
+PASS bullet blocking retains quarter damage and four meter
+PASS bullet feet stop cycling when both fighters push against each other
+PASS bullet wall contact produces no skating or whole-body hopping
+PASS bullet half health and a ready ultimate are represented correctly in the HUD
+PASS bullet ultimate glow requires a fully charged meter
+PASS bullet ultimate animation freezes on pause
+PASS nachtelf starts with 200 HP and zero meter
+PASS nachtelf/light has continuous anticipation, extension and recovery samples
+PASS nachtelf/heavy has continuous anticipation, extension and recovery samples
+PASS nachtelf/special has continuous anticipation, extension and recovery samples
+PASS nachtelf/ultimate has continuous anticipation, extension and recovery samples
+PASS nachtelf actual heavy renders continuous poses around a fixed support foot
+PASS nachtelf heavy returns to its resting animation
+PASS nachtelf earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE nachtelf ready target HP=92 after ultimate=62 elapsed=8.08333333333287
+PASS nachtelf incoming heavy grants five meter without changing its damage
+PASS nachtelf blocking retains quarter damage and four meter
+PASS nachtelf feet stop cycling when both fighters push against each other
+PASS nachtelf wall contact produces no skating or whole-body hopping
+PASS nachtelf half health and a ready ultimate are represented correctly in the HUD
+PASS nachtelf ultimate glow requires a fully charged meter
+PASS nachtelf ultimate animation freezes on pause
+PASS poisonboy starts with 200 HP and zero meter
+PASS poisonboy/light has continuous anticipation, extension and recovery samples
+PASS poisonboy/heavy has continuous anticipation, extension and recovery samples
+PASS poisonboy/special has continuous anticipation, extension and recovery samples
+PASS poisonboy/ultimate has continuous anticipation, extension and recovery samples
+PASS poisonboy actual heavy renders continuous poses around a fixed support foot
+PASS poisonboy heavy returns to its resting animation
+PASS poisonboy earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE poisonboy ready target HP=92 after ultimate=62 elapsed=8.03333333333288
+PASS poisonboy incoming heavy grants five meter without changing its damage
+PASS poisonboy blocking retains quarter damage and four meter
+PASS poisonboy feet stop cycling when both fighters push against each other
+PASS poisonboy wall contact produces no skating or whole-body hopping
+PASS poisonboy half health and a ready ultimate are represented correctly in the HUD
+PASS poisonboy ultimate glow requires a fully charged meter
+PASS poisonboy ultimate animation freezes on pause
+PASS spinegrin starts with 200 HP and zero meter
+PASS spinegrin/light has continuous anticipation, extension and recovery samples
+PASS spinegrin/heavy has continuous anticipation, extension and recovery samples
+PASS spinegrin/special has continuous anticipation, extension and recovery samples
+PASS spinegrin/ultimate has continuous anticipation, extension and recovery samples
+PASS spinegrin actual heavy renders continuous poses around a fixed support foot
+PASS spinegrin heavy returns to its resting animation
+PASS spinegrin earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE spinegrin ready target HP=92 after ultimate=62 elapsed=7.99999999999955
+PASS spinegrin incoming heavy grants five meter without changing its damage
+PASS spinegrin blocking retains quarter damage and four meter
+PASS spinegrin feet stop cycling when both fighters push against each other
+PASS spinegrin wall contact produces no skating or whole-body hopping
+PASS spinegrin half health and a ready ultimate are represented correctly in the HUD
+PASS spinegrin ultimate glow requires a fully charged meter
+PASS spinegrin ultimate animation freezes on pause
+PASS chainveil starts with 200 HP and zero meter
+PASS chainveil/light has continuous anticipation, extension and recovery samples
+PASS chainveil/heavy has continuous anticipation, extension and recovery samples
+PASS chainveil/special has continuous anticipation, extension and recovery samples
+PASS chainveil/ultimate has continuous anticipation, extension and recovery samples
+PASS chainveil actual heavy renders continuous poses around a fixed support foot
+PASS chainveil heavy returns to its resting animation
+PASS chainveil earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE chainveil ready target HP=92 after ultimate=62 elapsed=8.04999999999954
+PASS chainveil incoming heavy grants five meter without changing its damage
+PASS chainveil blocking retains quarter damage and four meter
+PASS chainveil feet stop cycling when both fighters push against each other
+PASS chainveil wall contact produces no skating or whole-body hopping
+PASS chainveil half health and a ready ultimate are represented correctly in the HUD
+PASS chainveil ultimate glow requires a fully charged meter
+PASS chainveil ultimate animation freezes on pause
+PASS cheese_rat starts with 200 HP and zero meter
+PASS cheese_rat/light has continuous anticipation, extension and recovery samples
+PASS cheese_rat/heavy has continuous anticipation, extension and recovery samples
+PASS cheese_rat/special has continuous anticipation, extension and recovery samples
+PASS cheese_rat/ultimate has continuous anticipation, extension and recovery samples
+PASS cheese_rat actual heavy renders continuous poses around a fixed support foot
+PASS cheese_rat heavy returns to its resting animation
+PASS cheese_rat earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE cheese_rat ready target HP=92 after ultimate=62 elapsed=7.84999999999955
+PASS cheese_rat incoming heavy grants five meter without changing its damage
+PASS cheese_rat blocking retains quarter damage and four meter
+PASS cheese_rat feet stop cycling when both fighters push against each other
+PASS cheese_rat wall contact produces no skating or whole-body hopping
+PASS cheese_rat half health and a ready ultimate are represented correctly in the HUD
+PASS cheese_rat ultimate glow requires a fully charged meter
+PASS cheese_rat ultimate animation freezes on pause
+PASS lava_stone starts with 200 HP and zero meter
+PASS lava_stone/light has continuous anticipation, extension and recovery samples
+PASS lava_stone/heavy has continuous anticipation, extension and recovery samples
+PASS lava_stone/special has continuous anticipation, extension and recovery samples
+PASS lava_stone/ultimate has continuous anticipation, extension and recovery samples
+PASS lava_stone/strike has continuous anticipation, extension and recovery samples
+PASS lava_stone/slam has continuous anticipation, extension and recovery samples
+PASS lava_stone/power has continuous anticipation, extension and recovery samples
+PASS lava_stone actual heavy renders continuous poses around a fixed support foot
+PASS lava_stone heavy returns to its resting animation
+PASS lava_stone earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE lava_stone ready target HP=92 after ultimate=66 elapsed=8.24999999999953
+PASS lava_stone incoming heavy grants five meter without changing its damage
+PASS lava_stone blocking retains quarter damage and four meter
+PASS lava_stone feet stop cycling when both fighters push against each other
+PASS lava_stone wall contact produces no skating or whole-body hopping
+PASS lava_stone half health and a ready ultimate are represented correctly in the HUD
+PASS lava_stone ultimate glow requires a fully charged meter
+PASS lava_stone ultimate animation freezes on pause
+PASS crystal_fang starts with 200 HP and zero meter
+PASS crystal_fang/light has continuous anticipation, extension and recovery samples
+PASS crystal_fang/heavy has continuous anticipation, extension and recovery samples
+PASS crystal_fang/special has continuous anticipation, extension and recovery samples
+PASS crystal_fang/ultimate has continuous anticipation, extension and recovery samples
+PASS crystal_fang/strike has continuous anticipation, extension and recovery samples
+PASS crystal_fang/slam has continuous anticipation, extension and recovery samples
+PASS crystal_fang/power has continuous anticipation, extension and recovery samples
+PASS crystal_fang actual heavy renders continuous poses around a fixed support foot
+PASS crystal_fang heavy returns to its resting animation
+PASS crystal_fang earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE crystal_fang ready target HP=92 after ultimate=64 elapsed=7.86666666666622
+PASS crystal_fang incoming heavy grants five meter without changing its damage
+PASS crystal_fang blocking retains quarter damage and four meter
+PASS crystal_fang feet stop cycling when both fighters push against each other
+PASS crystal_fang wall contact produces no skating or whole-body hopping
+PASS crystal_fang half health and a ready ultimate are represented correctly in the HUD
+PASS crystal_fang ultimate glow requires a fully charged meter
+PASS crystal_fang ultimate animation freezes on pause
+PASS phoenix_reign starts with 200 HP and zero meter
+PASS phoenix_reign/light has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/heavy has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/special has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/ultimate has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/peck has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/wing_beat has continuous anticipation, extension and recovery samples
+PASS phoenix_reign/rebirth has continuous anticipation, extension and recovery samples
+PASS phoenix_reign actual heavy renders continuous poses around a fixed support foot
+PASS phoenix_reign heavy returns to its resting animation
+PASS phoenix_reign earns and lands an ultimate before KO using only normal heavy/movement input
+ULT BALANCE phoenix_reign ready target HP=92 after ultimate=62 elapsed=8.09999999999954
+PASS phoenix_reign incoming heavy grants five meter without changing its damage
+PASS phoenix_reign blocking retains quarter damage and four meter
+PASS phoenix_reign feet stop cycling when both fighters push against each other
+PASS phoenix_reign wall contact produces no skating or whole-body hopping
+PASS phoenix_reign half health and a ready ultimate are represented correctly in the HUD
+PASS phoenix_reign ultimate glow requires a fully charged meter
+PASS phoenix_reign ultimate animation freezes on pause
+PASS all 49 authored attack clips have continuous motion fields
+QUALITY RESULT: 160 passed, 0 failed
