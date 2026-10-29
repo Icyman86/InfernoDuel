@@ -1,0 +1,19 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS host real UDP host opens and produces a session code
+PASS host connection enters owned fighter selection
+PASS host guest input cannot move or attack during the host countdown
+PASS host session starts a genuine two-device fight without CPU
+PASS host guest movement, light and projectile damage reach authoritative host
+PASS host host attack applies authoritative guest damage
+PASS host pause propagates to both gameplay and UI
+PASS host network pause freezes the authoritative timer
+PASS host one resume vote cannot override the other player's pause
+PASS host both resume votes restart the shared fight
+PASS host host and guest agree on the best-of-three result
+PASS host mutual rematch starts a fresh synchronized match generation
+PASS host leaving closes the host session
+NETWORK PEER RESULT: {"failed":0,"passed":13,"role":"host"}
