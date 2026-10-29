@@ -1,3 +1,19 @@
+# V11 frontal select portraits — 29 October 2026
+
+0.11.0 / Android code 1100. Ten newly generated half-body paintings face the
+player directly, retaining the reference costumes and art style. Neither slot
+mirrors them. Existing originals and V10 portraits remain unchanged. Provenance
+records the new sheet SHA-256. Combat artwork is unchanged from V10.
+
+PASS: 80 rendered portrait/layout/mesh assertions across all ten fighters and six
+framebuffer sizes. The source portrait width check now accepts the new 396–397px
+cells rather than requiring the earlier sheet's 512px cells. APK export, full
+archive CRC, payload, retained v2/v3 signature and 16-KiB alignment passed.
+No physical Android device was attached. The V10 gameplay results below are
+historical coverage, not a new execution of every gameplay suite for V11.
+
+---
+
 # V10 full phone surface and discrete animation drawings — 29 October 2026
 
 V10 / 0.10.0, Android code 1000. The root viewport uses native device pixels.

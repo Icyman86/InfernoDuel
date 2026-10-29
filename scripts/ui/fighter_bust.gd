@@ -22,7 +22,7 @@ func _ready() -> void:
 	figure.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	figure.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	figure.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	figure.flip_h = facing < 0
+	figure.flip_h = false
 	figure.size = size-Vector2(-4,12)
 	origin = Vector2(-2,12)
 	figure.position = origin

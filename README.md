@@ -9,7 +9,11 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Android APK — phones and tablets
 
-[Download Android V10 (0.10.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.10.0-android/releases/android-v0.10.0/InfernoDuel-Android-v0.10.0.apk)
+V11 replaces character-select portraits with ten newly painted frontal half-body
+shots looking directly at the player. Both selection slots retain that frontal
+orientation. Combat artwork is unchanged from V10.
+
+[Download Android V11 (0.11.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.11.0-android/releases/android-v0.11.0/InfernoDuel-Android-v0.11.0.apk)
 
 Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
 multitouch. Install the APK from your browser/downloads; allow installation from
@@ -234,8 +238,8 @@ these Python packages are not needed to play or run the normal tests.
 
 No external services or credentials are needed to play or test the game.
 Every published update gets a new version, Android versionCode, APK path and Git
-tag; published APKs/tags are retained instead of overwritten. This update is V10,
-version 0.10.0 / Android code 1000.
+tag; published APKs/tags are retained instead of overwritten. This update is V11,
+version 0.11.0 / Android code 1100.
 On restricted cloud hosts use writable XDG data/config/cache directories when
 invoking Godot, e.g. `XDG_DATA_HOME=/workspace/.runtime/data` (and similarly
 `XDG_CONFIG_HOME`, `XDG_CACHE_HOME`). A graphical desktop/OpenGL 3.3 is required

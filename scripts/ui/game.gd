@@ -135,7 +135,7 @@ func show_menu() -> void:
 		buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  V10",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  V11",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	if touch_mode and not cpu:

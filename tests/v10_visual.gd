@@ -67,7 +67,7 @@ func run() -> void:
 		for frame in 3: await get_tree().process_frame
 		var bust: FighterBust = game.screen.hero_holders[0].get_child(0)
 		check(bust.clip_contents and bust.figure.texture is AtlasTexture and not bust.figure.is_processing(),game.roster[index].id+" has an intact waist-up drawing instead of a tiny animated full-body sprite")
-		check(bust.figure.material == null and bust.figure.texture.region.size.x >= 500,game.roster[index].id+" select portrait has no flow deformation or ghost layer")
+		check(bust.figure.material == null and bust.figure.texture.region.size.x >= 390,game.roster[index].id+" select portrait has no flow deformation or ghost layer")
 		var data: Dictionary = FighterVisual.art_cache[game.roster[index].id]
 		illustrated += data.drawn.frames.size()
 		if data.has("drawn_heavy"): illustrated += data.drawn_heavy.frames.size()

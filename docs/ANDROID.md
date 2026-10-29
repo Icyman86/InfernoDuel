@@ -1,3 +1,9 @@
+# V11 / 0.11.0 portrait update
+
+VersionCode 1100; same signing certificate and installation requirements as V10.
+Character select uses ten new frontal half-body shots looking at the player.
+Both players need V11 for sessions. V10 implementation details follow.
+
 # Android V10 / 0.10.0
 
 V10 uses the native device resolution and modernizes the combat controls and

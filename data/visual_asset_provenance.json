@@ -613,6 +613,12 @@
       ],
       "indexed_poses": 24,
       "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/portraits/v11_front.png",
+      "sha256": "02ac23dc8568fe901b521132da179900383480c3caaeb6fc32a15326111821ce",
+      "kind": "reference_guided_generated_frontal_half_body_portraits",
+      "original_user_file": false
     }
   ],
   "gallery_views": {

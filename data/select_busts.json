@@ -2,104 +2,104 @@
   "schema_version": 1,
   "profiles": {
     "sharkbyte": {
-      "path": "assets/portraits/v10_classic.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
         0,
         0,
-        512,
-        512
+        397,
+        396
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "bullet": {
-      "path": "assets/portraits/v10_classic.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
-        512,
+        397,
         0,
-        512,
-        512
+        396,
+        396
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "nachtelf": {
-      "path": "assets/portraits/v10_classic.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
-        1024,
+        793,
         0,
-        512,
-        512
+        397,
+        396
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "poisonboy": {
-      "path": "assets/portraits/v10_classic.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
+        1190,
         0,
-        512,
-        512,
-        512
+        396,
+        396
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "spinegrin": {
-      "path": "assets/portraits/v10_classic.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
-        512,
-        512,
-        512,
-        512
+        1586,
+        0,
+        397,
+        396
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "chainveil": {
-      "path": "assets/portraits/v10_legends.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
         0,
-        0,
-        512,
-        512
+        396,
+        397,
+        397
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "cheese_rat": {
-      "path": "assets/portraits/v10_legends.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
-        512,
-        0,
-        512,
-        512
+        397,
+        396,
+        396,
+        397
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "lava_stone": {
-      "path": "assets/portraits/v10_legends.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
-        1024,
-        0,
-        512,
-        512
+        793,
+        396,
+        397,
+        397
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "crystal_fang": {
-      "path": "assets/portraits/v10_legends.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
-        0,
-        512,
-        512,
-        512
+        1190,
+        396,
+        396,
+        397
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     },
     "phoenix_reign": {
-      "path": "assets/portraits/v10_legends.png",
+      "path": "assets/portraits/v11_front.png",
       "rect": [
-        512,
-        512,
-        512,
-        512
+        1586,
+        396,
+        397,
+        397
       ],
-      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+      "kind": "new frontal half-body painting looking directly at the player"
     }
   }
 }
