@@ -1,0 +1,33 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+RESOLUTION OBSERVED requested=(960, 540) framebuffer=(960, 540) viewport=(960.0, 540.0) root=(960.0, 540.0) window=(960, 540) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (960, 540) native pixels
+PASS logical arena stays correctly proportioned inside (960, 540)
+RESOLUTION OBSERVED requested=(1280, 720) framebuffer=(1280, 720) viewport=(1280.0, 720.0) root=(1280.0, 720.0) window=(1280, 720) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1280, 720) native pixels
+PASS logical arena stays correctly proportioned inside (1280, 720)
+RESOLUTION OBSERVED requested=(1920, 1080) framebuffer=(1920, 1080) viewport=(1920.0, 1080.0) root=(1920.0, 1080.0) window=(1920, 1080) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1920, 1080) native pixels
+PASS logical arena stays correctly proportioned inside (1920, 1080)
+RESOLUTION OBSERVED requested=(2560, 1440) framebuffer=(2560, 1440) viewport=(2560.0, 1440.0) root=(2560.0, 1440.0) window=(2560, 1440) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (2560, 1440) native pixels
+PASS logical arena stays correctly proportioned inside (2560, 1440)
+RESOLUTION OBSERVED requested=(1280, 800) framebuffer=(1280, 800) viewport=(1280.0, 800.0) root=(1280.0, 800.0) window=(1280, 800) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1280, 800) native pixels
+PASS logical arena stays correctly proportioned inside (1280, 800)
+RESOLUTION OBSERVED requested=(1024, 768) framebuffer=(1024, 768) viewport=(1024.0, 768.0) root=(1024.0, 768.0) window=(1024, 768) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (1024, 768) native pixels
+PASS logical arena stays correctly proportioned inside (1024, 768)
+RESOLUTION OBSERVED requested=(2400, 1080) framebuffer=(2400, 1080) viewport=(2400.0, 1080.0) root=(2400.0, 1080.0) window=(2400, 1080) scale=(0, 0) mode=0
+PASS actual framebuffer, viewport and UI root follow (2400, 1080) native pixels
+PASS logical arena stays correctly proportioned inside (2400, 1080)
+PASS Android session-code screen renders
+PASS options display real surface dimensions
+PASS resolution readout refreshes after device/window size changes
+PASS Android local-versus route is replaced by session connect
+PASS Android solo remains playable independently of networking
+PASS Android fight renders one thumbstick and seven circular buttons instead of shared controls
+V6 VISUAL RESULT: 20 passed, 0 failed

@@ -1,0 +1,950 @@
+OK: SharkByte Fighting Game Character Sheet.png
+OK: Spinegrin_ Inferno Duel Character Sheet.png
+OK: Chainveil_ Inferno Duel Character Sheet.png
+OK: Dark Fantasy Fighting Game Character Sheet.png
+OK: WhatsApp Image 2026-10-25 at 18.59.15.jpeg
+OK: WhatsApp Image 2026-10-25 at 19.53.45.jpeg
+OK: WhatsApp Image 2026-10-27 at 20.17.30.jpeg
+OK: WhatsApp Image 2026-10-27 at 20.18.10.jpeg
+8/8 OK
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] loading_editor_layout | Started Loading editor (5 steps)
+[   0% ] loading_editor_layout | Loading editor layout...
+[  16% ] loading_editor_layout | Loading docks...
+[  33% ] loading_editor_layout | Reopening scenes...
+[  50% ] loading_editor_layout | Loading central editor layout...
+[  66% ] loading_editor_layout | Loading plugin window layout...
+[  83% ] loading_editor_layout | Editor layout ready.
+[ DONE ] loading_editor_layout
+
+cannot connect to daemon at tcp:5037: Connection refused
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS main scene boots to menu
+PASS ten data-driven roster profiles
+PASS both select cursors navigate independently
+PASS Crystal Fang is fully selectable and can ready
+PASS both confirmations open arena selection
+PASS round begins with locked countdown
+PASS countdown clears held input
+PASS physical events route simultaneous movement and attacks
+PASS held attack does not retrigger
+PASS clearing releases both players
+PASS P1 maps move_left
+PASS P1 maps move_right
+PASS P1 maps jump
+PASS P1 maps block
+PASS P1 maps light
+PASS P1 maps heavy
+PASS P1 maps special
+PASS P1 maps ultimate
+PASS P2 maps move_left
+PASS P2 maps move_right
+PASS P2 maps jump
+PASS P2 maps block
+PASS P2 maps light
+PASS P2 maps heavy
+PASS P2 maps special
+PASS P2 maps ultimate
+PASS fighters move simultaneously
+PASS same-tick light attacks trade for six damage each
+PASS hit meter accrues independently
+PASS one hit per attack activation
+PASS ground guard reduces heavy damage by 75 percent
+PASS guard does not protect the fighter's back
+PASS out-of-range hitboxes miss
+PASS special starts independent cooldown
+PASS special cannot repeat before cooldown
+PASS special becomes available after cooldown
+PASS late recovery input buffers a follow-up attack
+PASS landed light cancels recovery into special
+PASS ultimate requires full meter
+PASS ultimate consumes meter and deals thirty damage
+PASS Bullet ultimate projectile collides exactly once
+PASS light-light-heavy connects as three-hit combo
+PASS third hit grants escape immunity against infinite stun
+PASS jump works without a double jump
+PASS gravity returns fighter to arena floor
+PASS arena boundary contains fighter
+PASS pause freezes timer and simulation
+PASS resume releases stale held keys
+PASS focus loss automatically pauses
+PASS pause options keep combat stopped
+PASS timeout awards healthier fighter
+PASS meter persists but health resets between rounds
+PASS equal timeout replays round without awarding score
+PASS draw retry keeps round number
+PASS double KO trades without awarding a round
+PASS KO locks round 1
+PASS KO locks round 2
+PASS KO locks round 3
+PASS complete best-of-three match reaches 2-1 result
+PASS rematch resets score health and meter
+PASS restart requires a visible confirmation
+PASS cancel restart preserves score
+PASS confirmed restart creates fresh match
+PASS gallery loads original reference art
+PASS all ten gallery entries load
+PASS story has a working preview screen
+PASS easy CPU approaches and damages player
+PASS CPU completes an unmodified full match against passive player
+PASS mirror match keeps each instance's combat state separate
+PASS options persist to user settings
+
+RESULT: 70 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS sharkbyte portrait is a valid crop of its original sheet
+PASS bullet portrait is a valid crop of its original sheet
+PASS nachtelf portrait is a valid crop of its original sheet
+PASS poisonboy portrait is a valid crop of its original sheet
+PASS spinegrin portrait is a valid crop of its original sheet
+PASS chainveil portrait is a valid crop of its original sheet
+PASS cheese_rat portrait is a valid crop of its original sheet
+PASS lava_stone portrait is a valid crop of its original sheet
+PASS crystal_fang portrait is a valid crop of its original sheet
+PASS phoenix_reign portrait is a valid crop of its original sheet
+PASS all ten roster avatars are distinct
+PASS sharkbyte core has genuine alpha transparency
+PASS sharkbyte core frame 0 has a bounded textured mesh
+PASS sharkbyte core frame 1 has a bounded textured mesh
+PASS sharkbyte core frame 2 has a bounded textured mesh
+PASS sharkbyte core frame 3 has a bounded textured mesh
+PASS sharkbyte core frame 4 has a bounded textured mesh
+PASS sharkbyte core frame 5 has a bounded textured mesh
+PASS sharkbyte core frame 6 has a bounded textured mesh
+PASS sharkbyte core frame 7 has a bounded textured mesh
+PASS sharkbyte core frame 8 has a bounded textured mesh
+PASS sharkbyte core frame 9 has a bounded textured mesh
+PASS sharkbyte core frame 10 has a bounded textured mesh
+PASS sharkbyte core frame 11 has a bounded textured mesh
+PASS sharkbyte core frame 12 has a bounded textured mesh
+PASS sharkbyte core frame 13 has a bounded textured mesh
+PASS sharkbyte core frame 14 has a bounded textured mesh
+PASS sharkbyte core frame 15 has a bounded textured mesh
+PASS sharkbyte actions has genuine alpha transparency
+PASS sharkbyte actions frame 16 has a bounded textured mesh
+PASS sharkbyte actions frame 17 has a bounded textured mesh
+PASS sharkbyte actions frame 18 has a bounded textured mesh
+PASS sharkbyte actions frame 19 has a bounded textured mesh
+PASS sharkbyte actions frame 20 has a bounded textured mesh
+PASS sharkbyte actions frame 21 has a bounded textured mesh
+PASS sharkbyte actions frame 22 has a bounded textured mesh
+PASS sharkbyte actions frame 23 has a bounded textured mesh
+PASS sharkbyte walk has genuine alpha transparency
+PASS sharkbyte walk frame 24 has a bounded textured mesh
+PASS sharkbyte walk frame 25 has a bounded textured mesh
+PASS sharkbyte walk frame 26 has a bounded textured mesh
+PASS sharkbyte walk frame 27 has a bounded textured mesh
+PASS sharkbyte walk frame 28 has a bounded textured mesh
+PASS sharkbyte walk frame 29 has a bounded textured mesh
+PASS sharkbyte has its complete unique pose set
+PASS sharkbyte renders idle
+PASS sharkbyte renders walk
+PASS sharkbyte renders light
+PASS sharkbyte renders heavy
+PASS sharkbyte renders guard
+PASS sharkbyte renders jump
+PASS sharkbyte renders special
+PASS sharkbyte renders ultimate
+PASS sharkbyte renders hit
+PASS sharkbyte renders ko
+PASS bullet core has genuine alpha transparency
+PASS bullet core frame 0 has a bounded textured mesh
+PASS bullet core frame 1 has a bounded textured mesh
+PASS bullet core frame 2 has a bounded textured mesh
+PASS bullet core frame 3 has a bounded textured mesh
+PASS bullet core frame 4 has a bounded textured mesh
+PASS bullet core frame 5 has a bounded textured mesh
+PASS bullet core frame 6 has a bounded textured mesh
+PASS bullet core frame 7 has a bounded textured mesh
+PASS bullet core frame 8 has a bounded textured mesh
+PASS bullet core frame 9 has a bounded textured mesh
+PASS bullet core frame 10 has a bounded textured mesh
+PASS bullet core frame 11 has a bounded textured mesh
+PASS bullet core frame 12 has a bounded textured mesh
+PASS bullet core frame 13 has a bounded textured mesh
+PASS bullet core frame 14 has a bounded textured mesh
+PASS bullet core frame 15 has a bounded textured mesh
+PASS bullet actions has genuine alpha transparency
+PASS bullet actions frame 16 has a bounded textured mesh
+PASS bullet actions frame 17 has a bounded textured mesh
+PASS bullet actions frame 18 has a bounded textured mesh
+PASS bullet actions frame 19 has a bounded textured mesh
+PASS bullet actions frame 20 has a bounded textured mesh
+PASS bullet actions frame 21 has a bounded textured mesh
+PASS bullet actions frame 22 has a bounded textured mesh
+PASS bullet actions frame 23 has a bounded textured mesh
+PASS bullet walk has genuine alpha transparency
+PASS bullet walk frame 24 has a bounded textured mesh
+PASS bullet walk frame 25 has a bounded textured mesh
+PASS bullet walk frame 26 has a bounded textured mesh
+PASS bullet walk frame 27 has a bounded textured mesh
+PASS bullet walk frame 28 has a bounded textured mesh
+PASS bullet walk frame 29 has a bounded textured mesh
+PASS bullet has its complete unique pose set
+PASS bullet renders idle
+PASS bullet renders walk
+PASS bullet renders light
+PASS bullet renders heavy
+PASS bullet renders guard
+PASS bullet renders jump
+PASS bullet renders special
+PASS bullet renders ultimate
+PASS bullet renders hit
+PASS bullet renders ko
+PASS poisonboy core has genuine alpha transparency
+PASS poisonboy core frame 0 has a bounded textured mesh
+PASS poisonboy core frame 1 has a bounded textured mesh
+PASS poisonboy core frame 2 has a bounded textured mesh
+PASS poisonboy core frame 3 has a bounded textured mesh
+PASS poisonboy core frame 4 has a bounded textured mesh
+PASS poisonboy core frame 5 has a bounded textured mesh
+PASS poisonboy core frame 6 has a bounded textured mesh
+PASS poisonboy core frame 7 has a bounded textured mesh
+PASS poisonboy core frame 8 has a bounded textured mesh
+PASS poisonboy core frame 9 has a bounded textured mesh
+PASS poisonboy core frame 10 has a bounded textured mesh
+PASS poisonboy core frame 11 has a bounded textured mesh
+PASS poisonboy core frame 12 has a bounded textured mesh
+PASS poisonboy core frame 13 has a bounded textured mesh
+PASS poisonboy core frame 14 has a bounded textured mesh
+PASS poisonboy core frame 15 has a bounded textured mesh
+PASS poisonboy actions has genuine alpha transparency
+PASS poisonboy actions frame 16 has a bounded textured mesh
+PASS poisonboy actions frame 17 has a bounded textured mesh
+PASS poisonboy actions frame 18 has a bounded textured mesh
+PASS poisonboy actions frame 19 has a bounded textured mesh
+PASS poisonboy actions frame 20 has a bounded textured mesh
+PASS poisonboy actions frame 21 has a bounded textured mesh
+PASS poisonboy actions frame 22 has a bounded textured mesh
+PASS poisonboy actions frame 23 has a bounded textured mesh
+PASS poisonboy walk has genuine alpha transparency
+PASS poisonboy walk frame 24 has a bounded textured mesh
+PASS poisonboy walk frame 25 has a bounded textured mesh
+PASS poisonboy walk frame 26 has a bounded textured mesh
+PASS poisonboy walk frame 27 has a bounded textured mesh
+PASS poisonboy has its complete unique pose set
+PASS poisonboy renders idle
+PASS poisonboy renders walk
+PASS poisonboy renders light
+PASS poisonboy renders heavy
+PASS poisonboy renders guard
+PASS poisonboy renders jump
+PASS poisonboy renders special
+PASS poisonboy renders ultimate
+PASS poisonboy renders hit
+PASS poisonboy renders ko
+PASS chainveil core has genuine alpha transparency
+PASS chainveil core frame 0 has a bounded textured mesh
+PASS chainveil core frame 1 has a bounded textured mesh
+PASS chainveil core frame 2 has a bounded textured mesh
+PASS chainveil core frame 3 has a bounded textured mesh
+PASS chainveil core frame 4 has a bounded textured mesh
+PASS chainveil core frame 5 has a bounded textured mesh
+PASS chainveil core frame 6 has a bounded textured mesh
+PASS chainveil core frame 7 has a bounded textured mesh
+PASS chainveil core frame 8 has a bounded textured mesh
+PASS chainveil core frame 9 has a bounded textured mesh
+PASS chainveil core frame 10 has a bounded textured mesh
+PASS chainveil core frame 11 has a bounded textured mesh
+PASS chainveil core frame 12 has a bounded textured mesh
+PASS chainveil core frame 13 has a bounded textured mesh
+PASS chainveil core frame 14 has a bounded textured mesh
+PASS chainveil core frame 15 has a bounded textured mesh
+PASS chainveil actions has genuine alpha transparency
+PASS chainveil actions frame 16 has a bounded textured mesh
+PASS chainveil actions frame 17 has a bounded textured mesh
+PASS chainveil actions frame 18 has a bounded textured mesh
+PASS chainveil actions frame 19 has a bounded textured mesh
+PASS chainveil actions frame 20 has a bounded textured mesh
+PASS chainveil actions frame 21 has a bounded textured mesh
+PASS chainveil actions frame 22 has a bounded textured mesh
+PASS chainveil actions frame 23 has a bounded textured mesh
+PASS chainveil walk has genuine alpha transparency
+PASS chainveil walk frame 24 has a bounded textured mesh
+PASS chainveil walk frame 25 has a bounded textured mesh
+PASS chainveil walk frame 26 has a bounded textured mesh
+PASS chainveil walk frame 27 has a bounded textured mesh
+PASS chainveil has its complete unique pose set
+PASS chainveil renders idle
+PASS chainveil renders walk
+PASS chainveil renders light
+PASS chainveil renders heavy
+PASS chainveil renders guard
+PASS chainveil renders jump
+PASS chainveil renders special
+PASS chainveil renders ultimate
+PASS chainveil renders hit
+PASS chainveil renders ko
+PASS cheese_rat core has genuine alpha transparency
+PASS cheese_rat core frame 0 has a bounded textured mesh
+PASS cheese_rat core frame 1 has a bounded textured mesh
+PASS cheese_rat core frame 2 has a bounded textured mesh
+PASS cheese_rat core frame 3 has a bounded textured mesh
+PASS cheese_rat core frame 4 has a bounded textured mesh
+PASS cheese_rat core frame 5 has a bounded textured mesh
+PASS cheese_rat core frame 6 has a bounded textured mesh
+PASS cheese_rat core frame 7 has a bounded textured mesh
+PASS cheese_rat core frame 8 has a bounded textured mesh
+PASS cheese_rat core frame 9 has a bounded textured mesh
+PASS cheese_rat core frame 10 has a bounded textured mesh
+PASS cheese_rat core frame 11 has a bounded textured mesh
+PASS cheese_rat core frame 12 has a bounded textured mesh
+PASS cheese_rat core frame 13 has a bounded textured mesh
+PASS cheese_rat core frame 14 has a bounded textured mesh
+PASS cheese_rat core frame 15 has a bounded textured mesh
+PASS cheese_rat actions has genuine alpha transparency
+PASS cheese_rat actions frame 16 has a bounded textured mesh
+PASS cheese_rat actions frame 17 has a bounded textured mesh
+PASS cheese_rat actions frame 18 has a bounded textured mesh
+PASS cheese_rat actions frame 19 has a bounded textured mesh
+PASS cheese_rat actions frame 20 has a bounded textured mesh
+PASS cheese_rat actions frame 21 has a bounded textured mesh
+PASS cheese_rat actions frame 22 has a bounded textured mesh
+PASS cheese_rat actions frame 23 has a bounded textured mesh
+PASS cheese_rat walk has genuine alpha transparency
+PASS cheese_rat walk frame 24 has a bounded textured mesh
+PASS cheese_rat walk frame 25 has a bounded textured mesh
+PASS cheese_rat walk frame 26 has a bounded textured mesh
+PASS cheese_rat walk frame 27 has a bounded textured mesh
+PASS cheese_rat has its complete unique pose set
+PASS cheese_rat renders idle
+PASS cheese_rat renders walk
+PASS cheese_rat renders light
+PASS cheese_rat renders heavy
+PASS cheese_rat renders guard
+PASS cheese_rat renders jump
+PASS cheese_rat renders special
+PASS cheese_rat renders ultimate
+PASS cheese_rat renders hit
+PASS cheese_rat renders ko
+PASS nachtelf core has genuine alpha transparency
+PASS nachtelf core frame 0 has a bounded textured mesh
+PASS nachtelf core frame 1 has a bounded textured mesh
+PASS nachtelf core frame 2 has a bounded textured mesh
+PASS nachtelf core frame 3 has a bounded textured mesh
+PASS nachtelf core frame 4 has a bounded textured mesh
+PASS nachtelf core frame 5 has a bounded textured mesh
+PASS nachtelf core frame 6 has a bounded textured mesh
+PASS nachtelf core frame 7 has a bounded textured mesh
+PASS nachtelf core frame 8 has a bounded textured mesh
+PASS nachtelf core frame 9 has a bounded textured mesh
+PASS nachtelf core frame 10 has a bounded textured mesh
+PASS nachtelf core frame 11 has a bounded textured mesh
+PASS nachtelf core frame 12 has a bounded textured mesh
+PASS nachtelf core frame 13 has a bounded textured mesh
+PASS nachtelf core frame 14 has a bounded textured mesh
+PASS nachtelf core frame 15 has a bounded textured mesh
+PASS nachtelf actions has genuine alpha transparency
+PASS nachtelf actions frame 16 has a bounded textured mesh
+PASS nachtelf actions frame 17 has a bounded textured mesh
+PASS nachtelf actions frame 18 has a bounded textured mesh
+PASS nachtelf actions frame 19 has a bounded textured mesh
+PASS nachtelf actions frame 20 has a bounded textured mesh
+PASS nachtelf actions frame 21 has a bounded textured mesh
+PASS nachtelf actions frame 22 has a bounded textured mesh
+PASS nachtelf actions frame 23 has a bounded textured mesh
+PASS nachtelf walk has genuine alpha transparency
+PASS nachtelf walk frame 24 has a bounded textured mesh
+PASS nachtelf walk frame 25 has a bounded textured mesh
+PASS nachtelf walk frame 26 has a bounded textured mesh
+PASS nachtelf walk frame 27 has a bounded textured mesh
+PASS nachtelf walk frame 28 has a bounded textured mesh
+PASS nachtelf walk frame 29 has a bounded textured mesh
+PASS nachtelf has its complete unique pose set
+PASS nachtelf renders idle
+PASS nachtelf renders walk
+PASS nachtelf renders light
+PASS nachtelf renders heavy
+PASS nachtelf renders guard
+PASS nachtelf renders jump
+PASS nachtelf renders special
+PASS nachtelf renders ultimate
+PASS nachtelf renders hit
+PASS nachtelf renders ko
+PASS spinegrin core has genuine alpha transparency
+PASS spinegrin core frame 0 has a bounded textured mesh
+PASS spinegrin core frame 1 has a bounded textured mesh
+PASS spinegrin core frame 2 has a bounded textured mesh
+PASS spinegrin core frame 3 has a bounded textured mesh
+PASS spinegrin core frame 4 has a bounded textured mesh
+PASS spinegrin core frame 5 has a bounded textured mesh
+PASS spinegrin core frame 6 has a bounded textured mesh
+PASS spinegrin core frame 7 has a bounded textured mesh
+PASS spinegrin core frame 8 has a bounded textured mesh
+PASS spinegrin core frame 9 has a bounded textured mesh
+PASS spinegrin core frame 10 has a bounded textured mesh
+PASS spinegrin core frame 11 has a bounded textured mesh
+PASS spinegrin core frame 12 has a bounded textured mesh
+PASS spinegrin core frame 13 has a bounded textured mesh
+PASS spinegrin core frame 14 has a bounded textured mesh
+PASS spinegrin core frame 15 has a bounded textured mesh
+PASS spinegrin actions has genuine alpha transparency
+PASS spinegrin actions frame 16 has a bounded textured mesh
+PASS spinegrin actions frame 17 has a bounded textured mesh
+PASS spinegrin actions frame 18 has a bounded textured mesh
+PASS spinegrin actions frame 19 has a bounded textured mesh
+PASS spinegrin actions frame 20 has a bounded textured mesh
+PASS spinegrin actions frame 21 has a bounded textured mesh
+PASS spinegrin actions frame 22 has a bounded textured mesh
+PASS spinegrin actions frame 23 has a bounded textured mesh
+PASS spinegrin walk has genuine alpha transparency
+PASS spinegrin walk frame 24 has a bounded textured mesh
+PASS spinegrin walk frame 25 has a bounded textured mesh
+PASS spinegrin walk frame 26 has a bounded textured mesh
+PASS spinegrin walk frame 27 has a bounded textured mesh
+PASS spinegrin walk frame 28 has a bounded textured mesh
+PASS spinegrin walk frame 29 has a bounded textured mesh
+PASS spinegrin extra has genuine alpha transparency
+PASS spinegrin extra frame 30 has a bounded textured mesh
+PASS spinegrin extra frame 31 has a bounded textured mesh
+PASS spinegrin extra frame 32 has a bounded textured mesh
+PASS spinegrin extra frame 33 has a bounded textured mesh
+PASS spinegrin extra frame 34 has a bounded textured mesh
+PASS spinegrin extra frame 35 has a bounded textured mesh
+PASS spinegrin extra frame 36 has a bounded textured mesh
+PASS spinegrin extra frame 37 has a bounded textured mesh
+PASS spinegrin has its complete unique pose set
+PASS spinegrin renders idle
+PASS spinegrin renders walk
+PASS spinegrin renders light
+PASS spinegrin renders heavy
+PASS spinegrin renders guard
+PASS spinegrin renders jump
+PASS spinegrin renders special
+PASS spinegrin renders ultimate
+PASS spinegrin renders hit
+PASS spinegrin renders ko
+PASS lava_stone core has genuine alpha transparency
+PASS lava_stone core frame 0 has a bounded textured mesh
+PASS lava_stone core frame 1 has a bounded textured mesh
+PASS lava_stone core frame 2 has a bounded textured mesh
+PASS lava_stone core frame 3 has a bounded textured mesh
+PASS lava_stone core frame 4 has a bounded textured mesh
+PASS lava_stone core frame 5 has a bounded textured mesh
+PASS lava_stone core frame 6 has a bounded textured mesh
+PASS lava_stone core frame 7 has a bounded textured mesh
+PASS lava_stone core frame 8 has a bounded textured mesh
+PASS lava_stone core frame 9 has a bounded textured mesh
+PASS lava_stone core frame 10 has a bounded textured mesh
+PASS lava_stone core frame 11 has a bounded textured mesh
+PASS lava_stone core frame 12 has a bounded textured mesh
+PASS lava_stone core frame 13 has a bounded textured mesh
+PASS lava_stone core frame 14 has a bounded textured mesh
+PASS lava_stone core frame 15 has a bounded textured mesh
+PASS lava_stone actions has genuine alpha transparency
+PASS lava_stone actions frame 16 has a bounded textured mesh
+PASS lava_stone actions frame 17 has a bounded textured mesh
+PASS lava_stone actions frame 18 has a bounded textured mesh
+PASS lava_stone actions frame 19 has a bounded textured mesh
+PASS lava_stone actions frame 20 has a bounded textured mesh
+PASS lava_stone actions frame 21 has a bounded textured mesh
+PASS lava_stone actions frame 22 has a bounded textured mesh
+PASS lava_stone actions frame 23 has a bounded textured mesh
+PASS lava_stone walk has genuine alpha transparency
+PASS lava_stone walk frame 24 has a bounded textured mesh
+PASS lava_stone walk frame 25 has a bounded textured mesh
+PASS lava_stone walk frame 26 has a bounded textured mesh
+PASS lava_stone walk frame 27 has a bounded textured mesh
+PASS lava_stone walk frame 28 has a bounded textured mesh
+PASS lava_stone walk frame 29 has a bounded textured mesh
+PASS lava_stone extra has genuine alpha transparency
+PASS lava_stone extra frame 30 has a bounded textured mesh
+PASS lava_stone extra frame 31 has a bounded textured mesh
+PASS lava_stone extra frame 32 has a bounded textured mesh
+PASS lava_stone extra frame 33 has a bounded textured mesh
+PASS lava_stone extra frame 34 has a bounded textured mesh
+PASS lava_stone extra frame 35 has a bounded textured mesh
+PASS lava_stone extra frame 36 has a bounded textured mesh
+PASS lava_stone extra frame 37 has a bounded textured mesh
+PASS lava_stone has its complete unique pose set
+PASS lava_stone renders idle
+PASS lava_stone renders walk
+PASS lava_stone renders light
+PASS lava_stone renders heavy
+PASS lava_stone renders guard
+PASS lava_stone renders jump
+PASS lava_stone renders special
+PASS lava_stone renders ultimate
+PASS lava_stone renders hit
+PASS lava_stone renders ko
+PASS lava_stone renders strike
+PASS lava_stone renders slam
+PASS lava_stone renders power
+PASS crystal_fang core has genuine alpha transparency
+PASS crystal_fang core frame 0 has a bounded textured mesh
+PASS crystal_fang core frame 1 has a bounded textured mesh
+PASS crystal_fang core frame 2 has a bounded textured mesh
+PASS crystal_fang core frame 3 has a bounded textured mesh
+PASS crystal_fang core frame 4 has a bounded textured mesh
+PASS crystal_fang core frame 5 has a bounded textured mesh
+PASS crystal_fang core frame 6 has a bounded textured mesh
+PASS crystal_fang core frame 7 has a bounded textured mesh
+PASS crystal_fang core frame 8 has a bounded textured mesh
+PASS crystal_fang core frame 9 has a bounded textured mesh
+PASS crystal_fang core frame 10 has a bounded textured mesh
+PASS crystal_fang core frame 11 has a bounded textured mesh
+PASS crystal_fang core frame 12 has a bounded textured mesh
+PASS crystal_fang core frame 13 has a bounded textured mesh
+PASS crystal_fang core frame 14 has a bounded textured mesh
+PASS crystal_fang core frame 15 has a bounded textured mesh
+PASS crystal_fang actions has genuine alpha transparency
+PASS crystal_fang actions frame 16 has a bounded textured mesh
+PASS crystal_fang actions frame 17 has a bounded textured mesh
+PASS crystal_fang actions frame 18 has a bounded textured mesh
+PASS crystal_fang actions frame 19 has a bounded textured mesh
+PASS crystal_fang actions frame 20 has a bounded textured mesh
+PASS crystal_fang actions frame 21 has a bounded textured mesh
+PASS crystal_fang actions frame 22 has a bounded textured mesh
+PASS crystal_fang actions frame 23 has a bounded textured mesh
+PASS crystal_fang walk has genuine alpha transparency
+PASS crystal_fang walk frame 24 has a bounded textured mesh
+PASS crystal_fang walk frame 25 has a bounded textured mesh
+PASS crystal_fang walk frame 26 has a bounded textured mesh
+PASS crystal_fang walk frame 27 has a bounded textured mesh
+PASS crystal_fang walk frame 28 has a bounded textured mesh
+PASS crystal_fang walk frame 29 has a bounded textured mesh
+PASS crystal_fang extra has genuine alpha transparency
+PASS crystal_fang extra frame 30 has a bounded textured mesh
+PASS crystal_fang extra frame 31 has a bounded textured mesh
+PASS crystal_fang extra frame 32 has a bounded textured mesh
+PASS crystal_fang extra frame 33 has a bounded textured mesh
+PASS crystal_fang extra frame 34 has a bounded textured mesh
+PASS crystal_fang extra frame 35 has a bounded textured mesh
+PASS crystal_fang extra frame 36 has a bounded textured mesh
+PASS crystal_fang extra frame 37 has a bounded textured mesh
+PASS crystal_fang has its complete unique pose set
+PASS crystal_fang renders idle
+PASS crystal_fang renders walk
+PASS crystal_fang renders light
+PASS crystal_fang renders heavy
+PASS crystal_fang renders guard
+PASS crystal_fang renders jump
+PASS crystal_fang renders special
+PASS crystal_fang renders ultimate
+PASS crystal_fang renders hit
+PASS crystal_fang renders ko
+PASS crystal_fang renders strike
+PASS crystal_fang renders slam
+PASS crystal_fang renders power
+PASS phoenix_reign core has genuine alpha transparency
+PASS phoenix_reign core frame 0 has a bounded textured mesh
+PASS phoenix_reign core frame 1 has a bounded textured mesh
+PASS phoenix_reign core frame 2 has a bounded textured mesh
+PASS phoenix_reign core frame 3 has a bounded textured mesh
+PASS phoenix_reign core frame 4 has a bounded textured mesh
+PASS phoenix_reign core frame 5 has a bounded textured mesh
+PASS phoenix_reign core frame 6 has a bounded textured mesh
+PASS phoenix_reign core frame 7 has a bounded textured mesh
+PASS phoenix_reign core frame 8 has a bounded textured mesh
+PASS phoenix_reign core frame 9 has a bounded textured mesh
+PASS phoenix_reign core frame 10 has a bounded textured mesh
+PASS phoenix_reign core frame 11 has a bounded textured mesh
+PASS phoenix_reign core frame 12 has a bounded textured mesh
+PASS phoenix_reign core frame 13 has a bounded textured mesh
+PASS phoenix_reign core frame 14 has a bounded textured mesh
+PASS phoenix_reign core frame 15 has a bounded textured mesh
+PASS phoenix_reign actions has genuine alpha transparency
+PASS phoenix_reign actions frame 16 has a bounded textured mesh
+PASS phoenix_reign actions frame 17 has a bounded textured mesh
+PASS phoenix_reign actions frame 18 has a bounded textured mesh
+PASS phoenix_reign actions frame 19 has a bounded textured mesh
+PASS phoenix_reign actions frame 20 has a bounded textured mesh
+PASS phoenix_reign actions frame 21 has a bounded textured mesh
+PASS phoenix_reign actions frame 22 has a bounded textured mesh
+PASS phoenix_reign actions frame 23 has a bounded textured mesh
+PASS phoenix_reign walk has genuine alpha transparency
+PASS phoenix_reign walk frame 24 has a bounded textured mesh
+PASS phoenix_reign walk frame 25 has a bounded textured mesh
+PASS phoenix_reign walk frame 26 has a bounded textured mesh
+PASS phoenix_reign walk frame 27 has a bounded textured mesh
+PASS phoenix_reign walk frame 28 has a bounded textured mesh
+PASS phoenix_reign walk frame 29 has a bounded textured mesh
+PASS phoenix_reign extra has genuine alpha transparency
+PASS phoenix_reign extra frame 30 has a bounded textured mesh
+PASS phoenix_reign extra frame 31 has a bounded textured mesh
+PASS phoenix_reign extra frame 32 has a bounded textured mesh
+PASS phoenix_reign extra frame 33 has a bounded textured mesh
+PASS phoenix_reign extra frame 34 has a bounded textured mesh
+PASS phoenix_reign extra frame 35 has a bounded textured mesh
+PASS phoenix_reign extra frame 36 has a bounded textured mesh
+PASS phoenix_reign extra frame 37 has a bounded textured mesh
+PASS phoenix_reign has its complete unique pose set
+PASS phoenix_reign renders idle
+PASS phoenix_reign renders walk
+PASS phoenix_reign renders light
+PASS phoenix_reign renders heavy
+PASS phoenix_reign renders guard
+PASS phoenix_reign renders jump
+PASS phoenix_reign renders special
+PASS phoenix_reign renders ultimate
+PASS phoenix_reign renders hit
+PASS phoenix_reign renders ko
+PASS phoenix_reign renders peck
+PASS phoenix_reign renders wing_beat
+PASS phoenix_reign renders rebirth
+PASS heavy full-extension artwork coincides with active hitbox
+PASS guard input selects authored block pose
+PASS KO selects authored defeated pose
+PASS pause freezes sprite animation clock
+ART RESULT: 494 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS all ten complete fighters are available
+PASS poisonboy can ready in local selection
+PASS poisonboy has animated selection art
+PASS poisonboy has a functional six-damage light attack
+PASS poisonboy has a functional twelve-damage heavy
+PASS poisonboy heavy can be guarded for chip damage
+PASS poisonboy ultimate requires full meter
+PASS poisonboy ultimate spends full meter
+PASS chainveil can ready in local selection
+PASS chainveil has animated selection art
+PASS chainveil has a functional six-damage light attack
+PASS chainveil has a functional twelve-damage heavy
+PASS chainveil heavy can be guarded for chip damage
+PASS chainveil ultimate requires full meter
+PASS chainveil ultimate spends full meter
+PASS cheese_rat can ready in local selection
+PASS cheese_rat has animated selection art
+PASS cheese_rat has a functional six-damage light attack
+PASS cheese_rat has a functional twelve-damage heavy
+PASS cheese_rat heavy can be guarded for chip damage
+PASS cheese_rat ultimate requires full meter
+PASS cheese_rat ultimate spends full meter
+PASS Toxic Splash travels and hits once for sixteen
+PASS PoisonBoy casts instead of using the generic dash
+PASS toxic projectile is directionally blockable
+PASS Venom Cataclysm cloud delivers thirty damage once
+PASS Chain Lash reaches beyond normal melee range
+PASS Chain Lash pulls its target inward
+PASS Chain Lash can be blocked
+PASS Iron Widow has extended reach and thirty damage
+PASS Cheese Ball travels and strikes once
+PASS back plus special places a stationary Cheese Trap
+PASS Cheese Trap is placed behind the retreating fighter
+PASS trap damages only the enemy and is consumed once
+PASS trap remains stationary while waiting
+PASS unused trap expires after its lifetime
+PASS King of the Cheese delivers thirty damage once
+PASS each fighter is limited to three active projectiles or traps
+PASS poisonboy CPU completes a full match at normal health
+PASS chainveil CPU completes a full match at normal health
+PASS cheese_rat CPU completes a full match at normal health
+PASS bullet gallery uses its own named sheet resource
+PASS nachtelf gallery uses its own named sheet resource
+PASS poisonboy gallery uses its own named sheet resource
+PASS the three classic fighters have separate non-identical sheet regions
+EXPANSION RESULT: 45 passed, 0 failed
+PASS sharkbyte 193-frame intro decoded, distinct close-up and kick
+PASS bullet 193-frame intro decoded, distinct close-up and kick
+PASS nachtelf 193-frame intro decoded, distinct close-up and kick
+PASS poisonboy 193-frame intro decoded, distinct close-up and kick
+PASS spinegrin 193-frame intro decoded, distinct close-up and kick
+PASS chainveil 193-frame intro decoded, distinct close-up and kick
+PASS cheese_rat 193-frame intro decoded, distinct close-up and kick
+PASS lava_stone 193-frame intro decoded, distinct close-up and kick
+PASS crystal_fang 193-frame intro decoded, distinct close-up and kick
+PASS phoenix_reign 193-frame intro decoded, distinct close-up and kick
+INTRO MEDIA RESULT: 10 complete distinct intro films verified
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS sharkbyte can ready and enter versus
+PASS sharkbyte has an animated combat sprite
+PASS sharkbyte/light has an unambiguous keyboard/touch binding
+PASS sharkbyte/light applies its exact damage once (including volleys)
+PASS sharkbyte/light respects its meter cost
+PASS sharkbyte/heavy has an unambiguous keyboard/touch binding
+PASS sharkbyte/heavy applies its exact damage once (including volleys)
+PASS sharkbyte/heavy respects its meter cost
+PASS sharkbyte/special has an unambiguous keyboard/touch binding
+PASS sharkbyte/special applies its exact damage once (including volleys)
+PASS sharkbyte/special respects its meter cost
+PASS sharkbyte/ultimate has an unambiguous keyboard/touch binding
+PASS sharkbyte/ultimate applies its exact damage once (including volleys)
+PASS sharkbyte/ultimate respects its meter cost
+PASS sharkbyte/ultimate refuses insufficient meter
+PASS sharkbyte CPU wins a full normal-health match against a passive player
+PASS bullet can ready and enter versus
+PASS bullet has an animated combat sprite
+PASS bullet/light has an unambiguous keyboard/touch binding
+PASS bullet/light applies its exact damage once (including volleys)
+PASS bullet/light respects its meter cost
+PASS bullet/heavy has an unambiguous keyboard/touch binding
+PASS bullet/heavy applies its exact damage once (including volleys)
+PASS bullet/heavy respects its meter cost
+PASS bullet/special has an unambiguous keyboard/touch binding
+PASS bullet/special applies its exact damage once (including volleys)
+PASS bullet/special respects its meter cost
+PASS bullet/ultimate has an unambiguous keyboard/touch binding
+PASS bullet/ultimate applies its exact damage once (including volleys)
+PASS bullet/ultimate respects its meter cost
+PASS bullet/ultimate refuses insufficient meter
+PASS bullet CPU wins a full normal-health match against a passive player
+PASS nachtelf can ready and enter versus
+PASS nachtelf has an animated combat sprite
+PASS nachtelf/light has an unambiguous keyboard/touch binding
+PASS nachtelf/light applies its exact damage once (including volleys)
+PASS nachtelf/light respects its meter cost
+PASS nachtelf/heavy has an unambiguous keyboard/touch binding
+PASS nachtelf/heavy applies its exact damage once (including volleys)
+PASS nachtelf/heavy respects its meter cost
+PASS nachtelf/special has an unambiguous keyboard/touch binding
+PASS nachtelf/special applies its exact damage once (including volleys)
+PASS nachtelf/special respects its meter cost
+PASS nachtelf/ultimate has an unambiguous keyboard/touch binding
+PASS nachtelf/ultimate applies its exact damage once (including volleys)
+PASS nachtelf/ultimate respects its meter cost
+PASS nachtelf/ultimate refuses insufficient meter
+PASS nachtelf CPU wins a full normal-health match against a passive player
+PASS poisonboy can ready and enter versus
+PASS poisonboy has an animated combat sprite
+PASS poisonboy/light has an unambiguous keyboard/touch binding
+PASS poisonboy/light applies its exact damage once (including volleys)
+PASS poisonboy/light respects its meter cost
+PASS poisonboy/heavy has an unambiguous keyboard/touch binding
+PASS poisonboy/heavy applies its exact damage once (including volleys)
+PASS poisonboy/heavy respects its meter cost
+PASS poisonboy/special has an unambiguous keyboard/touch binding
+PASS poisonboy/special applies its exact damage once (including volleys)
+PASS poisonboy/special respects its meter cost
+PASS poisonboy/ultimate has an unambiguous keyboard/touch binding
+PASS poisonboy/ultimate applies its exact damage once (including volleys)
+PASS poisonboy/ultimate respects its meter cost
+PASS poisonboy/ultimate refuses insufficient meter
+PASS poisonboy CPU wins a full normal-health match against a passive player
+PASS spinegrin can ready and enter versus
+PASS spinegrin has an animated combat sprite
+PASS spinegrin/light has an unambiguous keyboard/touch binding
+PASS spinegrin/light applies its exact damage once (including volleys)
+PASS spinegrin/light respects its meter cost
+PASS spinegrin/heavy has an unambiguous keyboard/touch binding
+PASS spinegrin/heavy applies its exact damage once (including volleys)
+PASS spinegrin/heavy respects its meter cost
+PASS spinegrin/special has an unambiguous keyboard/touch binding
+PASS spinegrin/special applies its exact damage once (including volleys)
+PASS spinegrin/special respects its meter cost
+PASS spinegrin/ultimate has an unambiguous keyboard/touch binding
+PASS spinegrin/ultimate applies its exact damage once (including volleys)
+PASS spinegrin/ultimate respects its meter cost
+PASS spinegrin/ultimate refuses insufficient meter
+PASS spinegrin CPU wins a full normal-health match against a passive player
+PASS chainveil can ready and enter versus
+PASS chainveil has an animated combat sprite
+PASS chainveil/light has an unambiguous keyboard/touch binding
+PASS chainveil/light applies its exact damage once (including volleys)
+PASS chainveil/light respects its meter cost
+PASS chainveil/heavy has an unambiguous keyboard/touch binding
+PASS chainveil/heavy applies its exact damage once (including volleys)
+PASS chainveil/heavy respects its meter cost
+PASS chainveil/special has an unambiguous keyboard/touch binding
+PASS chainveil/special applies its exact damage once (including volleys)
+PASS chainveil/special respects its meter cost
+PASS chainveil/ultimate has an unambiguous keyboard/touch binding
+PASS chainveil/ultimate applies its exact damage once (including volleys)
+PASS chainveil/ultimate respects its meter cost
+PASS chainveil/ultimate refuses insufficient meter
+PASS chainveil CPU wins a full normal-health match against a passive player
+PASS cheese_rat can ready and enter versus
+PASS cheese_rat has an animated combat sprite
+PASS cheese_rat/light has an unambiguous keyboard/touch binding
+PASS cheese_rat/light applies its exact damage once (including volleys)
+PASS cheese_rat/light respects its meter cost
+PASS cheese_rat/heavy has an unambiguous keyboard/touch binding
+PASS cheese_rat/heavy applies its exact damage once (including volleys)
+PASS cheese_rat/heavy respects its meter cost
+PASS cheese_rat/special has an unambiguous keyboard/touch binding
+PASS cheese_rat/special applies its exact damage once (including volleys)
+PASS cheese_rat/special respects its meter cost
+PASS cheese_rat/ultimate has an unambiguous keyboard/touch binding
+PASS cheese_rat/ultimate applies its exact damage once (including volleys)
+PASS cheese_rat/ultimate respects its meter cost
+PASS cheese_rat/ultimate refuses insufficient meter
+PASS cheese_rat/tail_whip has an unambiguous keyboard/touch binding
+PASS cheese_rat/tail_whip applies its exact damage once (including volleys)
+PASS cheese_rat/tail_whip respects its meter cost
+PASS cheese_rat/low_cheese_swipe has an unambiguous keyboard/touch binding
+PASS cheese_rat/low_cheese_swipe applies its exact damage once (including volleys)
+PASS cheese_rat/low_cheese_swipe respects its meter cost
+PASS cheese_rat/cheese_slide has an unambiguous keyboard/touch binding
+PASS cheese_rat/cheese_slide applies its exact damage once (including volleys)
+PASS cheese_rat/cheese_slide respects its meter cost
+PASS cheese_rat/cheese_trap has an unambiguous keyboard/touch binding
+PASS cheese_rat/cheese_trap applies its exact damage once (including volleys)
+PASS cheese_rat/cheese_trap respects its meter cost
+PASS cheese_rat/tail_spin has an unambiguous keyboard/touch binding
+PASS cheese_rat/tail_spin applies its exact damage once (including volleys)
+PASS cheese_rat/tail_spin respects its meter cost
+PASS cheese_rat/rat_rush has an unambiguous keyboard/touch binding
+PASS cheese_rat/rat_rush applies its exact damage once (including volleys)
+PASS cheese_rat/rat_rush respects its meter cost
+PASS cheese_rat/rat_rush refuses insufficient meter
+PASS cheese_rat/cheese_storm has an unambiguous keyboard/touch binding
+PASS cheese_rat/cheese_storm applies its exact damage once (including volleys)
+PASS cheese_rat/cheese_storm respects its meter cost
+PASS cheese_rat/cheese_storm refuses insufficient meter
+PASS cheese_rat CPU wins a full normal-health match against a passive player
+PASS lava_stone can ready and enter versus
+PASS lava_stone has an animated combat sprite
+PASS lava_stone/light has an unambiguous keyboard/touch binding
+PASS lava_stone/light applies its exact damage once (including volleys)
+PASS lava_stone/light respects its meter cost
+PASS lava_stone/heavy has an unambiguous keyboard/touch binding
+PASS lava_stone/heavy applies its exact damage once (including volleys)
+PASS lava_stone/heavy respects its meter cost
+PASS lava_stone/special has an unambiguous keyboard/touch binding
+PASS lava_stone/special applies its exact damage once (including volleys)
+PASS lava_stone/special respects its meter cost
+PASS lava_stone/ultimate has an unambiguous keyboard/touch binding
+PASS lava_stone/ultimate applies its exact damage once (including volleys)
+PASS lava_stone/ultimate respects its meter cost
+PASS lava_stone/ultimate activates temporary armor
+PASS lava_stone/ultimate refuses insufficient meter
+PASS lava_stone/metal_strike has an unambiguous keyboard/touch binding
+PASS lava_stone/metal_strike applies its exact damage once (including volleys)
+PASS lava_stone/metal_strike respects its meter cost
+PASS lava_stone/stone_slam has an unambiguous keyboard/touch binding
+PASS lava_stone/stone_slam applies its exact damage once (including volleys)
+PASS lava_stone/stone_slam respects its meter cost
+PASS lava_stone/lava_burst has an unambiguous keyboard/touch binding
+PASS lava_stone/lava_burst applies its exact damage once (including volleys)
+PASS lava_stone/lava_burst respects its meter cost
+PASS lava_stone/lava_shield has an unambiguous keyboard/touch binding
+PASS lava_stone/lava_shield applies its exact damage once (including volleys)
+PASS lava_stone/lava_shield respects its meter cost
+PASS lava_stone/lava_shield activates temporary armor
+PASS lava_stone/lava_shield refuses insufficient meter
+PASS lava_stone/metal_armor has an unambiguous keyboard/touch binding
+PASS lava_stone/metal_armor applies its exact damage once (including volleys)
+PASS lava_stone/metal_armor respects its meter cost
+PASS lava_stone/metal_armor activates temporary armor
+PASS lava_stone/metal_armor refuses insufficient meter
+PASS lava_stone/earthquake has an unambiguous keyboard/touch binding
+PASS lava_stone/earthquake applies its exact damage once (including volleys)
+PASS lava_stone/earthquake respects its meter cost
+PASS lava_stone/earthquake activates temporary armor
+PASS lava_stone/earthquake refuses insufficient meter
+PASS lava_stone/lava_ascension has an unambiguous keyboard/touch binding
+PASS lava_stone/lava_ascension applies its exact damage once (including volleys)
+PASS lava_stone/lava_ascension respects its meter cost
+PASS lava_stone/lava_ascension activates temporary armor
+PASS lava_stone/lava_ascension refuses insufficient meter
+PASS lava_stone CPU wins a full normal-health match against a passive player
+PASS crystal_fang can ready and enter versus
+PASS crystal_fang has an animated combat sprite
+PASS crystal_fang/light has an unambiguous keyboard/touch binding
+PASS crystal_fang/light applies its exact damage once (including volleys)
+PASS crystal_fang/light respects its meter cost
+PASS crystal_fang/heavy has an unambiguous keyboard/touch binding
+PASS crystal_fang/heavy applies its exact damage once (including volleys)
+PASS crystal_fang/heavy respects its meter cost
+PASS crystal_fang/special has an unambiguous keyboard/touch binding
+PASS crystal_fang/special applies its exact damage once (including volleys)
+PASS crystal_fang/special respects its meter cost
+PASS crystal_fang/ultimate has an unambiguous keyboard/touch binding
+PASS crystal_fang/ultimate applies its exact damage once (including volleys)
+PASS crystal_fang/ultimate respects its meter cost
+PASS crystal_fang/ultimate activates empowered attacks
+PASS crystal_fang/ultimate refuses insufficient meter
+PASS crystal_fang/crystal_punch has an unambiguous keyboard/touch binding
+PASS crystal_fang/crystal_punch applies its exact damage once (including volleys)
+PASS crystal_fang/crystal_punch respects its meter cost
+PASS crystal_fang/ground_pound has an unambiguous keyboard/touch binding
+PASS crystal_fang/ground_pound applies its exact damage once (including volleys)
+PASS crystal_fang/ground_pound respects its meter cost
+PASS crystal_fang/crystal_spikes has an unambiguous keyboard/touch binding
+PASS crystal_fang/crystal_spikes applies its exact damage once (including volleys)
+PASS crystal_fang/crystal_spikes respects its meter cost
+PASS crystal_fang/shatter_shield has an unambiguous keyboard/touch binding
+PASS crystal_fang/shatter_shield applies its exact damage once (including volleys)
+PASS crystal_fang/shatter_shield respects its meter cost
+PASS crystal_fang/shatter_shield activates temporary armor
+PASS crystal_fang/shatter_shield refuses insufficient meter
+PASS crystal_fang/lunar_howl has an unambiguous keyboard/touch binding
+PASS crystal_fang/lunar_howl applies its exact damage once (including volleys)
+PASS crystal_fang/lunar_howl respects its meter cost
+PASS crystal_fang/lunar_howl activates empowered attacks
+PASS crystal_fang/lunar_howl refuses insufficient meter
+PASS crystal_fang/diamond_transformation has an unambiguous keyboard/touch binding
+PASS crystal_fang/diamond_transformation applies its exact damage once (including volleys)
+PASS crystal_fang/diamond_transformation respects its meter cost
+PASS crystal_fang/diamond_transformation activates temporary armor
+PASS crystal_fang/diamond_transformation activates empowered attacks
+PASS crystal_fang/diamond_transformation activates temporary invulnerability
+PASS crystal_fang/diamond_transformation refuses insufficient meter
+PASS crystal_fang/crystal_storm has an unambiguous keyboard/touch binding
+PASS crystal_fang/crystal_storm applies its exact damage once (including volleys)
+PASS crystal_fang/crystal_storm respects its meter cost
+PASS crystal_fang/crystal_storm activates empowered attacks
+PASS crystal_fang/crystal_storm refuses insufficient meter
+PASS crystal_fang CPU wins a full normal-health match against a passive player
+PASS phoenix_reign can ready and enter versus
+PASS phoenix_reign has an animated combat sprite
+PASS phoenix_reign/light has an unambiguous keyboard/touch binding
+PASS phoenix_reign/light applies its exact damage once (including volleys)
+PASS phoenix_reign/light respects its meter cost
+PASS phoenix_reign/heavy has an unambiguous keyboard/touch binding
+PASS phoenix_reign/heavy applies its exact damage once (including volleys)
+PASS phoenix_reign/heavy respects its meter cost
+PASS phoenix_reign/special has an unambiguous keyboard/touch binding
+PASS phoenix_reign/special applies its exact damage once (including volleys)
+PASS phoenix_reign/special respects its meter cost
+PASS phoenix_reign/ultimate has an unambiguous keyboard/touch binding
+PASS phoenix_reign/ultimate applies its exact damage once (including volleys)
+PASS phoenix_reign/ultimate respects its meter cost
+PASS phoenix_reign/ultimate refuses insufficient meter
+PASS phoenix_reign/bird_bite has an unambiguous keyboard/touch binding
+PASS phoenix_reign/bird_bite applies its exact damage once (including volleys)
+PASS phoenix_reign/bird_bite respects its meter cost
+PASS phoenix_reign/wing_beat has an unambiguous keyboard/touch binding
+PASS phoenix_reign/wing_beat applies its exact damage once (including volleys)
+PASS phoenix_reign/wing_beat respects its meter cost
+PASS phoenix_reign/heat_wave has an unambiguous keyboard/touch binding
+PASS phoenix_reign/heat_wave applies its exact damage once (including volleys)
+PASS phoenix_reign/heat_wave respects its meter cost
+PASS phoenix_reign/rebirth has an unambiguous keyboard/touch binding
+PASS phoenix_reign/rebirth applies its exact damage once (including volleys)
+PASS phoenix_reign/rebirth respects its meter cost
+PASS phoenix_reign/rebirth activates temporary invulnerability
+PASS phoenix_reign/rebirth restores its documented HP
+PASS phoenix_reign/rebirth refuses insufficient meter
+PASS phoenix_reign/fire_tornado has an unambiguous keyboard/touch binding
+PASS phoenix_reign/fire_tornado applies its exact damage once (including volleys)
+PASS phoenix_reign/fire_tornado respects its meter cost
+PASS phoenix_reign/eternal_flame has an unambiguous keyboard/touch binding
+PASS phoenix_reign/eternal_flame applies its exact damage once (including volleys)
+PASS phoenix_reign/eternal_flame respects its meter cost
+PASS phoenix_reign/eternal_flame activates temporary invulnerability
+PASS phoenix_reign/eternal_flame restores its documented HP
+PASS phoenix_reign/eternal_flame refuses insufficient meter
+PASS phoenix_reign/inferno_wings has an unambiguous keyboard/touch binding
+PASS phoenix_reign/inferno_wings applies its exact damage once (including volleys)
+PASS phoenix_reign/inferno_wings respects its meter cost
+PASS phoenix_reign/inferno_wings refuses insufficient meter
+PASS phoenix_reign/solar_flare has an unambiguous keyboard/touch binding
+PASS phoenix_reign/solar_flare applies its exact damage once (including volleys)
+PASS phoenix_reign/solar_flare respects its meter cost
+PASS phoenix_reign/solar_flare refuses insufficient meter
+PASS phoenix_reign CPU wins a full normal-health match against a passive player
+PASS all 69 defined attacks and abilities were exercised
+PASS Lava Stone armor halves an incoming 12-damage heavy
+PASS temporary invulnerability prevents damage
+PASS empower modifies this attack without mutating base resources
+PASS landing buffer executes a jump pressed just before touchdown
+PASS locomotion responds immediately and accelerates smoothly
+PASS jumping over Low Cheese Swipe evades its genuine low hitbox
+PASS Rebirth caps healing at maximum health and spends 35 meter
+PASS Rebirth genuinely escapes hitstun through the normal back-special input
+PASS Eternal Flame cannot revive an already defeated fighter
+ROSTER RESULT: 287 passed, 0 failed

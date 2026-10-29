@@ -51,6 +51,10 @@ bouwt op een macOS/Xcode-runner een echte ARM64-app en unsigned IPA.
 Na een geslaagde tagbuild staat het bestand bij de
 [iOS 0.9 release](https://github.com/Icyman86/InfernoDuel/releases/tag/v0.9.0-ios).
 Een Xcode-export of broncode-zip is geen installeerbare IPA.
+Het [complete Mac/Xcode-bouwpakket](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.9.0-ios-project/releases/ios-v0.9.0/InfernoDuel-Xcode-v0.9.0.zip) is apart beschikbaar.
+Vanuit deze Linux-cloudomgeving startte geen Mac-build: de Actions-API geeft
+Forbidden. De eigenaar kan in de workflow Run workflow kiezen vanaf main met
+release_tag v0.9.0-ios; pas na succes verschijnt de installeerbare IPA.
 
 Installeer met AltStore Classic + AltServer op Windows of Mac en je eigen Apple
 Account. Een gratis account vraagt normaal elke zeven dagen om vernieuwen.

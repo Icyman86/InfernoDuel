@@ -1,0 +1,13 @@
+{
+  "version": "0.9.0",
+  "ios_build": 900,
+  "xcode_export": "passed",
+  "pck_all_file_hashes": "passed",
+  "automated_source_assertions": 1004,
+  "macos_ipa_build": "not run; no macOS executor and GitHub Actions API Forbidden; workflow has no runs",
+  "physical_iphone": "not run",
+  "artifact_kind": "Xcode project ZIP; not an IPA",
+  "source_commit": "068c3f6aa2c25dcf79d502a5de04a7715159c59c",
+  "archive_sha256": "ad31462b7d5fe79dc6b36483d856cc1cee61a6aba683308670eced46d859022e",
+  "archive_bytes": 203444092
+}

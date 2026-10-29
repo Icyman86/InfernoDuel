@@ -36,6 +36,15 @@ ook opnieuw gecontroleerd. De export bevat geen tests, docs of buildbestanden.
 Een builds/.gdignore voorkomt dat gegenereerde Xcode-iconen opnieuw als game-
 assets worden geïmporteerd bij een volgende export.
 
+De broncode en workflow zijn naar main gepusht. GitHub meldt nul workflowruns;
+handmatig starten vanuit deze omgeving geeft Forbidden op de Actions-API. Er is
+daarom nog geen echte IPA of Mac-buildtest. De eigenaar kan de workflow vanaf main
+starten met release_tag v0.9.0-ios. Het complete Xcode-bouwpakket met zelfstandige
+Mac-builder is gepubliceerd onder releases/ios-v0.9.0; dit ZIP-bestand is uitdrukkelijk
+geen installeerbare iPhone-app. Volledige ZIP-CRCs zijn geslaagd, SHA256SUMS
+identificeert de download en de validatielogs zijn meegeleverd. De builder stopt
+op Linux met een expliciete macOS/Xcode-melding in plaats van een nep-IPA te maken.
+
 Deze port houdt versie 0.9.0 zoals gevraagd. Het bestaande Android-artifact,
 ondertekening, tag en alle oorspronkelijke artwork blijven ongewijzigd.
 

@@ -1,0 +1,28 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS mobile preview enables touch using the common iOS/Android platform helper
+PASS iPhone discovery covers the nearby private /24
+PASS discovery excludes its own address and all broadcast addresses
+PASS discovery never probes public, loopback, link-local, IPv6 or invalid addresses
+PASS supports the private network containing 10.0.0.11
+PASS supports the private network containing 172.16.2.9
+PASS supports the private network containing 172.31.0.44
+PASS 172 addresses outside RFC1918 are rejected
+PASS discovery deduplicates and bounds lookup to two private /24 networks
+PASS real UDP host opens its temporary code session
+PASS real lookup socket opens
+PASS unicast lookup sends at most 64 datagrams per batch
+PASS subsequent batches continue through the destination list
+PASS six-character lookup succeeds through actual unicast request/reply sockets
+PASS mobile route creates a real touch controller
+PASS mobile local-versus request routes to code sessions
+PASS iPhone configuration retains 200 HP and a single player thumbstick
+PASS mobile combat target has a usable radius: block
+PASS mobile combat target has a usable radius: light
+PASS mobile combat target has a usable radius: heavy
+PASS mobile combat target has a usable radius: special
+PASS mobile combat target has a usable radius: ultimate
+PASS mobile combat target has a usable radius: jump
+PASS mobile combat target has a usable radius: pause
+PASS background/focus loss pauses the mobile fight without consuming timer
+IOS SOURCE RESULT: 25 passed, 0 failed
