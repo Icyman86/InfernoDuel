@@ -11,7 +11,6 @@ var fighter_buttons: Array[Button] = []
 var demo_viewport: SubViewport
 var preview: SubViewportContainer
 var presentation: FighterPresentation
-var idle: FighterVisual
 var sheet_button: Button
 var replay_button: Button
 var sheet_open := false
@@ -42,11 +41,6 @@ func _ready() -> void:
 	demo_viewport.own_world_3d = true
 	demo_viewport.handle_input_locally = false
 	preview.add_child(demo_viewport)
-	idle = FighterVisual.new()
-	idle.target_height = 358
-	idle.position = Vector2(635,500)
-	idle.visible = false
-	add_child(idle)
 	art = TextureRect.new()
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -108,18 +102,8 @@ func show_fighter(index: int) -> void:
 	if presentation:
 		demo_viewport.remove_child(presentation)
 		presentation.queue_free()
-	if idle:
-		remove_child(idle)
-		idle.queue_free()
 	var f: Dictionary = roster[index]
 	var color := Color(f.get("accent","55d9ef"))
-	idle = FighterVisual.new()
-	idle.profile = f
-	idle.accent = color
-	idle.target_height = 358
-	idle.position = Vector2(635,500)
-	idle.visible = false
-	add_child(idle)
 	presentation = FighterPresentation.new()
 	presentation.profile = f
 	presentation.completed.connect(show_idle)
@@ -144,15 +128,13 @@ Ready for the citadel." % moves.size()
 
 func show_idle() -> void:
 	if sheet_open: return
-	preview.visible = false
-	idle.visible = true
-	demo_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
+	preview.visible = true
+	demo_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	status_label.text = "READY FOR THE CITADEL"
 
 func replay_presentation() -> void:
 	set_sheet(false)
 	preview.visible = true
-	idle.visible = false
 	presentation.replay()
 	demo_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	status_label.text = "LEGEND PRESENTATION"
@@ -163,9 +145,8 @@ func toggle_sheet() -> void:
 func set_sheet(value: bool) -> void:
 	sheet_open = value
 	art.visible = value
-	preview.visible = not value and not presentation.finished
-	idle.visible = not value and presentation.finished
-	presentation.set_process(not value and not presentation.finished)
+	preview.visible = not value
+	presentation.set_process(not value)
 	demo_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS if preview.visible else SubViewport.UPDATE_DISABLED
 	sheet_button.text = "BACK TO FIGHTER" if value else "ORIGINAL SHEET"
 	status_label.text = "ORIGINAL REFERENCE" if value else ("READY FOR THE CITADEL" if presentation.finished else "LEGEND PRESENTATION")

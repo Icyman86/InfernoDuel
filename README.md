@@ -9,7 +9,7 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Android APK — phones and tablets
 
-[Download Android V7 (0.7.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.7.0-android/releases/android-v0.7.0/InfernoDuel-Android-v0.7.0.apk)
+[Download Android V8 (0.8.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.8.0-android/releases/android-v0.8.0/InfernoDuel-Android-v0.8.0.apk)
 
 Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
 multitouch. Install the APK from your browser/downloads; allow installation from
@@ -72,17 +72,29 @@ complete basic/special/ultimate set; the full roster has **69 attacks/abilities*
 **FIGHTERS** is now a character showcase. Ten portrait cards select each legend.
 A short entrance uses the existing illustrated character art as an extruded,
 textured silhouette on a lit perspective **3D podium**, performs one signature
-move, then returns to a stationary breathing sprite, like the menu characters.
+move, then keeps the **same lit character and rings** on screen with breathing
+and a small idle sway. The camera settles; the 3D view is retained.
 REPLAY PRESENTATION repeats the entrance. ORIGINAL SHEET and PLAY INTRO retain
 the original references and existing films. The old movement tour, dummy and
 executable move list are removed. This is a 2.5D art presentation, not ten new
 fully modelled/rigged 3D characters.
 
-New six-key walk cycles, 55 ms pose blends, velocity-driven gait, small body lean,
-physics interpolation, acceleration with fast direction reversal, a 160 ms attack
-buffer and a 120 ms landing jump buffer reduce hard visual/input transitions.
-Heavy kick/bite extension keys now coincide with the active hit window. These
-remain illustrated key-pose animations, not fully hand-drawn in-between frames.
+All ten fighters have continuous movement rendering targeting **60 FPS**. The
+existing authored walk poses are aligned using 54 precomputed bidirectional
+motion fields; the GPU draws intermediate poses in a single layer instead of
+holding each drawing. Distance-driven gait follows analog thumbstick speed and
+reverses while backstepping. Per-character motion profiles add start, brake,
+pivot, rise/apex/fall/landing and guard-entry/exit clips. Foot-pivot transforms,
+small arm/torso motions and smooth facing changes reduce hard transitions. Pose
+geometry and motion textures are cached, and movement resets with rounds/pause.
+
+This interpolates and animates existing artwork; it does not add 60 independently
+hand-drawn images per second. Fast limb occlusions can still show interpolation
+artifacts. Physics remains at 60 Hz, with unchanged attacks, hitboxes and costs.
+Native resolution is retained; the 60-FPS cap is a target, not a guarantee for
+all devices. Real-phone performance and animation feel still need acceptance.
+
+[Watch the scripted V8 movement preview (60-fps video)](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.8.0-android/releases/android-v0.8.0/InfernoDuel-MovementPreview-v0.8.0.mp4)
 
 [Watch an intro preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-IntroPreview-v0.3.mp4)
 
@@ -148,13 +160,16 @@ godot --path . --audio-driver Dummy tests/visual.tscn
 godot --path . --audio-driver Dummy tests/expansion_visual.tscn
 ./tools/test_touch.sh
 ./tools/test_gallery.sh
-TEST_NETWORK_RENDERED=1 ./tools/test_v7.sh
+TEST_NETWORK_RENDERED=1 ./tools/test_v8.sh
 ```
 
 Rendered screenshots are written to `/tmp/inferno-visual/`, `/tmp/inferno-v03-visual/`,
 `/tmp/inferno-touch/`, `/tmp/inferno-roster-visual/` and `/tmp/inferno-v6-visual/`.
 The session/UI suite checks native framebuffer sizes, Android routes, session-code parsing
-six-character LAN discovery, modern touch UI and real multi-process ENet gameplay. The graphical network repeat is optional;
+six-character LAN discovery, modern touch UI and real multi-process ENet gameplay. The V8 additions test all ten movement transitions, real GPU opacity and
+persistent podiums. ./tools/benchmark_motion.sh measures actual monotonic frame
+intervals against V7 at 720p and wide native resolution (requires the V7 tag).
+The graphical network repeat is optional;
 the default network run is headless. No public relay service is required or bundled.
 Tests do not establish
 physical keyboard rollover, audio-device quality, or real two-person playability.
@@ -182,8 +197,8 @@ these Python packages are not needed to play or run the normal tests.
 
 No external services or credentials are needed to play or test the game.
 Every published update gets a new version, Android versionCode, APK path and Git
-tag; published APKs/tags are retained instead of overwritten. This update is V7,
-version 0.7.0 / Android code 700.
+tag; published APKs/tags are retained instead of overwritten. This update is V8,
+version 0.8.0 / Android code 800.
 On restricted cloud hosts use writable XDG data/config/cache directories when
 invoking Godot, e.g. `XDG_DATA_HOME=/workspace/.runtime/data` (and similarly
 `XDG_CONFIG_HOME`, `XDG_CACHE_HOME`). A graphical desktop/OpenGL 3.3 is required

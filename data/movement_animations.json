@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "profiles": {
+    "sharkbyte": {
+      "stride": 142,
+      "bounce": 3.5,
+      "sway": 1.8,
+      "lean": 0.044,
+      "breath": 0.006,
+      "tempo": 1.0,
+      "land": 0.085,
+      "arm_swing": 0.03,
+      "leg_swing": 0.05
+    },
+    "bullet": {
+      "stride": 154,
+      "bounce": 3.0,
+      "sway": 2.8,
+      "lean": 0.035,
+      "breath": 0.007,
+      "tempo": 0.94,
+      "land": 0.075,
+      "arm_swing": 0.04,
+      "leg_swing": 0.044
+    },
+    "nachtelf": {
+      "stride": 148,
+      "bounce": 2.2,
+      "sway": 1.5,
+      "lean": 0.028,
+      "breath": 0.0045,
+      "tempo": 0.82,
+      "land": 0.055,
+      "arm_swing": 0.022,
+      "leg_swing": 0.036
+    },
+    "poisonboy": {
+      "stride": 138,
+      "bounce": 3.8,
+      "sway": 2.3,
+      "lean": 0.04,
+      "breath": 0.006,
+      "tempo": 1.08,
+      "land": 0.078,
+      "arm_swing": 0.045,
+      "leg_swing": 0.05
+    },
+    "spinegrin": {
+      "stride": 144,
+      "bounce": 3.3,
+      "sway": 1.6,
+      "lean": 0.044,
+      "breath": 0.006,
+      "tempo": 1.05,
+      "land": 0.08,
+      "arm_swing": 0.032,
+      "leg_swing": 0.044
+    },
+    "chainveil": {
+      "stride": 140,
+      "bounce": 2.4,
+      "sway": 2.6,
+      "lean": 0.035,
+      "breath": 0.005,
+      "tempo": 0.98,
+      "land": 0.065,
+      "arm_swing": 0.03,
+      "leg_swing": 0.046
+    },
+    "cheese_rat": {
+      "stride": 126,
+      "bounce": 4.2,
+      "sway": 2.5,
+      "lean": 0.05,
+      "breath": 0.006,
+      "tempo": 1.16,
+      "land": 0.09,
+      "arm_swing": 0.05,
+      "leg_swing": 0.058
+    },
+    "lava_stone": {
+      "stride": 168,
+      "bounce": 2.0,
+      "sway": 1.2,
+      "lean": 0.027,
+      "breath": 0.004,
+      "tempo": 0.74,
+      "land": 0.105,
+      "arm_swing": 0.025,
+      "leg_swing": 0.032
+    },
+    "crystal_fang": {
+      "stride": 146,
+      "bounce": 4.1,
+      "sway": 1.8,
+      "lean": 0.053,
+      "breath": 0.007,
+      "tempo": 1.13,
+      "land": 0.095,
+      "arm_swing": 0.043,
+      "leg_swing": 0.06
+    },
+    "phoenix_reign": {
+      "stride": 150,
+      "bounce": 3.4,
+      "sway": 2.3,
+      "lean": 0.042,
+      "breath": 0.006,
+      "tempo": 1.04,
+      "land": 0.07,
+      "arm_swing": 0.04,
+      "leg_swing": 0.05
+    }
+  },
+  "clips": {
+    "idle": {
+      "duration": 1,
+      "loop": true,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.25,
+          0,
+          -1.2,
+          0.997,
+          1.006
+        ],
+        [
+          0.5,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.75,
+          0,
+          0.6,
+          1.002,
+          0.997
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "start": {
+      "duration": 0.14,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.35,
+          -2,
+          1.6,
+          1.025,
+          0.975
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "brake": {
+      "duration": 0.17,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.4,
+          3,
+          2.3,
+          1.02,
+          0.98
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "backstep": {
+      "duration": 0.55,
+      "loop": true,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.25,
+          -1,
+          -2,
+          1.005,
+          0.995
+        ],
+        [
+          0.5,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.75,
+          1,
+          -2,
+          0.995,
+          1.005
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "pivot": {
+      "duration": 0.14,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.5,
+          0,
+          2.3,
+          0.78,
+          1.02
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "rise": {
+      "duration": 0.22,
+      "keys": [
+        [
+          0,
+          0,
+          2,
+          1.025,
+          0.975
+        ],
+        [
+          0.45,
+          0,
+          -1,
+          0.975,
+          1.035
+        ],
+        [
+          1,
+          0,
+          0,
+          0.99,
+          1.01
+        ]
+      ]
+    },
+    "apex": {
+      "duration": 0.25,
+      "loop": true,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.5,
+          0,
+          -1.7,
+          1.01,
+          0.99
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "fall": {
+      "duration": 0.4,
+      "loop": true,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          0.985,
+          1.025
+        ],
+        [
+          0.5,
+          0,
+          1,
+          0.99,
+          1.015
+        ],
+        [
+          1,
+          0,
+          0,
+          0.985,
+          1.025
+        ]
+      ]
+    },
+    "land": {
+      "duration": 0.21,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.25,
+          0,
+          3.0,
+          1.055,
+          0.915
+        ],
+        [
+          0.7,
+          0,
+          -0.8,
+          0.99,
+          1.018
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "guard_in": {
+      "duration": 0.13,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.5,
+          -1.5,
+          2,
+          1.015,
+          0.98
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    "guard_out": {
+      "duration": 0.15,
+      "keys": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0.5,
+          1,
+          -1,
+          0.99,
+          1.01
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "provenance": "Procedural motion curves over existing validated pose artwork. No new hand-drawn frames or changed source pixels."
+}

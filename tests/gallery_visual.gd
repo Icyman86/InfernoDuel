@@ -50,20 +50,23 @@ func run() -> void:
 			var world := gallery.presentation.face.global_transform*bounds.get_endpoint(corner)
 			framed = framed and Rect2(Vector2.ZERO,Vector2(gallery.demo_viewport.size)).has_point(gallery.presentation.camera.unproject_position(world))
 		check(framed,game.roster[index].id+" full signature silhouette remains inside the camera frame")
+		var stage_id := gallery.presentation.get_instance_id()
+		var ring_id := gallery.presentation.rings[0].get_instance_id()
+		var world_id := gallery.demo_viewport.find_world_3d().get_instance_id()
 		await capture("presentation-"+game.roster[index].id)
 		await get_tree().create_timer(2.0).timeout
-		check(gallery.idle.visible and not gallery.preview.visible and gallery.presentation.finished,game.roster[index].id+" automatically returns to its in-place idle sprite")
-		var foot := gallery.idle.position
-		var scale_before := gallery.idle.sprite.scale.y
+		check(gallery.preview.visible and gallery.presentation.finished and gallery.presentation.is_processing() and gallery.presentation.get_instance_id() == stage_id and gallery.presentation.rings[0].get_instance_id() == ring_id and gallery.demo_viewport.find_world_3d().get_instance_id() == world_id,game.roster[index].id+" keeps the same live 3D world, character and rings after the signature move")
+		var foot := gallery.presentation.rig.position
+		var scale_before := gallery.presentation.rig.scale.y
 		await get_tree().create_timer(.16).timeout
-		check(gallery.idle.position == foot and gallery.idle.sprite.scale.y != scale_before,game.roster[index].id+" breathes without walking away")
+		check(gallery.presentation.rig.position == foot and gallery.presentation.rig.scale.y != scale_before,game.roster[index].id+" breathes on the existing ring without moving its feet")
 		await capture("idle-"+game.roster[index].id)
 		await click(gallery.sheet_button)
-		check(gallery.art.visible and not gallery.idle.visible and not gallery.preview.visible,game.roster[index].id+" original reference sheet remains separately accessible")
+		check(gallery.art.visible and not gallery.preview.visible and not gallery.presentation.is_processing(),game.roster[index].id+" original reference sheet remains separately accessible")
 		await click(gallery.sheet_button)
-		check(gallery.idle.visible and not gallery.art.visible,game.roster[index].id+" returns from sheet to stationary character")
+		check(gallery.preview.visible and not gallery.art.visible and gallery.presentation.rings[0].get_instance_id() == ring_id,game.roster[index].id+" returns from the sheet to the same persistent podium")
 		await click(gallery.replay_button)
-		check(gallery.preview.visible and not gallery.presentation.finished and not gallery.idle.visible,game.roster[index].id+" presentation replay restarts the entrance")
+		check(gallery.preview.visible and not gallery.presentation.finished and gallery.presentation.rings[0].get_instance_id() == ring_id,game.roster[index].id+" presentation replay restarts the entrance")
 	var gallery: FighterGallery = game.screen
 	check(gallery.get("move_buttons") == null and gallery.get("showcase") == null,"old automatic movement tour and executable move list are removed from Fighters")
 	# Mobile/touch UI stays usable after the roster/gallery expansion.

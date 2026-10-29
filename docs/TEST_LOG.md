@@ -1,3 +1,88 @@
+# V8 persistent rings and continuous movement — 29 October 2026
+
+V8 / 0.8.0, Android code 800. Fighters retains the same lit 3D character, world,
+podium and rings after the move. The camera settles while breathing/sway continues;
+there is no switch to another 2D sprite. Sheet view pauses the existing world;
+return/replay retains its nodes. All ten fighters have continuous walk in-betweens
+plus individual start/brake/backstep/pivot, rise/apex/fall/land and guard transitions.
+
+| Final required check | Result and scope |
+| --- | --- |
+| Immutable art and intro media | PASS — eight source hashes unchanged, ten complete film decodes |
+| Core / art / expansion / roster | PASS — 70 + 494 + 45 + 287 = 896 assertions |
+| Existing touch / persistent gallery | PASS — 38 + 92 rendered assertions |
+| Existing Linux / intro rendering | PASS — 9 + 31 assertions |
+| Codes / network / native resolution / UI | PASS — 53 + 25 + 20 + 10 assertions |
+| Rendered real-network repeat | PASS — same 25 assertions using three real processes |
+| New movement state / cache / cadence checks | PASS — 121 assertions, all ten fighters |
+| New movement and GPU opacity rendering | PASS — 37 assertions, all ten fighters |
+| Native Linux release engine + PCK | PASS — OS keyboard menu/showcase/select/arena/fight/damage/pause/Quit, normal exit 0 |
+| Android export, CRC, payload, signature and alignment | PASS — ARM64+x86_64, compiled movement code, 54 fields/ten profiles, v2/v3 signing and 16-KiB alignment |
+| Android manifest and update certificate | PASS — 0.8.0 / code 800, min API 24 / target 36; same retained V7 development certificate |
+| Published movement video | PASS — full decode, 1280×720, 60 FPS, 1,188 frames / 19.8 seconds |
+| Physical Android / two-device Wi-Fi | NOT RUN — no physical device attached; no Android runtime/FPS acceptance claimed |
+
+There are 1,332 distinct successful source assertions. The rendered network
+repeat and separate recorded movement repeat are additional executions. Media,
+hash, signature and native-package checks are separate. Final required runs have
+no script/engine errors or leaked instances. The known software-display V-Sync
+warning and optional absent adb-daemon probe do not prevent builds or these tests.
+
+The 121 motion checks drive real controllers for every fighter: starting, reversing,
+braking, backstepping and a complete jump through rise/apex/fall/landing; guard
+entry/exit; pause/reset; cache reuse and matching phase at 60/120 time samples.
+Collision, HP/meter and every attack/CPU regression remain unchanged. Tests caught
+a direction reversal crossing below the movement threshold: short neutral crossings
+now preserve the previous travel direction so the pivot clip is not skipped.
+
+The new GPU test actually renders an offscreen transparent viewport and checks
+that overlapping opaque poses remain opaque halfway through a blend. Initial
+fixture setup omitted UPDATE_ALWAYS for an undisplayed viewport; the corrected
+fixture renders it explicitly. Normal walking uses one pass with aligned poses.
+Existing artwork is analyzed into 54 bidirectional motion fields; it is not
+replaced or repainted. All ten original key sets and their unique-image counts
+remain intact. Motion vectors and movement curves create derived intermediate
+poses, not 60 independently hand-drawn images. Occluded limbs can still show
+small interpolation/warping artifacts; final artist and human feel review remains.
+
+The rendered gallery checks retain world/character/ring identity after all ten
+entrances, framing, continuing breathing, original sheets and replay. The new
+movement fixture renders every fighter's actual controllers through gait, pivot,
+jump and landing while preserving HP and returning to the floor. The video shows
+that scripted fixture; it is not a human match or live Android performance result.
+Movie Maker records 60 samples/second offline. Cropping/encoding retains that
+frame rate without generating frames; the final MP4 fully decodes 1,188 frames.
+
+## Actual frame pacing, separate from offline recording
+
+A repeatable scripted two-fighter workload uses the V7 visual script/shader and
+current V8, the same scene and 60-FPS cap. After two seconds of warmup, six seconds
+are sampled per condition on Linux X11 / Mesa llvmpipe software rendering. Frame
+intervals use Time.get_ticks_usec; engine delta and process-monitor values are
+retained only as diagnostics. The table reports the actual monotonic clock.
+
+| Native framebuffer | V7 mean FPS | V8 mean FPS | V8 p95 frame interval |
+| --- | --- | --- | --- |
+| 1280x720 | 59.92 | 59.92 | 16.88 ms |
+| 2400x1080 | 43.48 | 41.24 | 35.27 ms |
+
+This is one sample per condition, not a phone benchmark or a general speedup
+claim. Both versions approach the cap at 720p; the wide software-rendered case
+does not achieve 60 FPS, and V8 is slower in that sample. The improvement targets
+animation continuity between authored poses, not a guaranteed increase in engine
+FPS. Cached geometry eliminates per-render polygon reconstruction, while motion
+alignment adds GPU work. Native resolution is preserved. Actual hardware GPU,
+thermal and 60-FPS frame pacing on phones/tablets still need acceptance.
+Reproduce with ./tools/benchmark_motion.sh (V7 tag required); do not run competing
+render/encode workloads while measuring.
+
+The signed APK remains a sideload preview, retaining the development certificate
+for an in-place V7 update. The six-character same-Wi-Fi host-device sessions and
+modern thumbstick/skill controls remain intact. No Internet relay is added.
+Still required: physical install/update, Wi-Fi/multitouch, audio, cutouts, thermal
+behavior, frame pacing and final two-human animation/ergonomic review. Every
+published change gets a new version/code/path/tag; older releases are retained.
+
 # V7 six-character rooms, character showcase and thumbstick UI — 29 October 2026
 
 V7 / 0.7.0, Android code 700, replaces the V6 endpoint invitation and move lab.

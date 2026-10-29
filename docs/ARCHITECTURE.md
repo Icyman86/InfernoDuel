@@ -1,4 +1,4 @@
-# Prototype architecture — V7 / v0.7.0
+# Prototype architecture — V8 / v0.8.0
 
 Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 `scenes/main.tscn` is the F5 entry point. No network services or secrets are needed.
@@ -73,14 +73,26 @@ three-object cap. Low variants have genuine low hitboxes.
 
 Ground locomotion accelerates at 3600 units/s², reverses at 5200 and uses lighter
 air control. Physics interpolation and reset handling smooth world motion without
-changing the 60 Hz deterministic simulation. Sprite keys blend separately over
-55 ms and track authored active/recovery phases.
+changing the 60 Hz deterministic simulation. FighterMotion samples movement curves at render cadence, with separate per-character
+stride/bounce/lean profiles. Gait advances by traveled distance and reverses for
+backsteps. Start, brake, pivot, rise/apex/fall/land and guard transitions are visual
+only. Facing eases over 120 ms, resets on round start and freezes with pause.
+
+FighterVisual caches atlas polygons/UVs and only uploads changed geometry. Walking
+uses a cached union mesh for adjacent poses and one GPU pass. WalkPoseFields loads
+54 bidirectional vector fields derived by OpenCV from existing masked pose pixels.
+The shader aligns both source poses before blending, with nearer-silhouette choice
+at occlusions. A fallback subdivided mesh supports profiles without derived fields;
+all ten current fighters have fields. Idle/attack transitions preserve opacity
+through corrected over-compositing. Foot pivots anchor stretch/lean. Shared cached
+motion textures are primed during match creation, before the countdown ends.
 
 `FighterGallery` now selects ten characters and plays one `FighterPresentation`
-3D podium shot, then swaps to a stationary `FighterVisual` idle. The presentation
+3D podium shot, then retains the same live world, character, lights and rings. The presentation
 extrudes existing silhouette polygons into textured front meshes and sidewalls,
 with perspective/lighting/camera motion; it is 2.5D art, not a skeletal model.
-The 3D viewport stops when idle or original-sheet view is active. Replay and
+The camera settles after the entrance while breathing/sway continues. Only
+original-sheet view disables the 3D viewport and timeline; returning resumes it. Replay and
 original intro navigation remain. The old executable move list/tour is removed;
 MoveShowcase remains an unused internal authoring helper, outside the player flow.
 

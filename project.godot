@@ -2,9 +2,10 @@ config_version=5
 
 [application]
 config/name="Inferno Duel: Legends"
-config/version="0.7.0"
+config/version="0.8.0"
 config/icon="res://assets/icon.svg"
 run/main_scene="res://scenes/main.tscn"
+run/max_fps=60
 
 [autoload]
 InputRouter="*res://scripts/core/input_router.gd"

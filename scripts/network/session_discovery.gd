@@ -2,7 +2,7 @@ class_name SessionDiscovery
 extends RefCounted
 ## LAN room lookup. Endpoints stay internal; the player sees only six symbols.
 const PORT := 38747
-const MAGIC := "inferno-room-v7"
+const MAGIC := "inferno-room-v8"
 var socket: PacketPeerUDP
 var room := ""
 var query := ""
@@ -76,7 +76,7 @@ func poll() -> Dictionary:
 				"port":host_port,"token":host_token,"version":ProjectSettings.get_setting("application/config/version")}).to_utf8_buffer())
 		elif requested != "" and data.get("room") == requested and data.get("query") == query:
 			if data.get("version") != ProjectSettings.get_setting("application/config/version"):
-				return {"error":"Install the same V7 version on both devices."}
+				return {"error":"Install the same V8 version on both devices."}
 			var target_port: Variant = data.get("port",0)
 			var nonce: Variant = data.get("token","")
 			if typeof(target_port) not in [TYPE_INT,TYPE_FLOAT] or target_port < 1 or target_port > 65535: continue

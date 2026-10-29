@@ -1,4 +1,4 @@
-# V7 six-character direct sessions
+# V8 six-character direct sessions
 
 The device hosting the game manages a temporary room. CREATE SESSION produces
 six cryptographically random characters from a 30-symbol unambiguous alphabet.
@@ -43,7 +43,7 @@ the room. Do not infer physical Wi-Fi success from local-process tests.
 
 A short code cannot locate a device across unrelated networks without a shared
 lookup/rendezvous service. Home/carrier NAT can also block the actual connection.
-V7 has no public directory, NAT traversal or relay service. It therefore targets
+V8 has no public directory, NAT traversal or relay service. It therefore targets
 same-Wi-Fi play; different Wi-Fi networks / 4G / 5G are not automatically supported.
 This limitation is visible in the connection UI. The user does not host an extra
 server: only the game on the host device stays open for the temporary room.

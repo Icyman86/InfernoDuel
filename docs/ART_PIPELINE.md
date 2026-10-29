@@ -1,3 +1,42 @@
+# V8 persistent podiums and continuous movement — 29 October 2026
+
+Fighters now retains the same 3D character, lighting, pedestal and luminous rings
+after the entrance. There is no replacement by a separate 2D sprite. The camera
+settles after 2.8 seconds, while small idle breathing/sway continues. Reference
+sheet view pauses the world; returning and replay retain the same podium nodes.
+The hidden FighterVisual advances only once, driven by the presentation timeline.
+
+All ten fighters gain render-time start, brake, backstep, pivot, rise, apex, fall,
+landing and guard-in/out clips, with individual stride, weight, breathing and
+lean profiles in data/movement_animations.json. They change presentation only.
+Gait follows traveled distance, including fractional thumbstick motion. Scaling
+and leaning use the foot pivot. Round/reset and pause invalidate old motion phases.
+
+Walking uses existing authored poses plus derived in-betweens. The optional
+OpenCV authoring script tools/build_walk_fields.py reads masked RGBA pose regions
+and computes forward/backward motion fields for 54 adjacent walk-pose pairs.
+It writes only quantized vector data to data/walk_motion_fields.json; it never
+writes source or derivative artwork pixels. Runtime reconstructs small GPU data
+textures and aligns both poses in a single shader pass over a cached union mesh.
+Occlusions prefer the time-nearest silhouette; some limb warping remains possible.
+This is motion-interpolated illustrated animation, not 60 independently drawn
+frames or a new fully rigged 3D model. Original art hashes and unique image counts
+remain unchanged. The other movement phases use authored curves and pose art.
+
+To regenerate analysis data, use Python with Pillow, NumPy and
+opencv-python-headless==4.11.0.86, then python3 tools/build_walk_fields.py from the
+repository. These packages are authoring-only: normal tests, APK builds and the
+game use the committed data and do not require OpenCV. The cloud installation
+used /workspace/.runtime/motion-python, outside the checkout. All eight original
+reference sheets and existing sprite PNGs remain byte-for-byte unchanged.
+
+The scripted movement video is recorded at 60 frames per second with Godot Movie
+Maker. It shows persistent rings and all ten characters' transitions using a test
+fixture controlling both fighters. It is an offline animation review, not proof
+of live phone performance. Separate uncapped-wall-clock measurements retain a
+60-FPS engine cap and report actual monotonic frame intervals on Linux llvmpipe.
+Physical phone/tablet frame pacing and final human animation review remain open.
+
 # V7 character presentations — 29 October 2026
 
 Fighters no longer runs the animated move lab or movement tour. Each character

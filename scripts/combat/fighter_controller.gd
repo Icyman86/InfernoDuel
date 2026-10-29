@@ -73,6 +73,7 @@ func reset_at(x: float, keep_meter := false) -> void:
 	jump_buffer = 0.0
 	coyote_time = 0.0
 	reset_physics_interpolation()
+	if is_instance_valid(visual): visual.reset_motion()
 	queue_redraw()
 
 func grounded() -> bool:

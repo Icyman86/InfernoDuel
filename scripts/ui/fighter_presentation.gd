@@ -7,6 +7,7 @@ var visual: FighterVisual
 var rig: Node3D
 var face: MeshInstance3D
 var edge: MeshInstance3D
+var rings: Array[MeshInstance3D] = []
 var camera: Camera3D
 var elapsed := 0.0
 var finished := false
@@ -75,6 +76,7 @@ func _ready() -> void:
 		ring.material_override = solid(Color(accent,.8),.7)
 		ring.position.y = .01
 		add_child(ring)
+		rings.append(ring)
 	rig = Node3D.new()
 	add_child(rig)
 	face = MeshInstance3D.new()
@@ -93,6 +95,8 @@ func _ready() -> void:
 	visual.target_height = 300
 	visual.visible = false
 	add_child(visual)
+	# Drive once from this timeline; the hidden 2D node must not advance again.
+	visual.set_process(false)
 	# Supplementary bite/kick silhouettes can extend far beyond the idle pivot.
 	# Fit the whole authored entrance once, then center each pose on the podium.
 	var widest := 0.0
@@ -126,7 +130,8 @@ func build_mesh() -> void:
 		var uv := PackedVector2Array()
 		var normals := PackedVector3Array()
 		for i in sprite.polygon.size():
-			var p: Vector2 = (sprite.polygon[i]-visual.current_pivot)*sprite.scale/80.0
+			var base: Dictionary = sprite.get_meta("frame_data")
+			var p: Vector2 = (sprite.polygon[i]-visual.current_pivot)*float(base.scale)/80.0
 			vertices.append(Vector3(p.x,-p.y,.075))
 			uv.append(sprite.uv[i]/sprite.texture.get_size())
 			normals.append(Vector3(0,0,1))
@@ -154,18 +159,20 @@ func build_mesh() -> void:
 
 func _process(delta: float) -> void:
 	elapsed += delta
+	visual.clock += delta
 	var progress := clampf((elapsed-.65)/1.35,0.0,.999)
 	visual.preview_pose = "heavy" if elapsed >= .65 and elapsed < 2.0 else "idle"
-	visual.preview_progress = progress if visual.preview_pose == "heavy" else -1.0
+	visual.preview_progress = progress if visual.preview_pose == "heavy" else 0.0
 	visual._update_pose(delta)
 	build_mesh()
 	var swing := sin(progress*PI) if visual.preview_pose == "heavy" else 0.0
-	rig.rotation.y = sin(elapsed*1.5)*.1-swing*.16
+	var camera_time := minf(elapsed,2.8)
+	var idle_time := maxf(0.0,elapsed-2.8)
+	rig.rotation.y = sin(camera_time*1.5)*.1-swing*.16+sin(idle_time*1.4)*.012
 	rig.position.x = swing*.15-face.mesh.get_aabb().get_center().x*hero_scale if face.mesh else 0.0
-	rig.scale = Vector3.ONE*hero_scale*(1+sin(elapsed*3)*.004)
-	camera.position = Vector3(1.2*cos(elapsed*.65),2.1,7.5-swing*.35)
+	rig.scale = Vector3(hero_scale*visual.motion.stretch.x,hero_scale*visual.motion.stretch.y,hero_scale)
+	camera.position = Vector3(1.2*cos(camera_time*.65),2.1,7.5-swing*.35)
 	camera.look_at(Vector3(0,1.65,0))
 	if elapsed > 2.8 and not finished:
 		finished = true
-		set_process(false)
 		completed.emit()
