@@ -1,0 +1,52 @@
+{
+  "version": "0.8.0",
+  "android_version_code": 800,
+  "source_commit": "1a5085751190c78f748fd65fcb317fee0d2675df",
+  "files": {
+    "InfernoDuel-Android-v0.8.0.apk": {
+      "bytes": 151547244,
+      "sha256": "0b8b6de8cb1dd7c544d91975a1ed2cd2b02f151edf3e7afbc61b48ef68e9220b"
+    },
+    "InfernoDuel-MovementPreview-v0.8.0.mp4": {
+      "bytes": 6892375,
+      "sha256": "3d14ca6cf2c5a1586c516974d7a35b4997740248c19f852f8016eecf78e902f8"
+    }
+  },
+  "assertions": {
+    "core": 70,
+    "artwork": 494,
+    "expansion": 45,
+    "roster": 287,
+    "touch": 38,
+    "gallery": 92,
+    "linux_rendered": 9,
+    "intro_expansion_rendered": 31,
+    "session": 53,
+    "network": 25,
+    "native_resolution": 20,
+    "modern_ui": 10,
+    "motion": 121,
+    "movement_visual": 37
+  },
+  "distinct_assertions_passed": 1332,
+  "failed": 0,
+  "additional_rendered_network_repeat": 25,
+  "original_hashes_unchanged": 8,
+  "films_decoded": 10,
+  "preview": {
+    "width": 1280,
+    "height": 720,
+    "fps": 60,
+    "frames": 1188,
+    "seconds": 19.8,
+    "scope": "Offline Godot Movie Maker scripted fixture, not live Android frame-rate proof"
+  },
+  "motion_fields": 54,
+  "motion_profiles": 10,
+  "native_linux": "PASS: OS keyboard menu/podium/select/arena/fight/damage/pause/Quit, exit 0",
+  "apk": "PASS: release export, CRC/payload, v2/v3 signatures, 16KiB alignment, manifest, same V7 update certificate",
+  "native_android": "NOT RUN: no physical devices attached; no end-to-end Android or FPS claim",
+  "performance_scope": "Separate actual monotonic frame timings on Linux llvmpipe with 60-FPS cap; see frame-pacing.json. Around 60 FPS at 720p; wide software rendering falls below target. No general speedup or device guarantee.",
+  "art_scope": "Existing artwork unchanged. GPU motion-aligned intermediate poses plus movement curves; not newly hand-drawn 60 FPS animation. Limb interpolation artifacts remain possible.",
+  "network_scope": "Same-Wi-Fi six-character temporary host-device sessions retained; no Internet relay added"
+}

@@ -1,0 +1,24 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+MOTION BENCHMARK: {"average_actual_fps":59.9240883651623,"baseline":true,"frames":359,"median_cpu_process_ms":16.889,"median_engine_delta_ms":16.666,"median_frame_ms":16.666,"p95_cpu_process_ms":40.631,"p95_frame_ms":16.948,"p99_frame_ms":19.768,"renderer":"llvmpipe (LLVM 19.1.7, 256 bits)","scope":"Linux X11 software-rendered scripted movement; not physical Android acceptance","size":[1280,720],"target_fps":60}
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+MOTION BENCHMARK: {"average_actual_fps":59.9163168774279,"baseline":false,"cached_geometry_builds":17,"frames":360,"median_cpu_process_ms":15.589,"median_engine_delta_ms":16.665,"median_frame_ms":16.665,"p95_cpu_process_ms":37.172,"p95_frame_ms":16.878,"p99_frame_ms":18.583,"renderer":"llvmpipe (LLVM 19.1.7, 256 bits)","scope":"Linux X11 software-rendered scripted movement; not physical Android acceptance","size":[1280,720],"target_fps":60}
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+MOTION BENCHMARK: {"average_actual_fps":43.4774641810661,"baseline":true,"frames":261,"median_cpu_process_ms":39.051,"median_engine_delta_ms":21.095,"median_frame_ms":21.086,"p95_cpu_process_ms":94.308,"p95_frame_ms":32.723,"p99_frame_ms":40.029,"renderer":"llvmpipe (LLVM 19.1.7, 256 bits)","scope":"Linux X11 software-rendered scripted movement; not physical Android acceptance","size":[2400,1080],"target_fps":60}
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+MOTION BENCHMARK: {"average_actual_fps":41.2443366265906,"baseline":false,"cached_geometry_builds":18,"frames":247,"median_cpu_process_ms":40.637,"median_engine_delta_ms":22.1,"median_frame_ms":22.12,"p95_cpu_process_ms":132.927,"p95_frame_ms":35.265,"p99_frame_ms":40.016,"renderer":"llvmpipe (LLVM 19.1.7, 256 bits)","scope":"Linux X11 software-rendered scripted movement; not physical Android acceptance","size":[2400,1080],"target_fps":60}

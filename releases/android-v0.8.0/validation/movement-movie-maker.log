@@ -1,0 +1,52 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Movie Maker mode enabled, recording movie in 1280×720 @ 60 FPS...
+POSE BLEND GPU PIXEL (1.0, 1.0, 1.0, 1.0)
+PASS GPU pose compositing stays opaque halfway through a movement blend
+PASS rings and the same lit character remain live after the entrance
+PASS pair 1 has active continuous gait deformation
+PASS sharkbyte renders start, reverse and brake through its actual controller
+PASS sharkbyte renders the full jump and landing sequence
+PASS sharkbyte returns to the floor without changing health
+PASS bullet renders start, reverse and brake through its actual controller
+PASS bullet renders the full jump and landing sequence
+PASS bullet returns to the floor without changing health
+PASS pair 2 has active continuous gait deformation
+PASS nachtelf renders start, reverse and brake through its actual controller
+PASS nachtelf renders the full jump and landing sequence
+PASS nachtelf returns to the floor without changing health
+PASS poisonboy renders start, reverse and brake through its actual controller
+PASS poisonboy renders the full jump and landing sequence
+PASS poisonboy returns to the floor without changing health
+PASS pair 3 has active continuous gait deformation
+PASS spinegrin renders start, reverse and brake through its actual controller
+PASS spinegrin renders the full jump and landing sequence
+PASS spinegrin returns to the floor without changing health
+PASS chainveil renders start, reverse and brake through its actual controller
+PASS chainveil renders the full jump and landing sequence
+PASS chainveil returns to the floor without changing health
+PASS pair 4 has active continuous gait deformation
+PASS cheese_rat renders start, reverse and brake through its actual controller
+PASS cheese_rat renders the full jump and landing sequence
+PASS cheese_rat returns to the floor without changing health
+PASS lava_stone renders start, reverse and brake through its actual controller
+PASS lava_stone renders the full jump and landing sequence
+PASS lava_stone returns to the floor without changing health
+PASS pair 5 has active continuous gait deformation
+PASS crystal_fang renders start, reverse and brake through its actual controller
+PASS crystal_fang renders the full jump and landing sequence
+PASS crystal_fang returns to the floor without changing health
+PASS phoenix_reign renders start, reverse and brake through its actual controller
+PASS phoenix_reign renders the full jump and landing sequence
+PASS phoenix_reign returns to the floor without changing health
+MOVEMENT VISUAL RESULT: 37 passed, 0 failed
+--------------------------------------------------------------------------------
+Done recording movie at path: /workspace/InfernoDuel/builds/v8-movement-preview.avi
+1232 frames at 60 FPS (movie length: 00:00:20:32), recorded in 00:00:56 (35% of real-time speed).
+CPU render time: 6.85 seconds (average: 5.56 ms/frame)
+GPU render time: 16.55 seconds (average: 13.43 ms/frame)
+Encoding time: 19.14 seconds (average: 15.53 ms/frame)
+--------------------------------------------------------------------------------
