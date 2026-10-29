@@ -7,6 +7,28 @@ Based on the supplied v1.1 Word specification and Linux starter package.
 The original design documents remain in `docs/`; the current implementation
 and its limits are described here and in `docs/TEST_LOG.md`.
 
+## Android APK — phones and tablets
+
+[Download Android v0.4.0 APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.4.0-android/releases/android-v0.4.0/InfernoDuel-Android-v0.4.0.apk)
+
+Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
+multitouch. Install the APK from your browser/downloads; allow installation from
+that source when Android asks. This is a sideloadable preview signed with a local
+development key, not a Play Store release. See [Android build and validation](docs/ANDROID.md).
+
+Play in landscape. **PLAY · TOUCH VS CPU** is the phone default; **2 PLAYERS ·
+SHARED TABLET** gives both players separate cyan/orange controls on one screen.
+Tap a fighter, ready both sides, and enter the arena. EDIT P2 / CPU changes the
+opponent. Left controls move, jump and guard; right controls light, heavy, special
+and ultimate. Hold guard while facing the opponent; ultimate needs 100% meter.
+Moving and attacking support multiple fingers. Tap **Ⅱ** to pause; Android Back
+returns or pauses, and switching apps pauses the fight. Layouts fit phone and
+tablet aspect ratios and keep controls inside Android's safe display area.
+
+The APK is stored in Git LFS because it includes both native engines and all ten
+intro movies. A source checkout needs `git lfs pull` to fetch it; the download
+link above serves the APK directly. Linux play and keyboard controls remain supported.
+
 ## Download Linux prototype
 
 [Download Linux v0.3.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-Linux-v0.3.tar.xz)

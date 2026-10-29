@@ -90,6 +90,7 @@ func _make_hud() -> void:
 	announcement.add_theme_color_override("font_outline_color",Color("130b15"))
 	hud.add_child(UI.place(announcement,100,230,1080,145))
 	var footer_bg := ColorRect.new()
+	if OS.has_feature("android") or "--touch" in OS.get_cmdline_user_args(): return
 	footer_bg.color = Color(0.02,0.015,0.03,0.84)
 	footer_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(UI.place(footer_bg,0,675,1280,45))

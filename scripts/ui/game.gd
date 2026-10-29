@@ -15,8 +15,11 @@ var route := "menu"
 var option_origin := "menu"
 var modal: ConfirmationDialog
 var gallery_index := 0
+var touch_controls: TouchControls
+var touch_mode := OS.has_feature("android") or "--touch" in OS.get_cmdline_user_args()
 
 func _ready() -> void:
+	get_tree().quit_on_go_back = false
 	roster = JSON.parse_string(FileAccess.get_file_as_string("res://data/fighters.json")).fighters
 	stage = Control.new()
 	stage.theme = UI.theme()
@@ -26,13 +29,22 @@ func _ready() -> void:
 	stage.add_child(backdrop)
 	resized.connect(_resize_stage)
 	_resize_stage()
+	if touch_mode:
+		touch_controls = TouchControls.new()
+		add_child(touch_controls)
+		touch_controls.pause_requested.connect(show_pause)
 	show_menu()
 
 func _resize_stage() -> void:
 	if not stage: return
-	var factor := minf(size.x/1280.0,size.y/720.0)
+	var safe := TouchControls.safe_rect(get_viewport())
+	var factor := minf(safe.size.x/1280.0,safe.size.y/720.0)
 	stage.scale = Vector2.ONE * factor
-	stage.position = (size-Vector2(1280,720)*factor)*0.5
+	stage.position = safe.position + (safe.size-Vector2(1280,720)*factor)*0.5
+
+func _process(_delta: float) -> void:
+	if touch_controls:
+		touch_controls.set_active(route == "fight")
 
 func clear_screen() -> void:
 	InputRouter.clear()
@@ -92,15 +104,19 @@ func show_menu() -> void:
 	var buttons := VBoxContainer.new()
 	UI.place(buttons,140,311,390,320)
 	screen.add_child(buttons)
-	buttons.add_child(UI.button("LOCAL VERSUS",func(): show_select(false),true))
-	buttons.add_child(UI.button("SOLO VS CPU",func(): show_select(true)))
+	if touch_mode:
+		buttons.add_child(UI.button("PLAY · TOUCH VS CPU",func(): show_select(true),true))
+		buttons.add_child(UI.button("2 PLAYERS · SHARED TABLET",func(): show_select(false)))
+	else:
+		buttons.add_child(UI.button("LOCAL VERSUS",func(): show_select(false),true))
+		buttons.add_child(UI.button("SOLO VS CPU",func(): show_select(true)))
 	buttons.add_child(UI.button("STORY MODE",show_story))
 	buttons.add_child(UI.button("FIGHTERS",show_gallery))
 	buttons.add_child(UI.button("OPTIONS",func(): show_options("menu")))
 	buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  v0.3",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  v0.4",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	end_match()
@@ -110,6 +126,7 @@ func show_select(cpu: bool) -> void:
 	var picker := SelectScreen.new()
 	picker.roster = roster
 	picker.solo = solo
+	picker.touch_mode = touch_mode
 	picker.selected = selected.duplicate()
 	picker.accepted.connect(func(indices: Array[int]):
 		selected = indices
@@ -139,12 +156,15 @@ func show_arena() -> void:
 	screen.add_child(UI.place(start,440,510,400,56))
 	start.grab_focus()
 	screen.add_child(UI.place(UI.button("BACK",func(): show_select(solo)),440,586,400,46))
-	screen.add_child(UI.place(UI.label("ENTER / F  fight     ·     ESC  back",18,UI.MUTED),300,659,680,30))
+	screen.add_child(UI.place(UI.label("TAP ENTER THE ARENA TO FIGHT" if touch_mode else "ENTER / F  fight     ·     ESC  back",18,UI.MUTED),300,659,680,30))
 
 func start_match() -> void:
 	clear_screen()
 	end_match()
 	route = "fight"
+	if touch_controls:
+		touch_controls.solo = solo
+		touch_controls.rebuild()
 	match_node = MatchScene.instantiate()
 	match_node.profiles = [roster[selected[0]],roster[selected[1]]]
 	match_node.solo = solo
@@ -215,11 +235,13 @@ func show_options(origin: String) -> void:
 		shade.color = Color("0b0911")
 		overlay.add_child(UI.place(shade,0,0,1280,720))
 		var options := Options.new()
+		options.touch_mode = touch_mode
 		options.back_requested.connect(show_pause)
 		overlay.add_child(options)
 	else:
 		clear_screen()
 		var options := Options.new()
+		options.touch_mode = touch_mode
 		options.back_requested.connect(show_menu)
 		screen = options
 		stage.add_child(screen)
@@ -278,16 +300,8 @@ func _input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo: return
 	if is_instance_valid(modal) and modal.visible: return
 	var key: int = event.physical_keycode if event.physical_keycode else event.keycode
-	if key == KEY_ESCAPE:
-		match route:
-			"fight": show_pause()
-			"pause": resume_match()
-			"options":
-				if option_origin == "pause": show_pause()
-				else: show_menu()
-			"select", "story", "gallery": show_menu()
-			"intro": show_gallery()
-			"arena": show_select(solo)
+	if key == KEY_ESCAPE or key == KEY_BACK:
+		go_back()
 		get_viewport().set_input_as_handled()
 	elif route == "select":
 		screen.handle_key(key)
@@ -310,6 +324,24 @@ func _input(event: InputEvent) -> void:
 			if focused is Button: focused.pressed.emit()
 			get_viewport().set_input_as_handled()
 
+func go_back() -> void:
+	if is_instance_valid(modal) and modal.visible:
+		modal.hide()
+		modal.queue_free()
+		return
+	match route:
+		"fight": show_pause()
+		"pause": resume_match()
+		"options":
+			if option_origin == "pause": show_pause()
+			else: show_menu()
+		"select", "story", "gallery": show_menu()
+		"intro": show_gallery()
+		"arena": show_select(solo)
+		"menu": confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and route == "fight":
 		show_pause()
+	elif what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		go_back()

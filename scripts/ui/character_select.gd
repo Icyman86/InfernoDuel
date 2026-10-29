@@ -4,6 +4,7 @@ signal accepted(indices: Array[int])
 signal back_requested
 var roster: Array = []
 var solo := false
+var touch_mode := false
 var selected: Array[int] = [0,1]
 var ready_players: Array[bool] = [false,false]
 var mouse_player := 0
@@ -25,7 +26,7 @@ func _ready() -> void:
 	add_child(UI.place(shade,0,0,1280,720))
 	add_child(UI.place(UI.label("THE CITADEL AWAITS",16,UI.GOLD),300,32,680,28))
 	add_child(UI.place(UI.label("CHOOSE YOUR FIGHTER",33,UI.IVORY,true),290,66,700,50))
-	add_child(UI.place(UI.label("SOLO  /  CPU EASY" if solo else "LOCAL VERSUS  /  ONE KEYBOARD",16,UI.MUTED),300,122,680,25))
+	add_child(UI.place(UI.label("SOLO  /  CPU EASY" if solo else ("LOCAL VERSUS  /  SHARED TOUCHSCREEN" if touch_mode else "LOCAL VERSUS  /  ONE KEYBOARD"),16,UI.MUTED),300,122,680,25))
 	for i in 10:
 		var index := i
 		var f: Dictionary = roster[i]
@@ -89,6 +90,8 @@ func _ready() -> void:
 		undo.tooltip_text = "Undo ready: G / O"
 		add_child(UI.place(undo,x+156,613,52,43))
 	hint = UI.label("P1  W A S D · F ready · G undo       /       P2  Arrows · I ready · O undo",17,UI.MUTED)
+	if touch_mode:
+		hint.text = "TAP A FIGHTER · EDIT P2 / CPU TO PICK OPPONENT · READY BOTH SIDES"
 	add_child(UI.place(hint,220,675,1000,28))
 	add_child(UI.place(UI.button("BACK",func(): back_requested.emit()),34,675,150,38))
 	refresh()

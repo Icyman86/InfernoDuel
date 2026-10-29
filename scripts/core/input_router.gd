@@ -4,6 +4,16 @@ var held: Array[Dictionary] = [{}, {}]
 var pressed: Array[Dictionary] = [{}, {}]
 var layouts: Array[Dictionary] = []
 var keys: Array[Dictionary] = []
+var touch_held: Array[Dictionary] = [{}, {}]
+var generation := 0
+
+func set_touch(player: int, action: String, down: bool) -> void:
+	if down and not touch_held[player].get(action, false):
+		pressed[player][action] = true
+	touch_held[player][action] = down
+
+func is_held(player: int, action: String) -> bool:
+	return held[player].get(action, false) or touch_held[player].get(action, false)
 
 func _ready() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/input_layouts.json"))
@@ -25,17 +35,19 @@ func _input(event: InputEvent) -> void:
 					pressed[i][action] = true
 
 func sample(player: int) -> Dictionary:
-	var state := {"axis": int(held[player].get("move_right", false)) - int(held[player].get("move_left", false)),
-		"block": held[player].get("block", false)}
+	var state := {"axis": int(is_held(player, "move_right")) - int(is_held(player, "move_left")),
+		"block": is_held(player, "block")}
 	for action in ["jump", "light", "heavy", "special", "ultimate"]:
 		state[action] = pressed[player].get(action, false)
 	pressed[player].clear()
 	return state
 
 func clear() -> void:
+	generation += 1
 	for i in 2:
 		held[i].clear()
 		pressed[i].clear()
+		touch_held[i].clear()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:

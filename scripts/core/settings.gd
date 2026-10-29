@@ -20,7 +20,7 @@ func _ready() -> void:
 func apply() -> void:
 	for entry in [["Master", master], ["Music", music], ["SFX", sfx]]:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(entry[0]), linear_to_db(maxf(0.0001, entry[1])))
-	if DisplayServer.get_name() != "headless":
+	if DisplayServer.get_name() != "headless" and not OS.has_feature("android"):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 
 func save() -> void:
