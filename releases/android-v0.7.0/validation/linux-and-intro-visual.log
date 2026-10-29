@@ -1,0 +1,61 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+CAPTURE 01-menu
+CAPTURE 02-select
+PASS keyboard opens local versus
+CAPTURE 03-arena
+PASS native input flow confirms both players
+PASS both input streams move fighters in rendered match
+CAPTURE 04-fight
+PASS simultaneous attacks trade in real physics loop
+CAPTURE 05-pause
+PASS rendered pause holds timer
+CAPTURE 06-options
+PASS options has keyboard focus
+PASS fullscreen applies
+CAPTURE 07-gallery
+PASS gallery has keyboard focus
+CAPTURE 08-resized
+PASS render surface follows the actual window resolution while logical UI scales
+VISUAL RESULT: 0 failed
+
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS bullet own sheet rendered in gallery
+PASS nachtelf own sheet rendered in gallery
+PASS poisonboy own sheet rendered in gallery
+PASS sharkbyte intro button decodes a real 720p video
+PASS replay restarts the intro from its beginning
+PASS intro reaches its finished end state
+PASS sharkbyte Escape returns to the same selected fighter
+PASS bullet intro button decodes a real 720p video
+PASS bullet Escape returns to the same selected fighter
+PASS nachtelf intro button decodes a real 720p video
+PASS nachtelf Escape returns to the same selected fighter
+PASS poisonboy intro button decodes a real 720p video
+PASS poisonboy Escape returns to the same selected fighter
+PASS spinegrin intro button decodes a real 720p video
+PASS spinegrin Escape returns to the same selected fighter
+PASS chainveil intro button decodes a real 720p video
+PASS chainveil Escape returns to the same selected fighter
+PASS cheese_rat intro button decodes a real 720p video
+PASS cheese_rat Escape returns to the same selected fighter
+PASS lava_stone intro button decodes a real 720p video
+PASS lava_stone Escape returns to the same selected fighter
+PASS crystal_fang intro button decodes a real 720p video
+PASS crystal_fang Escape returns to the same selected fighter
+PASS phoenix_reign intro button decodes a real 720p video
+PASS phoenix_reign Escape returns to the same selected fighter
+PASS poisonboy reaches arena through ready buttons
+PASS poisonboy combat sprite renders during special
+PASS chainveil reaches arena through ready buttons
+PASS chainveil combat sprite renders during special
+PASS cheese_rat reaches arena through ready buttons
+PASS cheese_rat combat sprite renders during special
+EXPANSION VISUAL RESULT: 31 passed, 0 failed

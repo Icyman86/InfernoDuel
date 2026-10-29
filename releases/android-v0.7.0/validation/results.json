@@ -1,0 +1,40 @@
+{
+  "version": "0.7.0",
+  "display_version": "V7",
+  "android_version_code": 700,
+  "source_commit": "4d684ec12520b1df647e1d4825fc5437ef70b7df",
+  "apk": "InfernoDuel-Android-v0.7.0.apk",
+  "apk_bytes": 151014243,
+  "apk_sha256": "f3dc6a4240795ab8d11bf8e0613388c45f804365d3e16e45e9bfc5610164dc13",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "assertions": {
+    "core": 70,
+    "artwork": 494,
+    "expansion": 45,
+    "roster": 287,
+    "touch": 38,
+    "gallery_rendered": 92,
+    "linux_rendered": 9,
+    "expansion_rendered": 31,
+    "session": 53,
+    "network_real_processes": 25,
+    "native_resolution_rendered": 20,
+    "modern_ui_rendered": 10
+  },
+  "distinct_assertions_passed": 1174,
+  "additional_network_rendered_repeat": 25,
+  "failed": 0,
+  "original_hashes_unchanged": 8,
+  "intro_films_decoded": 10,
+  "native_linux_workflow": "PASS: visible menu/presentation/select/arena/fight/damage/pause/normal Quit, exit 0",
+  "apk_checks": "PASS: export, CRC, compiled V7 discovery/presentation, ARM64+x86_64, v2/v3 signatures, 16KiB alignment, manifest, V6 certificate match",
+  "network_scope": "Six random characters; actual LAN UDP broadcast lookup and direct ENet. Host device manages temporary room. No visible endpoints, external hosting, Internet directory or NAT traversal. Tests use local processes; physical Wi-Fi unverified.",
+  "art_presentation": "Actual perspective 3D podium, extruded textured silhouette and signature pose keys, then stationary 2D idle. 2.5D existing artwork, not new full 3D models/rigs.",
+  "native_android_end_to_end": "NOT RUN; no physical device attached; prior cloud emulator limitations documented",
+  "limitations": [
+    "physical Android multitouch/audio/cutouts/performance and two-device Wi-Fi acceptance remain unverified",
+    "no Internet matchmaking/relay service; different networks or carriers not automatically supported",
+    "guest smoothing has no prediction/rollback",
+    "character presentation is extruded illustrated artwork rather than fully rigged 3D anatomy"
+  ]
+}
