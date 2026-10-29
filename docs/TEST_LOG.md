@@ -1,4 +1,61 @@
-# Current validation — Linux v0.3.0, 28 October 2026
+# Android preview v0.4.0 — 29 October 2026
+
+Source milestone: `289326f`. Standard Godot 4.6.3; Android release templates
+verified against the official SHA-512 sums. Google SDK components were checked
+against their repository checksums. Linux remains supported.
+
+| Check on the final source / artifact | Result |
+| --- | --- |
+| Original artwork integrity | PASS — all 8 original SHA-256 hashes unchanged |
+| Headless integration/combat | PASS — 70 passed, 0 failed |
+| Artwork/animation | PASS — 229 passed, 0 failed |
+| Fighter expansion | PASS — 45 passed, 0 failed |
+| Intro film decode | PASS — all 10 films, 193 frames each |
+| Rendered Linux regression | PASS — 9 checks, 0 failures |
+| Rendered multitouch suite | PASS — 33 passed, 0 failed |
+| Reproducible Android export/signing script | PASS — exit 0, no engine/script errors |
+| Final APK payload and CRCs | PASS — ARM64 + x86_64, compiled touch scripts, all ten films |
+| APK signing and native alignment | PASS — APK v2/v3 signatures; `zipalign -c -P 16 4` |
+| Manifest | PASS — package `org.infernoduel.legends`, version 0.4.0/code 400, min API 24, target 36, landscape, small through xlarge screens |
+| Native Android end-to-end acceptance of final APK | NOT COMPLETED — software-emulator limitation, described below |
+| Physical phone/tablet acceptance | NOT RUN — no physical Android device attached |
+
+The touch suite exercises actual ScreenTouch, ScreenDrag and canceled events:
+simultaneous move/attack, damage from touch, one press edge per hold, independent
+finger release, drag-off release, keyboard isolation, guard/jump/special/ultimate,
+touch pause/resume, mobile options, background clearing, round/reset invalidation
+and two simultaneous players. Ten layout checks use actual SubViewports at five
+phone/tablet sizes (16:9, 16:10, 4:3 and wide phone), both solo and shared modes,
+and reject clipped or overlapping controls. These are software-injected touches;
+they do not establish physical digitizer behavior or comfort.
+
+## Android emulator evidence and limit
+
+An earlier signed candidate installed successfully on an Android 15/API 35
+x86_64 emulator. The cloud host has no `/dev/kvm`; the emulator uses slow TCG CPU
+emulation. Its direct SwiftShader GLES driver failed Godot shader linking with
+`Fragment shader active uniforms exceed GL_MAX_FRAGMENT_UNIFORM_VECTORS (261)`.
+This rendering attempt is **not a pass**. Restarting the same AVD with the
+supported `-gpu swangle` backend reached GLES 3.1 initialization and
+`OnGodotMainLoopStarted` without those shader errors, but did not establish a
+complete interactive Android game flow.
+
+A readback/hash comparison correctly detected that the installed candidate was
+older than the final download. Attempts to replace it with the final APK timed
+out in Android's package installer, including after the final APK had been
+successfully transferred. The native result therefore must not be attributed to
+the final APK. The final download is build/signature/payload verified; its native
+menu-to-fight flow still needs on-device acceptance. No physical-phone result,
+runtime performance claim, or fully passed emulator smoke test is made.
+
+The preview is signed with a local development key, not a production Play Store
+key. Its exact checksum, source hashes and successful test logs are in
+`releases/android-v0.4.0/`. Real-phone/tablet checks should cover installing this
+exact APK, menu/select/fight/result/rematch, multiple fingers, Android Back,
+pause/background/resume, audio, cutouts, frame rate and tablet shared-player
+ergonomics. See `docs/ANDROID.md` for build and install commands.
+
+# Linux v0.3.0 validation, 28 October 2026
 
 Engine: Godot **4.6.3.stable.official.7d41c59c4**, standard Linux x86_64,
 Compatibility renderer, 60 Hz physics. Rendered tests use Xvfb 1280×720 and Mesa

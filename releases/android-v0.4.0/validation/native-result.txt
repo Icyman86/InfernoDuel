@@ -1,0 +1,5 @@
+NOT COMPLETED: native final-APK end-to-end validation.
+An earlier candidate installed and reached the engine main loop with ANGLE.
+The final APK transfer succeeded, but Android pm install -r timed out (180 seconds).
+Final APK signatures, alignment and payload passed; see build.log.
+No physical Android device was attached.

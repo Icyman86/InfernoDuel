@@ -1,0 +1,395 @@
+OK: SharkByte Fighting Game Character Sheet.png
+OK: Spinegrin_ Inferno Duel Character Sheet.png
+OK: Chainveil_ Inferno Duel Character Sheet.png
+OK: Dark Fantasy Fighting Game Character Sheet.png
+OK: WhatsApp Image 2026-10-25 at 18.59.15.jpeg
+OK: WhatsApp Image 2026-10-25 at 19.53.45.jpeg
+OK: WhatsApp Image 2026-10-27 at 20.17.30.jpeg
+OK: WhatsApp Image 2026-10-27 at 20.18.10.jpeg
+8/8 OK
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+cannot connect to daemon at tcp:5037: Connection refused
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS main scene boots to menu
+PASS ten data-driven roster profiles
+PASS both select cursors navigate independently
+PASS unfinished fighters cannot enter combat
+PASS both confirmations open arena selection
+PASS round begins with locked countdown
+PASS countdown clears held input
+PASS physical events route simultaneous movement and attacks
+PASS held attack does not retrigger
+PASS clearing releases both players
+PASS P1 maps move_left
+PASS P1 maps move_right
+PASS P1 maps jump
+PASS P1 maps block
+PASS P1 maps light
+PASS P1 maps heavy
+PASS P1 maps special
+PASS P1 maps ultimate
+PASS P2 maps move_left
+PASS P2 maps move_right
+PASS P2 maps jump
+PASS P2 maps block
+PASS P2 maps light
+PASS P2 maps heavy
+PASS P2 maps special
+PASS P2 maps ultimate
+PASS fighters move simultaneously
+PASS same-tick light attacks trade for six damage each
+PASS hit meter accrues independently
+PASS one hit per attack activation
+PASS ground guard reduces heavy damage by 75 percent
+PASS guard does not protect the fighter's back
+PASS out-of-range hitboxes miss
+PASS special starts independent cooldown
+PASS special cannot repeat before cooldown
+PASS special becomes available after cooldown
+PASS late recovery input buffers a follow-up attack
+PASS landed light cancels recovery into special
+PASS ultimate requires full meter
+PASS ultimate consumes meter and deals thirty damage
+PASS Bullet ultimate projectile collides exactly once
+PASS light-light-heavy connects as three-hit combo
+PASS third hit grants escape immunity against infinite stun
+PASS jump works without a double jump
+PASS gravity returns fighter to arena floor
+PASS arena boundary contains fighter
+PASS pause freezes timer and simulation
+PASS resume releases stale held keys
+PASS focus loss automatically pauses
+PASS pause options keep combat stopped
+PASS timeout awards healthier fighter
+PASS meter persists but health resets between rounds
+PASS equal timeout replays round without awarding score
+PASS draw retry keeps round number
+PASS double KO trades without awarding a round
+PASS KO locks round 1
+PASS KO locks round 2
+PASS KO locks round 3
+PASS complete best-of-three match reaches 2-1 result
+PASS rematch resets score health and meter
+PASS restart requires a visible confirmation
+PASS cancel restart preserves score
+PASS confirmed restart creates fresh match
+PASS gallery loads original reference art
+PASS all ten gallery entries load
+PASS story has a working preview screen
+PASS easy CPU approaches and damages player
+PASS CPU completes an unmodified full match against passive player
+PASS mirror match keeps each instance's combat state separate
+PASS options persist to user settings
+
+RESULT: 70 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS sharkbyte portrait is a valid crop of its original sheet
+PASS bullet portrait is a valid crop of its original sheet
+PASS nachtelf portrait is a valid crop of its original sheet
+PASS poisonboy portrait is a valid crop of its original sheet
+PASS spinegrin portrait is a valid crop of its original sheet
+PASS chainveil portrait is a valid crop of its original sheet
+PASS cheese_rat portrait is a valid crop of its original sheet
+PASS lava_stone portrait is a valid crop of its original sheet
+PASS crystal_fang portrait is a valid crop of its original sheet
+PASS phoenix_reign portrait is a valid crop of its original sheet
+PASS all ten roster avatars are distinct
+PASS sharkbyte core has genuine alpha transparency
+PASS sharkbyte core frame 0 has a bounded textured mesh
+PASS sharkbyte core frame 1 has a bounded textured mesh
+PASS sharkbyte core frame 2 has a bounded textured mesh
+PASS sharkbyte core frame 3 has a bounded textured mesh
+PASS sharkbyte core frame 4 has a bounded textured mesh
+PASS sharkbyte core frame 5 has a bounded textured mesh
+PASS sharkbyte core frame 6 has a bounded textured mesh
+PASS sharkbyte core frame 7 has a bounded textured mesh
+PASS sharkbyte core frame 8 has a bounded textured mesh
+PASS sharkbyte core frame 9 has a bounded textured mesh
+PASS sharkbyte core frame 10 has a bounded textured mesh
+PASS sharkbyte core frame 11 has a bounded textured mesh
+PASS sharkbyte core frame 12 has a bounded textured mesh
+PASS sharkbyte core frame 13 has a bounded textured mesh
+PASS sharkbyte core frame 14 has a bounded textured mesh
+PASS sharkbyte core frame 15 has a bounded textured mesh
+PASS sharkbyte actions has genuine alpha transparency
+PASS sharkbyte actions frame 16 has a bounded textured mesh
+PASS sharkbyte actions frame 17 has a bounded textured mesh
+PASS sharkbyte actions frame 18 has a bounded textured mesh
+PASS sharkbyte actions frame 19 has a bounded textured mesh
+PASS sharkbyte actions frame 20 has a bounded textured mesh
+PASS sharkbyte actions frame 21 has a bounded textured mesh
+PASS sharkbyte actions frame 22 has a bounded textured mesh
+PASS sharkbyte actions frame 23 has a bounded textured mesh
+PASS sharkbyte walk has genuine alpha transparency
+PASS sharkbyte walk frame 24 has a bounded textured mesh
+PASS sharkbyte walk frame 25 has a bounded textured mesh
+PASS sharkbyte walk frame 26 has a bounded textured mesh
+PASS sharkbyte walk frame 27 has a bounded textured mesh
+PASS sharkbyte walk frame 28 has a bounded textured mesh
+PASS sharkbyte walk frame 29 has a bounded textured mesh
+PASS sharkbyte has its complete unique pose set
+PASS sharkbyte renders idle
+PASS sharkbyte renders walk
+PASS sharkbyte renders light
+PASS sharkbyte renders heavy
+PASS sharkbyte renders guard
+PASS sharkbyte renders jump
+PASS sharkbyte renders special
+PASS sharkbyte renders ultimate
+PASS sharkbyte renders hit
+PASS sharkbyte renders ko
+PASS bullet core has genuine alpha transparency
+PASS bullet core frame 0 has a bounded textured mesh
+PASS bullet core frame 1 has a bounded textured mesh
+PASS bullet core frame 2 has a bounded textured mesh
+PASS bullet core frame 3 has a bounded textured mesh
+PASS bullet core frame 4 has a bounded textured mesh
+PASS bullet core frame 5 has a bounded textured mesh
+PASS bullet core frame 6 has a bounded textured mesh
+PASS bullet core frame 7 has a bounded textured mesh
+PASS bullet core frame 8 has a bounded textured mesh
+PASS bullet core frame 9 has a bounded textured mesh
+PASS bullet core frame 10 has a bounded textured mesh
+PASS bullet core frame 11 has a bounded textured mesh
+PASS bullet core frame 12 has a bounded textured mesh
+PASS bullet core frame 13 has a bounded textured mesh
+PASS bullet core frame 14 has a bounded textured mesh
+PASS bullet core frame 15 has a bounded textured mesh
+PASS bullet actions has genuine alpha transparency
+PASS bullet actions frame 16 has a bounded textured mesh
+PASS bullet actions frame 17 has a bounded textured mesh
+PASS bullet actions frame 18 has a bounded textured mesh
+PASS bullet actions frame 19 has a bounded textured mesh
+PASS bullet actions frame 20 has a bounded textured mesh
+PASS bullet actions frame 21 has a bounded textured mesh
+PASS bullet actions frame 22 has a bounded textured mesh
+PASS bullet actions frame 23 has a bounded textured mesh
+PASS bullet walk has genuine alpha transparency
+PASS bullet walk frame 24 has a bounded textured mesh
+PASS bullet walk frame 25 has a bounded textured mesh
+PASS bullet walk frame 26 has a bounded textured mesh
+PASS bullet walk frame 27 has a bounded textured mesh
+PASS bullet walk frame 28 has a bounded textured mesh
+PASS bullet walk frame 29 has a bounded textured mesh
+PASS bullet has its complete unique pose set
+PASS bullet renders idle
+PASS bullet renders walk
+PASS bullet renders light
+PASS bullet renders heavy
+PASS bullet renders guard
+PASS bullet renders jump
+PASS bullet renders special
+PASS bullet renders ultimate
+PASS bullet renders hit
+PASS bullet renders ko
+PASS poisonboy core has genuine alpha transparency
+PASS poisonboy core frame 0 has a bounded textured mesh
+PASS poisonboy core frame 1 has a bounded textured mesh
+PASS poisonboy core frame 2 has a bounded textured mesh
+PASS poisonboy core frame 3 has a bounded textured mesh
+PASS poisonboy core frame 4 has a bounded textured mesh
+PASS poisonboy core frame 5 has a bounded textured mesh
+PASS poisonboy core frame 6 has a bounded textured mesh
+PASS poisonboy core frame 7 has a bounded textured mesh
+PASS poisonboy core frame 8 has a bounded textured mesh
+PASS poisonboy core frame 9 has a bounded textured mesh
+PASS poisonboy core frame 10 has a bounded textured mesh
+PASS poisonboy core frame 11 has a bounded textured mesh
+PASS poisonboy core frame 12 has a bounded textured mesh
+PASS poisonboy core frame 13 has a bounded textured mesh
+PASS poisonboy core frame 14 has a bounded textured mesh
+PASS poisonboy core frame 15 has a bounded textured mesh
+PASS poisonboy actions has genuine alpha transparency
+PASS poisonboy actions frame 16 has a bounded textured mesh
+PASS poisonboy actions frame 17 has a bounded textured mesh
+PASS poisonboy actions frame 18 has a bounded textured mesh
+PASS poisonboy actions frame 19 has a bounded textured mesh
+PASS poisonboy actions frame 20 has a bounded textured mesh
+PASS poisonboy actions frame 21 has a bounded textured mesh
+PASS poisonboy actions frame 22 has a bounded textured mesh
+PASS poisonboy actions frame 23 has a bounded textured mesh
+PASS poisonboy walk has genuine alpha transparency
+PASS poisonboy walk frame 24 has a bounded textured mesh
+PASS poisonboy walk frame 25 has a bounded textured mesh
+PASS poisonboy walk frame 26 has a bounded textured mesh
+PASS poisonboy walk frame 27 has a bounded textured mesh
+PASS poisonboy has its complete unique pose set
+PASS poisonboy renders idle
+PASS poisonboy renders walk
+PASS poisonboy renders light
+PASS poisonboy renders heavy
+PASS poisonboy renders guard
+PASS poisonboy renders jump
+PASS poisonboy renders special
+PASS poisonboy renders ultimate
+PASS poisonboy renders hit
+PASS poisonboy renders ko
+PASS chainveil core has genuine alpha transparency
+PASS chainveil core frame 0 has a bounded textured mesh
+PASS chainveil core frame 1 has a bounded textured mesh
+PASS chainveil core frame 2 has a bounded textured mesh
+PASS chainveil core frame 3 has a bounded textured mesh
+PASS chainveil core frame 4 has a bounded textured mesh
+PASS chainveil core frame 5 has a bounded textured mesh
+PASS chainveil core frame 6 has a bounded textured mesh
+PASS chainveil core frame 7 has a bounded textured mesh
+PASS chainveil core frame 8 has a bounded textured mesh
+PASS chainveil core frame 9 has a bounded textured mesh
+PASS chainveil core frame 10 has a bounded textured mesh
+PASS chainveil core frame 11 has a bounded textured mesh
+PASS chainveil core frame 12 has a bounded textured mesh
+PASS chainveil core frame 13 has a bounded textured mesh
+PASS chainveil core frame 14 has a bounded textured mesh
+PASS chainveil core frame 15 has a bounded textured mesh
+PASS chainveil actions has genuine alpha transparency
+PASS chainveil actions frame 16 has a bounded textured mesh
+PASS chainveil actions frame 17 has a bounded textured mesh
+PASS chainveil actions frame 18 has a bounded textured mesh
+PASS chainveil actions frame 19 has a bounded textured mesh
+PASS chainveil actions frame 20 has a bounded textured mesh
+PASS chainveil actions frame 21 has a bounded textured mesh
+PASS chainveil actions frame 22 has a bounded textured mesh
+PASS chainveil actions frame 23 has a bounded textured mesh
+PASS chainveil walk has genuine alpha transparency
+PASS chainveil walk frame 24 has a bounded textured mesh
+PASS chainveil walk frame 25 has a bounded textured mesh
+PASS chainveil walk frame 26 has a bounded textured mesh
+PASS chainveil walk frame 27 has a bounded textured mesh
+PASS chainveil has its complete unique pose set
+PASS chainveil renders idle
+PASS chainveil renders walk
+PASS chainveil renders light
+PASS chainveil renders heavy
+PASS chainveil renders guard
+PASS chainveil renders jump
+PASS chainveil renders special
+PASS chainveil renders ultimate
+PASS chainveil renders hit
+PASS chainveil renders ko
+PASS cheese_rat core has genuine alpha transparency
+PASS cheese_rat core frame 0 has a bounded textured mesh
+PASS cheese_rat core frame 1 has a bounded textured mesh
+PASS cheese_rat core frame 2 has a bounded textured mesh
+PASS cheese_rat core frame 3 has a bounded textured mesh
+PASS cheese_rat core frame 4 has a bounded textured mesh
+PASS cheese_rat core frame 5 has a bounded textured mesh
+PASS cheese_rat core frame 6 has a bounded textured mesh
+PASS cheese_rat core frame 7 has a bounded textured mesh
+PASS cheese_rat core frame 8 has a bounded textured mesh
+PASS cheese_rat core frame 9 has a bounded textured mesh
+PASS cheese_rat core frame 10 has a bounded textured mesh
+PASS cheese_rat core frame 11 has a bounded textured mesh
+PASS cheese_rat core frame 12 has a bounded textured mesh
+PASS cheese_rat core frame 13 has a bounded textured mesh
+PASS cheese_rat core frame 14 has a bounded textured mesh
+PASS cheese_rat core frame 15 has a bounded textured mesh
+PASS cheese_rat actions has genuine alpha transparency
+PASS cheese_rat actions frame 16 has a bounded textured mesh
+PASS cheese_rat actions frame 17 has a bounded textured mesh
+PASS cheese_rat actions frame 18 has a bounded textured mesh
+PASS cheese_rat actions frame 19 has a bounded textured mesh
+PASS cheese_rat actions frame 20 has a bounded textured mesh
+PASS cheese_rat actions frame 21 has a bounded textured mesh
+PASS cheese_rat actions frame 22 has a bounded textured mesh
+PASS cheese_rat actions frame 23 has a bounded textured mesh
+PASS cheese_rat walk has genuine alpha transparency
+PASS cheese_rat walk frame 24 has a bounded textured mesh
+PASS cheese_rat walk frame 25 has a bounded textured mesh
+PASS cheese_rat walk frame 26 has a bounded textured mesh
+PASS cheese_rat walk frame 27 has a bounded textured mesh
+PASS cheese_rat has its complete unique pose set
+PASS cheese_rat renders idle
+PASS cheese_rat renders walk
+PASS cheese_rat renders light
+PASS cheese_rat renders heavy
+PASS cheese_rat renders guard
+PASS cheese_rat renders jump
+PASS cheese_rat renders special
+PASS cheese_rat renders ultimate
+PASS cheese_rat renders hit
+PASS cheese_rat renders ko
+PASS heavy full-extension artwork coincides with active hitbox
+PASS guard input selects authored block pose
+PASS KO selects authored defeated pose
+PASS pause freezes sprite animation clock
+ART RESULT: 229 passed, 0 failed
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS exactly five complete fighters are available
+PASS poisonboy can ready in local selection
+PASS poisonboy has animated selection art
+PASS poisonboy has a functional six-damage light attack
+PASS poisonboy has a functional twelve-damage heavy
+PASS poisonboy heavy can be guarded for chip damage
+PASS poisonboy ultimate requires full meter
+PASS poisonboy ultimate spends full meter
+PASS chainveil can ready in local selection
+PASS chainveil has animated selection art
+PASS chainveil has a functional six-damage light attack
+PASS chainveil has a functional twelve-damage heavy
+PASS chainveil heavy can be guarded for chip damage
+PASS chainveil ultimate requires full meter
+PASS chainveil ultimate spends full meter
+PASS cheese_rat can ready in local selection
+PASS cheese_rat has animated selection art
+PASS cheese_rat has a functional six-damage light attack
+PASS cheese_rat has a functional twelve-damage heavy
+PASS cheese_rat heavy can be guarded for chip damage
+PASS cheese_rat ultimate requires full meter
+PASS cheese_rat ultimate spends full meter
+PASS Toxic Splash travels and hits once for sixteen
+PASS PoisonBoy casts instead of using the generic dash
+PASS toxic projectile is directionally blockable
+PASS Venom Cataclysm cloud delivers thirty damage once
+PASS Chain Lash reaches beyond normal melee range
+PASS Chain Lash pulls its target inward
+PASS Chain Lash can be blocked
+PASS Iron Widow has extended reach and thirty damage
+PASS Cheese Ball travels and strikes once
+PASS back plus special places a stationary Cheese Trap
+PASS Cheese Trap is placed behind the retreating fighter
+PASS trap damages only the enemy and is consumed once
+PASS trap remains stationary while waiting
+PASS unused trap expires after its lifetime
+PASS King of the Cheese delivers thirty damage once
+PASS each fighter is limited to three active projectiles or traps
+PASS poisonboy CPU completes a full match at normal health
+PASS chainveil CPU completes a full match at normal health
+PASS cheese_rat CPU completes a full match at normal health
+PASS bullet gallery uses its own named sheet resource
+PASS nachtelf gallery uses its own named sheet resource
+PASS poisonboy gallery uses its own named sheet resource
+PASS the three classic fighters have separate non-identical sheet regions
+EXPANSION RESULT: 45 passed, 0 failed
+PASS sharkbyte 193-frame intro decoded, distinct close-up and kick
+PASS bullet 193-frame intro decoded, distinct close-up and kick
+PASS nachtelf 193-frame intro decoded, distinct close-up and kick
+PASS poisonboy 193-frame intro decoded, distinct close-up and kick
+PASS spinegrin 193-frame intro decoded, distinct close-up and kick
+PASS chainveil 193-frame intro decoded, distinct close-up and kick
+PASS cheese_rat 193-frame intro decoded, distinct close-up and kick
+PASS lava_stone 193-frame intro decoded, distinct close-up and kick
+PASS crystal_fang 193-frame intro decoded, distinct close-up and kick
+PASS phoenix_reign 193-frame intro decoded, distinct close-up and kick
+INTRO MEDIA RESULT: 10 complete distinct intro films verified
