@@ -14,11 +14,11 @@ with zipfile.ZipFile(apk) as archive:
         assert f"assets/assets/intros/{fighter}.ogv" in names, f"Missing {fighter} intro"
     for script in ("scripts/core/input_router", "scripts/ui/game", "scripts/ui/touch_controls"):
         assert f"assets/{script}.gdc" in names, f"Missing compiled {script}"
-    for script in ("scripts/ui/gallery", "scripts/ui/fighter_presentation", "scripts/combat/move_catalog", "scripts/combat/fighter_motion", "scripts/combat/walk_pose_fields", "scripts/combat/action_pose_fields", "scripts/ui/ultimate_gauge", "scripts/ui/combat_chrome"):
+    for script in ("scripts/ui/gallery", "scripts/ui/fighter_presentation", "scripts/combat/move_catalog", "scripts/combat/fighter_motion", "scripts/combat/walk_pose_fields", "scripts/combat/action_pose_fields", "scripts/ui/ultimate_gauge", "scripts/ui/combat_chrome", "scripts/ui/fighter_bust"):
         assert f"assets/{script}.gdc" in names, f"Missing character presentation {script}"
     for script in ('scripts/network/session_code', 'scripts/network/session_discovery', 'scripts/network/online_session',
                    'scripts/network/network_match_driver', 'scripts/ui/online_lobby'):
-        assert f'assets/{script}.gdc' in names, f'Missing V9 connection script {script}'
+        assert f'assets/{script}.gdc' in names, f'Missing V10 connection script {script}'
     import json
     fighters = json.loads(archive.read('assets/data/fighters.json'))['fighters']
     moves = json.loads(archive.read('assets/data/move_sets.json'))
@@ -41,7 +41,15 @@ with zipfile.ZipFile(apk) as archive:
     for profile in actions['profiles'].values():
         for raw in profile['fields'].values():
             assert len(zlib.decompress(base64.b64decode(raw))) == actions['grid'][0]*actions['grid'][1]*4
-    for shader in ['presentation','ultimate_bar']:
+    for shader in ['presentation','ultimate_bar','cel']:
         assert f'assets/assets/shaders/{shader}.gdshader' in names
-    assert not any(name.startswith(("assets/tests/", "assets/releases/")) for name in names)
-print(f"APK PAYLOAD PASS: ARM64 + x86_64, V9 whole-attack motion and glowing ultimate UI, 49 clips / 266 action fields, ten playable fighters, 69 moves, touch ({apk.stat().st_size} bytes)")
+    poses = json.loads(archive.read('assets/data/sprite_atlases.json'))
+    busts = json.loads(archive.read('assets/data/select_busts.json'))['profiles']
+    assert set(busts) == {f['id'] for f in fighters}
+    assert sum(len(p['drawn']['frames'])+len(p.get('drawn_heavy',{}).get('frames',[])) for p in poses.values()) == 240
+    for fighter, data in poses.items():
+        assert len(data['animations']['walk']['frames']) == 12
+        assert len(data['animations']['heavy']['frames']) == 12
+        assert data['animations']['heavy']['contact_frame'] == 6
+    assert not any(name.startswith(("assets/tests/", "assets/releases/", "assets/builds/")) for name in names)
+print(f"APK PAYLOAD PASS: ARM64 + x86_64, V10 full-surface HUD, 240 drawn poses, ten half-body portraits and glowing ultimate UI, ten playable fighters, 69 moves, touch ({apk.stat().st_size} bytes)")

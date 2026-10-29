@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "profiles": {
+    "sharkbyte": {
+      "path": "assets/portraits/v10_classic.png",
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "bullet": {
+      "path": "assets/portraits/v10_classic.png",
+      "rect": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "nachtelf": {
+      "path": "assets/portraits/v10_classic.png",
+      "rect": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "poisonboy": {
+      "path": "assets/portraits/v10_classic.png",
+      "rect": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "spinegrin": {
+      "path": "assets/portraits/v10_classic.png",
+      "rect": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "chainveil": {
+      "path": "assets/portraits/v10_legends.png",
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "cheese_rat": {
+      "path": "assets/portraits/v10_legends.png",
+      "rect": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "lava_stone": {
+      "path": "assets/portraits/v10_legends.png",
+      "rect": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "crystal_fang": {
+      "path": "assets/portraits/v10_legends.png",
+      "rect": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    },
+    "phoenix_reign": {
+      "path": "assets/portraits/v10_legends.png",
+      "rect": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "kind": "new high-resolution half-body portrait; intentionally framed at waist"
+    }
+  }
+}

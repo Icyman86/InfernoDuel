@@ -1,3 +1,72 @@
+# V10 full phone surface and discrete animation drawings — 29 October 2026
+
+V10 / 0.10.0, Android code 1000. The root viewport uses native device pixels.
+Citadel paints the entire screen; HUD and thumb controls follow the same safe
+rectangle. Fighters retain uniform proportions and the deterministic combat
+bounds stay unchanged. Six framebuffer layouts passed: 1280×582 (the supplied
+screenshot ratio), 2400×1080, OnePlus 13R 2780×1264, 2532×1170, 1024×768 and
+1280×720. These are actual Linux framebuffer checks, not a physical OnePlus run.
+
+All ten fighters receive twelve illustrated walk poses and twelve heavy poses,
+240 new drawings in total. The renderer switches intact polygons/UVs/textures
+without flow interpolation, mesh morphing or a visible previous-frame layer.
+Heavy extension remains aligned with the active hitbox. Other attacks keep their
+older illustrated keys. Selection uses ten separate high-resolution half-body
+paintings; the Fighters podium retains the same world and rings. Thin connected
+hair/chain contours initially exposed a triangulation failure; convex alpha
+envelopes fix it without repainting any pixels, and every new mesh is checked.
+
+| Final check | Result and scope |
+| --- | --- |
+| Original artwork / films | PASS — eight original hashes unchanged; all ten complete intro films decoded |
+| Core / artwork / expansion / roster | PASS — 70 + 745 + 45 + 287 = 1,147 source assertions; all 69 moves and ten complete CPU matches |
+| Touch / persistent podiums | PASS — 38 + 92 rendered assertions; all ten enter, perform and remain on their rings |
+| Linux UI / intro rendering | PASS — 9 + 31 assertions |
+| Session codes / actual network / native resolution / mobile UI | PASS — 53 + 25 + 20 + 10 assertions |
+| Rendered network repeat | PASS — same 25 assertions using three actual processes, direct UDP discovery and ENet |
+| Movement / GPU regression | PASS — 121 + 37 assertions; legacy compositing fixture retained, live V10 drawing checks below |
+| Attack integrity / balance | PASS — 160 assertions across 49 clips: immutable drawing geometry, fixed heavy support, pause, collision gait, 200 HP and normal-input ultimate earning/spending/hit |
+| Rendered attacks / gold gauges | PASS — 20 assertions across all ten fighters; varied heavy images and actual gold GPU pixels |
+| V10 layouts / portraits / new meshes | PASS — 80 assertions across six native framebuffers, ten half-body crops and 240 triangulatable poses |
+| Exported Linux release engine + PCK | PASS — real OS keyboard menu/Fighters/select/arena/fight, visible attack damage, pause and normal Quit; no engine/script errors |
+| Android export / archive / signing | PASS — ARM64+x86_64, complete CRCs, compiled code and matching final metadata, APK v2/v3 signing and 16-KiB alignment |
+| Android manifest / certificate | PASS — 0.10.0 / code 1000, API 24 minimum / target 36; retained V4–V9 development certificate |
+| Wide preview | PASS — full FFmpeg decode, H.264 1280×582, 60 video FPS, 1,815 frames / 30.25 seconds |
+| Physical Android / Wi-Fi acceptance | NOT RUN — no attached phone/tablet; no digitizer, cutout, installation, thermal or physical FPS acceptance claimed |
+
+There are **1,843 distinct successful automated source assertions**. Repeated
+network, quality and updated screenshot runs are additional executions. Original
+hashes, media decoding, signing/export and the native package smoke are separate.
+Final required runs contain no engine/script errors or leaked instances. The
+software display retains its unsupported V-Sync warning. Final logs, screen
+samples and the native smoke helper are published in
+releases/android-v0.10.0/validation/.
+
+Linux llvmpipe movement measurements target 60 FPS: at 1280×720 the actual
+average was 60.00 FPS (median 16.67 ms, p95 16.878 ms); at 2780×1264 it was
+34.84 FPS (median 26.737 ms, p95 39.543 ms). This software renderer is not the
+OnePlus GPU. Rendering at native resolution costs more pixels; these numbers
+neither guarantee nor rule out 60 FPS on a physical phone.
+
+The new APK is 181,865,950 bytes, SHA-256
+b48e8cfab918044be26e67f001353e481c5ec2b231ff2fcea5ebd57d5353505d.
+Its signing certificate SHA-256 is
+bf325c42dd009bd6a6309692bfbbf46a9b3448a807a8718a284e0b8a8c5ab48c.
+The 60-FPS video is an offline Movie Maker capture with slowed attacks for pose
+inspection and a charged-meter HUD fixture. It does not establish real-phone
+performance or sixty independently drawn poses per second. The frame benchmark
+logs report actual monotonic Linux/software-rendered intervals separately.
+
+Reproduce with tools/test.sh, tools/test_touch.sh, tools/test_gallery.sh,
+tests/visual.tscn, tests/expansion_visual.tscn and
+TEST_NETWORK_RENDERED=1 tools/test_v10.sh with DISPLAY for rendered checks.
+Build with tools/build_android.sh and tools/build_linux.sh. The optional
+tools/render_v10_preview.sh uses an isolated initial viewport config for the
+wide movie; it does not change project.godot or the APK. Old tags/artifacts and
+all original artwork are retained. Both session peers must use V10.
+
+---
+
 # iPhone-port van V9 / 0.9.0 — 29 October 2026
 
 Een iOS-preset voor ARM64, iOS 15+, build 900 is toegevoegd. Godot 4.6.3 exporteert

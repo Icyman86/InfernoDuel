@@ -62,7 +62,7 @@ func run() -> void:
 	actor.begin_attack("heavy")
 	actor.attack_time = actor.attack.startup+actor.attack.active*0.65
 	actor.visual._update_pose()
-	check(actor.visual.state == "heavy" and actor.visual.frame_number == 2,"heavy full-extension artwork coincides with active hitbox")
+	check(actor.visual.state == "heavy" and actor.visual.frame_number in [6,7],"heavy full-extension artwork coincides with active hitbox")
 	actor.attack = null
 	actor.guarding = true
 	actor.visual._update_pose()

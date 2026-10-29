@@ -28,6 +28,10 @@ var meter_labels: Array[Label] = []
 var round_tokens: Array[Label] = []
 var input_provider: Callable
 var local_network_slot := -1
+var chrome: CombatChrome
+var portraits: Array[Control] = []
+var timer_panel: PanelContainer
+var footer: Control
 
 func _ready() -> void:
 	for i in 2:
@@ -45,7 +49,7 @@ func _make_hud() -> void:
 	hud = Control.new()
 	hud.theme = UI.theme()
 	add_child(hud)
-	var chrome := CombatChrome.new()
+	chrome = CombatChrome.new()
 	hud.add_child(chrome)
 	for i in 2:
 		var x := 134.0 if i == 0 else 748.0
@@ -55,6 +59,7 @@ func _make_hud() -> void:
 		portrait_style.set_corner_radius_all(14)
 		portrait_frame.add_theme_stylebox_override("panel",portrait_style)
 		hud.add_child(UI.place(portrait_frame,34 if i == 0 else 1162,34,84,88))
+		portraits.append(portrait_frame)
 		var portrait := FighterPortrait.new()
 		portrait.setup(profiles[i])
 		portrait_frame.add_child(portrait)
@@ -89,7 +94,7 @@ func _make_hud() -> void:
 		var combo_label := UI.label("",22,c)
 		hud.add_child(UI.place(combo_label,95 if i == 0 else 780,163,405,75))
 		combos.append(combo_label)
-	var timer_panel := UI.panel()
+	timer_panel = UI.panel()
 	var timer_style := UI.style(Color("0d1726"),Color("334a62"),1)
 	timer_style.set_corner_radius_all(18)
 	timer_panel.add_theme_stylebox_override("panel",timer_style)
@@ -104,6 +109,7 @@ func _make_hud() -> void:
 	hud.add_child(UI.place(announcement,100,230,1080,145))
 	if GamePlatform.touch_enabled(): return
 	var footer_bg := ColorRect.new()
+	footer = footer_bg
 	footer_bg.color = Color(0.02,0.015,0.03,0.84)
 	footer_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(UI.place(footer_bg,0,675,1280,45))
@@ -113,6 +119,34 @@ func _make_hud() -> void:
 	hud.add_child(UI.place(UI.label("P1  A D · W · S · F G H J",16,UI.CYAN),35,684,420,28))
 	hud.add_child(UI.place(UI.label("ESC  PAUSE   /   F3  HITBOXES",14,UI.MUTED),455,684,370,28))
 	hud.add_child(UI.place(UI.label("P2  ← → · ↑ · ↓ · I O P L",16,UI.ORANGE),825,684,420,28))
+
+func layout_hud(safe: Rect2) -> void:
+	if not hud: return
+	hud.position = safe.position
+	hud.size = safe.size
+	var width := safe.size.x
+	var side_width := width*.5-82
+	var bar_width := side_width-160
+	chrome.logical_width = width
+	chrome.queue_redraw()
+	for i in 2:
+		var x := 134.0 if i == 0 else width*.5+108
+		portraits[i].position.x = 34 if i == 0 else width-118
+		for item in [names[i],health[i],meter_labels[i]]:
+			item.position.x = x
+			item.size.x = bar_width
+		meters[i].position.x = x-4
+		meters[i].size.x = bar_width+8
+		round_tokens[i].position.x = side_width-137 if i == 0 else width*.5+109
+		combos[i].position.x = 95 if i == 0 else width-500
+	timer_panel.position.x = width*.5-63
+	timer_label.position.x = width*.5-65
+	round_label.position.x = width*.5-72
+	announcement.position = Vector2(100,safe.size.y*.32)
+	announcement.size.x = width-200
+	if footer:
+		footer.position.y = safe.size.y-45
+		footer.size.x = width
 
 
 func start_round(keep_meter := true) -> void:

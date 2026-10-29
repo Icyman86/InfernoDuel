@@ -1,4 +1,4 @@
-# Prototype architecture — V9 / v0.9.0
+# Prototype architecture — V10 / v0.10.0
 
 Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 `scenes/main.tscn` is the F5 entry point. No network services or secrets are needed.
@@ -9,7 +9,9 @@ Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 - `scripts/ui/game.gd` routes menu, connection, character select, arena, gallery,
   intro, options, pause and results on a logical 1280×720 stage. The root viewport
   renders at native surface pixels with Godot stretch disabled. The stage fits
-  the safe rectangle without changing arena coordinates. Gallery index survives intro playback.
+  the safe rectangle without changing arena coordinates. Citadel draws over the
+  full native viewport via view_rect, splitting at the fixed combat floor; HUD
+  uses layout_hud with that same safe area. Gallery index survives intro playback.
 - `fighter_controller.gd` owns deterministic movement, facing, attack lifecycle,
   blocking, hitstun, cooldowns and meter. Each fighter duplicates base `AttackData`
   resources before applying data-driven overrides, avoiding shared-state mutations.
@@ -76,7 +78,8 @@ air control. Physics interpolation and reset handling smooth world motion withou
 changing the 60 Hz deterministic simulation. FighterMotion samples movement curves at render cadence, with separate per-character
 stride/bounce/lean profiles. Gait advances by traveled distance and reverses for
 backsteps. Start, brake, pivot, rise/apex/fall/land and guard transitions are visual
-only. Facing eases over 120 ms, resets on round start and freezes with pause.
+only. Facing flips directly without squeezing the image, resets on round start
+and freezes with pause. World movement remains physics-interpolated.
 
 FighterVisual caches atlas polygons/UVs and only uploads changed geometry. Walking
 uses a cached union mesh for adjacent poses and one GPU pass. WalkPoseFields loads
@@ -129,16 +132,23 @@ An eight-second gameplay heartbeat timeout stops lost sessions. Disconnects
 close the ENet peer on a deferred call, outside SceneMultiplayer's packet poll.
 See NETWORK.md for endpoint reachability and testing limits.
 
-## V9 whole attacks, planted gait and ultimate readability
+## V10 intact drawings and responsive display
 
-ActionPoseFields loads 49 clip timelines and 266 compressed RGBA8 motion-vector
-fields from data/action_motion_fields.json. Anticipation/chamber reaches extension
-at semantic progress .45, contact spans .45–.65, then recovery returns to the idle
-key. FighterVisual maps startup/active/recovery to those phases, smooths each
-interval and binds the cached union mesh/field in the existing one-pass shader.
-Support-foot pivots plus a clip root offset preserve resting position. The 3D
-presentation copies the same field parameters to a spatial shader and fits the
-whole signature envelope once, keeping a fixed support location on the rings.
+FighterVisual caches immutable polygons, UVs, pivots and uniform atlas scales.
+cel.gdshader samples the unmodified texture plus the hit flash; it has no vertex
+or UV displacement. The previous-frame layer remains hidden. Walk and heavy each
+select twelve new poses per fighter; other moves use their existing discrete
+keys. Heavy times map semantic startup/active/recovery and hold extension during
+contact. The old motion-field data/tools remain for historical reproduction but
+are not loaded by the live sprite or podium renderer.
+
+FighterPresentation uses the same discrete signature frames, an alpha-cutout
+spatial material and an extruded mesh. A fixed envelope fits all signature poses;
+its world, camera and rings persist after the entrance. New generated pose
+polygons use convex alpha envelopes so thin hair/chains cannot self-intersect
+and break Godot triangulation. Transparent pixels preserve the painted contour.
+FighterBust crops separately painted 512×512 half-body artwork from two sheets.
+It animates entrance alpha and rigid image position, without deforming anatomy.
 
 The controller records walk_distance only for grounded free locomotion; the match
 corrects it after push-box resolution. FighterMotion advances gait from that

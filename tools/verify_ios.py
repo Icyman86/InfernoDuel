@@ -3,10 +3,16 @@ import argparse
 import hashlib
 import io
 import json
+import re
 from pathlib import Path
 import plistlib
 import struct
 import zipfile
+
+
+PROJECT_VERSION = re.search(r'config/version="([^"]+)"', (Path(__file__).resolve().parent.parent/'project.godot').read_text())[1]
+PARTS = list(map(int, PROJECT_VERSION.split('.')))
+PROJECT_BUILD = str(PARTS[0]*10000+PARTS[1]*100+PARTS[2])
 
 
 def pack_files(raw):
@@ -62,7 +68,7 @@ def verify_plist(info):
 
 def verify_project(folder):
     project = (folder/'InfernoDuel.xcodeproj/project.pbxproj').read_text()
-    for expected in ['IPHONEOS_DEPLOYMENT_TARGET = 15.0', 'MARKETING_VERSION = 0.9.0', 'CURRENT_PROJECT_VERSION = 900', 'PRODUCT_BUNDLE_IDENTIFIER = org.infernoduel.legends']:
+    for expected in ['IPHONEOS_DEPLOYMENT_TARGET = 15.0', 'MARKETING_VERSION = '+PROJECT_VERSION, 'CURRENT_PROJECT_VERSION = '+PROJECT_BUILD, 'PRODUCT_BUNDLE_IDENTIFIER = org.infernoduel.legends']:
         assert expected in project, expected
     info = plistlib.loads((folder/'InfernoDuel/InfernoDuel-Info.plist').read_bytes())
     verify_plist(info)
@@ -84,7 +90,7 @@ def verify_ipa(path):
         info = plistlib.loads(archive.read(plists[0]))
         verify_plist(info)
         assert info['CFBundleIdentifier'] == 'org.infernoduel.legends'
-        assert info['CFBundleShortVersionString'] == '0.9.0' and info['CFBundleVersion'] == '900'
+        assert info['CFBundleShortVersionString'] == PROJECT_VERSION and info['CFBundleVersion'] == PROJECT_BUILD
         assert info['CFBundleSupportedPlatforms'] == ['iPhoneOS'], 'Simulator build is not installable'
         assert tuple(map(int, info['MinimumOSVersion'].split('.'))) >= (15, 0)
         binary = archive.read(prefix+info['CFBundleExecutable'])

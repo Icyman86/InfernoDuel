@@ -1,6 +1,6 @@
 class_name FighterVisual
 extends Node2D
-## Reference-derived, alpha-separated animation keys. Combat logic owns timing.
+## Discrete illustrated poses. No UV interpolation, mesh morph or ghost layers.
 const ART_DATA_PATH := "res://data/sprite_atlases.json"
 static var art_cache: Dictionary = {}
 var profile: Dictionary = {}
@@ -54,11 +54,8 @@ func _ready() -> void:
 		node.antialiased = true
 		node.z_index = 1 if previous else 0
 		var fx := ShaderMaterial.new()
-		fx.shader = preload("res://assets/shaders/fighter.gdshader")
+		fx.shader = preload("res://assets/shaders/cel.gdshader")
 		fx.set_shader_parameter("team_color",accent)
-		fx.set_shader_parameter("leg_swing",float(motion.profile.leg_swing))
-		fx.set_shader_parameter("arm_swing",float(motion.profile.arm_swing))
-		fx.set_shader_parameter("body_bounce",float(motion.profile.bounce)/target_height)
 		node.material = fx
 		add_child(node)
 		if previous:
@@ -69,10 +66,10 @@ func _ready() -> void:
 			sprite = node
 			material_fx = fx
 	if actor:
-		var walk: Dictionary = metadata.animations.walk
-		WalkPoseFields.prime(profile.id)
-		ActionPoseFields.prime(profile.id)
-		if not WalkPoseFields.available(profile.id): rig_geometry(frame_data(walk.get("atlas","core"),walk.frames[0]))
+		# Warm immutable pose geometry; no optical-flow textures are loaded.
+		for name in ["walk","heavy"]:
+			var clip: Dictionary = metadata.animations[name]
+			for index in clip.frames: frame_data(clip.get("atlas","core"),index)
 		shown_facing = actor.facing
 		facing_from = actor.facing
 		facing_target = actor.facing
@@ -99,9 +96,6 @@ func frame_data(source: String, index: int) -> Dictionary:
 	if not geometry_cache.has(key):
 		var frame: Dictionary = metadata[source].frames[index]
 		var pivot := Vector2(frame.pivot[0],frame.pivot[1])
-		if source == str(metadata.animations.walk.get("atlas","core")) and WalkPoseFields.available(profile.id):
-			var anchor: Array = WalkPoseFields.data.get("anchors",{}).get(profile.id,{}).get(str(index),frame.pivot)
-			pivot = Vector2(anchor[0],anchor[1])
 		var r: Array = frame.rect
 		var vertices := PackedVector2Array()
 		var uvs := PackedVector2Array()
@@ -121,106 +115,14 @@ func frame_data(source: String, index: int) -> Dictionary:
 		geometry_builds += 1
 	return geometry_cache[key]
 
-func action_frame(descriptor: Dictionary, animation: String) -> Dictionary:
-	var raw := frame_data(descriptor.atlas,int(descriptor.index))
-	var key: String = raw.key+"@"+animation
-	if not geometry_cache.has(key):
-		var copy := raw.duplicate()
-		copy.key = key
-		copy.pivot = Vector2(descriptor.pivot[0],descriptor.pivot[1])
-		copy.flow_meshes = {}
-		geometry_cache[key] = copy
-		texture_cache[key] = texture_cache[raw.key]
-	return geometry_cache[key]
-
-func rig_geometry(data: Dictionary) -> void:
-	if data.has("rig_vertices"): return
-	var vertices: PackedVector2Array = data.vertices.duplicate()
-	var triangles := Geometry2D.triangulate_polygon(vertices)
-	# Two subdivisions add interior joints to the authored outline. UVs stay
-	# tied to the original drawing while the GPU articulates legs and arms.
-	for subdivision in 2:
-		var edges := {}
-		var refined := PackedInt32Array()
-		for i in range(0,triangles.size(),3):
-			var a: int = triangles[i]
-			var b: int = triangles[i+1]
-			var c: int = triangles[i+2]
-			var mids: Array[int] = []
-			for edge in [[a,b],[b,c],[c,a]]:
-				var key: int = (mini(edge[0],edge[1]) << 32) | maxi(edge[0],edge[1])
-				if not edges.has(key):
-					edges[key] = vertices.size()
-					vertices.append((vertices[edge[0]]+vertices[edge[1]])*.5)
-				mids.append(edges[key])
-			refined.append_array(PackedInt32Array([a,mids[0],mids[2],mids[0],b,mids[1],mids[2],mids[1],c,mids[0],mids[1],mids[2]]))
-		triangles = refined
-	var uv := PackedVector2Array()
-	for point in vertices: uv.append(point+Vector2(data.origin))
-	var polygons: Array[PackedInt32Array] = []
-	for i in range(0,triangles.size(),3): polygons.append(PackedInt32Array([triangles[i],triangles[i+1],triangles[i+2]]))
-	data.rig_vertices = vertices
-	data.rig_uv = uv
-	data.rig_triangles = polygons
-
-func assign_frame(node: Polygon2D, data: Dictionary, rigged := false) -> void:
-	var key: String = data.key+("-rig" if rigged else "")
-	if node.get_meta("frame_key","") != key:
-		if rigged: rig_geometry(data)
-		node.polygons = data.rig_triangles if rigged else []
-		node.polygon = data.rig_vertices if rigged else data.vertices
-		node.uv = data.rig_uv if rigged else data.uv
-		node.texture = data.texture
-		node.set_meta("frame_key",key)
-		node.set_meta("frame_data",data)
-		node.set_meta("rigged",rigged)
-		node.material.set_shader_parameter("pivot_pixels",data.pivot)
-		node.material.set_shader_parameter("body_height_pixels",data.height)
-		geometry_assignments += 1
-
-func assign_flow_frame(base: Dictionary, next: Dictionary, action: Dictionary = {}) -> void:
-	var key: String = base.key+"-flow-"+next.key
-	if sprite.get_meta("frame_key","") == key: return
-	if not base.has("flow_meshes"): base.flow_meshes = {}
-	if not base.flow_meshes.has(next.key):
-		var points: PackedVector2Array = base.vertices.duplicate()
-		for point in next.vertices:
-			points.append((point-Vector2(next.pivot))*float(next.scale)/float(base.scale)+Vector2(base.pivot))
-		var hull := Geometry2D.convex_hull(points)
-		if hull.size() > 1 and hull[0] == hull[-1]: hull.resize(hull.size()-1)
-		var uv := PackedVector2Array()
-		for point in hull: uv.append(point+Vector2(base.origin))
-		base.flow_meshes[next.key] = [hull,uv]
-	sprite.polygons = []
-	sprite.polygon = base.flow_meshes[next.key][0]
-	sprite.uv = base.flow_meshes[next.key][1]
-	sprite.texture = base.texture
-	sprite.set_meta("frame_data",base)
-	sprite.set_meta("frame_key",key)
-	sprite.set_meta("rigged",false)
-	material_fx.set_shader_parameter("pivot_pixels",base.pivot)
-	material_fx.set_shader_parameter("body_height_pixels",base.height)
-	blend_coverage(base,next)
-	if action.is_empty():
-		WalkPoseFields.bind(material_fx,profile.id,frame_number,base,next,target_height)
-	else:
-		WalkPoseFields.bind_texture(material_fx,ActionPoseFields.texture(profile.id,action.pair),base,next,target_height,ActionPoseFields.data)
+func assign_frame(node: Polygon2D, data: Dictionary) -> void:
+	if node.get_meta("frame_key","") == data.key: return
+	node.polygon = data.vertices
+	node.uv = data.uv
+	node.texture = data.texture
+	node.set_meta("frame_key",data.key)
+	node.set_meta("frame_data",data)
 	geometry_assignments += 1
-
-func blend_coverage(base: Dictionary, overlay: Dictionary) -> void:
-	var pair: String = base.key+":"+overlay.key
-	if sprite.get_meta("blend_pair","") == pair: return
-	sprite.set_meta("blend_pair",pair)
-	var size_a: Vector2 = base.texture.get_size()
-	var size_b: Vector2 = overlay.texture.get_size()
-	var ratio: float = float(base.scale)/float(overlay.scale)
-	var uv_scale := size_a*ratio/size_b
-	var uv_offset: Vector2 = ((-Vector2(base.origin)-Vector2(base.pivot))*ratio+Vector2(overlay.pivot)+Vector2(overlay.origin))/size_b
-	material_fx.set_shader_parameter("overlay_texture",overlay.texture)
-	material_fx.set_shader_parameter("overlay_uv",Vector4(uv_scale.x,uv_scale.y,uv_offset.x,uv_offset.y))
-	var lo: Vector2 = overlay.origin/size_b
-	var hi: Vector2 = (Vector2(overlay.origin)+Vector2(overlay.extent))/size_b
-	material_fx.set_shader_parameter("overlay_bounds",Vector4(lo.x,lo.y,hi.x,hi.y))
 
 func _update_pose(delta := 0.0) -> void:
 	if not sprite or metadata.is_empty(): return
@@ -250,7 +152,7 @@ func _update_pose(delta := 0.0) -> void:
 			facing_target = actor.facing
 			turn_age = 0
 		turn_age += delta
-		shown_facing = lerpf(facing_from,facing_target,smoothstep(0,.12,turn_age))
+		shown_facing = facing_target
 		scale.x = shown_facing
 		var flash := minf(1.0,actor.flash/.12)
 		material_fx.set_shader_parameter("hit_flash",flash)
@@ -262,89 +164,34 @@ func _update_pose(delta := 0.0) -> void:
 	motion_state = motion.clip
 	var animation: Dictionary = metadata.animations.get(state,metadata.animations.idle)
 	var indices: Array = animation.frames
-	var phase := 0.0
-	var flowing := actor != null and state == "walk" and progress < 0 and WalkPoseFields.available(profile.id)
-	var rigged := actor != null and state == "walk" and progress < 0 and not flowing
-	var cyclic := progress < 0 and state in ["idle","walk"] and indices.size() > 1 and not rigged
-	if progress >= 0:
-		frame_number = mini(indices.size()-1,int(progress*indices.size()))
-	elif state == "walk":
+	frame_number = 0
+	if state == "walk" and progress < 0:
 		walk_phase = fposmod(motion.gait,1.0)*indices.size()
-		phase = walk_phase
-		frame_number = 0 if rigged else int(phase)%indices.size()
-	else:
-		phase = clock*float(animation.get("fps",8))*float(motion.profile.tempo)
-		frame_number = int(phase)%indices.size()
-	var source: String = animation.get("atlas","core")
-	var data := frame_data(source,indices[frame_number])
-	var action := {}
-	if progress >= 0 and ActionPoseFields.available(profile.id,state):
-		action = ActionPoseFields.sample(profile.id,state,progress)
-		data = action_frame(action.base,state)
-		frame_number = int(action.base.frame)
-	support_anchor = Vector2.ZERO
-	material_fx.set_shader_parameter("flow_blend",flowing)
-	if not action.is_empty():
-		var next := action_frame(action.next,state)
-		assign_flow_frame(data,next,action)
-		action_blend = action.mix
-		support_anchor = Vector2(action.offset)*target_height/float(ActionPoseFields.data.body_height)
-		material_fx.set_shader_parameter("flow_blend",true)
-		material_fx.set_shader_parameter("flow_mix",action_blend)
-		material_fx.set_shader_parameter("pose_alpha",1.0)
-		previous_sprite.visible = false
-	elif cyclic:
-		# Blend toward the next authored key for the ENTIRE interval. There is no
-		# static hold between keys, even on four-key legacy walk cycles.
-		var next := frame_data(source,indices[(frame_number+1)%indices.size()])
-		if flowing:
-			assign_flow_frame(data,next)
-			cycle_blend = fposmod(phase,1.0)
-			material_fx.set_shader_parameter("flow_mix",cycle_blend)
-			material_fx.set_shader_parameter("pose_alpha",1.0)
-			previous_sprite.visible = false
+		frame_number = int(walk_phase)%indices.size()
+	elif progress >= 0:
+		if animation.has("times"):
+			for i in indices.size():
+				if progress >= float(animation.times[i]): frame_number = i
 		else:
-			assign_frame(sprite,data)
-			assign_frame(previous_sprite,next)
-			cycle_blend = smoothstep(0,1,fposmod(phase,1.0))
-			material_fx.set_shader_parameter("pose_alpha",1.0-cycle_blend if next.key != data.key else 1.0)
-			previous_material.set_shader_parameter("pose_alpha",cycle_blend if next.key != data.key else 0.0)
-			previous_sprite.visible = next.key != data.key and cycle_blend > .001
-	else:
-		if data.key != last_key and last_key != "":
-			var outgoing: Dictionary = sprite.get_meta("frame_data",data)
-			assign_frame(previous_sprite,outgoing,bool(sprite.get_meta("rigged",false)))
-			previous_sprite.visible = true
-			blend_age = 0
-		assign_frame(sprite,data,rigged)
-		blend_age += delta
-		var alpha := smoothstep(0,.075,blend_age)
-		material_fx.set_shader_parameter("pose_alpha",alpha if previous_sprite.visible else 1.0)
-		previous_material.set_shader_parameter("pose_alpha",1-alpha)
-		if alpha >= 1: previous_sprite.visible = false
-	material_fx.set_shader_parameter("blend_base",previous_sprite.visible)
-	if previous_sprite.visible:
-		blend_coverage(data,previous_sprite.get_meta("frame_data",data))
-		material_fx.set_shader_parameter("overlay_weight",cycle_blend if cyclic else 1.0-smoothstep(0,.075,blend_age))
-	last_key = data.key
+			# Original attacks keep their drawn windup/contact/recovery keys.
+			frame_number = mini(indices.size()-1,int(progress*indices.size()))
+	elif state not in ["idle","guard"]:
+		frame_number = int(clock*float(animation.get("fps",8)))%indices.size()
+	var data := frame_data(animation.get("atlas","core"),indices[frame_number])
+	assign_frame(sprite,data)
+	previous_sprite.visible = false
 	current_pivot = data.pivot
 	current_texture = texture_cache[data.key]
-	var stretch := motion.stretch if not locked else Vector2.ONE
-	var offset := motion.offset if not locked else Vector2.ZERO
-	if actor and actor.attack and actor.attack.command == "down" and actor.attack.slot == "light": stretch.y *= .94
-	body_lean = motion.lean if not locked else 0.0
-	if state in ["light","heavy","special","ultimate","peck"] and progress >= 0:
-		body_lean += sin(progress*PI)*(.13 if state == "peck" else .035)
-	if state == "hit": offset.x -= 5
-	for node in [sprite,previous_sprite]:
-		var frame: Dictionary = node.get_meta("frame_data",data)
-		node.scale = Vector2.ONE*float(frame.scale)*stretch
-		# Scale around the foot pivot, not the atlas rectangle's top-left.
-		node.position = -Vector2(frame.pivot)*node.scale+offset+support_anchor
-		node.rotation = 0
-		node.material.set_shader_parameter("gait_phase",motion.gait*TAU)
-		node.material.set_shader_parameter("walk_weight",motion.blend_speed if not locked else 0.0)
-		node.material.set_shader_parameter("body_lean",body_lean)
+	support_anchor = Vector2.ZERO
+	action_blend = 0
+	body_lean = 0
+	material_fx.set_shader_parameter("flow_blend",false)
+	material_fx.set_shader_parameter("gait_phase",motion.gait*TAU)
+	# Every rendered pose is an intact drawing. Neither vertices nor UVs morph.
+	sprite.scale = Vector2.ONE*float(data.scale)
+	sprite.position = -Vector2(data.pivot)*sprite.scale
+	sprite.rotation = 0
+	last_key = data.key
 
 func _draw() -> void:
 	if metadata.is_empty(): return

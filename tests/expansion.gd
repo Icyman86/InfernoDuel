@@ -48,7 +48,7 @@ func run() -> void:
 		game.screen.choose(0,index_of(id))
 		game.screen.confirm(0)
 		check(game.screen.ready_players[0],id+" can ready in local selection")
-		check(game.screen.hero_holders[0].get_child(0) is FighterVisual,id+" has animated selection art")
+		check(game.screen.hero_holders[0].get_child(0) is FighterBust,id+" has animated half-body selection art")
 		fresh(id,560,650)
 		ticks(8,{"light":true})
 		check(duel.fighters[1].hp == DuelFighter.MAX_HEALTH - 6,id+" has a functional six-damage light attack")

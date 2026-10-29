@@ -434,6 +434,185 @@
       "original_user_file": false,
       "unique_poses": 8,
       "notes": "Full-silhouette meshes retain extended kick feet outside nominal grid cells. Heavy attacks depict actual kicks or a wolf bite; additional slam/wing/buff keys are shared by appropriate abilities."
+    },
+    {
+      "path": "assets/portraits/v10_classic.png",
+      "sha256": "abc2089e50203be0e43c40d3d6a5476d32800651eab70338f29762defaafa4a5",
+      "kind": "reference_guided_generated_half_body_portraits",
+      "original_user_file": false,
+      "fighters": [
+        "sharkbyte",
+        "bullet",
+        "nachtelf",
+        "poisonboy",
+        "spinegrin"
+      ],
+      "grid": [
+        3,
+        2
+      ],
+      "notes": "Five intentionally waist-up images, sixth cell unused. ImageGen output copied byte-for-byte; no image pixel editing by code."
+    },
+    {
+      "path": "assets/portraits/v10_legends.png",
+      "sha256": "a0983a767c99797dde5b5fd942307251d4be6153511b9ab2ace4bfd7c0d7b308",
+      "kind": "reference_guided_generated_half_body_portraits",
+      "original_user_file": false,
+      "fighters": [
+        "chainveil",
+        "cheese_rat",
+        "lava_stone",
+        "crystal_fang",
+        "phoenix_reign"
+      ],
+      "grid": [
+        3,
+        2
+      ],
+      "notes": "Five intentionally waist-up images, sixth cell unused. ImageGen output copied byte-for-byte; no image pixel editing by code."
+    },
+    {
+      "path": "assets/sprites/sharkbyte/v10_motion.png",
+      "sha256": "e641126d0b93cd93571179fa73806c5e958391f3d294fd70e190d594e821b8e3",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/sharkbyte/core.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/bullet/v10_motion.png",
+      "sha256": "2e841f9d6b7613242db8cc98c9d1c590461479054147c027d99844e8584e9256",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/bullet/core.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/chainveil/v10_motion.png",
+      "sha256": "083da40fce08ff5ecb0ba9ea78fe1472b18f78fb58c8e23203fa33fe0a93a8e0",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/chainveil/core.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/poisonboy/v10_motion.png",
+      "sha256": "0666b54783e0ba18371fe0b5f9d77bca49e4aa10cd6bab6d711cc5b1e13710b3",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/poisonboy/core.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 12,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/poisonboy/v10_heavy.png",
+      "sha256": "8831842e5be1bb7dfcd0ede33aa7c9eb9d36e2f6725cd6fbd417e805f04c3f1c",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/poisonboy/core.png",
+      "grid": [
+        4,
+        3
+      ],
+      "indexed_poses": 12,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/nachtelf/v10_motion.png",
+      "sha256": "49be91d84f69dbe8e1bd667616d8dbdaf712ac28d11705a091aabe5f21e4bbf4",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/nachtelf/atlas.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/spinegrin/v10_motion.png",
+      "sha256": "683fb3153090dbceae5afff03ae737ff8fba2c3518216edf85174b955efe9de7",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/spinegrin/atlas.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/cheese_rat/v10_motion.png",
+      "sha256": "7e53894c7bcb56de584ca097d474dc4dbb15ba8f7c1891d22c476e1ca532df08",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/cheese_rat/core.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/lava_stone/v10_motion.png",
+      "sha256": "a85d566e056ca57bfc21f599c9715e65f366e2738fe843b1ea16ce54503cfe76",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/lava_stone/atlas.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/crystal_fang/v10_motion.png",
+      "sha256": "5b9612929e623a6f30daedb50be0812c0f9102d951b916b9f4fe249a9aefafb2",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/crystal_fang/atlas.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
+    },
+    {
+      "path": "assets/sprites/phoenix_reign/v10_motion.png",
+      "sha256": "c302c8d333db8f25d8a89414352d21b93d9e1b3b2026a18a21c13ed8a3916eac",
+      "kind": "reference_guided_generated_discrete_animation_drawings",
+      "original_user_file": false,
+      "reference": "assets/sprites/phoenix_reign/atlas.png",
+      "grid": [
+        4,
+        6
+      ],
+      "indexed_poses": 24,
+      "notes": "ImageGen draws individual anatomy/limb positions. Indexer reads alpha and writes mesh metadata only. Rejected/unselected cells never enter runtime."
     }
   ],
   "gallery_views": {

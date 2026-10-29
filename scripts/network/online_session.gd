@@ -174,7 +174,7 @@ func _hello(room_token: String, protocol: int, build: String) -> void:
 	if local_slot != 0 or phase != "hosting": return
 	var sender := multiplayer.get_remote_sender_id()
 	if sender != pending_peer or room_token != token or protocol != SessionCode.PROTOCOL or build != build_version:
-		_rejected.rpc_id(sender,"Game versions differ. Install the same V9 build on both devices." if build != build_version or protocol != SessionCode.PROTOCOL else "This session code does not match the host. Copy a new code.")
+		_rejected.rpc_id(sender,"Game versions differ. Install the same V10 build on both devices." if build != build_version or protocol != SessionCode.PROTOCOL else "This session code does not match the host. Copy a new code.")
 		peer.get_host().flush()
 		_reject_peer(sender)
 		return

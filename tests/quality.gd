@@ -28,15 +28,20 @@ func run() -> void:
 		view.set_process(false)
 		rival.visual.set_process(false)
 		check(hero.hp == 200 and rival.hp == 200,profile.id+" starts with 200 HP and zero meter")
-		for animation in ActionPoseFields.data.profiles[profile.id].clips:
+		view.actor = null
+		for animation in view.metadata.animations:
+			if animation in ["idle","walk","jump","guard","hit","ko"]: continue
 			clips += 1
-			var signatures := {}
+			var intact := true
+			view.preview_pose = animation
 			for frame in 61:
-				var sample := ActionPoseFields.sample(profile.id,animation,frame/60.0)
-				var texture := ActionPoseFields.texture(profile.id,sample.pair)
-				signatures[sample.pair+":"+str(snappedf(sample.mix,.001))] = true
-				if texture.get_width() != 96 or texture.get_height() != 72: failed += 1
-			check(signatures.size() >= 45,profile.id+"/"+animation+" has continuous anticipation, extension and recovery samples")
+				view.preview_progress = frame/60.0
+				view._update_pose()
+				var raw: Dictionary = view.sprite.get_meta("frame_data")
+				intact = intact and view.sprite.polygon == raw.vertices and view.sprite.uv == raw.uv and view.sprite.scale.x == view.sprite.scale.y and not view.previous_sprite.visible
+			check(intact,profile.id+"/"+animation+" uses intact drawn pose geometry and UVs through its full timeline")
+		view.actor = hero
+		view.preview_progress = -1
 		hero.begin_attack("heavy")
 		var variations := {}
 		var support := Vector2.ZERO
@@ -49,7 +54,7 @@ func run() -> void:
 				var foot: Vector2 = view.sprite.position+view.current_pivot*view.sprite.scale
 				if frame == 0: support = foot
 				fixed = fixed and foot.distance_to(support) < .01
-		check(variations.size() >= 20 and fixed,profile.id+" actual heavy renders continuous poses around a fixed support foot")
+		check(variations.size() >= 9 and fixed,profile.id+" actual heavy renders at least nine distinct drawings around a fixed support foot")
 		check(hero.attack == null and view.state == "idle",profile.id+" heavy returns to its resting animation")
 		duel.start_round(false)
 		duel.phase = "fight"
@@ -117,7 +122,7 @@ func run() -> void:
 		check(duel.meters[0].clock == clock,profile.id+" ultimate animation freezes on pause")
 		duel.queue_free()
 		await get_tree().process_frame
-	check(clips == 49,"all 49 authored attack clips have continuous motion fields")
+	check(clips == 49,"all 49 attack clips render without texture or mesh warping")
 	await get_tree().process_frame
 	await get_tree().create_timer(.6).timeout
 	print("QUALITY RESULT: %d passed, %d failed" % [passed,failed])

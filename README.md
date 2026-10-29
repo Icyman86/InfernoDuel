@@ -9,7 +9,7 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Android APK — phones and tablets
 
-[Download Android V9 (0.9.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.9.0-android/releases/android-v0.9.0/InfernoDuel-Android-v0.9.0.apk)
+[Download Android V10 (0.10.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.10.0-android/releases/android-v0.10.0/InfernoDuel-Android-v0.10.0.apk)
 
 Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
 multitouch. Install the APK from your browser/downloads; allow installation from
@@ -34,8 +34,9 @@ Tap **Ⅱ** or Android Back to pause; backgrounding also pauses and clears touch
 In connected play all pause requests must be released before resuming.
 
 Rendering follows the device's actual surface resolution, including changes.
-The arena keeps its proportions inside the safe display area; touch controls fit
-phone and tablet aspect ratios. Lift and touch again after countdown, rounds or
+The painted arena fills the entire surface, including wide phone screens and
+taller tablets. Fighters keep their proportions; HUD and touch controls share the
+usable safe display area. Combat coordinates remain stable across aspect ratios. Lift and touch again after countdown, rounds or
 pause. Physical-device ergonomics, cutouts and performance still need acceptance.
 
 The APK is stored in Git LFS because it includes both native engines and all ten
@@ -104,14 +105,14 @@ the original references and existing films. The old movement tour, dummy and
 executable move list are removed. This is a 2.5D art presentation, not ten new
 fully modelled/rigged 3D characters.
 
-V9 extends continuous animation to **49 whole attack clips** across all ten
-fighters. Another 266 bidirectional fields align anticipation, chamber, extension,
-contact and recovery, returning to idle around a planted support foot. Smooth
-in-betweens render throughout the move, including the Fighters podium signature.
-Walking uses 54 re-analyzed fields with steadier torso anchors, a longer two-step
-stride and less body bounce. Gait follows actual displacement after arena and
-opponent collision, so pushing against a blocked path stops the foot cycle.
-Start, brake, pivot, jump/landing and guard transitions remain per character.
+V10 replaces flow-warped animation with intact illustrated poses. Each of the ten
+fighters gets **12 walk drawings and 12 heavy-attack drawings**: 240 new indexed
+poses. Heavy anticipation, chamber, extension and recovery follow the existing
+hitbox timing, with contact held through the active window. Other attacks retain
+their earlier illustrated keys; they also render without UV/mesh deformation.
+Walking follows actual traveled distance and stops at walls/opponents. Character
+select now uses **ten high-resolution half-body portraits** with a small entrance
+fade and gentle whole-image movement. The Fighters podium retains its rings.
 
 Combat now uses angular dark armor panels and animated energy gauges. A full
 ultimate meter pulses gold along with the ULT touch button. Each fighter starts
@@ -120,12 +121,11 @@ rounded up**; guarding retains its existing four meter. Attack gains, costs,
 damage, collision and 60-Hz physics retain their documented values. Meter caps at
 100, supers spend 100, and the ready glow turns off when the meter is spent.
 
-This animates existing artwork using derived motion fields; it does not add
-independently hand-drawn frames. Limb occlusion/warping artifacts can remain.
-Native resolution is retained and the render cap targets 60 FPS. Real-phone
-frame pacing, performance and animation feel still need acceptance.
+Native resolution is retained and rendering targets 60 FPS. Twelve drawings per
+cycle do not mean sixty independently drawn frames per second. Real-phone frame
+pacing, performance and animation feel still need acceptance.
 
-[Watch the scripted V9 combat animation preview (60-fps video)](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.9.0-android/releases/android-v0.9.0/InfernoDuel-CombatPreview-v0.9.0.mp4)
+[Watch the scripted V10 wide-screen preview (60-fps video)](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.10.0-android/releases/android-v0.10.0/InfernoDuel-Preview-v0.10.0.mp4)
 
 [Watch an intro preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-IntroPreview-v0.3.mp4)
 
@@ -182,7 +182,7 @@ Eternal Flame costs 100 meter to restore 25 HP. Neither revives a KO.
 ```
 
 This verifies all eight artwork SHA-256 hashes, imports the project, checks for
-engine/script errors, and runs 70 integration/combat, 494 artwork/animation,
+engine/script errors, and runs 70 integration/combat, 745 artwork/animation,
 45 earlier fighter-expansion and 287 full-roster/move checks (including all ten CPU matches). It also decodes all ten intro films with FFmpeg
 (install `ffmpeg` for this validation step). For
 rendered tests on a Linux desktop:
@@ -192,15 +192,18 @@ godot --path . --audio-driver Dummy tests/visual.tscn
 godot --path . --audio-driver Dummy tests/expansion_visual.tscn
 ./tools/test_touch.sh
 ./tools/test_gallery.sh
-TEST_NETWORK_RENDERED=1 ./tools/test_v9.sh
+TEST_NETWORK_RENDERED=1 ./tools/test_v10.sh
 ```
 
 Rendered screenshots are written to `/tmp/inferno-visual/`, `/tmp/inferno-v03-visual/`,
-`/tmp/inferno-touch/`, `/tmp/inferno-roster-visual/` and `/tmp/inferno-v6-visual/`.
+`/tmp/inferno-touch/`, `/tmp/inferno-roster-visual/`, `/tmp/inferno-v6-visual/`
+and `/tmp/inferno-v10-visual/`.
 The session/UI suite checks native framebuffer sizes, Android routes, session-code parsing
-six-character LAN discovery, modern touch UI and real multi-process ENet gameplay. The V8 additions test all ten movement transitions, real GPU opacity and
-persistent podiums. V9 adds all 49 attack clips, support-foot continuity, collision
-gait stops, 200-HP balance and normal-input ultimate earning/spending checks.
+six-character LAN discovery, modern touch UI and real multi-process ENet gameplay. The movement tests cover all ten fighters and persistent podiums. Quality tests
+cover 49 attack clips with immutable drawing geometry, collision gait stops,
+200-HP balance and normal-input ultimate earning/spending. V10 renders six screen
+sizes (including 2780×1264), checks full-surface scenery, shared safe-area HUD and
+controls, all ten half-body portraits and all 240 triangulatable pose meshes.
 ./tools/benchmark_motion.sh measures actual monotonic frame
 intervals against V7 at 720p and wide native resolution (requires the V7 tag).
 The graphical network repeat is optional;
@@ -231,8 +234,8 @@ these Python packages are not needed to play or run the normal tests.
 
 No external services or credentials are needed to play or test the game.
 Every published update gets a new version, Android versionCode, APK path and Git
-tag; published APKs/tags are retained instead of overwritten. This update is V9,
-version 0.9.0 / Android code 900.
+tag; published APKs/tags are retained instead of overwritten. This update is V10,
+version 0.10.0 / Android code 1000.
 On restricted cloud hosts use writable XDG data/config/cache directories when
 invoking Godot, e.g. `XDG_DATA_HOME=/workspace/.runtime/data` (and similarly
 `XDG_CONFIG_HOME`, `XDG_CACHE_HOME`). A graphical desktop/OpenGL 3.3 is required

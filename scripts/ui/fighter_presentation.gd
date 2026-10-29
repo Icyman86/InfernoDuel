@@ -100,10 +100,9 @@ func _ready() -> void:
 	var envelope := Rect2(Vector2.ZERO,Vector2.ZERO)
 	var first := true
 	var frames: Array = []
-	if ActionPoseFields.available(profile.id,"heavy"):
-		var clip: Dictionary = ActionPoseFields.data.profiles[profile.id].clips.heavy
-		for descriptor in clip["keys"]:
-			frames.append([visual.action_frame(descriptor,"heavy"),Vector2(clip.root_offset[0],clip.root_offset[1])*visual.target_height/float(ActionPoseFields.data.body_height)])
+	var signature: Dictionary = visual.metadata.animations.heavy
+	for index in signature.frames:
+		frames.append([visual.frame_data(signature.get("atlas","core"),index),Vector2.ZERO])
 	var idle_animation: Dictionary = visual.metadata.animations.idle
 	frames.append([visual.frame_data(idle_animation.get("atlas","core"),idle_animation.frames[0]),Vector2.ZERO])
 	for entry in frames:
@@ -164,9 +163,6 @@ func build_mesh() -> void:
 	face.mesh = mesh_cache[key][0]
 	edge.mesh = mesh_cache[key][1]
 	front_material.set_shader_parameter("base_texture",mesh_cache[key][2])
-	for parameter in ["overlay_texture","motion_field","overlay_uv","overlay_bounds","source_bounds","flow_uv","flow_pixel_uv","flow_canvas_size","flow_range"]:
-		var value: Variant = visual.material_fx.get_shader_parameter(parameter)
-		if value != null: front_material.set_shader_parameter(parameter,value)
 
 func _process(delta: float) -> void:
 	elapsed += delta
@@ -176,8 +172,6 @@ func _process(delta: float) -> void:
 	visual.preview_progress = progress if visual.preview_pose == "heavy" else 0.0
 	visual._update_pose(delta)
 	build_mesh()
-	front_material.set_shader_parameter("flow_blend",visual.material_fx.get_shader_parameter("flow_blend"))
-	front_material.set_shader_parameter("flow_mix",visual.action_blend)
 	var swing := sin(progress*PI) if visual.preview_pose == "heavy" else 0.0
 	var camera_time := minf(elapsed,2.8)
 	var idle_time := maxf(0.0,elapsed-2.8)

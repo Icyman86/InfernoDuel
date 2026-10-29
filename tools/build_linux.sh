@@ -30,7 +30,7 @@ exec ./InfernoDuel.x86_64 "$@"
 PLAY
 chmod 755 builds/linux/PLAY.sh
 cat > builds/linux/README.txt <<'README'
-INFERNO DUEL: LEGENDS — Linux full roster V9 / v0.9.0
+INFERNO DUEL: LEGENDS — Linux full roster V10 / v0.10.0
 Made by Rens de Gee en Ted Sondervan
 
 Run ./PLAY.sh on a Linux x86_64 desktop with OpenGL 3.3 support.
@@ -48,8 +48,9 @@ FIGHTERS presents each legend on a perspective 3D stage for one signature move,
 then keeps the same lit character and rings during breathing idle. REPLAY PRESENTATION restarts it. ORIGINAL SHEET and PLAY INTRO preserve all reference art.
 The 69 attacks/abilities include directional variants: hold forward, backward
 or guard plus LIGHT, SPECIAL or ULT. Directional variants remain available in combat.
-V9 adds continuous whole-attack in-betweens, planted support feet, distance-driven
-walking and a gold ultimate-ready glow. All fighters have 200 HP. Taking damage
+V10 fills wide phone/tablet screens, adds ten crisp half-body select portraits
+and 240 new drawn walk/heavy poses. Flow warping is removed.
+Distance-driven walking and the gold ultimate-ready glow remain. All fighters have 200 HP. Taking damage
 also grants 35% of damage as meter (rounded up). Rendering targets 60 FPS; native-device performance still needs testing.
 Armor halves damage; power buffs add 20%; Phoenix Rebirth spends 35 meter to
 escape hitstun and heal 8 HP. Supers cost 100 meter and cannot revive a KO.
@@ -59,7 +60,7 @@ Original reference sheets are preserved. New sprite/intro art is reference-guide
 CONNECT uses six-character session codes with automatic same-Wi-Fi discovery.
 Android has one touchpad per device; offline CPU remains available.
 Rendering follows native device/window pixels; the arena preserves its proportions.
-Android touch play is available as a separate V9 APK. Story and music are later milestones.
+Android touch play is available as a separate V10 APK. Story and music are later milestones.
 Two-person physical keyboard / ghosting testing is still required.
 README
 printf '\nEngine package: %s\n' "$engine_kind" >> builds/linux/README.txt

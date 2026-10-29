@@ -163,12 +163,10 @@ func refresh() -> void:
 				child.queue_free()
 			hero_ids[p] = f.id
 			if f.get("playable",false):
-				var figure := FighterVisual.new()
+				var figure := FighterBust.new()
 				figure.profile = f
-				figure.accent = UI.CYAN if p == 0 else UI.ORANGE
-				figure.target_height = 240
-				figure.position = Vector2(104,250)
-				figure.scale.x = 1 if p == 0 else -1
+				figure.size = hero_holders[p].size
+				figure.facing = 1 if p == 0 else -1
 				hero_holders[p].add_child(figure)
 			else:
 				var portrait := FighterPortrait.new()

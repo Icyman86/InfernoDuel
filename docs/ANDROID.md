@@ -1,6 +1,6 @@
-# Android V9 / 0.9.0
+# Android V10 / 0.10.0
 
-V9 uses the native device resolution and modernizes the combat controls and
+V10 uses the native device resolution and modernizes the combat controls and
 Fighters screen. The hosting device creates a temporary session with six random
 letters/numbers; the other device connects with only that code. IP addresses are
 absent from the UI. No external server needs to be hosted for same-Wi-Fi play.
@@ -10,7 +10,7 @@ absent from the UI. No external server needs to be hosted for same-Wi-Fi play.
 Download the APK in README. Android 7.0+ (API 24), a 64-bit ARM or x86_64 Android
 OS, OpenGL ES 3.0 and multitouch are required. Target SDK: 36. Landscape phones
 and tablets are supported; 32-bit Android is not. This sideload preview uses the
-retained v0.4–v0.8 development certificate and versionCode 900 for in-place
+retained v0.4–v0.9 development certificate and versionCode 1000 for in-place
 updates. It is not a Play Store release; private production signing is separate.
 
 CONNECT · SESSION CODE: host taps CREATE SESSION and shares six characters.
@@ -38,22 +38,28 @@ from the existing validated atlases (2.5D), not fully modelled skeletal characte
 REPLAY PRESENTATION, ORIGINAL SHEET and PLAY INTRO remain available. The old
 move-lab animation tour and executable move list have been removed.
 
-V9 adds continuous anticipation, chamber, extension/contact and recovery for all
-49 authored attack clips, using 266 bidirectional motion fields and planted
-support-foot pivots. The same motion rendering drives the podium signature.
-Walking's 54 fields use steadier torso anchors; two-step stride lengths, lower
-bounce and resolved-distance gait reduce skating/hopping, including wall and
-opponent contact. Existing start/brake/pivot/jump/guard clips remain.
+V10 adds 240 separately illustrated poses: twelve walk and twelve heavy poses for
+every fighter. The renderer switches intact drawings without UV interpolation,
+mesh morphing or crossfade ghosts. Heavy contact remains aligned with the active
+hitbox. The remaining attacks use their existing drawn keys. Walking advances
+from actual resolved travel, including wall/opponent stops. Character select has
+ten new high-resolution half-body portraits with subtle rigid image motion.
+The Fighters podium keeps its lit character and rings after the signature.
 Angular combat panels and animated ultimate gauges pulse gold at 100 meter,
 along with the ULT touch button. Every fighter has 200 HP. Clean incoming damage
 also grants ceil(damage × 0.35) meter; guard grants four and meter caps at 100.
 Normal attack costs, damage, hitboxes and 60-Hz physics remain as documented.
-This is derived animation from existing artwork, not new hand-drawn frames.
-Some occlusion warping remains possible. The render cap targets 60 FPS;
+New drawings are reference-guided generated art, not original user artwork or
+motion capture. Twelve illustrated poses per cycle are distinct from render FPS. The render cap targets 60 FPS;
 real-device frame rates are unverified.
 
-The viewport tracks real surface pixels; the logical arena preserves proportions
-inside the safe rectangle. No fixed 1280×720 render target is forced. Normal
+The viewport tracks real surface pixels. Scenery extends across the entire
+screen, with a stable floor under the fighters. Fighters use uniform scaling;
+HUD and touch controls use the same safe area. The combat simulation keeps its
+fixed logical bounds for consistent play across devices. No fixed 1280×720 render
+target is forced. Six native framebuffer sizes cover wide phones, 16:9 and 4:3
+tablets, including OnePlus 13R 2780×1264; this is Linux layout testing rather than
+a physical OnePlus run. Normal
 INTERNET and ACCESS_NETWORK_STATE permissions support direct UDP play. Broadcast
 discovery uses IPv4 UDP, not multicast; there is no hosted directory or relay.
 
@@ -90,7 +96,7 @@ keystores out of Git. Fetching the published APK through a checkout requires Git
 
 Run ./tools/test.sh for gameplay/artwork/roster and films, ./tools/test_touch.sh
 for injected multitouch, ./tools/test_gallery.sh for all ten presentations and
-idle transitions, and TEST_NETWORK_RENDERED=1 ./tools/test_v9.sh for room codes,
+idle transitions, and TEST_NETWORK_RENDERED=1 ./tools/test_v10.sh for room codes,
 real broadcast discovery/ENet processes, native framebuffers and mobile UI.
 Graphical tests need DISPLAY; headless tests are not native Android execution.
 
@@ -106,4 +112,4 @@ room create/join/cancel, owned touch movement and attacks, pause/background,
 results/rematch/disconnect, real multitouch, cutouts, speakers, thermals and frame
 rate at native resolution. Linux/loopback results do not establish those results.
 Different Wi-Fi networks / 4G / 5G generally need a relay or NAT traversal service;
-none is hosted or included in V9. Every update gets its own version/code/path/tag.
+none is hosted or included in V10. Every update gets its own version/code/path/tag.

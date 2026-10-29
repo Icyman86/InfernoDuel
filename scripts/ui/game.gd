@@ -50,6 +50,11 @@ func _resize_stage() -> void:
 	var factor := minf(safe.size.x/1280.0,safe.size.y/720.0)
 	stage.scale = Vector2.ONE * factor
 	stage.position = safe.position + (safe.size-Vector2(1280,720)*factor)*0.5
+	if is_instance_valid(backdrop):
+		backdrop.view_rect = Rect2(-stage.position/factor,get_viewport().get_visible_rect().size/factor)
+		backdrop.queue_redraw()
+	if is_instance_valid(match_node):
+		match_node.layout_hud(Rect2((safe.position-stage.position)/factor,safe.size/factor))
 
 func _process(_delta: float) -> void:
 	if touch_controls:
@@ -130,7 +135,7 @@ func show_menu() -> void:
 		buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  V9",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  V10",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	if touch_mode and not cpu:
@@ -237,6 +242,7 @@ func start_match() -> void:
 	else:
 		match_node.completed.connect(show_result)
 	stage.add_child(match_node)
+	_resize_stage()
 	if touch_controls: touch_controls.match_state = match_node
 	if networked:
 		network_driver = NetworkMatchDriver.new()

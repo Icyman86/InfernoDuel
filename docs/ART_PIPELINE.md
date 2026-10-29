@@ -1,3 +1,41 @@
+# V10 discrete drawings and half-body portraits — 29 October 2026
+
+The live renderer no longer uses the V8/V9 flow fields described historically
+below. It displays intact artwork without UV/vertex warping or crossfade ghosts.
+New reference-guided ImageGen sheets provide 240 indexed drawings: twelve walk
+and twelve heavy poses per fighter. Other attacks retain their existing drawn
+keys. Heavy contact is held through the actual active interval. These are newly
+generated drawings; no human frame-by-frame authorship, motion capture or sixty
+unique drawings per second is claimed. Costume/volume consistency still benefits
+from artist review.
+
+assets/sprites/<id>/v10_motion.png contains a 4×6 sheet. PoisonBoy uses only its
+first twelve walk cells and a separate 4×3 v10_heavy.png; clipped rejected cells
+are never indexed. data/drawn_animation_sources.json records the selected cells.
+The PNGs are copied byte-for-byte from ImageGen output. No existing PNG is edited.
+All eight original user sheets and earlier generated sheets remain unchanged.
+
+Two generated 1536×1024 portrait sheets, assets/portraits/v10_classic.png and
+v10_legends.png, supply ten 512×512 half-body paintings. data/select_busts.json
+maps the cells. FighterBust uses an AtlasTexture crop, gentle rigid movement and
+an entrance fade. HUD/source-reference portraits remain separately accessible.
+
+The optional tools/index_drawn_poses.py reads alpha connected components, indexes
+complete bodies even when a foot overhangs a nominal grid cell, and writes JSON
+rectangles, support pivots, atlas scale and convex envelope polygons. Convex
+envelopes prevent self-touching hair/chains from breaking 3D triangulation; alpha
+preserves the visible painted contour. It never writes artwork pixels. Reproduce
+with Pillow, NumPy, SciPy and opencv-python-headless 4.11.0.86. Runtime needs only
+the committed metadata. data/visual_asset_provenance.json records SHA-256 and
+identifies all new artwork as generated derivatives, not original user uploads.
+
+V10 preview captures select portraits, all ten walking/heavy demonstrations and
+the charged-ultimate UI at 1280×582 and 60 video FPS. Attacks are slowed for pose
+inspection; charged meter is a UI fixture. Separate quality tests earn/spend the
+ultimate through ordinary input. Offline capture does not measure phone FPS.
+
+---
+
 # V9 continuous whole attacks — 29 October 2026
 
 All ten fighters now use 49 full attack timelines: idle → anticipation → chamber

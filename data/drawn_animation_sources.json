@@ -1,0 +1,376 @@
+{
+  "version": 10,
+  "kind": "reference-guided separately illustrated poses; no optical flow",
+  "profiles": {
+    "sharkbyte": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/sharkbyte/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "bullet": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/bullet/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "chainveil": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/chainveil/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "poisonboy": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/poisonboy/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "atlas": "drawn_heavy",
+        "path": "assets/sprites/poisonboy/v10_heavy.png",
+        "grid": [
+          4,
+          3
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      }
+    ],
+    "nachtelf": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/nachtelf/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "spinegrin": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/spinegrin/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "cheese_rat": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/cheese_rat/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "lava_stone": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/lava_stone/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "crystal_fang": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/crystal_fang/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ],
+    "phoenix_reign": [
+      {
+        "atlas": "drawn",
+        "path": "assets/sprites/phoenix_reign/v10_motion.png",
+        "grid": [
+          4,
+          6
+        ],
+        "use": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
+    ]
+  }
+}

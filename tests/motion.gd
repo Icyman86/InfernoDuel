@@ -37,10 +37,12 @@ func run() -> void:
 		observed[view.motion_state] = true
 		check(view.motion_state == "start",profile.id+" enters its start movement clip through real input")
 		var blends := {}
+		var drawn_keys := {}
 		for frame in 36:
 			tick(hero,rival,{"axis":1})
 			blends[int(float(view.material_fx.get_shader_parameter("gait_phase"))*1000)] = true
-		check(blends.size() >= 25 and view.clock > clock_before+.5 and bool(view.material_fx.get_shader_parameter("flow_blend")) and not view.previous_sprite.visible,profile.id+" renders motion-aligned authored walking poses in one pass at 60 render steps")
+			drawn_keys[view.last_key] = true
+		check(blends.size() >= 25 and view.clock > clock_before+.5 and not bool(view.material_fx.get_shader_parameter("flow_blend")) and drawn_keys.size() >= 4 and not view.previous_sprite.visible,profile.id+" advances actual drawn walk keys at 60 render steps without flow warping or ghost layers")
 		var before_cache := view.geometry_builds
 		for frame in 60: tick(hero,rival,{"axis":1})
 		check(view.geometry_builds-before_cache <= 2,profile.id+" reuses warmed walk geometry instead of rebuilding it each render")

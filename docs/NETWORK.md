@@ -1,4 +1,4 @@
-# V9 six-character direct sessions
+# V10 six-character direct sessions
 
 The device hosting the game manages a temporary room. CREATE SESSION produces
 six cryptographically random characters from a 30-symbol unambiguous alphabet.
@@ -43,7 +43,7 @@ the room. Do not infer physical Wi-Fi success from local-process tests.
 
 A short code cannot locate a device across unrelated networks without a shared
 lookup/rendezvous service. Home/carrier NAT can also block the actual connection.
-V9 has no public directory, NAT traversal or relay service. It therefore targets
+V10 has no public directory, NAT traversal or relay service. It therefore targets
 same-Wi-Fi play; different Wi-Fi networks / 4G / 5G are not automatically supported.
 This limitation is visible in the connection UI. The user does not host an extra
 server: only the game on the host device stays open for the temporary room.
@@ -66,6 +66,6 @@ NETWORK_RENDERED=1 repeats with graphical peers. NETWORK_ARTIFACT_DIR retains
 logs/combat screenshots without room invitations. Real Android/Wi-Fi, packet loss,
 latency, carrier routers and physical two-human play remain manual acceptance.
 
-V9 peers also synchronize resolved walk distance and locomotion speed so guest
-gait follows the smoothed authoritative position. Both devices must run V9
-(0.9.0); version checks reject mixed builds.
+V10 peers also synchronize resolved walk distance and locomotion speed so guest
+gait follows the smoothed authoritative position. Both devices must run V10
+(0.10.0); version checks reject mixed builds.
