@@ -1,0 +1,183 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] loading_editor_layout | Started Loading editor (5 steps)
+[   0% ] loading_editor_layout | Loading editor layout...
+[  16% ] loading_editor_layout | Loading docks...
+[  33% ] loading_editor_layout | Reopening scenes...
+[  50% ] loading_editor_layout | Loading central editor layout...
+[  66% ] loading_editor_layout | Loading plugin window layout...
+[  83% ] loading_editor_layout | Editor layout ready.
+[ DONE ] loading_editor_layout
+
+cannot connect to daemon at tcp:5037: Connection refused
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+Could not find version of build tools that matches Target SDK, using 35.0.1
+[   0% ] export | Started Exporting for Android (105 steps)
+0 param: --xr_mode_regular
+1 param: --xr-mode
+2 param: off
+3 param: --fullscreen
+4 param: --background_color
+5 param: #000000
+[   0% ] export | Creating APK...
+ADDING: META-INF/com/android/build/gradle/app-metadata.properties
+ADDING: META-INF/version-control-info.textproto
+ADDING: assets/dexopt/baseline.prof
+ADDING: assets/dexopt/baseline.profm
+ADDING: classes.dex
+ADDING: lib/arm64-v8a/libc++_shared.so
+ADDING: lib/arm64-v8a/libgodot_android.so
+ADDING: lib/x86_64/libc++_shared.so
+ADDING: lib/x86_64/libgodot_android.so
+Adding application metadata org.godotengine.rendering.method
+Adding application metadata org.godotengine.editor.version
+ADDING: AndroidManifest.xml
+ADDING: res/anim-v21/fragment_fast_out_extra_slow_in.xml
+ADDING: res/animator/fragment_close_enter.xml
+ADDING: res/animator/fragment_close_exit.xml
+ADDING: res/animator/fragment_fade_enter.xml
+ADDING: res/animator/fragment_fade_exit.xml
+ADDING: res/animator/fragment_open_enter.xml
+ADDING: res/animator/fragment_open_exit.xml
+ADDING: res/drawable-hdpi-v4/notification_bg_low_normal.9.png
+ADDING: res/drawable-hdpi-v4/notification_bg_low_pressed.9.png
+ADDING: res/drawable-hdpi-v4/notification_bg_normal.9.png
+ADDING: res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png
+ADDING: res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png
+ADDING: res/drawable-mdpi-v4/notification_bg_low_normal.9.png
+ADDING: res/drawable-mdpi-v4/notification_bg_low_pressed.9.png
+ADDING: res/drawable-mdpi-v4/notification_bg_normal.9.png
+ADDING: res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png
+ADDING: res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png
+ADDING: res/drawable-v21/notification_action_background.xml
+ADDING: res/drawable-v23/compat_splash_screen.xml
+ADDING: res/drawable-v23/compat_splash_screen_no_icon_background.xml
+ADDING: res/drawable-xhdpi-v4/notification_bg_low_normal.9.png
+ADDING: res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png
+ADDING: res/drawable-xhdpi-v4/notification_bg_normal.9.png
+ADDING: res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png
+ADDING: res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png
+ADDING: res/drawable/icon_background.xml
+ADDING: res/drawable/notification_bg.xml
+ADDING: res/drawable/notification_bg_low.xml
+ADDING: res/drawable/notification_icon_background.xml
+ADDING: res/drawable/notification_tile_bg.xml
+ADDING: res/layout-v21/notification_action.xml
+ADDING: res/layout-v21/notification_action_tombstone.xml
+ADDING: res/layout-v21/notification_template_custom_big.xml
+ADDING: res/layout-v21/notification_template_icon_group.xml
+ADDING: res/layout/custom_dialog.xml
+ADDING: res/layout/downloading_expansion.xml
+ADDING: res/layout/godot_app_layout.xml
+ADDING: res/layout/notification_template_part_chronometer.xml
+ADDING: res/layout/notification_template_part_time.xml
+ADDING: res/layout/remote_godot_fragment_layout.xml
+ADDING: res/layout/snackbar.xml
+ADDING: res/layout/splash_screen_view.xml
+ADDING: res/layout/status_bar_ongoing_event_progress_bar.xml
+ADDING: res/mipmap-anydpi-v26/icon.xml
+ADDING: res/mipmap-hdpi-v4/icon.webp
+ADDING: res/mipmap-hdpi-v4/icon_background.webp
+ADDING: res/mipmap-hdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-hdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-mdpi-v4/icon.webp
+ADDING: res/mipmap-mdpi-v4/icon_background.webp
+ADDING: res/mipmap-mdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-mdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-xhdpi-v4/icon.webp
+ADDING: res/mipmap-xhdpi-v4/icon_background.webp
+ADDING: res/mipmap-xhdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-xhdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-xxhdpi-v4/icon.webp
+ADDING: res/mipmap-xxhdpi-v4/icon_background.webp
+ADDING: res/mipmap-xxhdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-xxhdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon_background.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap/icon.webp
+ADDING: res/mipmap/icon_background.webp
+ADDING: res/mipmap/icon_foreground.webp
+ADDING: res/mipmap/icon_monochrome.webp
+ADDING: res/xml/godot_provider_paths.xml
+ADDING: resources.arsc
+ADDING: DebugProbesKt.bin
+ADDING: META-INF/androidx.activity_activity.version
+ADDING: META-INF/androidx.annotation_annotation-experimental.version
+ADDING: META-INF/androidx.arch.core_core-runtime.version
+ADDING: META-INF/androidx.core_core-ktx.version
+ADDING: META-INF/androidx.core_core-splashscreen.version
+ADDING: META-INF/androidx.core_core.version
+ADDING: META-INF/androidx.customview_customview.version
+ADDING: META-INF/androidx.documentfile_documentfile.version
+ADDING: META-INF/androidx.fragment_fragment.version
+ADDING: META-INF/androidx.lifecycle_lifecycle-livedata-core.version
+ADDING: META-INF/androidx.lifecycle_lifecycle-livedata.version
+ADDING: META-INF/androidx.lifecycle_lifecycle-runtime.version
+ADDING: META-INF/androidx.lifecycle_lifecycle-viewmodel-savedstate.version
+ADDING: META-INF/androidx.lifecycle_lifecycle-viewmodel.version
+ADDING: META-INF/androidx.loader_loader.version
+ADDING: META-INF/androidx.profileinstaller_profileinstaller.version
+ADDING: META-INF/androidx.savedstate_savedstate.version
+ADDING: META-INF/androidx.startup_startup-runtime.version
+ADDING: META-INF/androidx.tracing_tracing.version
+ADDING: META-INF/androidx.versionedparcelable_versionedparcelable.version
+ADDING: META-INF/androidx.viewpager_viewpager.version
+ADDING: META-INF/kotlinx_coroutines_android.version
+ADDING: META-INF/kotlinx_coroutines_core.version
+ADDING: META-INF/services/kotlinx.coroutines.CoroutineExceptionHandler
+ADDING: META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory
+ADDING: META-INF/versions/9/OSGI-INF/MANIFEST.MF
+ADDING: kotlin-tooling-metadata.json
+ADDING: kotlin/annotation/annotation.kotlin_builtins
+ADDING: kotlin/collections/collections.kotlin_builtins
+ADDING: kotlin/concurrent/atomics/atomics.kotlin_builtins
+ADDING: kotlin/coroutines/coroutines.kotlin_builtins
+ADDING: kotlin/internal/internal.kotlin_builtins
+ADDING: kotlin/kotlin.kotlin_builtins
+ADDING: kotlin/ranges/ranges.kotlin_builtins
+ADDING: kotlin/reflect/reflect.kotlin_builtins
+[   0% ] export | Adding files...
+[  99% ] export | Aligning APK...
+[ DONE ] export
+
+cannot connect to daemon at tcp:5037: Connection refused
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Godot, OU=Godot Engine, O=Stichting Godot, C=NL
+Signer #1 certificate SHA-256 digest: bf325c42dd009bd6a6309692bfbbf46a9b3448a807a8718a284e0b8a8c5ab48c
+Signer #1 certificate SHA-1 digest: 9e574b8b542d3a912e0e6be8d9fe6efc43c954e9
+Signer #1 certificate MD5 digest: 50b9d4235b3c0b22d8526d91f035561b
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: 22cedcec400fc8719e3b85f2c5686f8e635fdfef219139f16bd8d4a266d77bca
+Signer #1 public key SHA-1 digest: 763ad072ce9d5a161a3dfccee18b0c5ffa1c7516
+Signer #1 public key MD5 digest: 772a4cb6c53051ad6f1c2c8f5bbb5b09
+APK PAYLOAD PASS: ARM64 + x86_64, ten playable fighters, 69 moves, live move lab, touch, ten films (150972207 bytes)
+Built: /workspace/InfernoDuel/builds/android/InfernoDuel-Android-v0.5.0.apk

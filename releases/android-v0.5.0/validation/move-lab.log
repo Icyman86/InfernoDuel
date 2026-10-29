@@ -1,0 +1,90 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS sharkbyte is selectable through its actual gallery button
+PASS sharkbyte has a rendered animated preview
+PASS sharkbyte lists every attack and movement
+PASS sharkbyte actual move button performs heavy and takes manual control
+PASS sharkbyte scrolled ultimate button executes the real meter-consuming move
+PASS sharkbyte auto tour can resume after manual moves
+PASS sharkbyte original sheet remains available and pauses preview
+PASS sharkbyte returns from original sheet to live moves
+PASS bullet is selectable through its actual gallery button
+PASS bullet has a rendered animated preview
+PASS bullet lists every attack and movement
+PASS bullet actual move button performs heavy and takes manual control
+PASS bullet scrolled ultimate button executes the real meter-consuming move
+PASS bullet auto tour can resume after manual moves
+PASS bullet original sheet remains available and pauses preview
+PASS bullet returns from original sheet to live moves
+PASS nachtelf is selectable through its actual gallery button
+PASS nachtelf has a rendered animated preview
+PASS nachtelf lists every attack and movement
+PASS nachtelf actual move button performs heavy and takes manual control
+PASS nachtelf scrolled ultimate button executes the real meter-consuming move
+PASS nachtelf auto tour can resume after manual moves
+PASS nachtelf original sheet remains available and pauses preview
+PASS nachtelf returns from original sheet to live moves
+PASS poisonboy is selectable through its actual gallery button
+PASS poisonboy has a rendered animated preview
+PASS poisonboy lists every attack and movement
+PASS poisonboy actual move button performs heavy and takes manual control
+PASS poisonboy scrolled ultimate button executes the real meter-consuming move
+PASS poisonboy auto tour can resume after manual moves
+PASS poisonboy original sheet remains available and pauses preview
+PASS poisonboy returns from original sheet to live moves
+PASS spinegrin is selectable through its actual gallery button
+PASS spinegrin has a rendered animated preview
+PASS spinegrin lists every attack and movement
+PASS spinegrin actual move button performs heavy and takes manual control
+PASS spinegrin scrolled ultimate button executes the real meter-consuming move
+PASS spinegrin auto tour can resume after manual moves
+PASS spinegrin original sheet remains available and pauses preview
+PASS spinegrin returns from original sheet to live moves
+PASS chainveil is selectable through its actual gallery button
+PASS chainveil has a rendered animated preview
+PASS chainveil lists every attack and movement
+PASS chainveil actual move button performs heavy and takes manual control
+PASS chainveil scrolled ultimate button executes the real meter-consuming move
+PASS chainveil auto tour can resume after manual moves
+PASS chainveil original sheet remains available and pauses preview
+PASS chainveil returns from original sheet to live moves
+PASS cheese_rat is selectable through its actual gallery button
+PASS cheese_rat has a rendered animated preview
+PASS cheese_rat lists every attack and movement
+PASS cheese_rat actual move button performs heavy and takes manual control
+PASS cheese_rat scrolled ultimate button executes the real meter-consuming move
+PASS cheese_rat auto tour can resume after manual moves
+PASS cheese_rat original sheet remains available and pauses preview
+PASS cheese_rat returns from original sheet to live moves
+PASS lava_stone is selectable through its actual gallery button
+PASS lava_stone has a rendered animated preview
+PASS lava_stone lists every attack and movement
+PASS lava_stone actual move button performs heavy and takes manual control
+PASS lava_stone scrolled ultimate button executes the real meter-consuming move
+PASS lava_stone auto tour can resume after manual moves
+PASS lava_stone original sheet remains available and pauses preview
+PASS lava_stone returns from original sheet to live moves
+PASS crystal_fang is selectable through its actual gallery button
+PASS crystal_fang has a rendered animated preview
+PASS crystal_fang lists every attack and movement
+PASS crystal_fang actual move button performs heavy and takes manual control
+PASS crystal_fang scrolled ultimate button executes the real meter-consuming move
+PASS crystal_fang auto tour can resume after manual moves
+PASS crystal_fang original sheet remains available and pauses preview
+PASS crystal_fang returns from original sheet to live moves
+PASS phoenix_reign is selectable through its actual gallery button
+PASS phoenix_reign has a rendered animated preview
+PASS phoenix_reign lists every attack and movement
+PASS phoenix_reign actual move button performs heavy and takes manual control
+PASS phoenix_reign scrolled ultimate button executes the real meter-consuming move
+PASS phoenix_reign auto tour can resume after manual moves
+PASS phoenix_reign original sheet remains available and pauses preview
+PASS phoenix_reign returns from original sheet to live moves
+PASS automatic demonstration advances to the next move
+PASS walking preview advances authored gait frames
+PASS pose blending leaves the current sprite visible
+PASS new roster fighter also renders in actual combat
+GALLERY VISUAL RESULT: 84 passed, 0 failed

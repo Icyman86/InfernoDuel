@@ -1,0 +1,22 @@
+{
+  "source_assertions_passed": 1055,
+  "failed": 0,
+  "headless": {
+    "combat": 70,
+    "art": 494,
+    "expansion": 45,
+    "roster_moves_cpu": 287
+  },
+  "rendered": {
+    "touch": 35,
+    "move_lab": 84,
+    "linux": 9,
+    "intros_expansion": 31
+  },
+  "original_hashes": 8,
+  "decoded_films": 10,
+  "native_linux": "passed; normal exit 0",
+  "apk": "export, signature, alignment, payload passed",
+  "native_android": "not verified for v0.5.0",
+  "physical_phone_tablet": "not run"
+}

@@ -1,0 +1,41 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS combat touchpad stays hidden in menus
+PASS Android back is routed through game navigation instead of quitting
+PASS phone play button opens solo selection
+PASS touch-friendly ready buttons confirm both fighters
+PASS arena button starts fight with touchpad
+PASS two fingers move and attack simultaneously
+PASS held attack produces a single press edge
+PASS touch input moves the actual fighter
+PASS touch light attack damages the opponent exactly once
+PASS releasing one of two fingers on a button keeps it held
+PASS dragging outside releases movement
+PASS Android canceled touches release movement
+PASS guard and special support independent contacts
+PASS jump, heavy and ultimate are routed
+PASS touch release does not clear a held keyboard key
+PASS touch pause opens a usable pause menu
+PASS pausing clears held touch input
+PASS mobile options replace desktop-only window buttons
+PASS mobile options return to pause
+PASS resume does not leave a stuck movement key
+PASS backgrounding pauses and clears touches
+PASS round/reset generation invalidates stale contacts
+PASS (1280, 720) solo layout has no overlapping or clipped touch targets
+PASS (1280, 720) shared layout has no overlapping or clipped touch targets
+PASS (1920, 1080) solo layout has no overlapping or clipped touch targets
+PASS (1920, 1080) shared layout has no overlapping or clipped touch targets
+PASS (1280, 800) solo layout has no overlapping or clipped touch targets
+PASS (1280, 800) shared layout has no overlapping or clipped touch targets
+PASS (1024, 768) solo layout has no overlapping or clipped touch targets
+PASS (1024, 768) shared layout has no overlapping or clipped touch targets
+PASS (1600, 720) solo layout has no overlapping or clipped touch targets
+PASS (1600, 720) shared layout has no overlapping or clipped touch targets
+PASS shared tablet has independent simultaneous player controls
+PASS GUARD plus SPECIAL performs Lava Stone's actual armor move through touch
+PASS P2 back plus SPECIAL uses facing-relative touch binding for Crystal Fang's shield
+TOUCH RESULT: 35 passed, 0 failed
