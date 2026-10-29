@@ -1,0 +1,234 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] savepack | Started Packing (102 steps)
+[   1% ] savepack | Storing File: res://.godot/imported/infernal_citadel.png-9354006d781618c777e7715d14802283.ctex
+[   1% ] savepack | Storing File: res://assets/arenas/infernal_citadel.png.import
+[   1% ] savepack | Storing File: res://.godot/imported/DejaVuSans.ttf-0dcd47e426510e02f045e926ff1bfdf0.fontdata
+[   1% ] savepack | Storing File: res://assets/fonts/DejaVuSans.ttf.import
+[   2% ] savepack | Storing File: res://.godot/imported/DejaVuSerif-Bold.ttf-5e14f82452e18fd7af6ec587ffd4b0e5.fontdata
+[   2% ] savepack | Storing File: res://assets/fonts/DejaVuSerif-Bold.ttf.import
+[   3% ] savepack | Storing File: res://assets/intros/bullet.ogv
+[   4% ] savepack | Storing File: res://scripts/ui/portrait.gdc
+[   5% ] savepack | Storing File: res://assets/intros/chainveil.ogv
+[   5% ] savepack | Storing File: res://scripts/ui/intro_cinematic.gdc
+[   6% ] savepack | Storing File: res://assets/intros/cheese_rat.ogv
+[   7% ] savepack | Storing File: res://scripts/ui/move_showcase.gdc
+[   8% ] savepack | Storing File: res://assets/intros/crystal_fang.ogv
+[   9% ] savepack | Storing File: res://scripts/ui/intro_player.gdc
+[   9% ] savepack | Storing File: res://assets/intros/lava_stone.ogv
+[  10% ] savepack | Storing File: res://scripts/ui/ultimate_gauge.gdc
+[  11% ] savepack | Storing File: res://assets/intros/nachtelf.ogv
+[  12% ] savepack | Storing File: res://scripts/ui/fighter_presentation.gdc
+[  13% ] savepack | Storing File: res://assets/intros/phoenix_reign.ogv
+[  14% ] savepack | Storing File: res://scripts/ui/citadel.gdc
+[  14% ] savepack | Storing File: res://assets/intros/poisonboy.ogv
+[  15% ] savepack | Storing File: res://scripts/ui/ui_kit.gdc
+[  16% ] savepack | Storing File: res://assets/intros/sharkbyte.ogv
+[  17% ] savepack | Storing File: res://scripts/ui/options.gdc
+[  18% ] savepack | Storing File: res://assets/intros/spinegrin.ogv
+[  18% ] savepack | Storing File: res://scripts/ui/game.gdc
+[  19% ] savepack | Storing File: res://.godot/imported/Chainveil_ Inferno Duel Character Sheet.png-63c7fde29e338045a14f724d7ed3a1c5.ctex
+[  19% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/Chainveil_ Inferno Duel Character Sheet.png.import
+[  20% ] savepack | Storing File: res://.godot/imported/Dark Fantasy Fighting Game Character Sheet.png-98219f3c5153f169fcc3e8bb6709d35a.ctex
+[  20% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png.import
+[  21% ] savepack | Storing File: res://.godot/imported/SharkByte Fighting Game Character Sheet.png-ac891fb51bc23e8d9f4b12b2cb19dd73.ctex
+[  21% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/SharkByte Fighting Game Character Sheet.png.import
+[  22% ] savepack | Storing File: res://.godot/imported/Spinegrin_ Inferno Duel Character Sheet.png-efc86229f01bd1e5e825c3c4fc481b36.ctex
+[  22% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png.import
+[  22% ] savepack | Storing File: res://.godot/imported/WhatsApp Image 2026-10-25 at 18.59.15.jpeg-7bd1bcd7014d99a7306e7755a3146f95.ctex
+[  22% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 18.59.15.jpeg.import
+[  23% ] savepack | Storing File: res://.godot/imported/WhatsApp Image 2026-10-25 at 19.53.45.jpeg-38ffad228830b452f43fea31d1e1e387.ctex
+[  23% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg.import
+[  24% ] savepack | Storing File: res://.godot/imported/WhatsApp Image 2026-10-27 at 20.17.30.jpeg-85efecdf21294738ceb1d984d8ce3e7e.ctex
+[  24% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg.import
+[  25% ] savepack | Storing File: res://.godot/imported/WhatsApp Image 2026-10-27 at 20.18.10.jpeg-e5e6e816b877d5e76719c60bcdfe68a9.ctex
+[  25% ] savepack | Storing File: res://assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg.import
+[  26% ] savepack | Storing File: res://.godot/imported/v10_classic.png-2075fd348b09d39c6562bebff990226f.ctex
+[  26% ] savepack | Storing File: res://assets/portraits/v10_classic.png.import
+[  27% ] savepack | Storing File: res://.godot/imported/v10_legends.png-34736dbbead35612403359e77e21456c.ctex
+[  27% ] savepack | Storing File: res://assets/portraits/v10_legends.png.import
+[  27% ] savepack | Storing File: res://.godot/exported/133200997/export-3a437bd9971eb4bc061b808de6feded1-bullet_sheet.res
+[  28% ] savepack | Storing File: res://.godot/exported/133200997/export-ea0b19e9ee33290b9f478a3413d99b85-nachtelf_sheet.res
+[  29% ] savepack | Storing File: res://.godot/exported/133200997/export-3aa4b10d66f90509ce3a020dcd2b596e-poisonboy_sheet.res
+[  30% ] savepack | Storing File: res://assets/shaders/cel.gdshader
+[  31% ] savepack | Storing File: res://assets/shaders/fighter.gdshader
+[  31% ] savepack | Storing File: res://assets/shaders/presentation.gdshader
+[  32% ] savepack | Storing File: res://assets/shaders/ultimate_bar.gdshader
+[  33% ] savepack | Storing File: res://.godot/imported/actions.png-63706b492d77ee98f8f93d78bcee688c.ctex
+[  33% ] savepack | Storing File: res://assets/sprites/bullet/actions.png.import
+[  33% ] savepack | Storing File: res://.godot/imported/core.png-c81480e10c3a040a30c92806075a402b.ctex
+[  33% ] savepack | Storing File: res://assets/sprites/bullet/core.png.import
+[  34% ] savepack | Storing File: res://.godot/imported/v10_motion.png-b1d37abc0c32a584b69a27852f6c3e9f.ctex
+[  34% ] savepack | Storing File: res://assets/sprites/bullet/v10_motion.png.import
+[  34% ] savepack | Storing File: res://.godot/imported/walk.png-9e39c096d6ef67cf7432cbd72002bb55.ctex
+[  34% ] savepack | Storing File: res://assets/sprites/bullet/walk.png.import
+[  35% ] savepack | Storing File: res://.godot/imported/actions.png-e81d9810c1045c4dac7fbf2a32387afa.ctex
+[  35% ] savepack | Storing File: res://assets/sprites/chainveil/actions.png.import
+[  36% ] savepack | Storing File: res://.godot/imported/core.png-9e327e30f4e4ff5c4f480223f7b71745.ctex
+[  36% ] savepack | Storing File: res://assets/sprites/chainveil/core.png.import
+[  37% ] savepack | Storing File: res://.godot/imported/v10_motion.png-f69655f81b4d7beee57825a9dc80a958.ctex
+[  37% ] savepack | Storing File: res://assets/sprites/chainveil/v10_motion.png.import
+[  38% ] savepack | Storing File: res://.godot/imported/actions.png-cfaa390ccbebd0df41b4012e9dad17a2.ctex
+[  38% ] savepack | Storing File: res://assets/sprites/cheese_rat/actions.png.import
+[  39% ] savepack | Storing File: res://.godot/imported/core.png-a28d71f6092d9cb4e6e120651eb8e1e7.ctex
+[  39% ] savepack | Storing File: res://assets/sprites/cheese_rat/core.png.import
+[  39% ] savepack | Storing File: res://.godot/imported/v10_motion.png-fcfb30e8377a6f8e95a86c4779891a0d.ctex
+[  39% ] savepack | Storing File: res://assets/sprites/cheese_rat/v10_motion.png.import
+[  40% ] savepack | Storing File: res://.godot/imported/atlas.png-4c0a8d5e9db2a2b046a4cec01f3f378b.ctex
+[  40% ] savepack | Storing File: res://assets/sprites/crystal_fang/atlas.png.import
+[  41% ] savepack | Storing File: res://.godot/imported/extra.png-7ed7c1dc9d1d6d7bca3b56e67cace5cc.ctex
+[  41% ] savepack | Storing File: res://assets/sprites/crystal_fang/extra.png.import
+[  42% ] savepack | Storing File: res://.godot/imported/v10_motion.png-b92a67def81700e91e3ffcaa3ff45d82.ctex
+[  42% ] savepack | Storing File: res://assets/sprites/crystal_fang/v10_motion.png.import
+[  43% ] savepack | Storing File: res://.godot/imported/atlas.png-9cebc83f7f43a0d04f291e4998ffd671.ctex
+[  43% ] savepack | Storing File: res://assets/sprites/lava_stone/atlas.png.import
+[  43% ] savepack | Storing File: res://.godot/imported/extra.png-22c38337574089c47499739c892cda6a.ctex
+[  43% ] savepack | Storing File: res://assets/sprites/lava_stone/extra.png.import
+[  44% ] savepack | Storing File: res://.godot/imported/v10_motion.png-677cd22daa2e2a01131d726441071ba8.ctex
+[  44% ] savepack | Storing File: res://assets/sprites/lava_stone/v10_motion.png.import
+[  45% ] savepack | Storing File: res://.godot/imported/atlas.png-412035a0c845de248a7e7ad9f1c3eb2d.ctex
+[  45% ] savepack | Storing File: res://assets/sprites/nachtelf/atlas.png.import
+[  46% ] savepack | Storing File: res://.godot/imported/v10_motion.png-ec50b1904c6a042c79eb16d7fd7a2d73.ctex
+[  46% ] savepack | Storing File: res://assets/sprites/nachtelf/v10_motion.png.import
+[  47% ] savepack | Storing File: res://.godot/imported/atlas.png-0c84ac392ec98dac071c9f7419d3b070.ctex
+[  47% ] savepack | Storing File: res://assets/sprites/phoenix_reign/atlas.png.import
+[  47% ] savepack | Storing File: res://.godot/imported/extra.png-bf3611ac3d4390774eaba3b2355b996a.ctex
+[  47% ] savepack | Storing File: res://assets/sprites/phoenix_reign/extra.png.import
+[  48% ] savepack | Storing File: res://.godot/imported/v10_motion.png-35f6939ef72f0f357a97f78b455a0bb1.ctex
+[  48% ] savepack | Storing File: res://assets/sprites/phoenix_reign/v10_motion.png.import
+[  49% ] savepack | Storing File: res://.godot/imported/actions.png-78cc5aee3c5e39524f18119e58c14dbd.ctex
+[  49% ] savepack | Storing File: res://assets/sprites/poisonboy/actions.png.import
+[  50% ] savepack | Storing File: res://.godot/imported/core.png-2bf59b72393fd5dda07f4a7af82cf7d3.ctex
+[  50% ] savepack | Storing File: res://assets/sprites/poisonboy/core.png.import
+[  51% ] savepack | Storing File: res://.godot/imported/v10_heavy.png-b57403e88c76e9f587a078842381c037.ctex
+[  51% ] savepack | Storing File: res://assets/sprites/poisonboy/v10_heavy.png.import
+[  52% ] savepack | Storing File: res://.godot/imported/v10_motion.png-74e7896d1e3751f2d617a1e3344f5394.ctex
+[  52% ] savepack | Storing File: res://assets/sprites/poisonboy/v10_motion.png.import
+[  52% ] savepack | Storing File: res://.godot/imported/actions.png-bba55061704e69422f787266846170ca.ctex
+[  52% ] savepack | Storing File: res://assets/sprites/sharkbyte/actions.png.import
+[  53% ] savepack | Storing File: res://.godot/imported/core.png-a01bbc31a2407ebed9a1577f0e5097cf.ctex
+[  53% ] savepack | Storing File: res://assets/sprites/sharkbyte/core.png.import
+[  54% ] savepack | Storing File: res://.godot/imported/v10_motion.png-e6b436c5c55c584eebeff61f1a0827b2.ctex
+[  54% ] savepack | Storing File: res://assets/sprites/sharkbyte/v10_motion.png.import
+[  55% ] savepack | Storing File: res://.godot/imported/walk.png-7f5556726742c596f0b42d137a22ecdb.ctex
+[  55% ] savepack | Storing File: res://assets/sprites/sharkbyte/walk.png.import
+[  56% ] savepack | Storing File: res://.godot/imported/atlas.png-e5786197d38a79d105ae6ba084c31f5d.ctex
+[  56% ] savepack | Storing File: res://assets/sprites/spinegrin/atlas.png.import
+[  56% ] savepack | Storing File: res://.godot/imported/extra.png-5ca4674d4c1a95ddbf4afbad30282ae9.ctex
+[  56% ] savepack | Storing File: res://assets/sprites/spinegrin/extra.png.import
+[  57% ] savepack | Storing File: res://.godot/imported/v10_motion.png-c9bcab87ee2f84cb92b89d053f2a2fac.ctex
+[  57% ] savepack | Storing File: res://assets/sprites/spinegrin/v10_motion.png.import
+[  58% ] savepack | Storing File: res://.godot/imported/icon.svg-56083ea2a1f1a4f1e49773bdc6d7826c.ctex
+[  58% ] savepack | Storing File: res://assets/icon.svg.import
+[  59% ] savepack | Storing File: res://.godot/exported/133200997/export-b12a08c68803225779bded9628a5a602-heavy.res
+[  60% ] savepack | Storing File: res://.godot/exported/133200997/export-8e95a7177be4c62ce174eb4f733ce8c7-light.res
+[  60% ] savepack | Storing File: res://.godot/exported/133200997/export-7c47c2664862c9d3fc72a6c71d1566dc-special.res
+[  61% ] savepack | Storing File: res://.godot/exported/133200997/export-d7e22fbc0013c97057c88c4020a85628-ultimate.res
+[  62% ] savepack | Storing File: res://data/action_motion_fields.json
+[  63% ] savepack | Storing File: res://data/asset_manifest.csv.import
+[  64% ] savepack | Storing File: res://data/asset_manifest.fighter.translation
+[  65% ] savepack | Storing File: res://data/asset_manifest.included.translation
+[  65% ] savepack | Storing File: res://data/asset_manifest.json
+[  66% ] savepack | Storing File: res://data/asset_manifest.type.translation
+[  66% ] savepack | Storing File: res://data/drawn_animation_sources.json
+[  67% ] savepack | Storing File: res://data/fighters.json
+[  68% ] savepack | Storing File: res://data/input_layouts.json
+[  68% ] savepack | Storing File: res://data/intro_atlases.json
+[  69% ] savepack | Storing File: res://data/movement_animations.json
+[  70% ] savepack | Storing File: res://data/move_sets.json
+[  71% ] savepack | Storing File: res://data/select_busts.json
+[  72% ] savepack | Storing File: res://data/sprite_atlases.json
+[  72% ] savepack | Storing File: res://data/uploaded_character_sheets.json
+[  73% ] savepack | Storing File: res://data/visual_asset_provenance.json
+[  74% ] savepack | Storing File: res://data/walk_motion_fields.json
+[  75% ] savepack | Storing File: res://scripts/ui/fighter_bust.gdc
+[  76% ] savepack | Storing File: res://scripts/ui/online_lobby.gdc
+[  77% ] savepack | Storing File: res://scripts/ui/gallery.gdc
+[  77% ] savepack | Storing File: res://scripts/ui/touch_controls.gdc
+[  78% ] savepack | Storing File: res://scripts/ui/combat_chrome.gdc
+[  79% ] savepack | Storing File: res://.godot/exported/133200997/export-37d34595243eafebb281cab51d34ac09-infernal_citadel.scn
+[  80% ] savepack | Storing File: res://.godot/exported/133200997/export-c0f7a62ded0b07888831bf4a417d285f-fighter.scn
+[  81% ] savepack | Storing File: res://.godot/exported/133200997/export-a341a631f3f6eb4eec4449ef57988707-match.scn
+[  81% ] savepack | Storing File: res://.godot/exported/133200997/export-3ad5c15c4f3250da0cc7c1af1770d85f-main.scn
+[  82% ] savepack | Storing File: res://scripts/combat/action_pose_fields.gdc
+[  83% ] savepack | Storing File: res://scripts/combat/ai_controller.gdc
+[  84% ] savepack | Storing File: res://scripts/combat/attack_data.gdc
+[  85% ] savepack | Storing File: res://scripts/combat/fighter_controller.gdc
+[  85% ] savepack | Storing File: res://scripts/combat/fighter_motion.gdc
+[  86% ] savepack | Storing File: res://scripts/combat/fighter_visual.gdc
+[  87% ] savepack | Storing File: res://scripts/combat/hit_burst.gdc
+[  88% ] savepack | Storing File: res://scripts/combat/match_controller.gdc
+[  89% ] savepack | Storing File: res://scripts/combat/move_catalog.gdc
+[  90% ] savepack | Storing File: res://scripts/combat/projectile.gdc
+[  90% ] savepack | Storing File: res://scripts/combat/walk_pose_fields.gdc
+[  91% ] savepack | Storing File: res://scripts/core/game_platform.gdc
+[  92% ] savepack | Storing File: res://scripts/core/input_router.gdc
+[  93% ] savepack | Storing File: res://scripts/core/settings.gdc
+[  94% ] savepack | Storing File: res://scripts/core/sound.gdc
+[  94% ] savepack | Storing File: res://scripts/network/network_match_driver.gdc
+[  95% ] savepack | Storing File: res://scripts/network/online_session.gdc
+[  96% ] savepack | Storing File: res://scripts/network/session_code.gdc
+[  97% ] savepack | Storing File: res://scripts/network/session_discovery.gdc
+[  98% ] savepack | Storing File: res://scripts/ui/character_select.gdc
+[  98% ] savepack | Storing File: res://scripts/ui/portrait.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/intro_cinematic.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/move_showcase.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/intro_player.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/ultimate_gauge.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/fighter_presentation.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/citadel.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/ui_kit.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/options.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/game.gd.remap
+[  98% ] savepack | Storing File: res://assets/reference/bullet_sheet.tres.remap
+[  98% ] savepack | Storing File: res://assets/reference/nachtelf_sheet.tres.remap
+[  98% ] savepack | Storing File: res://assets/reference/poisonboy_sheet.tres.remap
+[  98% ] savepack | Storing File: res://data/attacks/heavy.tres.remap
+[  98% ] savepack | Storing File: res://data/attacks/light.tres.remap
+[  98% ] savepack | Storing File: res://data/attacks/special.tres.remap
+[  98% ] savepack | Storing File: res://data/attacks/ultimate.tres.remap
+[  98% ] savepack | Storing File: res://scripts/ui/fighter_bust.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/online_lobby.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/gallery.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/touch_controls.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/combat_chrome.gd.remap
+[  98% ] savepack | Storing File: res://scenes/arenas/infernal_citadel.tscn.remap
+[  98% ] savepack | Storing File: res://scenes/combat/fighter.tscn.remap
+[  98% ] savepack | Storing File: res://scenes/combat/match.tscn.remap
+[  98% ] savepack | Storing File: res://scenes/main.tscn.remap
+[  98% ] savepack | Storing File: res://scripts/combat/action_pose_fields.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/ai_controller.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/attack_data.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/fighter_controller.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/fighter_motion.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/fighter_visual.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/hit_burst.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/match_controller.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/move_catalog.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/projectile.gd.remap
+[  98% ] savepack | Storing File: res://scripts/combat/walk_pose_fields.gd.remap
+[  98% ] savepack | Storing File: res://scripts/core/game_platform.gd.remap
+[  98% ] savepack | Storing File: res://scripts/core/input_router.gd.remap
+[  98% ] savepack | Storing File: res://scripts/core/settings.gd.remap
+[  98% ] savepack | Storing File: res://scripts/core/sound.gd.remap
+[  98% ] savepack | Storing File: res://scripts/network/network_match_driver.gd.remap
+[  98% ] savepack | Storing File: res://scripts/network/online_session.gd.remap
+[  98% ] savepack | Storing File: res://scripts/network/session_code.gd.remap
+[  98% ] savepack | Storing File: res://scripts/network/session_discovery.gd.remap
+[  98% ] savepack | Storing File: res://scripts/ui/character_select.gd.remap
+[  98% ] savepack | Storing File: res://.godot/global_script_class_cache.cfg
+[  98% ] savepack | Storing File: res://assets/icon.svg
+[  98% ] savepack | Storing File: res://.godot/uid_cache.bin
+[  98% ] savepack | Storing File: res://project.binary
+[ DONE ] savepack
+
+Built: /workspace/InfernoDuel/builds/linux/PLAY.sh

@@ -1,0 +1,98 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS sharkbyte is selectable through its actual roster card
+PASS sharkbyte has a textured extruded silhouette in a real perspective 3D world
+PASS sharkbyte performs one signature move on entry
+PASS sharkbyte full signature silhouette remains inside the camera frame
+PASS sharkbyte keeps the same live 3D world, character and rings after the signature move
+PASS sharkbyte breathes on the existing ring without moving its feet
+PASS sharkbyte original reference sheet remains separately accessible
+PASS sharkbyte returns from the sheet to the same persistent podium
+PASS sharkbyte presentation replay restarts the entrance
+PASS bullet is selectable through its actual roster card
+PASS bullet has a textured extruded silhouette in a real perspective 3D world
+PASS bullet performs one signature move on entry
+PASS bullet full signature silhouette remains inside the camera frame
+PASS bullet keeps the same live 3D world, character and rings after the signature move
+PASS bullet breathes on the existing ring without moving its feet
+PASS bullet original reference sheet remains separately accessible
+PASS bullet returns from the sheet to the same persistent podium
+PASS bullet presentation replay restarts the entrance
+PASS nachtelf is selectable through its actual roster card
+PASS nachtelf has a textured extruded silhouette in a real perspective 3D world
+PASS nachtelf performs one signature move on entry
+PASS nachtelf full signature silhouette remains inside the camera frame
+PASS nachtelf keeps the same live 3D world, character and rings after the signature move
+PASS nachtelf breathes on the existing ring without moving its feet
+PASS nachtelf original reference sheet remains separately accessible
+PASS nachtelf returns from the sheet to the same persistent podium
+PASS nachtelf presentation replay restarts the entrance
+PASS poisonboy is selectable through its actual roster card
+PASS poisonboy has a textured extruded silhouette in a real perspective 3D world
+PASS poisonboy performs one signature move on entry
+PASS poisonboy full signature silhouette remains inside the camera frame
+PASS poisonboy keeps the same live 3D world, character and rings after the signature move
+PASS poisonboy breathes on the existing ring without moving its feet
+PASS poisonboy original reference sheet remains separately accessible
+PASS poisonboy returns from the sheet to the same persistent podium
+PASS poisonboy presentation replay restarts the entrance
+PASS spinegrin is selectable through its actual roster card
+PASS spinegrin has a textured extruded silhouette in a real perspective 3D world
+PASS spinegrin performs one signature move on entry
+PASS spinegrin full signature silhouette remains inside the camera frame
+PASS spinegrin keeps the same live 3D world, character and rings after the signature move
+PASS spinegrin breathes on the existing ring without moving its feet
+PASS spinegrin original reference sheet remains separately accessible
+PASS spinegrin returns from the sheet to the same persistent podium
+PASS spinegrin presentation replay restarts the entrance
+PASS chainveil is selectable through its actual roster card
+PASS chainveil has a textured extruded silhouette in a real perspective 3D world
+PASS chainveil performs one signature move on entry
+PASS chainveil full signature silhouette remains inside the camera frame
+PASS chainveil keeps the same live 3D world, character and rings after the signature move
+PASS chainveil breathes on the existing ring without moving its feet
+PASS chainveil original reference sheet remains separately accessible
+PASS chainveil returns from the sheet to the same persistent podium
+PASS chainveil presentation replay restarts the entrance
+PASS cheese_rat is selectable through its actual roster card
+PASS cheese_rat has a textured extruded silhouette in a real perspective 3D world
+PASS cheese_rat performs one signature move on entry
+PASS cheese_rat full signature silhouette remains inside the camera frame
+PASS cheese_rat keeps the same live 3D world, character and rings after the signature move
+PASS cheese_rat breathes on the existing ring without moving its feet
+PASS cheese_rat original reference sheet remains separately accessible
+PASS cheese_rat returns from the sheet to the same persistent podium
+PASS cheese_rat presentation replay restarts the entrance
+PASS lava_stone is selectable through its actual roster card
+PASS lava_stone has a textured extruded silhouette in a real perspective 3D world
+PASS lava_stone performs one signature move on entry
+PASS lava_stone full signature silhouette remains inside the camera frame
+PASS lava_stone keeps the same live 3D world, character and rings after the signature move
+PASS lava_stone breathes on the existing ring without moving its feet
+PASS lava_stone original reference sheet remains separately accessible
+PASS lava_stone returns from the sheet to the same persistent podium
+PASS lava_stone presentation replay restarts the entrance
+PASS crystal_fang is selectable through its actual roster card
+PASS crystal_fang has a textured extruded silhouette in a real perspective 3D world
+PASS crystal_fang performs one signature move on entry
+PASS crystal_fang full signature silhouette remains inside the camera frame
+PASS crystal_fang keeps the same live 3D world, character and rings after the signature move
+PASS crystal_fang breathes on the existing ring without moving its feet
+PASS crystal_fang original reference sheet remains separately accessible
+PASS crystal_fang returns from the sheet to the same persistent podium
+PASS crystal_fang presentation replay restarts the entrance
+PASS phoenix_reign is selectable through its actual roster card
+PASS phoenix_reign has a textured extruded silhouette in a real perspective 3D world
+PASS phoenix_reign performs one signature move on entry
+PASS phoenix_reign full signature silhouette remains inside the camera frame
+PASS phoenix_reign keeps the same live 3D world, character and rings after the signature move
+PASS phoenix_reign breathes on the existing ring without moving its feet
+PASS phoenix_reign original reference sheet remains separately accessible
+PASS phoenix_reign returns from the sheet to the same persistent podium
+PASS phoenix_reign presentation replay restarts the entrance
+PASS old automatic movement tour and executable move list are removed from Fighters
+PASS new roster fighter also renders in actual combat
+GALLERY VISUAL RESULT: 92 passed, 0 failed

@@ -1,0 +1,86 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS (1280, 582) arena covers the full native surface without a 16:9 frame
+PASS (1280, 582) HUD follows the same usable screen rectangle as touch controls
+PASS (1280, 582) health bar remains inside the screen
+PASS (1280, 582) health bar remains inside the screen
+PASS (1280, 582) all combat buttons are visible and reachable within the safe area
+PASS (1280, 582) uses actual device/window pixels
+PASS (1280, 582) former side wings contain live arena artwork
+PASS (1280, 582) fighter proportions remain uniform while the background fills the screen
+PASS (2400, 1080) arena covers the full native surface without a 16:9 frame
+PASS (2400, 1080) HUD follows the same usable screen rectangle as touch controls
+PASS (2400, 1080) health bar remains inside the screen
+PASS (2400, 1080) health bar remains inside the screen
+PASS (2400, 1080) all combat buttons are visible and reachable within the safe area
+PASS (2400, 1080) uses actual device/window pixels
+PASS (2400, 1080) former side wings contain live arena artwork
+PASS (2400, 1080) fighter proportions remain uniform while the background fills the screen
+PASS (2780, 1264) arena covers the full native surface without a 16:9 frame
+PASS (2780, 1264) HUD follows the same usable screen rectangle as touch controls
+PASS (2780, 1264) health bar remains inside the screen
+PASS (2780, 1264) health bar remains inside the screen
+PASS (2780, 1264) all combat buttons are visible and reachable within the safe area
+PASS (2780, 1264) uses actual device/window pixels
+PASS (2780, 1264) former side wings contain live arena artwork
+PASS (2780, 1264) fighter proportions remain uniform while the background fills the screen
+PASS (2532, 1170) arena covers the full native surface without a 16:9 frame
+PASS (2532, 1170) HUD follows the same usable screen rectangle as touch controls
+PASS (2532, 1170) health bar remains inside the screen
+PASS (2532, 1170) health bar remains inside the screen
+PASS (2532, 1170) all combat buttons are visible and reachable within the safe area
+PASS (2532, 1170) uses actual device/window pixels
+PASS (2532, 1170) former side wings contain live arena artwork
+PASS (2532, 1170) fighter proportions remain uniform while the background fills the screen
+PASS (1024, 768) arena covers the full native surface without a 16:9 frame
+PASS (1024, 768) HUD follows the same usable screen rectangle as touch controls
+PASS (1024, 768) health bar remains inside the screen
+PASS (1024, 768) health bar remains inside the screen
+PASS (1024, 768) all combat buttons are visible and reachable within the safe area
+PASS (1024, 768) uses actual device/window pixels
+PASS (1024, 768) former side wings contain live arena artwork
+PASS (1024, 768) fighter proportions remain uniform while the background fills the screen
+PASS (1280, 720) arena covers the full native surface without a 16:9 frame
+PASS (1280, 720) HUD follows the same usable screen rectangle as touch controls
+PASS (1280, 720) health bar remains inside the screen
+PASS (1280, 720) health bar remains inside the screen
+PASS (1280, 720) all combat buttons are visible and reachable within the safe area
+PASS (1280, 720) uses actual device/window pixels
+PASS (1280, 720) former side wings contain live arena artwork
+PASS (1280, 720) fighter proportions remain uniform while the background fills the screen
+PASS sharkbyte has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS sharkbyte select portrait has no flow deformation or ghost layer
+PASS sharkbyte has twelve real walk and heavy drawings
+PASS bullet has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS bullet select portrait has no flow deformation or ghost layer
+PASS bullet has twelve real walk and heavy drawings
+PASS nachtelf has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS nachtelf select portrait has no flow deformation or ghost layer
+PASS nachtelf has twelve real walk and heavy drawings
+PASS poisonboy has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS poisonboy select portrait has no flow deformation or ghost layer
+PASS poisonboy has twelve real walk and heavy drawings
+PASS spinegrin has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS spinegrin select portrait has no flow deformation or ghost layer
+PASS spinegrin has twelve real walk and heavy drawings
+PASS chainveil has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS chainveil select portrait has no flow deformation or ghost layer
+PASS chainveil has twelve real walk and heavy drawings
+PASS cheese_rat has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS cheese_rat select portrait has no flow deformation or ghost layer
+PASS cheese_rat has twelve real walk and heavy drawings
+PASS lava_stone has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS lava_stone select portrait has no flow deformation or ghost layer
+PASS lava_stone has twelve real walk and heavy drawings
+PASS crystal_fang has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS crystal_fang select portrait has no flow deformation or ghost layer
+PASS crystal_fang has twelve real walk and heavy drawings
+PASS phoenix_reign has an intact waist-up drawing instead of a tiny animated full-body sprite
+PASS phoenix_reign select portrait has no flow deformation or ghost layer
+PASS phoenix_reign has twelve real walk and heavy drawings
+PASS all 240 new complete drawings are indexed; rejected/cropped poses are excluded
+PASS every new pose triangulates for both combat and the persistent 3D podium
+V10 VISUAL RESULT: 80 passed, 0 failed

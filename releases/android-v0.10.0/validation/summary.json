@@ -1,0 +1,78 @@
+{
+  "version": "0.10.0",
+  "android_version_code": 1000,
+  "source_commit": "f770aeb06551762a3cef45cb74763bc3f6867be8",
+  "distinct_source_assertions_passed": 1843,
+  "rendered_network_repeat": 25,
+  "framebuffers": [
+    [
+      1280,
+      582
+    ],
+    [
+      2400,
+      1080
+    ],
+    [
+      2780,
+      1264
+    ],
+    [
+      2532,
+      1170
+    ],
+    [
+      1024,
+      768
+    ],
+    [
+      1280,
+      720
+    ]
+  ],
+  "fighters": 10,
+  "moves": 69,
+  "new_drawn_walk_heavy_poses": 240,
+  "walk_heavy_poses_per_fighter": [
+    12,
+    12
+  ],
+  "half_body_portraits": 10,
+  "art_original_hashes_verified": 8,
+  "intro_films_fully_decoded": 10,
+  "android_abis": [
+    "arm64-v8a",
+    "x86_64"
+  ],
+  "android_min_api": 24,
+  "android_target_api": 36,
+  "apk_signing_schemes": [
+    "v2",
+    "v3"
+  ],
+  "native_alignment_kib": 16,
+  "retained_signing_certificate_sha256": "bf325c42dd009bd6a6309692bfbbf46a9b3448a807a8718a284e0b8a8c5ab48c",
+  "native_linux_workflow_passed": true,
+  "preview": {
+    "width": 1280,
+    "height": 582,
+    "fps": 60,
+    "frames": 1815,
+    "duration_seconds": 30.25,
+    "fully_decoded": true,
+    "scope": "offline Movie Maker, slowed attack timeline and charged-meter fixture; not physical phone FPS"
+  },
+  "physical_android_tested": false,
+  "physical_oneplus13r_tested": false,
+  "same_wifi_two_physical_devices_tested": false,
+  "artifacts": {
+    "InfernoDuel-Preview-v0.10.0.mp4": {
+      "bytes": 5735447,
+      "sha256": "8b4906a61d4bba65a49320753fa130880ed735b0e89e965fae16834d4d8ba7d2"
+    },
+    "InfernoDuel-Android-v0.10.0.apk": {
+      "bytes": 181865950,
+      "sha256": "b48e8cfab918044be26e67f001353e481c5ec2b231ff2fcea5ebd57d5353505d"
+    }
+  }
+}
