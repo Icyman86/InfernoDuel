@@ -40,39 +40,32 @@ func run() -> void:
 	for index in game.roster.size():
 		var gallery: FighterGallery = game.screen
 		await click(gallery.fighter_buttons[index])
-		check(gallery.current == index, game.roster[index].id + " is selectable through its actual gallery button")
-		var hero := gallery.showcase.fighters[0]
-		check(hero.visual.sprite.texture != null and gallery.preview.visible, game.roster[index].id + " has a rendered animated preview")
-		check(gallery.move_buttons.size() == hero.moves.size()+4, game.roster[index].id + " lists every attack and movement")
-		await click(gallery.move_buttons.heavy)
-		await get_tree().create_timer(0.23).timeout
-		check(gallery.showcase.current_move == "heavy" and not gallery.showcase.autoplay, game.roster[index].id + " actual move button performs heavy and takes manual control")
-		await capture("gallery-" + game.roster[index].id)
-		# Ultimate is below the fold: native focus scrolling must make it clickable.
-		await click(gallery.move_buttons.ultimate)
-		await get_tree().create_timer(0.4).timeout
-		check(gallery.showcase.current_move == "ultimate" and gallery.showcase.fighters[0].meter == 0, game.roster[index].id + " scrolled ultimate button executes the real meter-consuming move")
-		await capture("ultimate-" + game.roster[index].id)
-		await click(gallery.auto_button)
-		check(gallery.showcase.autoplay, game.roster[index].id + " auto tour can resume after manual moves")
+		check(gallery.current == index,game.roster[index].id+" is selectable through its actual roster card")
+		await get_tree().create_timer(.95).timeout
+		check(gallery.presentation.face.mesh != null and gallery.presentation.edge.mesh != null and gallery.demo_viewport.find_world_3d() != null,game.roster[index].id+" has a textured extruded silhouette in a real perspective 3D world")
+		check(gallery.presentation.visual.preview_pose == "heavy" and gallery.preview.visible,game.roster[index].id+" performs one signature move on entry")
+		var framed := true
+		var bounds := gallery.presentation.face.mesh.get_aabb()
+		for corner in 8:
+			var world := gallery.presentation.face.global_transform*bounds.get_endpoint(corner)
+			framed = framed and Rect2(Vector2.ZERO,Vector2(gallery.demo_viewport.size)).has_point(gallery.presentation.camera.unproject_position(world))
+		check(framed,game.roster[index].id+" full signature silhouette remains inside the camera frame")
+		await capture("presentation-"+game.roster[index].id)
+		await get_tree().create_timer(2.0).timeout
+		check(gallery.idle.visible and not gallery.preview.visible and gallery.presentation.finished,game.roster[index].id+" automatically returns to its in-place idle sprite")
+		var foot := gallery.idle.position
+		var scale_before := gallery.idle.sprite.scale.y
+		await get_tree().create_timer(.16).timeout
+		check(gallery.idle.position == foot and gallery.idle.sprite.scale.y != scale_before,game.roster[index].id+" breathes without walking away")
+		await capture("idle-"+game.roster[index].id)
 		await click(gallery.sheet_button)
-		check(gallery.art.visible and not gallery.preview.visible and gallery.showcase.stopped, game.roster[index].id + " original sheet remains available and pauses preview")
+		check(gallery.art.visible and not gallery.idle.visible and not gallery.preview.visible,game.roster[index].id+" original reference sheet remains separately accessible")
 		await click(gallery.sheet_button)
-		check(gallery.preview.visible and not gallery.showcase.stopped, game.roster[index].id + " returns from original sheet to live moves")
-	# Verify the auto tour actually advances; a toggled label is not enough.
+		check(gallery.idle.visible and not gallery.art.visible,game.roster[index].id+" returns from sheet to stationary character")
+		await click(gallery.replay_button)
+		check(gallery.preview.visible and not gallery.presentation.finished and not gallery.idle.visible,game.roster[index].id+" presentation replay restarts the entrance")
 	var gallery: FighterGallery = game.screen
-	gallery.showcase.play_move("idle", false)
-	gallery.showcase.elapsed = gallery.showcase.demo_duration
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	check(gallery.showcase.current_move == "walk", "automatic demonstration advances to the next move")
-	gallery.perform_move("walk")
-	await get_tree().create_timer(.22).timeout
-	var view := gallery.showcase.fighters[0].visual
-	var key := view.frame_number
-	await get_tree().create_timer(.15).timeout
-	check(view.frame_number != key, "walking preview advances authored gait frames")
-	check(view.material_fx.get_shader_parameter("pose_alpha") > 0, "pose blending leaves the current sprite visible")
+	check(gallery.get("move_buttons") == null and gallery.get("showcase") == null,"old automatic movement tour and executable move list are removed from Fighters")
 	# Mobile/touch UI stays usable after the roster/gallery expansion.
 	game.touch_mode = true
 	game.show_select(true)

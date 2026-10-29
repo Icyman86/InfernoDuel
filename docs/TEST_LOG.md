@@ -1,3 +1,88 @@
+# V7 six-character rooms, character showcase and thumbstick UI — 29 October 2026
+
+V7 / 0.7.0, Android code 700, replaces the V6 endpoint invitation and move lab.
+CREATE SESSION now makes exactly six random letters/numbers. The host device
+advertises the temporary room; the guest enters only the code. The UI exposes
+no addresses. This is same-Wi-Fi direct play without an extra hosted server.
+Different networks / 4G / 5G still require rendezvous/NAT traversal/relay support;
+none is deployed or bundled, and the connection UI states this limitation.
+
+| Final check | Result and scope |
+| --- | --- |
+| Immutable art and intro media | PASS — all eight hashes unchanged, ten full film decodes |
+| Core / art / expansion / full roster | PASS — 70 + 494 + 45 + 287 = 896 assertions |
+| Actual touch/drag/cancel and analog combat | PASS — 38 assertions |
+| All ten character presentations | PASS — 92 rendered assertions, including full camera framing |
+| Existing Linux rendered integration / intro expansion | PASS — 9 + 31 assertions |
+| Six-character codes / input / Android routes | PASS — 53 assertions |
+| Actual broadcast discovery + ENet | PASS — 25 assertions over three separate OS processes |
+| Rendered network repeat | PASS — same 25 assertions with X11-rendered game peers |
+| Native framebuffer sizes | PASS — 20 assertions over seven phone/tablet/window formats |
+| Actual create/cancel UI and combat layouts | PASS — 10 assertions; no visible endpoint information |
+| Android export / payload / signatures / alignment | PASS — final universal ARM64+x86_64 APK, compiled V7 discovery/presentation code, CRCs, v2/v3 signing, 16-KiB alignment |
+| Android version / compatibility | PASS — version 0.7.0 / code 700, API 24 minimum / 36 target; retained V6 development certificate for update |
+| Native Linux release engine + PCK | PASS — OS keyboard menu/showcase/select/fight/damage/pause/Quit, normal exit 0 |
+| Physical Android / Wi-Fi acceptance | NOT RUN — no physical devices attached; no native Android end-to-end pass claimed |
+
+There are 1,174 distinct successful source assertions; the 25 network assertions
+also pass with rendering. Media/hash and native package checks are separate.
+The final required suites have no script/engine errors or instance leaks. X11's
+unsupported V-Sync warning is a known virtual-display limitation. An optional
+Android editor device-list probe can report the absent adb daemon; export and
+signature/payload checks still complete with exit 0. This does not mean an Android
+device was present or exercised.
+
+The network fixture uses actual IPv4 broadcast lookup on UDP 38747 and unicast
+replies, then the real ENet peer, rather than an injected endpoint/mock service.
+An unknown code times out without creating a fake match; a valid code connects,
+owned selection/readiness starts the match, guest movement/light/projectile and
+host heavy apply exact health changes, pause votes freeze the timer, results
+agree, mutual rematch increments the epoch and leaving returns the guest to UI.
+Round-transition KOs remain fixtures. Local process traffic proves the protocol,
+not physical Wi-Fi reachability, carrier NAT or encrypted account authentication.
+
+Touch tests inject real screen events, cover simultaneous stick/attacks, analog
+magnitude, deadzone recentering, off-base clamping/release, canceled contacts,
+finger ownership, keyboard isolation, all actions, actual damage and directional
+armor/shield commands. Pause/background/round transitions clear inputs. Layouts
+fit five phone/tablet formats. A legacy two-pad component remains tested only for
+desktop reuse; Android cannot enter shared-screen versus. A one-pixel stick-edge
+tolerance fixes boundary hit tests under scaled layouts; assertions compare
+fractional motion with float tolerance. Combat readiness rings use actual special
+cooldown and meter. The UI suite clicks CREATE and CANCEL and scans visible
+label/button/input text to ensure addresses never leak into the screen.
+
+Fighters tests click all ten cards, render the actual perspective 3D world and
+textured extruded silhouette, check the signature heavy, full camera framing,
+automatic transition after 2.8 seconds, stationary breathing idle, original-sheet
+pause/return and replay. The old movement tour and executable move list are gone.
+The 3D viewport stops during idle/sheet view. Visual review caught a wide Crystal
+Fang bite cropping outside the camera; the entrance now fits the maximum authored
+width/height and centers each pose on the podium. All ten framing checks pass.
+This is a 2.5D presentation built from existing art, not newly modelled/rigged
+characters. No original artwork pixels have changed.
+
+Native resolution remains unchanged: actual framebuffer readbacks, viewport/root
+and safe stage proportions are checked from 960×540 through 2560×1440, including
+2400×1080 phones and 1024×768 tablets. Modern combat screenshots additionally
+cover 1280×720, 2400×1080 and 1024×768 with one thumbstick, adjacent block, a large
+Attack and surrounding heavy/special/ultimate/jump, plus pause.
+
+The native Linux package also passed outside the editor, with X11 key injection,
+rendered character showcase, owned selections, active timer, actual damage pixels,
+pause and normal Quit. The harness now waits for visible menu/select/arena/fight
+states; fixed delays could send keys while a new screen was loading. Whole-image
+OCR could omit a clearly rendered HUD, so names/active time are checked before
+attacks and the actual health-bar change checks damage. Final native log has
+normal exit 0 and no engine/script errors. This remains a Linux package result.
+
+Still required: install this exact APK on two phones/tablets and test temporary
+room lookup on real Wi-Fi, own touch movement/attacks, pause/background/resume,
+rematch/disconnect, cutouts, physical multitouch, audio, thermals and native pixel
+frame rate. The guest uses smoothing without prediction/rollback. No physical
+Android, public Internet service or two-human ergonomics result is inferred from
+Linux tests. All versions are retained; later changes get a fresh APK/code/tag.
+
 # V6 native resolution + direct sessions — 29 October 2026
 
 This supersedes earlier Android shared-tablet and fixed-render-resolution behavior.

@@ -42,9 +42,9 @@ func _ready() -> void:
 			Settings.save())
 		add_child(slider)
 	add_child(UI.place(UI.label("MULTITOUCH · MOVE AND ATTACK TOGETHER" if touch_mode else "ONE KEYBOARD · TWO INDEPENDENT PLAYERS",24,UI.GOLD),60,410,1160,44))
-	add_child(UI.place(UI.label("LEFT: ◀ / ▶ move · JUMP · GUARD\nHold GUARD while facing your opponent" if touch_mode else "P1  A / D move · W jump · S block\nF light · G heavy · H special · J ultimate",20,UI.CYAN),60,475,570,80))
-	add_child(UI.place(UI.label("RIGHT: LIGHT · HEAVY · SPECIAL · ULT\nULT requires 100% meter" if touch_mode else "P2  ← / → move · ↑ jump · ↓ block\nI light · O heavy · P special · L ultimate",20,UI.ORANGE),650,475,570,80))
-	add_child(UI.place(UI.label("Ⅱ pauses · Android Back navigates back · Your pad matches your P1/P2 color" if touch_mode else "ESC pause · Physical keyboard ghosting requires a two-person hardware test.",18,UI.MUTED),60,579,1160,32))
+	add_child(UI.place(UI.label("LEFT: THUMBSTICK + BLOCK\nSlide to move · Hold BLOCK to defend" if touch_mode else "P1  A / D move · W jump · S block\nF light · G heavy · H special · J ultimate",20,UI.CYAN),60,475,570,80))
+	add_child(UI.place(UI.label("RIGHT: ATTACK + SKILL BUTTONS\nJUMP · HEAVY · SPECIAL · ULT (100%)" if touch_mode else "P2  ← / → move · ↑ jump · ↓ block\nI light · O heavy · P special · L ultimate",20,UI.ORANGE),650,475,570,80))
+	add_child(UI.place(UI.label("Ⅱ pauses · Android Back returns · Combine thumbstick or BLOCK with attacks" if touch_mode else "ESC pause · Physical keyboard ghosting requires a two-person hardware test.",18,UI.MUTED),60,579,1160,32))
 	add_child(UI.place(UI.label("MOVE VARIANTS: hold FORWARD / BACK / GUARD + LIGHT, SPECIAL or ULT · Full move list in FIGHTERS",15,UI.GOLD),60,611,1160,26))
 	add_child(UI.place(UI.button("RESET DEFAULTS",func():
 		Settings.reset()

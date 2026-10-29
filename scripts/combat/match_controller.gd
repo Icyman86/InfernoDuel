@@ -46,14 +46,16 @@ func _make_hud() -> void:
 	hud.theme = UI.theme()
 	add_child(hud)
 	var top := ColorRect.new()
-	top.color = Color(0.018,0.014,0.03,0.82)
+	top.color = Color(0.025,0.04,0.07,0.88)
 	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(UI.place(top,0,0,1280,140))
 	for i in 2:
 		var x := 134.0 if i == 0 else 748.0
 		var c := UI.CYAN if i == 0 else UI.ORANGE
 		var portrait_frame := UI.panel()
-		portrait_frame.add_theme_stylebox_override("panel",UI.style(Color("17131b"),c,2))
+		var portrait_style := UI.style(Color("101b2b"),c,2)
+		portrait_style.set_corner_radius_all(14)
+		portrait_frame.add_theme_stylebox_override("panel",portrait_style)
 		hud.add_child(UI.place(portrait_frame,34 if i == 0 else 1162,34,84,88))
 		var portrait := FighterPortrait.new()
 		portrait.setup(profiles[i])
@@ -63,6 +65,12 @@ func _make_hud() -> void:
 		hud.add_child(UI.place(name_label,x,30,398,30))
 		names.append(name_label)
 		var hp_bar := UI.bar(c)
+		for layer in ["background","fill"]:
+			var health_style := hp_bar.get_theme_stylebox(layer).duplicate()
+			health_style.set_corner_radius_all(10)
+			health_style.set_border_width_all(0)
+			health_style.bg_color = Color("172839") if layer == "background" else c
+			hp_bar.add_theme_stylebox_override(layer,health_style)
 		hud.add_child(UI.place(hp_bar,x,65,398,24))
 		if i == 1: hp_bar.fill_mode = ProgressBar.FILL_END_TO_BEGIN
 		health.append(hp_bar)
@@ -74,20 +82,22 @@ func _make_hud() -> void:
 		meter_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if i == 0 else HORIZONTAL_ALIGNMENT_RIGHT
 		hud.add_child(UI.place(meter_text,x,109,398,23))
 		meter_labels.append(meter_text)
-		var tokens := UI.label("◇ ◇",22,c)
+		var tokens := UI.label("○ ○",22,c)
 		hud.add_child(UI.place(tokens,421 if i == 0 else 749,23,112,40))
 		round_tokens.append(tokens)
-		var combo_label := UI.label("",28,c,true)
+		var combo_label := UI.label("",22,c)
 		hud.add_child(UI.place(combo_label,95 if i == 0 else 780,163,405,75))
 		combos.append(combo_label)
 	var timer_panel := UI.panel()
-	timer_panel.add_theme_stylebox_override("panel",UI.style(Color("17111c"),Color("806044"),2))
+	var timer_style := UI.style(Color("0d1726"),Color("334a62"),1)
+	timer_style.set_corner_radius_all(18)
+	timer_panel.add_theme_stylebox_override("panel",timer_style)
 	hud.add_child(UI.place(timer_panel,577,22,126,93))
-	timer_label = UI.label("60",47,UI.GOLD,true)
+	timer_label = UI.label("60",47,UI.IVORY)
 	hud.add_child(UI.place(timer_label,575,28,130,64))
 	round_label = UI.label("ROUND 1",14,UI.MUTED)
 	hud.add_child(UI.place(round_label,568,95,144,25))
-	announcement = UI.label("3",64,UI.GOLD,true)
+	announcement = UI.label("3",64,UI.IVORY)
 	announcement.add_theme_constant_override("outline_size",8)
 	announcement.add_theme_color_override("font_outline_color",Color("130b15"))
 	hud.add_child(UI.place(announcement,100,230,1080,145))
@@ -237,7 +247,7 @@ func update_hud() -> void:
 		meters[i].value = fighters[i].meter
 		var owner := "YOU" if local_network_slot == i else ("CPU" if solo and i == 1 else "P%d" % (i+1))
 		names[i].text = "%s  /  %s" % [owner,profiles[i].display_name.to_upper()]
-		round_tokens[i].text = "◆ ".repeat(wins[i])+"◇ ".repeat(2-wins[i])
+		round_tokens[i].text = "● ".repeat(wins[i])+"○ ".repeat(2-wins[i])
 		meter_labels[i].text = "%d HP    /    SUPER %d%%" % [fighters[i].hp,fighters[i].meter]
 		if fighters[i].armor_time > 0: meter_labels[i].text += "  ARMOR %.1fs" % fighters[i].armor_time
 		if fighters[i].empower_time > 0: meter_labels[i].text += "  POWER %.1fs" % fighters[i].empower_time

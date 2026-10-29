@@ -1,0 +1,171 @@
+class_name FighterPresentation
+extends Node3D
+## A textured, extruded silhouette in real perspective; preserves authored art.
+## This is a 2.5D presentation, not a newly modelled skeletal character.
+var profile: Dictionary
+var visual: FighterVisual
+var rig: Node3D
+var face: MeshInstance3D
+var edge: MeshInstance3D
+var camera: Camera3D
+var elapsed := 0.0
+var finished := false
+var cached_key := ""
+var hero_scale := 1.0
+var accent := Color("55d9ef")
+var front_material: StandardMaterial3D
+var mesh_cache: Dictionary = {}
+signal completed
+
+func solid(color: Color, emission := 0.0) -> StandardMaterial3D:
+	var material := StandardMaterial3D.new()
+	material.albedo_color = color
+	material.roughness = .36
+	material.metallic = .45
+	if emission > 0:
+		material.emission_enabled = true
+		material.emission = color
+		material.emission_energy_multiplier = emission
+	return material
+
+func cylinder(radius: float, height: float, y: float, material: Material) -> void:
+	var node := MeshInstance3D.new()
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = height
+	mesh.radial_segments = 64
+	node.mesh = mesh
+	node.material_override = material
+	node.position.y = y
+	add_child(node)
+
+func _ready() -> void:
+	accent = Color(profile.get("accent","55d9ef"))
+	var world := WorldEnvironment.new()
+	world.environment = Environment.new()
+	world.environment.background_mode = Environment.BG_COLOR
+	world.environment.background_color = Color("0b101b")
+	world.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	world.environment.ambient_light_color = Color("a2b7ce")
+	world.environment.ambient_light_energy = .68
+	add_child(world)
+	camera = Camera3D.new()
+	camera.fov = 37
+	add_child(camera)
+	camera.current = true
+	for item in [[Vector3(-3,6,5),Color("c8edff"),1.3],[Vector3(3,3,-2),accent,2.1]]:
+		var light := OmniLight3D.new()
+		light.position = item[0]
+		light.light_color = item[1]
+		light.light_energy = item[2]
+		light.omni_range = 12
+		add_child(light)
+	cylinder(2.4,.24,-.18,solid(Color("151f31")))
+	cylinder(2.44,.025,-.055,solid(accent,.8))
+	cylinder(2.34,.04,-.02,solid(Color("101724")))
+	for radius in [1.76,2.12]:
+		var ring := MeshInstance3D.new()
+		var torus := TorusMesh.new()
+		torus.inner_radius = radius
+		torus.outer_radius = radius+.015
+		torus.rings = 48
+		torus.ring_segments = 8
+		ring.mesh = torus
+		ring.material_override = solid(Color(accent,.8),.7)
+		ring.position.y = .01
+		add_child(ring)
+	rig = Node3D.new()
+	add_child(rig)
+	face = MeshInstance3D.new()
+	edge = MeshInstance3D.new()
+	rig.add_child(edge)
+	rig.add_child(face)
+	front_material = StandardMaterial3D.new()
+	front_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+	front_material.alpha_scissor_threshold = .12
+	front_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	front_material.roughness = .8
+	face.material_override = front_material
+	edge.material_override = solid(accent.darkened(.73))
+	visual = FighterVisual.new()
+	visual.profile = profile
+	visual.target_height = 300
+	visual.visible = false
+	add_child(visual)
+	# Supplementary bite/kick silhouettes can extend far beyond the idle pivot.
+	# Fit the whole authored entrance once, then center each pose on the podium.
+	var widest := 0.0
+	var tallest := 0.0
+	for pose in ["idle","heavy"]:
+		var animation: Dictionary = visual.metadata.animations[pose]
+		var source: String = animation.get("atlas","core")
+		var scale_factor := visual.pixels_to_world*float(visual.metadata[source].get("scale",1.0))/80.0
+		for index in animation.frames:
+			var frame: Dictionary = visual.metadata[source].frames[index]
+			var bounds := Rect2(Vector2(frame.polygon[0][0],frame.polygon[0][1]),Vector2.ZERO)
+			for point in frame.polygon: bounds = bounds.expand(Vector2(point[0],point[1]))
+			widest = maxf(widest,bounds.size.x*scale_factor)
+			tallest = maxf(tallest,bounds.size.y*scale_factor)
+	hero_scale = minf(1.0,minf(3.8/maxf(widest,.01),3.55/maxf(tallest,.01)))
+	replay()
+
+func replay() -> void:
+	elapsed = 0
+	finished = false
+	set_process(true)
+
+func build_mesh() -> void:
+	var sprite := visual.sprite
+	if not sprite or sprite.polygon.size() < 3: return
+	var key := visual.last_key
+	if key == cached_key: return
+	cached_key = key
+	if not mesh_cache.has(key):
+		var vertices := PackedVector3Array()
+		var uv := PackedVector2Array()
+		var normals := PackedVector3Array()
+		for i in sprite.polygon.size():
+			var p: Vector2 = (sprite.polygon[i]-visual.current_pivot)*sprite.scale/80.0
+			vertices.append(Vector3(p.x,-p.y,.075))
+			uv.append(sprite.uv[i]/sprite.texture.get_size())
+			normals.append(Vector3(0,0,1))
+		var arrays := []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = vertices
+		arrays[Mesh.ARRAY_TEX_UV] = uv
+		arrays[Mesh.ARRAY_NORMAL] = normals
+		arrays[Mesh.ARRAY_INDEX] = Geometry2D.triangulate_polygon(sprite.polygon)
+		var mesh := ArrayMesh.new()
+		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+		var walls := SurfaceTool.new()
+		walls.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for i in vertices.size():
+			var a := vertices[i]
+			var b := vertices[(i+1)%vertices.size()]
+			var back_a := a-Vector3(0,0,.15)
+			var back_b := b-Vector3(0,0,.15)
+			for v in [a,back_a,b,b,back_a,back_b]: walls.add_vertex(v)
+		walls.generate_normals()
+		mesh_cache[key] = [mesh,walls.commit(),sprite.texture]
+	face.mesh = mesh_cache[key][0]
+	edge.mesh = mesh_cache[key][1]
+	front_material.albedo_texture = mesh_cache[key][2]
+
+func _process(delta: float) -> void:
+	elapsed += delta
+	var progress := clampf((elapsed-.65)/1.35,0.0,.999)
+	visual.preview_pose = "heavy" if elapsed >= .65 and elapsed < 2.0 else "idle"
+	visual.preview_progress = progress if visual.preview_pose == "heavy" else -1.0
+	visual._update_pose(delta)
+	build_mesh()
+	var swing := sin(progress*PI) if visual.preview_pose == "heavy" else 0.0
+	rig.rotation.y = sin(elapsed*1.5)*.1-swing*.16
+	rig.position.x = swing*.15-face.mesh.get_aabb().get_center().x*hero_scale if face.mesh else 0.0
+	rig.scale = Vector3.ONE*hero_scale*(1+sin(elapsed*3)*.004)
+	camera.position = Vector3(1.2*cos(elapsed*.65),2.1,7.5-swing*.35)
+	camera.look_at(Vector3(0,1.65,0))
+	if elapsed > 2.8 and not finished:
+		finished = true
+		set_process(false)
+		completed.emit()

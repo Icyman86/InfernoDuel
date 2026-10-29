@@ -1,3 +1,25 @@
+# V7 character presentations — 29 October 2026
+
+Fighters no longer runs the animated move lab or movement tour. Each character
+opens with one signature heavy in a short 3D podium shot, then switches to a
+stationary FighterVisual idle with breathing, matching the menu's presentation.
+REPLAY PRESENTATION repeats it; original sheets and existing films remain.
+
+FighterPresentation uses real Godot Node3D, a perspective Camera3D, a lit cylinder
+podium, illuminated rings and MeshInstance3D faces/sidewalls. Front faces retain
+the existing indexed atlas texture/UVs; sidewalls extrude the validated silhouette
+by 0.15 world units. Meshes cache per authored pose. Camera movement, a small
+rotation and attack lunge add depth. The hidden FighterVisual supplies authored
+pose timing; no original pixels or generated derivatives are edited. This is a
+2.5D extruded-art presentation, not a new fully modelled/rigged 3D character or
+motion capture. It deliberately does not show invented back/side anatomy.
+
+After 2.8 seconds the 3D viewport stops rendering and a stationary idle sprite
+breathes in place. Original-sheet view pauses presentation; switching characters
+disposes the previous world/visual. All ten presentations, move-to-idle transitions,
+replay and original sheets are covered by rendered tests. Physical Android GPU
+performance remains unverified. All eight original source hashes remain unchanged.
+
 # Full roster animation update v0.5 — 29 October 2026
 
 All ten fighters now have reference-guided runtime sprites. The five new combat

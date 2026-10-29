@@ -1,4 +1,4 @@
-# Prototype architecture — V6 / v0.6.0
+# Prototype architecture — V7 / v0.7.0
 
 Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 `scenes/main.tscn` is the F5 entry point. No network services or secrets are needed.
@@ -61,7 +61,7 @@ third-party notices accompany the native package. Final balance, music/voices,
 physical-keyboard acceptance, Story, rebinding and physical Android acceptance
 remain follow-up work. All ten combat sets and the Android APK are implemented.
 
-## Full roster and move lab
+## Full roster and character presentation
 
 `data/move_sets.json` defines 69 attacks/abilities. `MoveCatalog` builds independent
 AttackData resources, applies profile overrides, resolves facing-relative directional
@@ -76,21 +76,31 @@ air control. Physics interpolation and reset handling smooth world motion withou
 changing the 60 Hz deterministic simulation. Sprite keys blend separately over
 55 ms and track authored active/recovery phases.
 
-`MoveShowcase` subclasses DuelMatch in a 2D-only SubViewport. It replaces the HUD
-with a training dummy/readout, scripts commands through the same move catalogue,
-refills meter between demonstrations and has no link to match progression.
-`FighterGallery` offers autoplay, manual scrollable move buttons, original-sheet
-view and existing intro navigation. Changing fighter destroys the previous preview;
-viewing the original sheet stops both its simulation and viewport rendering.
-The move lab and offline modes need no service or account.
+`FighterGallery` now selects ten characters and plays one `FighterPresentation`
+3D podium shot, then swaps to a stationary `FighterVisual` idle. The presentation
+extrudes existing silhouette polygons into textured front meshes and sidewalls,
+with perspective/lighting/camera motion; it is 2.5D art, not a skeletal model.
+The 3D viewport stops when idle or original-sheet view is active. Replay and
+original intro navigation remain. The old executable move list/tour is removed;
+MoveShowcase remains an unused internal authoring helper, outside the player flow.
+
+`TouchControls` owns fixed analog thumbsticks separately from circular contacts.
+A thumb owns its stick until release/cancel, with clamped travel and a deadzone.
+InputRouter combines fractional touch axis with existing keyboard input and
+clears both on transitions. Other fingers press the large basic attack, surrounding
+heavy/special/ultimate/jump and nearby block. Readiness rings use actual actor
+cooldowns/meter, including authoritative guest state.
 
 ## Direct sessions
 
-`OnlineSession` owns an ENet peer and the host-authoritative lobby. `SessionCode`
-encodes the IPv4 endpoint, random room nonce, protocol and typo checksum; there
-is no directory or NAT traversal. A reliable handshake checks the nonce and
-exact application version. Each peer can edit only its own fighter/ready state.
-Android exposes session-code play and offline CPU, with no local-versus route.
+`OnlineSession` owns an ENet peer and host-authoritative lobby. SessionCode makes
+six random unambiguous characters. SessionDiscovery uses local UDP broadcast and
+challenge-echoed unicast replies to resolve that code, keeping endpoints internal.
+The UI has no address picker/input. There is no public directory, relay or NAT
+traversal; the host device advertises only while waiting on the same Wi-Fi.
+The reliable ENet handshake checks a separate room nonce, protocol and exact app
+version. Each peer edits only its own selection/ready state. Android offers only
+session-code versus or offline CPU. See NETWORK.md for port/reachability limits.
 
 `NetworkMatchDriver` supplies the host's DuelMatch with local and bounded guest
 inputs. The host alone simulates collisions, damage, rounds and wins at 60 Hz.

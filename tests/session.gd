@@ -21,22 +21,17 @@ func _ready() -> void:
 	call_deferred("run")
 
 func run() -> void:
-	var nonce := PackedByteArray([0,255,1,2,3,4,99,200])
-	for address in ["192.168.1.18","10.0.0.4","172.20.0.2","127.0.0.1"]:
-		for port in [1024,24551,65535]:
-			var code := SessionCode.encode(address,port,nonce)
-			var decoded := SessionCode.decode(code)
-			check(not decoded.is_empty() and decoded.address == address and decoded.port == port and decoded.token == nonce.hex_encode(),"session code round-trips IPv4, port and full random nonce")
-	var code := SessionCode.encode("192.168.1.18",24551,nonce)
-	check(not SessionCode.decode(code.to_lower().replace("-"," ")).is_empty(),"codes accept lowercase and copied spacing")
-	check(SessionCode.decode(code.left(-1)+("0" if code[-1] != "0" else "1")).is_empty(),"checksum detects changed or noncanonical code characters")
-	for invalid in ["", "123456", "ID5-1234", "https://example.com", code+"A", code.substr(1)]:
-		check(SessionCode.decode(invalid).is_empty(),"malformed / wrong-version session code is rejected")
-	check(SessionCode.encode("0.0.0.0",10,nonce) == "" and SessionCode.encode("224.1.1.1",10,nonce) == "","unspecified and multicast addresses cannot become invitations")
-	check(SessionCode.encode("192.168.1.1",0,nonce) == "" and SessionCode.encode("192.168.1.1",65536,nonce) == "","invalid ports are rejected")
-	check(SessionCode.encode("::1",1234,nonce) == "" and SessionCode.encode("192.168.1.1",1234,nonce.slice(0,4)) == "","unsupported address and truncated nonce are rejected")
+	var seen := {}
+	for i in 32:
+		var code := SessionCode.generate()
+		check(code.length() == 6 and SessionCode.valid(code) and not seen.has(code),"generated room code has exactly six human-readable random symbols")
+		seen[code] = true
+	check(SessionCode.normalize(" ab-23cd ") == "AB23CD","codes normalize case, copied spacing and separators")
+	for invalid in ["", "12345", "1234567", "https://example.com", "ABC.23", "IO0O1L"]:
+		check(not SessionCode.valid(invalid),"bad length, ambiguous symbols and addresses cannot be room codes")
 	var input: Dictionary = OnlineSession.sanitize_input({"axis":200,"light":true,"hp":10000})
 	check(input.axis == 1 and input.light and not input.has("hp"),"remote input is clamped and cannot carry health changes")
+	check(is_equal_approx(OnlineSession.sanitize_input({"axis":0.45}).axis,0.45),"network input preserves partial thumbstick movement")
 	check(OnlineSession.sanitize_input({"axis":"bad"}).is_empty(),"non-numeric remote movement is rejected")
 	check(OnlineSession.sanitize_input({"axis":NAN}).is_empty(),"non-finite remote movement is rejected")
 	check(not OnlineSession.sanitize_input({"axis":0,"light":"true"}).light,"string input cannot masquerade as an attack button")
@@ -49,6 +44,7 @@ func run() -> void:
 	game.show_select(false)
 	check(game.route == "online","Android cannot enter local versus through the selection API")
 	var lobby: OnlineLobby = game.screen
+	check(lobby.code_input.max_length == 6 and not lobby.get("address_picker"),"connection UI accepts only six symbols and has no address picker")
 	lobby.code_input.grab_focus()
 	for letter in ["f","s","i"]:
 		var event := InputEventKey.new()

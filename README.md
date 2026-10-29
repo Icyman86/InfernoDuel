@@ -9,29 +9,34 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Android APK — phones and tablets
 
-[Download Android V6 (0.6.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.6.0-android/releases/android-v0.6.0/InfernoDuel-Android-v0.6.0.apk)
+[Download Android V7 (0.7.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.7.0-android/releases/android-v0.7.0/InfernoDuel-Android-v0.7.0.apk)
 
 Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
 multitouch. Install the APK from your browser/downloads; allow installation from
 that source when Android asks. This is a sideloadable preview signed with a local
 development key, not a Play Store release. See [Android build and validation](docs/ANDROID.md).
 
-Play in landscape. **CONNECT · SESSION CODE** connects two separate devices on
-the same Wi-Fi / reachable IPv4 network. The host taps CREATE SESSION and shares
-the complete code; the guest pastes it and taps CONNECT. Each player chooses and
-readies their own fighter. Android has one touchpad per device and no local versus.
-**PLAY · TOUCH VS CPU** remains available offline; EDIT P2 / CPU changes the
-opponent. Direct codes do not provide Internet matchmaking or NAT traversal;
-other Wi-Fi networks and 4G/5G need routing or a relay. See [session setup](docs/NETWORK.md).
+Play in landscape. **CONNECT · SESSION CODE** lets the hosting device create a
+temporary room with **six letters/numbers**. The guest types that code and taps
+CONNECT. No address is displayed or entered. Both devices must be on the same
+Wi-Fi with peer traffic allowed; discovery and combat connect directly without
+a separate server or account. Each player chooses and readies their own fighter.
+Android has one touchpad per device and no local versus. Other Wi-Fi networks or
+4G/5G need an external relay/NAT traversal service; the code alone does not bypass
+routers. No such service is bundled. See [session setup](docs/NETWORK.md).
 
-Rendering follows the device's actual surface resolution, including changes;
-there is no fixed 1280×720 render target. The arena keeps its proportions inside
-the safe display area. Left controls move, jump and guard; right controls light,
-heavy, special and ultimate. Hold guard while facing the opponent; ultimate needs
-100% meter. Moving and attacking support multiple fingers. Tap **Ⅱ** to pause;
-Android Back returns or pauses, and switching apps pauses the fight. In a connected
-match, either player can pause; both must release their pause request to continue.
-Layouts fit phone and tablet aspect ratios and keep controls inside Android's safe display area.
+**PLAY · TOUCH VS CPU** remains offline. The new combat UI has a proportional
+**left thumbstick**, BLOCK alongside it, a large right **ATTACK** button, and
+smaller HEAVY, SPECIAL, ULT and JUMP buttons around it. Rings show actual special
+cooldown and ultimate meter. Slide the stick to move; release to stop. Hold a
+direction or BLOCK with an attack for directional variants. ULT needs 100 meter.
+Tap **Ⅱ** or Android Back to pause; backgrounding also pauses and clears touches.
+In connected play all pause requests must be released before resuming.
+
+Rendering follows the device's actual surface resolution, including changes.
+The arena keeps its proportions inside the safe display area; touch controls fit
+phone and tablet aspect ratios. Lift and touch again after countdown, rounds or
+pause. Physical-device ergonomics, cutouts and performance still need acceptance.
 
 The APK is stored in Git LFS because it includes both native engines and all ten
 intro movies. A source checkout needs `git lfs pull` to fetch it; the download
@@ -42,7 +47,7 @@ link above serves the APK directly. Linux play and keyboard controls remain supp
 [Download Linux v0.3.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-Linux-v0.3.tar.xz)
 
 Extract the archive and run `InfernoDuel-Linux/PLAY.sh`. Godot does not need to
-be installed separately. This earlier archive has five fighters; rebuild from current source for all ten and the live move lab. Linux x86_64 and OpenGL 3.3 are required.
+be installed separately. This earlier archive has five fighters; rebuild from current source for all ten and the current character showcase. Linux x86_64 and OpenGL 3.3 are required.
 
 ## Play / F5
 
@@ -64,13 +69,14 @@ Bullet, Nachtelf, PoisonBoy, Spinegrin, Chainveil, Cheese Rat, Lava Stone,
 Crystal Fang and Phoenix Reign. Every fighter has animated selection art and a
 complete basic/special/ultimate set; the full roster has **69 attacks/abilities**.
 
-In **FIGHTERS · MOVE LAB**, each character performs an automatic tour of their
-movement and attacks against a training dummy. Click/tap any move to perform it
-manually, including specials, directional variants, buffs and supers. The preview
-uses actual match controllers, projectiles, damage and meter costs; meter refills
-only between demonstrations. AUTO resumes the tour, ORIGINAL SHEET opens the
-unchanged reference art, and PLAY INTRO retains every fighter's existing movie.
-The scrollable list supports touch, mouse and keyboard focus. BACK/Esc returns.
+**FIGHTERS** is now a character showcase. Ten portrait cards select each legend.
+A short entrance uses the existing illustrated character art as an extruded,
+textured silhouette on a lit perspective **3D podium**, performs one signature
+move, then returns to a stationary breathing sprite, like the menu characters.
+REPLAY PRESENTATION repeats the entrance. ORIGINAL SHEET and PLAY INTRO retain
+the original references and existing films. The old movement tour, dummy and
+executable move list are removed. This is a 2.5D art presentation, not ten new
+fully modelled/rigged 3D characters.
 
 New six-key walk cycles, 55 ms pose blends, velocity-driven gait, small body lean,
 physics interpolation, acceleration with fast direction reversal, a 160 ms attack
@@ -105,7 +111,7 @@ F3 shows combat hitboxes. Focus loss automatically pauses the fight.
 
 Rounds last 60 seconds with 100 HP. Win two rounds to win the match. Equal HP
 at timeout or double KO replays the round. Light/heavy/special/ultimate deal
-6/12/16/30 base damage; named variants have their own values in the move lab. Grounded guard facing the attacker reduces damage by 75%.
+6/12/16/30 base damage; named variants have their own values in data/move_sets.json. Grounded guard facing the attacker reduces damage by 75%.
 Special cooldown is 1.5 seconds (Cheese Rat: 1.4); meter persists between rounds, not rematches.
 Try light → light → heavy, or cancel a landed light's recovery into special.
 
@@ -117,7 +123,7 @@ each fighter can have at most three active projectiles/traps.
 
 Hold **forward, backward or guard** while pressing LIGHT, SPECIAL or ULT for
 named variants. Forward/backward are relative to the opponent. GUARD is S for P1,
-Down for P2, or the GUARD touch button. The move lab lists each binding and cost.
+Down for P2, or the GUARD touch button. Hold a direction or BLOCK with an attack to choose these variants.
 Lava Stone has armor and ground spikes; Crystal Fang has crystal rushdown,
 shields and temporary power; Phoenix Reign has aerial fire moves and healing;
 Nachtelf zones with ember/rift projectiles; Spinegrin fires capped spike volleys.
@@ -142,13 +148,13 @@ godot --path . --audio-driver Dummy tests/visual.tscn
 godot --path . --audio-driver Dummy tests/expansion_visual.tscn
 ./tools/test_touch.sh
 ./tools/test_gallery.sh
-TEST_NETWORK_RENDERED=1 ./tools/test_v6.sh
+TEST_NETWORK_RENDERED=1 ./tools/test_v7.sh
 ```
 
 Rendered screenshots are written to `/tmp/inferno-visual/`, `/tmp/inferno-v03-visual/`,
 `/tmp/inferno-touch/`, `/tmp/inferno-roster-visual/` and `/tmp/inferno-v6-visual/`.
-The V6 suite checks native framebuffer sizes, Android routes, session-code parsing
-and real multi-process ENet gameplay. The graphical network repeat is optional;
+The session/UI suite checks native framebuffer sizes, Android routes, session-code parsing
+six-character LAN discovery, modern touch UI and real multi-process ENet gameplay. The graphical network repeat is optional;
 the default network run is headless. No public relay service is required or bundled.
 Tests do not establish
 physical keyboard rollover, audio-device quality, or real two-person playability.
@@ -176,8 +182,8 @@ these Python packages are not needed to play or run the normal tests.
 
 No external services or credentials are needed to play or test the game.
 Every published update gets a new version, Android versionCode, APK path and Git
-tag; published APKs/tags are retained instead of overwritten. This update is V6,
-version 0.6.0 / Android code 600.
+tag; published APKs/tags are retained instead of overwritten. This update is V7,
+version 0.7.0 / Android code 700.
 On restricted cloud hosts use writable XDG data/config/cache directories when
 invoking Godot, e.g. `XDG_DATA_HOME=/workspace/.runtime/data` (and similarly
 `XDG_CONFIG_HOME`, `XDG_CACHE_HOME`). A graphical desktop/OpenGL 3.3 is required

@@ -1,53 +1,47 @@
-# Android preview V6 / v0.6.0
+# Android V7 / 0.7.0
 
-Native Godot touch play includes all ten fighters, 69 attacks/abilities, the
-interactive animated move lab and ten intro films. V6 renders at the device's
-actual surface resolution and replaces Android shared-screen versus with direct
-session-code play between two devices. Offline CPU remains available. The APK
-now requests normal INTERNET and ACCESS_NETWORK_STATE permissions for ENet UDP;
-there is no account or hosted matchmaking service.
+V7 uses the native device resolution and modernizes the combat controls and
+Fighters screen. The hosting device creates a temporary session with six random
+letters/numbers; the other device connects with only that code. IP addresses are
+absent from the UI. No external server needs to be hosted for same-Wi-Fi play.
 
 ## Install and play
 
-Download the APK linked in the main README. Requirements: Android 7.0 / API 24 or
-later, a 64-bit ARM or x86_64 Android OS, OpenGL ES 3.0 and multitouch. The target
-SDK is 36. Phones and tablets run in landscape; 32-bit Android is unsupported.
-The universal APK contains both ARM64 and x86_64 engines.
+Download the APK in README. Android 7.0+ (API 24), a 64-bit ARM or x86_64 Android
+OS, OpenGL ES 3.0 and multitouch are required. Target SDK: 36. Landscape phones
+and tablets are supported; 32-bit Android is not. This sideload preview uses the
+retained v0.4/v0.5/v0.6 development certificate and versionCode 700 for in-place
+updates. It is not a Play Store release; private production signing is separate.
 
-Enable installation from the downloading browser/file manager if Android asks.
-This preview uses the same retained local development certificate as v0.4/v0.5,
-with versionCode 600, allowing an in-place update. Keep the keystore locally for
-future updates. Production distribution needs a private release key and separate
-store validation. No keystore or password file is committed to Git.
+CONNECT · SESSION CODE: host taps CREATE SESSION and shares six characters.
+Guest enters the code and taps CONNECT. Keep both games open on the same Wi-Fi.
+The host advertises a room over local UDP; the guest finds it automatically and
+opens the direct ENet connection. Each chooses/readies their own fighter. No
+address entry or selection is needed. CANCEL closes the room and allows another
+one. No Android local/shared-tablet versus exists. PLAY · TOUCH VS CPU remains
+offline. See NETWORK.md for peer isolation, firewall and Internet limitations.
 
-For two players, choose CONNECT · SESSION CODE on each device. On the same Wi-Fi,
-one player selects the Wi-Fi IPv4 address and taps CREATE SESSION, then shares
-the complete ID6 code. The other pastes the code and taps CONNECT. Each chooses
-and readies their own fighter; the match starts when both are ready. Each device
-has one touchpad. There is no Android local/shared-tablet versus. Direct codes
-require an actually reachable host: guest Wi-Fi isolation and firewalls can block
-it. Different networks / 4G / 5G need routing or a relay; V6 does not include a
-public relay or automatic NAT traversal. See [NETWORK.md](NETWORK.md).
+Combat has a left thumbstick with a deadzone and proportional horizontal motion,
+BLOCK next to it, and a large ATTACK button on the right. HEAVY, SPECIAL, ULT and
+JUMP sit around ATTACK. Special cooldown and ultimate meter appear as rings.
+Hold a direction or BLOCK with attacks for directional variants. ULT needs 100
+meter. The stick retains its owning finger beyond its base and clamps its range;
+release/cancel recenters it. A second finger cannot take it over. Attack contacts
+release when dragged outside. Multiple contacts can move, block and attack.
+Android Back / Ⅱ pauses; backgrounding, rounds and countdown clear contacts.
+Lift and touch again after transitions. Either connected player can pause; all
+pause requests must be released before continuing. Rematch needs both votes.
 
-Choose PLAY · TOUCH VS CPU for offline solo. Select the fighters, using EDIT CPU
-for the opponent, then READY both and enter the arena. Left controls move, jump
-and guard; right controls perform light, heavy, special and ultimate. Ultimate
-needs 100 meter. Hold forward/back/guard with attacks for directional variants;
-the move lab lists the exact bindings. Guard plus special works with two contacts.
-Drag outside or release to stop a contact; countdown, rounds, pause and focus
-changes clear contacts. Lift and touch again when play resumes.
+Fighters has one perspective 3D podium presentation per selection, one signature
+move, then stationary breathing idle. It uses extruded illustrated silhouettes
+from the existing validated atlases (2.5D), not fully modelled skeletal characters.
+REPLAY PRESENTATION, ORIGINAL SHEET and PLAY INTRO remain available. The old
+move-lab animation tour and executable move list have been removed.
 
-Android Back returns or pauses. The pause button opens resume, options and main
-menu; offline play also offers restart. Backgrounding pauses combat and clears
-touches. Either connected player can pause; both must release their pause request
-before the match continues. Results offer a mutual-vote rematch. Leaving ends the
-session for the other player, with a readable reconnect message.
-
-The viewport follows native surface dimensions, including resize changes. Menus,
-arena and touch controls scale into the safe area while preserving proportions;
-the logical 1280×720 arena is not a fixed rendering resolution. Options reports
-current surface pixels. High-DPI, wide-phone and tablet layouts are supported;
-physical vendor cutouts and performance still need on-device acceptance.
+The viewport tracks real surface pixels; the logical arena preserves proportions
+inside the safe rectangle. No fixed 1280×720 render target is forced. Normal
+INTERNET and ACCESS_NETWORK_STATE permissions support direct UDP play. Broadcast
+discovery uses IPv4 UDP, not multicast; there is no hosted directory or relay.
 
 ## Reproduce the APK
 
@@ -78,42 +72,24 @@ alignment, inspects the payload and writes SHA-256. Output is under
 the Compatibility renderer and existing imports. Keep `builds/` and local
 keystores out of Git. Fetching the published APK through a checkout requires Git LFS.
 
-## Tests
+## Validation and limits
 
-```bash
-./tools/test.sh                       # 896 gameplay/artwork/move checks + ten films
-./tools/test_touch.sh                 # requires a graphical display; 35 touch checks
-godot --path . --audio-driver Dummy tests/visual.tscn
-./tools/test_gallery.sh               # 84 actual gallery clicks/render checks
-TEST_NETWORK_RENDERED=1 ./tools/test_v6.sh # session, real peers and native-resolution checks
-godot --path . -- --touch              # manual desktop preview of the touch UI
-```
+Run ./tools/test.sh for gameplay/artwork/roster and films, ./tools/test_touch.sh
+for injected multitouch, ./tools/test_gallery.sh for all ten presentations and
+idle transitions, and TEST_NETWORK_RENDERED=1 ./tools/test_v7.sh for room codes,
+real broadcast discovery/ENet processes, native framebuffers and mobile UI.
+Graphical tests need DISPLAY; headless tests are not native Android execution.
 
-The touch suite injects screen-touch/drag/cancel events and checks multiple
-contacts, attack edges and damage, drag release, keyboard isolation, pause/resume,
-background clearing, Android Back, directional abilities and mobile options.
-The legacy two-pad component layout is tested in isolation for desktop reuse;
-it cannot be entered through Android's menu or match routes.
+The final APK is checked by apksigner, zipalign -c -P 16 4, full archive CRCs,
+compiled-script/payload inspection and aapt manifest inspection. For launching
+Godot 4.6 use org.infernoduel.legends/com.godot.game.GodotAppLauncher.
+No keystores are committed; retain the local development key for future updates.
 
-V6 adds 35 session/code/input checks, a real three-process network test (host,
-rejected invitation and valid guest; 25 checks, also repeated with rendering),
-and 20 rendered native-resolution/routing checks. Actual framebuffer readbacks
-cover 960×540, 1280×720, 1920×1080, 2560×1440, 1280×800, 1024×768 and 2400×1080.
-This does not simulate a vendor cutout or physical digitizer. Network validation
-uses loopback UDP with separate Godot processes, not two physical Android devices.
-
-APK checks are separate: apksigner verification, 16-KiB zipalign, full archive
-CRCs, payload inspection and manifest inspection. Godot 4.6's exported launcher
-alias is org.infernoduel.legends/com.godot.game.GodotAppLauncher.
-
-The final APK is export/signature/alignment/payload verified; game source and the
-native Linux release package are tested on Linux. Native Android end-to-end
-acceptance remains unverified: no phone/tablet is attached, and earlier software
-emulator limitations are recorded in TEST_LOG. Test this exact APK on two devices
-for installation/update, Wi-Fi invitations, both owned selections, movement,
-attacks, pause/background/resume, rematch and disconnect. Check speakers, thermal
-behavior, real multitouch, cutouts and high-resolution frame rate. No physical
-Android success or public Internet service is claimed.
-
-Every published change receives a new version/code, path and tag. Published APKs
-are retained; future releases must not silently replace V6.
+Native Android end-to-end and physical two-device Wi-Fi acceptance still need
+real phones/tablets. No devices are attached; earlier software-emulator limits
+remain documented in TEST_LOG. Check this exact APK for installation/update,
+room create/join/cancel, owned touch movement and attacks, pause/background,
+results/rematch/disconnect, real multitouch, cutouts, speakers, thermals and frame
+rate at native resolution. Linux/loopback results do not establish those results.
+Different Wi-Fi networks / 4G / 5G generally need a relay or NAT traversal service;
+none is hosted or included in V7. Every update gets its own version/code/path/tag.

@@ -56,7 +56,7 @@ func run() -> void:
 	game.screen.confirm(1)
 	game.start_match()
 	await get_tree().create_timer(.2).timeout
-	check(game.touch_controls.solo and game.touch_controls.buttons.size() == 9,"Android fight renders one local touchpad instead of shared-tablet controls")
+	check(game.touch_controls.solo and game.touch_controls.buttons.size() == 7 and game.touch_controls.sticks.size() == 1,"Android fight renders one thumbstick and seven circular buttons instead of shared controls")
 	await capture("single-pad-native-fight")
 	game.show_menu()
 	get_window().size = Vector2i(1280,720)

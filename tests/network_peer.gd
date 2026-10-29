@@ -44,7 +44,7 @@ func run() -> void:
 	add_child(game)
 	game.show_online()
 	if role == "host":
-		var code := OnlineSession.host("127.0.0.1")
+		var code := OnlineSession.host()
 		check(code != "","real UDP host opens and produces a session code")
 		var file := FileAccess.open(directory+"/code.txt",FileAccess.WRITE)
 		file.store_string(code)
@@ -52,8 +52,7 @@ func run() -> void:
 	elif role in ["guest","bad"]:
 		var code := FileAccess.get_file_as_string(directory+"/code.txt")
 		if role == "bad":
-			var decoded := SessionCode.decode(code)
-			code = SessionCode.encode(decoded.address,decoded.port,PackedByteArray([0,0,0,0,0,0,0,0]))
+			code = ("2" if code[0] != "2" else "3")+code.substr(1)
 		check(OnlineSession.join(code),"real client starts a session-code connection")
 	set_process(true)
 
@@ -66,7 +65,7 @@ func _process(delta: float) -> void:
 		return
 	if role == "bad":
 		if not OnlineSession.active() and elapsed > .5:
-			check(game.route == "online" and OnlineSession.last_error != "","wrong room nonce is rejected without a match")
+			check(game.route == "online" and OnlineSession.last_error != "","unknown six-character code times out without a match")
 			finish()
 		return
 	if OnlineSession.phase == "lobby" and once("ready"):

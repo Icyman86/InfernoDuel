@@ -30,7 +30,7 @@ exec ./InfernoDuel.x86_64 "$@"
 PLAY
 chmod 755 builds/linux/PLAY.sh
 cat > builds/linux/README.txt <<'README'
-INFERNO DUEL: LEGENDS — Linux full roster V6 / v0.6.0
+INFERNO DUEL: LEGENDS — Linux full roster V7 / v0.7.0
 Made by Rens de Gee en Ted Sondervan
 
 Run ./PLAY.sh on a Linux x86_64 desktop with OpenGL 3.3 support.
@@ -44,19 +44,19 @@ Mouse: choose the P1/P2 edit button before clicking a fighter.
 
 All ten fighters are playable: SharkByte, Bullet, Nachtelf, PoisonBoy, Spinegrin,
 Chainveil, Cheese Rat, Lava Stone, Crystal Fang and Phoenix Reign.
-FIGHTERS has a live animated move lab: tap/click any move to execute it, or leave
-AUTO on for a tour. ORIGINAL SHEET and PLAY INTRO preserve all reference art.
+FIGHTERS presents each legend on a perspective 3D stage for one signature move,
+then returns to a stationary breathing sprite. REPLAY PRESENTATION restarts it. ORIGINAL SHEET and PLAY INTRO preserve all reference art.
 The 69 attacks/abilities include directional variants: hold forward, backward
-or guard plus LIGHT, SPECIAL or ULT. The move lab lists every exact binding.
+or guard plus LIGHT, SPECIAL or ULT. Directional variants remain available in combat.
 Armor halves damage; power buffs add 20%; Phoenix Rebirth spends 35 meter to
 escape hitstun and heal 8 HP. Supers cost 100 meter and cannot revive a KO.
 Each short intro opens on footwear (original claws for Crystal Fang/Phoenix
 Reign), then a front kick toward camera. REPLAY restarts; Esc/BACK returns.
 Original reference sheets are preserved. New sprite/intro art is reference-guided.
-CONNECT uses direct session codes between devices on the same reachable Wi-Fi.
+CONNECT uses six-character session codes with automatic same-Wi-Fi discovery.
 Android has one touchpad per device; offline CPU remains available.
 Rendering follows native device/window pixels; the arena preserves its proportions.
-Android touch play is available as a separate V6 APK. Story and music are later milestones.
+Android touch play is available as a separate V7 APK. Story and music are later milestones.
 Two-person physical keyboard / ghosting testing is still required.
 README
 printf '\nEngine package: %s\n' "$engine_kind" >> builds/linux/README.txt

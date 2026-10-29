@@ -57,7 +57,7 @@ func _ready() -> void:
 		badges.append(badge)
 		cards.append(b)
 	add_child(UI.place(UI.label("SELECT YOUR LEGEND",16,UI.MUTED),300,556,680,28))
-	add_child(UI.place(UI.label("ALL TEN FIGHTERS READY · TRY THEIR MOVES IN FIGHTERS",16,UI.MUTED),260,588,760,26))
+	add_child(UI.place(UI.label("ALL TEN FIGHTERS READY · MEET EVERY LEGEND IN FIGHTERS",16,UI.MUTED),260,588,760,26))
 	for i in 2:
 		var p := i
 		var x := 34+i*1004

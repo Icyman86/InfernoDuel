@@ -14,6 +14,8 @@ func check(ok: bool, message: String) -> void:
 
 func contact(id: int, action: String, down := true, player := 0, canceled := false) -> void:
 	var point := Vector2.ZERO
+	if action in ["move_left","move_right"]:
+		point = pad.sticks[player].center+Vector2(pad.sticks[player].radius*(-1 if action == "move_left" else 1),0)
 	for b in pad.buttons:
 		if b.player == player and b.action == action: point = b.rect.get_center()
 	var event := InputEventScreenTouch.new()
@@ -83,12 +85,31 @@ func run() -> void:
 	check(game.match_node.fighters[1].hp == 94, "touch light attack damages the opponent exactly once")
 	contact(2, "move_right")
 	contact(0, "move_right", false)
-	check(InputRouter.sample(0).axis == 1, "releasing one of two fingers on a button keeps it held")
+	check(InputRouter.sample(0).axis == 0, "a second finger cannot steal the owned thumbstick")
+	contact(2, "move_right", false)
+	contact(2, "move_right")
 	var drag := InputEventScreenDrag.new()
 	drag.index = 2
-	drag.position = Vector2(640, 350)
+	drag.position = pad.get_global_transform_with_canvas() * pad.sticks[0].center
 	get_viewport().push_input(drag)
-	check(InputRouter.sample(0).axis == 0, "dragging outside releases movement")
+	check(InputRouter.sample(0).axis == 0, "thumbstick drag follows its owning finger and recenters inside its deadzone")
+	contact(2,"move_right",false)
+	var stick: Dictionary = pad.sticks[0]
+	var analog := InputEventScreenTouch.new()
+	analog.index = 20
+	analog.position = pad.get_global_transform_with_canvas()*(stick.center+Vector2(stick.radius*.58,0))
+	analog.pressed = true
+	get_viewport().push_input(analog)
+	var partial: float = InputRouter.sample(0).axis
+	check(partial > .4 and partial < .6,"thumbstick travel produces proportional analog movement")
+	var beyond := InputEventScreenDrag.new()
+	beyond.index = 20
+	beyond.position = pad.get_global_transform_with_canvas()*(stick.center+Vector2(stick.radius*4,0))
+	get_viewport().push_input(beyond)
+	check(is_equal_approx(InputRouter.sample(0).axis,1.0),"owned thumbstick remains clamped while dragging beyond its base")
+	analog.pressed = false
+	get_viewport().push_input(analog)
+	check(InputRouter.sample(0).axis == 0 and pad.stick_fingers.is_empty(),"releasing an off-base thumb returns movement to neutral")
 	contact(3, "move_left")
 	contact(3, "move_left", false, 0, true)
 	check(InputRouter.sample(0).axis == 0, "Android canceled touches release movement")
@@ -147,10 +168,12 @@ func run() -> void:
 			layout.rebuild()
 			var valid := true
 			var safe := TouchControls.safe_rect(viewport)
+			for layout_stick in layout.sticks:
+				valid = valid and safe.encloses(Rect2(layout_stick.center-Vector2.ONE*layout_stick.radius,Vector2.ONE*layout_stick.radius*2))
 			for i in layout.buttons.size():
 				valid = valid and safe.encloses(layout.buttons[i].rect)
 				for j in range(i):
-					valid = valid and not layout.buttons[i].rect.intersects(layout.buttons[j].rect)
+					valid = valid and layout.buttons[i].center.distance_to(layout.buttons[j].center) > layout.buttons[i].radius+layout.buttons[j].radius
 			check(valid, "%s %s layout has no overlapping or clipped touch targets" % [dimensions, "solo" if solo else "shared"])
 		viewport.queue_free()
 	pad.solo = false
@@ -163,7 +186,8 @@ func run() -> void:
 	contact(3, "heavy", true, 1)
 	var p1: Dictionary = InputRouter.sample(0)
 	var p2: Dictionary = InputRouter.sample(1)
-	check(p1.axis == 1 and p1.light and p2.axis == -1 and p2.heavy, "desktop two-player touch-controller inputs remain independent")
+	print("SHARED INPUT OBSERVED ",p1," / ",p2," owners=",pad.stick_fingers)
+	check(is_equal_approx(p1.axis,1.0) and p1.light and is_equal_approx(p2.axis,-1.0) and p2.heavy, "desktop two-player touch-controller inputs remain independent")
 	DirAccess.make_dir_recursive_absolute("/tmp/inferno-touch")
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png("/tmp/inferno-touch/shared-tablet.png")
@@ -180,7 +204,7 @@ func run() -> void:
 	contact(1, "special")
 	var commands: Array[Dictionary] = [InputRouter.sample(0), InputRouter.sample(1)]
 	game.match_node.advance_fight(1.0/60.0, commands)
-	check(game.match_node.fighters[0].attack.id == "metal_armor" and game.match_node.fighters[0].meter == 65, "GUARD plus SPECIAL performs Lava Stone's actual armor move through touch")
+	check(game.match_node.fighters[0].attack.id == "metal_armor" and game.match_node.fighters[0].meter == 65, "BLOCK plus SPECIAL performs Lava Stone's actual armor move through touch")
 	game.selected.assign([8, 0])
 	game.start_match()
 	await get_tree().process_frame

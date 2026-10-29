@@ -1,57 +1,67 @@
-# V6 direct sessions
+# V7 six-character direct sessions
 
-V6 connects two devices using a self-contained session code. It is a direct IPv4
-UDP connection, intended for the same Wi-Fi / reachable network. No account,
-public matchmaking directory, relay, automatic NAT traversal or Internet hosting
-is included. Both devices must run the exact same application version.
+The device hosting the game manages a temporary room. CREATE SESSION produces
+six cryptographically random characters from a 30-symbol unambiguous alphabet.
+The other player enters those six symbols and taps CONNECT. No network addresses
+are displayed or typed, and no external service/account is required on the same
+Wi-Fi. Both devices must run the exact same app version.
 
-## Connect
+## Connect and leave
 
-1. Put both devices on the same Wi-Fi and open CONNECT · SESSION CODE.
-2. Host: select the Wi-Fi IPv4 address and tap CREATE SESSION. COPY CODE copies
-   the complete ID6 invitation. Share it privately with the other player.
-3. Guest: paste the complete code, then CONNECT. The invitation contains the host
-   endpoint and room nonce. It is longer than a directory-backed short room ID.
-4. Each player chooses their own fighter and taps their own READY. Both ready
-   starts the arena. Each device controls one player; on desktop connected play
-   uses A/D, W, S, F/G/H/J regardless of the assigned player side.
-5. Either can pause. Each resume button releases that player's pause request;
-   play continues when no player requests pause. Rematch needs both votes.
-6. BACK / MAIN MENU leaves the session. The other device returns to connection
-   with a reason, rather than continuing against a vanished player.
+1. Open CONNECT · SESSION CODE on both devices on the same Wi-Fi.
+2. Host: CREATE SESSION, then share the six-character code (COPY CODE is available).
+3. Guest: enter the code and CONNECT. Lowercase normalizes to uppercase.
+4. Each selects/readies their own fighter. Both ready starts the fight.
+5. Android uses one thumbstick and skill pad per device. Desktop connected play
+   uses A/D, W, S, F/G/H/J regardless of player side. Directional variants work.
+6. Either may pause; all pause requests must be released to continue. Both must
+   vote for a rematch. Leaving ends the match for the other player with a message.
+7. CANCEL SESSION closes a pending room/search and permits creating a fresh code.
+   A fresh room gets a new code. Leaving the app/network can invalidate the room.
 
-## Connection problems
+## How lookup works
 
-Choose the Wi-Fi address, rather than a mobile/VPN/virtual adapter address.
-The host chooses a random UDP port between 20000 and 50000; it is embedded in
-the code. Permit that host port in the device/network firewall if applicable.
-Router guest/client isolation can prevent devices on the same SSID from reaching
-each other. Disable that isolation or use a network allowing peer-to-peer traffic.
-Keep both apps open. A bad/expired code, version mismatch or timeout gives an
-error; return and create a fresh invitation after changing networks.
+SessionDiscovery advertises only while the host waits. Guest queries the local
+IPv4 broadcast domain on UDP 38747 with the requested code and a random query
+challenge. Only the matching host replies to the guest's ephemeral port. Its
+internal endpoint and independent random room nonce establish the existing ENet
+handshake. No endpoint information appears in the player UI. The host uses a
+random game UDP port from 20000 through 50000. Protocol and exact version are
+checked. Discovery retries and has an eight-second not-found timeout; subsequent
+ENet connection attempts have a separate timeout. Replies echo the query nonce;
+malformed/oversized packets and excessive repeats are ignored. This is a LAN
+invitation, not encrypted account authentication. Duplicate-code collision is
+very unlikely, but there is no global directory reserving names across networks.
 
-Different Wi-Fi networks, mobile carriers and carrier-grade NAT generally prevent
-direct inbound access. The code does not make a private address public. V6 does
-not deploy a relay; public Internet sessions require a separately designed and
-hosted relay/NAT-traversal service or an already routed network/VPN between peers.
-The UI makes this limitation visible. Direct invitation transport is not encrypted;
-the nonce restricts joining to invitation holders, and is not an account identity.
+Guest/client isolation, VPN adapters and firewall policies can block broadcast or
+direct peer traffic. Put both devices on a network permitting peer-to-peer Wi-Fi
+and allow local UDP discovery/game traffic. No multicast lock is used or needed
+for the broadcast protocol. If discovery fails, check the code and leave/recreate
+the room. Do not infer physical Wi-Fi success from local-process tests.
 
-## Implementation and validation
+## Internet scope
 
-The host is authoritative for movement, collisions, damage, time, rounds and wins.
-The guest sends only bounded controls for its own player. Reliable input edges
-and 20 Hz state snapshots use separate ENet channels. Snapshots are smoothed on
-the guest; no rollback or latency compensation is claimed. Guest held inputs
-expire after 350 ms without fresh packets, and an eight-second gameplay heartbeat
-timeout stops a lost match. Epochs reject packets from a previous rematch.
+A short code cannot locate a device across unrelated networks without a shared
+lookup/rendezvous service. Home/carrier NAT can also block the actual connection.
+V7 has no public directory, NAT traversal or relay service. It therefore targets
+same-Wi-Fi play; different Wi-Fi networks / 4G / 5G are not automatically supported.
+This limitation is visible in the connection UI. The user does not host an extra
+server: only the game on the host device stays open for the temporary room.
 
-Run python3 tools/test_network.py for three separate Godot processes over real
-loopback UDP. Set NETWORK_RENDERED=1 for graphical peers (DISPLAY required), and
-NETWORK_ARTIFACT_DIR to retain logs and combat/pause screenshots. Invitations
-remain temporary and are not copied to validation artifacts. The test exercises
-wrong-nonce rejection/recovery, owned selection, both-ready start, countdown input
-lock, remote move/melee/projectile damage, host damage, shared pause votes and
-frozen timer, matching round/result state, mutual rematch and clean host disconnect.
-Round-transition fixtures set low HP for deterministic KOs; this is not a human
-full-match or a physical Wi-Fi/Android acceptance claim.
+## Gameplay and testing
+
+The host simulates all movement/collisions/damage/rounds/wins at 60 Hz. Guest
+controls are bounded and preserve fractional thumbstick axis. Reliable input
+edges and 20 Hz state snapshots use separate ENet channels. Held inputs expire
+after 350 ms without packets; an eight-second gameplay heartbeat timeout stops
+lost sessions. Results/pause state are reliable; rematch epochs reject old data.
+The guest smooths transforms without prediction/rollback.
+
+python3 tools/test_network.py launches separate host, unknown-code guest and valid
+guest processes. They use actual UDP broadcast discovery and direct ENet traffic,
+not mocked RPCs or address injection. Tests exercise unknown-code timeout,
+owned selection, countdown gate, melee/projectile damage, pause timer/votes,
+matching results, mutual rematch and disconnect. Round-transition KOs are fixtures.
+NETWORK_RENDERED=1 repeats with graphical peers. NETWORK_ARTIFACT_DIR retains
+logs/combat screenshots without room invitations. Real Android/Wi-Fi, packet loss,
+latency, carrier routers and physical two-human play remain manual acceptance.

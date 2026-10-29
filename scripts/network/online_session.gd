@@ -8,6 +8,7 @@ signal pause_changed(paused: bool)
 signal disconnected(reason: String)
 var build_version := str(ProjectSettings.get_setting("application/config/version", ""))
 const INPUT_KEYS := ["jump", "light", "heavy", "special", "ultimate"]
+var discovery := SessionDiscovery.new()
 var peer: ENetMultiplayerPeer
 var phase := "idle"
 var local_slot := -1
@@ -46,7 +47,7 @@ func _ready() -> void:
 func active() -> bool:
 	return local_slot >= 0
 
-func host(address: String, requested_port := 0) -> String:
+func host(_address := "", requested_port := 0) -> String:
 	close()
 	var nonce := Crypto.new().generate_random_bytes(8)
 	var port := requested_port
@@ -60,12 +61,12 @@ func host(address: String, requested_port := 0) -> String:
 		last_error = "Cannot open a session on this device. Try again."
 		peer = null
 		return ""
-	code = SessionCode.encode(address, port, nonce)
-	if code == "":
-		close()
-		last_error = "Choose a valid Wi-Fi IPv4 address."
-		return ""
+	code = SessionCode.generate()
 	token = nonce.hex_encode()
+	if discovery.advertise(code,port,token) != OK:
+		close()
+		last_error = "Cannot create a session. Another game session may already be open on this device."
+		return ""
 	local_slot = 0
 	phase = "hosting"
 	multiplayer.multiplayer_peer = peer
@@ -74,20 +75,28 @@ func host(address: String, requested_port := 0) -> String:
 	return code
 
 func join(invitation: String) -> bool:
-	var target := SessionCode.decode(invitation)
-	if target.is_empty():
-		last_error = "Invalid V6 session code. Copy the complete code from the host."
+	if not SessionCode.valid(invitation):
+		last_error = "Invalid session code. Enter the six letters/numbers from the host."
 		return false
 	close()
+	code = SessionCode.normalize(invitation)
+	if discovery.find(code) != OK:
+		last_error = "Cannot search for the session. Check your Wi-Fi connection."
+		return false
+	local_slot = 1
+	phase = "discovering"
+	connection_started = now()
+	lobby_changed.emit()
+	return true
+
+func _connect_target(target: Dictionary) -> bool:
 	peer = ENetMultiplayerPeer.new()
 	var result := peer.create_client(target.address, target.port, 3)
 	if result != OK:
 		peer = null
-		last_error = "Cannot start the connection. Check your network."
+		fail("Cannot connect to this session. Check your Wi-Fi connection.")
 		return false
 	token = target.token
-	code = invitation.strip_edges().to_upper()
-	local_slot = 1
 	phase = "connecting"
 	connection_started = now()
 	multiplayer.multiplayer_peer = peer
@@ -96,6 +105,7 @@ func join(invitation: String) -> bool:
 
 func close() -> void:
 	closing = true
+	discovery.stop()
 	if peer: peer.close()
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	peer = null
@@ -135,6 +145,13 @@ func now() -> float:
 	return Time.get_ticks_msec() / 1000.0
 
 func _process(_delta: float) -> void:
+	if phase in ["hosting","discovering"]:
+		var found := discovery.poll()
+		if found.has("error"):
+			fail(found.error)
+		elif found.has("address") and phase == "discovering":
+			discovery.stop()
+			_connect_target(found)
 	if phase == "connecting" and now() - connection_started > 12:
 		fail("Connection timed out. Both devices need the same reachable network.")
 	elif phase == "hosting" and pending_peer != 0 and now() - connection_started > 5:
@@ -157,13 +174,14 @@ func _hello(room_token: String, protocol: int, build: String) -> void:
 	if local_slot != 0 or phase != "hosting": return
 	var sender := multiplayer.get_remote_sender_id()
 	if sender != pending_peer or room_token != token or protocol != SessionCode.PROTOCOL or build != build_version:
-		_rejected.rpc_id(sender,"Game versions differ. Install the same V6 build on both devices." if build != build_version or protocol != SessionCode.PROTOCOL else "This session code does not match the host. Copy a new code.")
+		_rejected.rpc_id(sender,"Game versions differ. Install the same V7 build on both devices." if build != build_version or protocol != SessionCode.PROTOCOL else "This session code does not match the host. Copy a new code.")
 		peer.get_host().flush()
 		_reject_peer(sender)
 		return
 	opponent = sender
 	pending_peer = 0
 	phase = "lobby"
+	discovery.stop()
 	last_input_time = now()
 	_accept.rpc_id(opponent, selected, ready_players)
 	lobby_changed.emit()
@@ -261,7 +279,7 @@ static func sanitize_input(data: Dictionary) -> Dictionary:
 	var axis: Variant = data.get("axis",0)
 	if typeof(axis) not in [TYPE_INT,TYPE_FLOAT] or not is_finite(float(axis)): return {}
 	var guard: Variant = data.get("block",false)
-	var result := {"axis": clampi(int(axis),-1,1), "block": typeof(guard) == TYPE_BOOL and guard}
+	var result := {"axis": clampf(float(axis),-1.0,1.0), "block": typeof(guard) == TYPE_BOOL and guard}
 	for key in INPUT_KEYS:
 		var value: Variant = data.get(key,false)
 		result[key] = typeof(value) == TYPE_BOOL and value
@@ -371,4 +389,5 @@ func _rematch(slot: int) -> void:
 	if rematch_flags[0] and rematch_flags[1]: _begin_match()
 
 func _exit_tree() -> void:
+	discovery.stop()
 	if peer: peer.close()
