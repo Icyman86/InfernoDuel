@@ -20,5 +20,15 @@ func sample(delta: float, fighter: DuelFighter, target: DuelFighter) -> Dictiona
 			result["heavy" if rng.randf() < 0.35 else "light"] = true
 		elif absf(distance) < 380 and rng.randf() < 0.65:
 			result.special = true
+		# Learn the same directional commands shown in the move lab. Only select
+		# affordable variants; guard is the modifier, not a separate AI ability.
+		for slot in ["light", "special", "ultimate"]:
+			if result.get(slot, false) and rng.randf() < 0.28:
+				var choices: Array[AttackData] = []
+				for move in fighter.moves.values():
+					if move.slot == slot and move.command != "neutral" and move.meter_cost <= fighter.meter:
+						choices.append(move)
+				if not choices.is_empty():
+					result.merge(MoveCatalog.input_for(choices[rng.randi_range(0, choices.size()-1)], fighter.facing), true)
 		if rng.randf() < 0.08: result.jump = true
 	return result

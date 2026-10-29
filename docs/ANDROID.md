@@ -1,7 +1,7 @@
-# Android preview v0.4.0
+# Android preview v0.5.0
 
 The first Android milestone adds native Godot touch play to the existing Linux
-prototype. Five fighters and ten intro films are included. No browser wrapper,
+prototype. All ten fighters, 69 attacks/abilities, the animated interactive move lab and ten intro films are included. No browser wrapper,
 accounts, online services or Internet permission are required.
 
 ## Install and play
@@ -9,7 +9,7 @@ accounts, online services or Internet permission are required.
 Download the APK linked in the main README. Requirements: Android 7.0 / API 24 or
 later, a 64-bit ARM or x86_64 Android OS, OpenGL ES 3.0 and multitouch. The target
 SDK is 36. Both phones and tablets run in landscape; 32-bit Android is unsupported.
-The 125 MiB universal APK includes ARM64 and x86_64 in the same signed file.
+The 144 MiB universal APK includes ARM64 and x86_64 in the same signed file.
 
 Enable installation from the downloading browser/file manager if Android asks.
 This preview uses a local Android development key. Keep that keystore locally to
@@ -67,9 +67,10 @@ keystores out of Git. Fetching the published APK through a checkout requires Git
 ## Tests
 
 ```bash
-./tools/test.sh                       # existing 344 gameplay/artwork assertions + ten films
-./tools/test_touch.sh                 # requires a graphical display; 33 touch checks
+./tools/test.sh                       # 896 gameplay/artwork/move checks + ten films
+./tools/test_touch.sh                 # requires a graphical display; 35 touch checks
 godot --path . --audio-driver Dummy tests/visual.tscn
+./tools/test_gallery.sh               # 84 actual gallery clicks/render checks
 godot --path . -- --touch              # manual desktop preview of the touch UI
 ```
 
@@ -91,3 +92,12 @@ Physical phone/tablet multitouch, speaker quality, thermal behavior, vendor
 cutouts, suspend/resume over long periods and two-human ergonomics still need
 on-device acceptance. Story, five additional combat sets, online multiplayer
 and Play Store publication remain outside this preview.
+
+Version 0.5.0 is signed with the same retained local development key as 0.4.0,
+with versionCode 500 for an in-place update. Hold forward/back/guard while
+pressing light/special/ultimate to choose directional moves; the move lab shows
+all bindings. GUARD plus special is also usable with two touch contacts.
+Native Android end-to-end validation remains unverified in this cloud setup;
+the earlier TCG/SwiftShader emulator limitations are recorded in TEST_LOG.
+The v0.5 APK is export/signature/alignment/payload verified, and its game source
+is tested under Linux. No physical-device result is claimed.

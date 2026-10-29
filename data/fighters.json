@@ -38,7 +38,8 @@
         "dash_speed": 620,
         "special_kind": "dash",
         "ultimate_kind": "melee"
-      }
+      },
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "bullet",
@@ -76,7 +77,8 @@
         "dash_speed": 500,
         "special_kind": "dash",
         "ultimate_kind": "ground_shock"
-      }
+      },
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "nachtelf",
@@ -85,7 +87,7 @@
       "special": "Ember Bolt",
       "ultimate": "Infernal Rift",
       "story_status": "story_unlock",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
       "reference_art_available": true,
       "portrait_region": [
@@ -95,7 +97,7 @@
         278
       ],
       "accent": "e14f65",
-      "playable": false,
+      "playable": true,
       "gallery_art_path": "assets/reference/nachtelf_sheet.tres",
       "intro": {
         "video_path": "assets/intros/nachtelf.ogv",
@@ -106,7 +108,15 @@
           77
         ],
         "art_path": "assets/intros/nachtelf_poses.png"
-      }
+      },
+      "animation_atlas": "assets/sprites/nachtelf/atlas.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "combat": {
+        "speed": 295,
+        "special_kind": "ember_bolt",
+        "ultimate_kind": "infernal_rift"
+      },
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "poisonboy",
@@ -143,7 +153,8 @@
         "ultimate_kind": "venom_cloud"
       },
       "animation_atlas": "assets/sprites/poisonboy/core.png",
-      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "spinegrin",
@@ -152,7 +163,7 @@
       "special": "Arm-Spike Volley",
       "ultimate": "Spineburst",
       "story_status": "story_unlock",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
       "reference_art_available": true,
       "portrait_region": [
@@ -162,7 +173,7 @@
         233
       ],
       "accent": "b7d448",
-      "playable": false,
+      "playable": true,
       "gallery_art_path": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
       "intro": {
         "video_path": "assets/intros/spinegrin.ogv",
@@ -173,7 +184,15 @@
           183
         ],
         "art_path": "assets/intros/spinegrin_poses.png"
-      }
+      },
+      "animation_atlas": "assets/sprites/spinegrin/atlas.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "combat": {
+        "speed": 315,
+        "special_kind": "spike_volley",
+        "ultimate_kind": "spineburst"
+      },
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "chainveil",
@@ -220,7 +239,8 @@
         }
       },
       "animation_atlas": "assets/sprites/chainveil/core.png",
-      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "cheese_rat",
@@ -268,7 +288,8 @@
         }
       },
       "animation_atlas": "assets/sprites/cheese_rat/core.png",
-      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved."
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "lava_stone",
@@ -277,7 +298,7 @@
       "special": "Lava Shield / Stone Spikes",
       "ultimate": "Metal Beast Mode",
       "story_status": "pending_story_design",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_available": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
       "additional_moves": [
@@ -293,7 +314,7 @@
         192
       ],
       "accent": "f46b35",
-      "playable": false,
+      "playable": true,
       "gallery_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
       "intro": {
         "video_path": "assets/intros/lava_stone.ogv",
@@ -304,7 +325,15 @@
           190
         ],
         "art_path": "assets/intros/lava_stone_poses.png"
-      }
+      },
+      "animation_atlas": "assets/sprites/lava_stone/atlas.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "combat": {
+        "speed": 260,
+        "special_kind": "stone_spikes",
+        "ultimate_kind": "melee"
+      },
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "crystal_fang",
@@ -313,7 +342,7 @@
       "special": "Crystal Dash / Crystal Spikes",
       "ultimate": "Full Moon Rage",
       "story_status": "pending_story_design",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_available": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
       "additional_moves": [
@@ -329,7 +358,7 @@
         202
       ],
       "accent": "f04eae",
-      "playable": false,
+      "playable": true,
       "gallery_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
       "intro": {
         "video_path": "assets/intros/crystal_fang.ogv",
@@ -340,7 +369,15 @@
           165
         ],
         "art_path": "assets/intros/crystal_fang_poses.png"
-      }
+      },
+      "animation_atlas": "assets/sprites/crystal_fang/atlas.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "combat": {
+        "speed": 350,
+        "special_kind": "dash",
+        "ultimate_kind": "melee"
+      },
+      "move_set": "data/move_sets.json"
     },
     {
       "id": "phoenix_reign",
@@ -349,7 +386,7 @@
       "special": "Phoenix Dash / Fire Tornado",
       "ultimate": "Phoenix Rising",
       "story_status": "pending_story_design",
-      "sprite_ready": false,
+      "sprite_ready": true,
       "reference_art_available": true,
       "reference_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
       "additional_moves": [
@@ -366,7 +403,7 @@
         191
       ],
       "accent": "ffb44a",
-      "playable": false,
+      "playable": true,
       "gallery_art_path": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
       "intro": {
         "video_path": "assets/intros/phoenix_reign.ogv",
@@ -377,7 +414,15 @@
           145
         ],
         "art_path": "assets/intros/phoenix_reign_poses.png"
-      }
+      },
+      "animation_atlas": "assets/sprites/phoenix_reign/atlas.png",
+      "sprite_provenance": "Reference-guided generated animation keys; original sheet preserved.",
+      "combat": {
+        "speed": 330,
+        "special_kind": "dash",
+        "ultimate_kind": "area"
+      },
+      "move_set": "data/move_sets.json"
     }
   ],
   "roster_count": 10,

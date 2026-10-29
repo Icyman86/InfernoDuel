@@ -1,4 +1,4 @@
-# Prototype architecture — v0.3
+# Prototype architecture — v0.5
 
 Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 `scenes/main.tscn` is the F5 entry point. No network services or secrets are needed.
@@ -12,9 +12,9 @@ Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
   blocking, hitstun, cooldowns and meter. Each fighter duplicates base `AttackData`
   resources before applying data-driven overrides, avoiding shared-state mutations.
 - `data/attacks/*.tres` defines startup, active, recovery, damage, reach, knockback,
-  hitstun, meter and cooldown. A 120 ms recovery buffer supports chaining. A landed
+  hitstun, meter and cooldown. A 160 ms recovery buffer supports chaining; landing jumps have a 120 ms buffer. A landed
   light can cancel recovery; three consecutive hits grant brief escape immunity.
-- `data/fighters.json` marks five fighters playable and stores movement speeds,
+- `data/fighters.json` marks all ten fighters playable and stores movement speeds,
   special/ultimate kinds and overrides. Playability is not inferred from roster index.
 - `match_controller.gd` handles countdown, 60-second rounds, first-to-two wins,
   timeout/draw retry, HUD, CPU routing and projectiles. Meter persists between
@@ -58,3 +58,26 @@ All eight original sheets remain unchanged. DejaVu fonts, Godot's MIT license an
 third-party notices accompany the native package. Five remaining combat sets,
 expanded move lists, final balance, music/voices, physical-keyboard acceptance,
 Story, rebinding and Android are later milestones.
+
+## Full roster and move lab
+
+`data/move_sets.json` defines 69 attacks/abilities. `MoveCatalog` builds independent
+AttackData resources, applies profile overrides, resolves facing-relative directional
+commands and supplies bindings for UI and AI. Meter costs, shared special cooldowns,
+buffs, healing limits and KO restrictions are enforced in DuelFighter. Rebirth
+explicitly permits hitstun escape; ordinary attacks cannot bypass stun. Volleys
+split their total damage across three single-hit projectiles, preserving the
+three-object cap. Low variants have genuine low hitboxes.
+
+Ground locomotion accelerates at 3600 units/s², reverses at 5200 and uses lighter
+air control. Physics interpolation and reset handling smooth world motion without
+changing the 60 Hz deterministic simulation. Sprite keys blend separately over
+55 ms and track authored active/recovery phases.
+
+`MoveShowcase` subclasses DuelMatch in a 2D-only SubViewport. It replaces the HUD
+with a training dummy/readout, scripts commands through the same move catalogue,
+refills meter between demonstrations and has no link to match progression.
+`FighterGallery` offers autoplay, manual scrollable move buttons, original-sheet
+view and existing intro navigation. Changing fighter destroys the previous preview;
+viewing the original sheet stops both its simulation and viewport rendering.
+No combat service, network permission or account is needed.

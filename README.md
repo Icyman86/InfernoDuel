@@ -1,6 +1,6 @@
 # INFERNO DUEL: LEGENDS
 
-**Playable native Linux fighting-game prototype — Godot 4 / GDScript.**
+**Native fighting game for Linux and Android — Godot 4 / GDScript.**
 Made by Rens de Gee en Ted Sondervan.
 
 Based on the supplied v1.1 Word specification and Linux starter package.
@@ -9,7 +9,7 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Android APK — phones and tablets
 
-[Download Android v0.4.0 APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.4.0-android/releases/android-v0.4.0/InfernoDuel-Android-v0.4.0.apk)
+[Download Android v0.5.0 APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.5.0-android/releases/android-v0.5.0/InfernoDuel-Android-v0.5.0.apk)
 
 Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
 multitouch. Install the APK from your browser/downloads; allow installation from
@@ -29,13 +29,12 @@ The APK is stored in Git LFS because it includes both native engines and all ten
 intro movies. A source checkout needs `git lfs pull` to fetch it; the download
 link above serves the APK directly. Linux play and keyboard controls remain supported.
 
-## Download Linux prototype
+## Earlier Linux download — v0.3.0
 
 [Download Linux v0.3.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-Linux-v0.3.tar.xz)
 
 Extract the archive and run `InfernoDuel-Linux/PLAY.sh`. Godot does not need to
-be installed separately. This is the five-fighter illustrated build described
-below; Linux x86_64 and OpenGL 3.3 are required.
+be installed separately. This earlier archive has five fighters; rebuild from current source for all ten and the live move lab. Linux x86_64 and OpenGL 3.3 are required.
 
 ## Play / F5
 
@@ -52,15 +51,24 @@ cd InfernoDuel
 ./tools/run.sh
 ```
 
-SharkByte, Bullet, **PoisonBoy, Chainveil and Cheese Rat** are playable, with
-illustrated sprite animation and animated selection previews. All ten fighters
-have their own portrait avatars. The other five slots are marked COMING SOON.
+All **ten fighters** are playable in local versus and against CPU: SharkByte,
+Bullet, Nachtelf, PoisonBoy, Spinegrin, Chainveil, Cheese Rat, Lava Stone,
+Crystal Fang and Phoenix Reign. Every fighter has animated selection art and a
+complete basic/special/ultimate set; the full roster has **69 attacks/abilities**.
 
-In **FIGHTERS**, Bullet, Nachtelf and PoisonBoy each display their own column of
-the supplied shared sheet. Every fighter has a **PLAY INTRO** button: a short
-720p film opens on their footwear and ends with a kick toward camera. Crystal
-Fang and Phoenix Reign retain their original claw feet. BACK/Esc returns to the
-same fighter; REPLAY starts the film again.
+In **FIGHTERS · MOVE LAB**, each character performs an automatic tour of their
+movement and attacks against a training dummy. Click/tap any move to perform it
+manually, including specials, directional variants, buffs and supers. The preview
+uses actual match controllers, projectiles, damage and meter costs; meter refills
+only between demonstrations. AUTO resumes the tour, ORIGINAL SHEET opens the
+unchanged reference art, and PLAY INTRO retains every fighter's existing movie.
+The scrollable list supports touch, mouse and keyboard focus. BACK/Esc returns.
+
+New six-key walk cycles, 55 ms pose blends, velocity-driven gait, small body lean,
+physics interpolation, acceleration with fast direction reversal, a 160 ms attack
+buffer and a 120 ms landing jump buffer reduce hard visual/input transitions.
+Heavy kick/bite extension keys now coincide with the active hit window. These
+remain illustrated key-pose animations, not fully hand-drawn in-between frames.
 
 [Watch an intro preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-IntroPreview-v0.3.mp4)
 
@@ -82,14 +90,14 @@ motion and impact effects. See `docs/ART_PIPELINE.md` for provenance and limits.
 | Pause | Esc | Esc |
 
 Character select: P1 WASD, F ready / G undo; P2 arrows, I ready / O undo.
-With a mouse, select **MOUSE EDITS P1/P2**, click a fighter, then use that player's
+With a mouse, select **EDIT P1/P2**, click a fighter, then use that player's
 READY button. Both players may choose the same fighter.
 Menus: W/S or arrows, F/I/Enter confirm, Esc back; mouse also supported.
 F3 shows combat hitboxes. Focus loss automatically pauses the fight.
 
 Rounds last 60 seconds with 100 HP. Win two rounds to win the match. Equal HP
 at timeout or double KO replays the round. Light/heavy/special/ultimate deal
-6/12/16/30 damage. Grounded guard facing the attacker reduces damage by 75%.
+6/12/16/30 base damage; named variants have their own values in the move lab. Grounded guard facing the attacker reduces damage by 75%.
 Special cooldown is 1.5 seconds (Cheese Rat: 1.4); meter persists between rounds, not rematches.
 Try light → light → heavy, or cancel a landed light's recovery into special.
 
@@ -99,6 +107,16 @@ Cheese Rat throws Cheese Ball; hold **backward + special** to place Cheese Trap
 instead. His ultimate is King of the Cheese. Traps expire after four seconds;
 each fighter can have at most three active projectiles/traps.
 
+Hold **forward, backward or guard** while pressing LIGHT, SPECIAL or ULT for
+named variants. Forward/backward are relative to the opponent. GUARD is S for P1,
+Down for P2, or the GUARD touch button. The move lab lists each binding and cost.
+Lava Stone has armor and ground spikes; Crystal Fang has crystal rushdown,
+shields and temporary power; Phoenix Reign has aerial fire moves and healing;
+Nachtelf zones with ember/rift projectiles; Spinegrin fires capped spike volleys.
+Armor reduces damage by 50%, power buffs add 20% damage, and invulnerability is
+brief and visible. Rebirth costs 35 meter to escape hitstun and restore 8 HP;
+Eternal Flame costs 100 meter to restore 25 HP. Neither revives a KO.
+
 ## Validate
 
 ```bash
@@ -106,17 +124,20 @@ each fighter can have at most three active projectiles/traps.
 ```
 
 This verifies all eight artwork SHA-256 hashes, imports the project, checks for
-engine/script errors, and runs 70 integration/combat, 229 artwork/animation and
-45 fighter-expansion checks. It also decodes all ten intro films with FFmpeg
+engine/script errors, and runs 70 integration/combat, 494 artwork/animation,
+45 earlier fighter-expansion and 287 full-roster/move checks (including all ten CPU matches). It also decodes all ten intro films with FFmpeg
 (install `ffmpeg` for this validation step). For
 rendered tests on a Linux desktop:
 
 ```bash
 godot --path . --audio-driver Dummy tests/visual.tscn
 godot --path . --audio-driver Dummy tests/expansion_visual.tscn
+./tools/test_touch.sh
+./tools/test_gallery.sh
 ```
 
-Rendered screenshots are written to `/tmp/inferno-visual/` and `/tmp/inferno-v03-visual/`.
+Rendered screenshots are written to `/tmp/inferno-visual/`, `/tmp/inferno-v03-visual/`,
+`/tmp/inferno-touch/` and `/tmp/inferno-roster-visual/`.
 Tests do not establish
 physical keyboard rollover, audio-device quality, or real two-person playability.
 See `docs/TEST_LOG.md` for exact results and the manual checklist.

@@ -168,6 +168,25 @@ func run() -> void:
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png("/tmp/inferno-touch/shared-tablet.png")
 	pad.release_all()
+	game.show_select(false)
+	game.screen.choose(0, 7)
+	game.screen.choose(1, 8)
+	game.screen.confirm(0)
+	game.screen.confirm(1)
+	game.start_match()
+	await get_tree().process_frame
+	game.match_node.set_physics_process(false)
+	game.match_node.phase = "fight"
+	game.match_node.fighters[0].meter = 100
+	game.match_node.fighters[1].meter = 100
+	contact(0, "block")
+	contact(1, "special")
+	contact(2, "move_right", true, 1)
+	contact(3, "special", true, 1)
+	var commands: Array[Dictionary] = [InputRouter.sample(0), InputRouter.sample(1)]
+	game.match_node.advance_fight(1.0/60.0, commands)
+	check(game.match_node.fighters[0].attack.id == "metal_armor" and game.match_node.fighters[0].meter == 65, "GUARD plus SPECIAL performs Lava Stone's actual armor move through touch")
+	check(game.match_node.fighters[1].attack.id == "shatter_shield" and game.match_node.fighters[1].meter == 80, "P2 back plus SPECIAL uses facing-relative touch binding for Crystal Fang's shield")
 	game.show_menu()
 	await get_tree().process_frame
 	await get_tree().create_timer(0.8).timeout

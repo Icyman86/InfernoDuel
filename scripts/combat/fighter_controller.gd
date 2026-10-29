@@ -36,13 +36,13 @@ var show_hitboxes := false
 var visual: FighterVisual
 var moves: Dictionary = {}
 var attack_variant := ""
+var armor_time := 0.0
+var empower_time := 0.0
+var jump_buffer := 0.0
+var coyote_time := 0.0
 
 func _ready() -> void:
-	var overrides: Dictionary = profile.get("combat",{}).get("overrides",{})
-	for id in ATTACKS:
-		var move: AttackData = moves.get(id,ATTACKS[id]).duplicate()
-		for field in overrides.get(id,{}): move.set(field,overrides[id][field])
-		moves[id] = move
+	moves = MoveCatalog.build(profile, ATTACKS)
 	visual = FighterVisual.new()
 	visual.profile = profile
 	visual.actor = self
@@ -68,6 +68,11 @@ func reset_at(x: float, keep_meter := false) -> void:
 	received_time = 0.0
 	flash = 0.0
 	attack_variant = ""
+	armor_time = 0.0
+	empower_time = 0.0
+	jump_buffer = 0.0
+	coyote_time = 0.0
+	reset_physics_interpolation()
 	queue_redraw()
 
 func grounded() -> bool:
@@ -75,6 +80,11 @@ func grounded() -> bool:
 
 func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 	anim_time += delta
+	armor_time = maxf(0.0, armor_time - delta)
+	empower_time = maxf(0.0, empower_time - delta)
+	jump_buffer = maxf(0.0, jump_buffer - delta)
+	coyote_time = 0.09 if grounded() else maxf(0.0, coyote_time - delta)
+	if input.get("jump", false): jump_buffer = 0.12
 	flash = maxf(0.0, flash - delta)
 	stun = maxf(0.0, stun - delta)
 	immunity = maxf(0.0, immunity - delta)
@@ -87,20 +97,26 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 	if buffer_time == 0.0: buffered = ""
 	if not attack and stun == 0.0 and hp > 0:
 		facing = 1 if opponent.position.x >= position.x else -1
-	guarding = input.get("block", false) and grounded() and not attack and stun == 0.0 and hp > 0
 	var requested := ""
 	for id in ["light", "heavy", "special", "ultimate"]:
-		if input.get(id, false): requested = id
+		if input.get(id, false): requested = MoveCatalog.resolve(moves, id, input, facing)
+	guarding = input.get("block", false) and requested == "" and grounded() and not attack and stun == 0.0 and hp > 0
+	if requested != "" and stun > 0 and moves[requested].escape_stun:
+		begin_attack(requested)
 	if attack:
 		attack_time += delta
-		if requested != "" and attack.duration() - attack_time <= 0.12:
+		if requested != "" and attack.duration() - attack_time <= 0.16:
 			buffered = requested
-			buffer_time = 0.12
-		if not emitted and is_projectile_attack(attack.id) and is_active():
+			buffer_time = 0.16
+		if not emitted and is_active():
 			emitted = true
-			projectile_requested.emit(self, attack)
+			if is_projectile_attack(attack.id): projectile_requested.emit(self, attack)
+			armor_time = maxf(armor_time, attack.armor_time)
+			empower_time = maxf(empower_time, attack.empower_time)
+			if not attack.escape_stun: immunity = maxf(immunity, attack.invulnerable_time)
+			hp = mini(100, hp + attack.heal)
 		# A landed light can cancel its recovery into a follow-up; startup/active are never skipped.
-		if attack.id == "light" and hit_connected and attack_time >= attack.startup + attack.active and requested in ["light", "heavy", "special"]:
+		if attack.slot == "light" and hit_connected and attack_time >= attack.startup + attack.active and requested != "" and moves[requested].slot in ["light", "heavy", "special"]:
 			attack = null
 		if attack and attack_time >= attack.duration():
 			attack = null
@@ -109,15 +125,19 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 				buffered = ""
 	if not attack and stun == 0.0 and not guarding and hp > 0:
 		if requested != "":
-			attack_variant = "trap" if requested == "special" and profile.get("id") == "cheese_rat" and float(input.get("axis",0))*facing < 0 else ""
 			begin_attack(requested)
 		if not attack:
-			velocity.x = float(input.get("axis", 0)) * float(profile.get("combat",{}).get("speed",285.0))
-			if input.get("jump", false) and grounded(): velocity.y = -700.0
+			var desired := float(input.get("axis", 0)) * float(profile.get("combat",{}).get("speed",285.0))
+			var acceleration := (5200.0 if velocity.x * desired < 0 else 3600.0) if grounded() else 2600.0
+			velocity.x = move_toward(velocity.x, desired, delta * acceleration)
+			if jump_buffer > 0 and coyote_time > 0:
+				velocity.y = -700.0
+				jump_buffer = 0.0
+				coyote_time = 0.0
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, delta * 1100)
-	if attack and attack.id == "special" and attack_kind("special") == "dash" and is_active():
-		velocity.x = facing * float(profile.get("combat",{}).get("dash_speed",500.0))
+		velocity.x = move_toward(velocity.x, 0.0, delta * 1800)
+	if attack and attack_kind(attack.id) == "dash" and is_active():
+		velocity.x = facing * (attack.dash_speed if attack.dash_speed > 0 else float(profile.get("combat",{}).get("dash_speed",500.0)))
 	if not grounded() or velocity.y < 0: velocity.y += 1800.0 * delta
 	position += velocity * delta
 	position.x = clampf(position.x, LEFT, RIGHT)
@@ -127,17 +147,25 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 	queue_redraw()
 
 func begin_attack(id: String) -> bool:
-	if not ATTACKS.has(id) or attack or stun > 0 or guarding or hp <= 0: return false
-	var move: AttackData = moves.get(id,ATTACKS[id])
-	if id == "special" and special_cooldown > 0: return false
+	if not moves.has(id) or attack or guarding or hp <= 0: return false
+	var move: AttackData = moves[id]
+	if stun > 0 and not move.escape_stun: return false
+	if move.slot == "special" and special_cooldown > 0: return false
 	if meter < move.meter_cost: return false
 	meter -= move.meter_cost
-	if id == "special": special_cooldown = move.cooldown
-	attack = move
+	if move.slot == "special": special_cooldown = move.cooldown
+	attack = move.duplicate()
+	if empower_time > 0 and attack.damage > 0: attack.damage = int(ceil(attack.damage * 1.2))
 	attack_time = 0.0
 	hit_connected = false
 	emitted = false
-	if id == "ultimate": Sound.play("ultimate")
+	attack_variant = "trap" if attack.kind == "cheese_trap" else ""
+	if move.escape_stun:
+		stun = 0.0
+		buffered = ""
+		immunity = maxf(immunity, move.invulnerable_time)
+	if attack.launch < 0 and grounded(): velocity.y = attack.launch
+	if move.slot == "ultimate": Sound.play("ultimate")
 	return true
 
 func is_active() -> bool:
@@ -148,25 +176,31 @@ func hurtbox() -> Rect2:
 
 func hitbox() -> Rect2:
 	if not attack: return Rect2()
+	if attack.kind == "area":
+		return Rect2(position + Vector2(-attack.reach, -270), Vector2(attack.reach * 2, 300))
+	if attack.command == "down" and attack.slot == "light":
+		return Rect2(position + Vector2(18 if facing == 1 else -18 - attack.reach, -95), Vector2(attack.reach, 95))
 	return Rect2(position + Vector2(18 if facing == 1 else -18 - attack.reach, -205), Vector2(attack.reach, 115))
 
 func pending_hit(target: DuelFighter) -> bool:
-	if not is_active() or hit_connected: return false
+	if not is_active() or hit_connected or attack.damage <= 0: return false
 	# Projectile attacks apply their hit once through their projectile, never twice.
 	if is_projectile_attack(attack.id): return false
 	return hitbox().intersects(target.hurtbox()) and target.immunity <= 0.0 and target.hp > 0
 
 func attack_kind(id: String) -> String:
+	if moves.has(id): return moves[id].kind
 	return profile.get("combat",{}).get(id+"_kind","melee")
 
 func is_projectile_attack(id: String) -> bool:
-	return attack_kind(id) in ["ground_shock","toxic_orb","venom_cloud","cheese_ball","cheese_king"]
+	return attack_kind(id) in ["ground_shock", "toxic_orb", "venom_cloud", "cheese_ball", "cheese_king", "cheese_trap", "cheese_storm", "ember_bolt", "infernal_rift", "spike_volley", "spineburst", "stone_spikes", "earthquake", "crystal_spikes", "crystal_storm", "heat_wave", "fire_tornado", "solar_flare"]
 
 func receive_hit(move: AttackData, attacker_x: float) -> bool:
 	if immunity > 0.0 or hp <= 0: return false
 	var toward := 1 if attacker_x >= position.x else -1
 	var blocked := guarding and grounded() and toward == facing
 	var damage := maxi(1, int(ceil(move.damage * 0.25))) if blocked else move.damage
+	if armor_time > 0: damage = maxi(1, int(ceil(damage * 0.5)))
 	hp = maxi(0, hp - damage)
 	flash = 0.12
 	if blocked:

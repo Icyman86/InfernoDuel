@@ -29,8 +29,9 @@ for name, value in [('android_sdk_path', os.environ['ANDROID_HOME']), ('java_sdk
         text += '\n' + line + '\n'
 settings.write_text(text)
 PY
-unsigned=builds/android/InfernoDuel-Android-v0.4.0-unsigned.apk
-output=builds/android/InfernoDuel-Android-v0.4.0.apk
+version=$(python3 -c 'import re; print(re.search(r"config/version=\"([^\"]+)\"", open("project.godot").read())[1])')
+unsigned="builds/android/InfernoDuel-Android-v$version-unsigned.apk"
+output="builds/android/InfernoDuel-Android-v$version.apk"
 "$godot_bin" --headless --path "$PWD" --export-release Android "$unsigned"
 # Android's standard development credentials are public by design. Never use
 # this key for Play Store distribution. Keep private production keys out of Git.

@@ -1,4 +1,44 @@
-# Illustrated fighter expansion v0.3 — 28 October 2026
+# Full roster animation update v0.5 — 29 October 2026
+
+All ten fighters now have reference-guided runtime sprites. The five new combat
+atlases belong to Nachtelf (the center dark elf/Warlock on the shared sheet),
+Spinegrin, Lava Stone, Crystal Fang and Phoenix Reign. Their original source
+images remain unchanged; all eight SHA-256 hashes pass. These new atlases are
+generated derivatives, **not original animation extracted from the uploads**.
+Crystal Fang retains furry wolf claw feet; Phoenix Reign retains bird talons.
+Sneakers have no copied brand marks.
+
+Each new base atlas contains 24 poses: idle, six-key gait, light, heavy, guard,
+jump, special, ultimate, recoil and KO. Four supplementary eight-key atlases add
+actual fully extended kicks (Lava Stone, Spinegrin, Phoenix Reign), a wolf bite
+(Crystal Fang), ground slams, wing sweeps and buff poses. Nachtelf has 24 unique
+keys; the other four have 32 each. Some poses are shared between abilities;
+69 abilities do not mean 69 independently drawn animation sequences.
+
+`tools/index_roster_art.py` reads RGBA silhouettes and emits atlas rectangles,
+foot pivots, scale factors and textured meshes. It never writes image pixels or
+original reference sheets. Supplemental kick meshes include full extended feet,
+even where they cross nominal grid boundaries. Metadata separates two touching
+Spinegrin sole contacts. Artwork paths, references and SHA-256 hashes are in
+`data/visual_asset_provenance.json`.
+
+`FighterVisual` caches atlas metadata, blends adjacent keys over 55 ms, drives gait
+phase from speed, and adds small breathing/lean motions. Heavy extension keys
+coincide with active hitboxes; new slam, bite, wing and buff keys distinguish the
+named abilities. Color-coded projectiles, chains, tail sweeps and temporary auras
+are runtime effects. This improves transitions but remains illustrated key-pose
+animation rather than complete hand-drawn in-betweens or skeletal animation.
+
+The move lab uses a bounded training match and the same controllers, effects,
+resources and directional input resolution as combat. It shows real damage,
+meter and buff state. Source sheets and intro movies remain accessible separately.
+The final artwork suite checks 494 properties, including all ten identities,
+real alpha, mesh bounds and every registered animation. Rendered move-lab and
+native Linux checks are recorded in TEST_LOG. Physical-device performance,
+keyboard/digitizer feel, final art polish and balance still need human review.
+
+# Historical illustrated fighter expansion v0.3 — 28 October 2026
+
 
 ## Source integrity and provenance
 

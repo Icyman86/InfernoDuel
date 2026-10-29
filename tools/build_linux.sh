@@ -30,7 +30,7 @@ exec ./InfernoDuel.x86_64 "$@"
 PLAY
 chmod 755 builds/linux/PLAY.sh
 cat > builds/linux/README.txt <<'README'
-INFERNO DUEL: LEGENDS — Linux fighter expansion v0.3
+INFERNO DUEL: LEGENDS — Linux full roster v0.5
 Made by Rens de Gee en Ted Sondervan
 
 Run ./PLAY.sh on a Linux x86_64 desktop with OpenGL 3.3 support.
@@ -42,16 +42,18 @@ ESC pauses. F3 displays hitboxes. Win two rounds to win a match.
 Select: P1 WASD + F ready / G undo. P2 arrows + I ready / O undo.
 Mouse: choose the P1/P2 edit button before clicking a fighter.
 
-Five playable fighters: SharkByte, Bullet, PoisonBoy, Chainveil and Cheese Rat.
-PoisonBoy casts Toxic Splash / Venom Cataclysm. Chainveil's Chain Lash and Iron
-Widow have extended range and pull targets. Cheese Rat throws Cheese Ball;
-hold backward plus special for Cheese Trap. Ultimate: King of the Cheese.
-Five other roster fighters remain in development.
-FIGHTERS has individual sheets and a PLAY INTRO button for all ten characters.
+All ten fighters are playable: SharkByte, Bullet, Nachtelf, PoisonBoy, Spinegrin,
+Chainveil, Cheese Rat, Lava Stone, Crystal Fang and Phoenix Reign.
+FIGHTERS has a live animated move lab: tap/click any move to execute it, or leave
+AUTO on for a tour. ORIGINAL SHEET and PLAY INTRO preserve all reference art.
+The 69 attacks/abilities include directional variants: hold forward, backward
+or guard plus LIGHT, SPECIAL or ULT. The move lab lists every exact binding.
+Armor halves damage; power buffs add 20%; Phoenix Rebirth spends 35 meter to
+escape hitstun and heal 8 HP. Supers cost 100 meter and cannot revive a KO.
 Each short intro opens on footwear (original claws for Crystal Fang/Phoenix
 Reign), then a front kick toward camera. REPLAY restarts; Esc/BACK returns.
 Original reference sheets are preserved. New sprite/intro art is reference-guided.
-Story, expanded movesets, music and Android are later milestones.
+Android touch play is available as a separate APK. Story and music are later milestones.
 Two-person physical keyboard / ghosting testing is still required.
 README
 printf '\nEngine package: %s\n' "$engine_kind" >> builds/linux/README.txt

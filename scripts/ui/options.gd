@@ -40,6 +40,7 @@ func _ready() -> void:
 	add_child(UI.place(UI.label("LEFT: ◀ / ▶ move · JUMP · GUARD\nHold GUARD while facing your opponent" if touch_mode else "P1  A / D move · W jump · S block\nF light · G heavy · H special · J ultimate",20,UI.CYAN),60,475,570,80))
 	add_child(UI.place(UI.label("RIGHT: LIGHT · HEAVY · SPECIAL · ULT\nULT requires 100% meter" if touch_mode else "P2  ← / → move · ↑ jump · ↓ block\nI light · O heavy · P special · L ultimate",20,UI.ORANGE),650,475,570,80))
 	add_child(UI.place(UI.label("Ⅱ pauses · Android Back navigates back · Cyan = P1 / Orange = P2" if touch_mode else "ESC pause · Physical keyboard ghosting requires a two-person hardware test.",18,UI.MUTED),60,579,1160,32))
+	add_child(UI.place(UI.label("MOVE VARIANTS: hold FORWARD / BACK / GUARD + LIGHT, SPECIAL or ULT · Full move list in FIGHTERS",15,UI.GOLD),60,611,1160,26))
 	add_child(UI.place(UI.button("RESET DEFAULTS",func():
 		Settings.reset()
 		rebuild()),340,644,290,46))

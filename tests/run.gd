@@ -52,7 +52,8 @@ func run() -> void:
 	check(picker.selected == [1,0],"both select cursors navigate independently")
 	picker.choose(0,8)
 	picker.confirm(0)
-	check(not picker.ready_players[0],"unfinished fighters cannot enter combat")
+	check(picker.ready_players[0],"Crystal Fang is fully selectable and can ready")
+	picker.ready_players[0] = false
 	picker.choose(0,0)
 	picker.choose(1,1)
 	picker.confirm(0)

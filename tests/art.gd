@@ -30,7 +30,8 @@ func run() -> void:
 		var fighter_data: Dictionary = data[id]
 		var count := 0
 		var unique_frames := {}
-		for atlas_id in ["core","actions","walk"]:
+		for atlas_id in fighter_data:
+			if not fighter_data[atlas_id] is Dictionary or not fighter_data[atlas_id].has("path"): continue
 			var texture: Texture2D = load("res://"+fighter_data[atlas_id].path)
 			var image := texture.get_image()
 			check(image.get_format() == Image.FORMAT_RGBA8 and image.detect_alpha() != Image.ALPHA_NONE,id+" "+atlas_id+" has genuine alpha transparency")

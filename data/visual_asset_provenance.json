@@ -333,6 +333,107 @@
       "kind": "reference_guided_generated_sprite_atlas",
       "reference": "sharkbyte",
       "original_user_file": false
+    },
+    {
+      "path": "assets/sprites/nachtelf/atlas.png",
+      "sha256": "20c9542869365f4cb28b5e7dff5179c0965d409e3e09853103dc7c264d37d294",
+      "kind": "reference_guided_generated_combat_animation_atlas",
+      "reference": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "original_user_file": false,
+      "grid": [
+        4,
+        6
+      ],
+      "unique_poses": 24,
+      "notes": "New illustrated keys, not extracted original animation. Meshes isolate alpha silhouettes within grid cells; six-key gait and short pose blending supply motion."
+    },
+    {
+      "path": "assets/sprites/spinegrin/atlas.png",
+      "sha256": "03eaa8fbb237fc3ea89c2ce571ddae58afcc356e21ab7316db77db0dd3f8e0ca",
+      "kind": "reference_guided_generated_combat_animation_atlas",
+      "reference": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
+      "original_user_file": false,
+      "grid": [
+        4,
+        6
+      ],
+      "unique_poses": 24,
+      "notes": "New illustrated keys, not extracted original animation. Meshes isolate alpha silhouettes within grid cells; six-key gait and short pose blending supply motion."
+    },
+    {
+      "path": "assets/sprites/lava_stone/atlas.png",
+      "sha256": "4a9397235e04abc2ac90c88fc1831dd936983e77f6990d12f01cb680cceb82a3",
+      "kind": "reference_guided_generated_combat_animation_atlas",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
+      "original_user_file": false,
+      "grid": [
+        4,
+        6
+      ],
+      "unique_poses": 24,
+      "notes": "New illustrated keys, not extracted original animation. Meshes isolate alpha silhouettes within grid cells; six-key gait and short pose blending supply motion."
+    },
+    {
+      "path": "assets/sprites/crystal_fang/atlas.png",
+      "sha256": "697568b13a42567fc0757c6e3de85b66d89ecc4a0aa9ce4cac71038825255f14",
+      "kind": "reference_guided_generated_combat_animation_atlas",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
+      "original_user_file": false,
+      "grid": [
+        4,
+        6
+      ],
+      "unique_poses": 24,
+      "notes": "New illustrated keys, not extracted original animation. Meshes isolate alpha silhouettes within grid cells; six-key gait and short pose blending supply motion."
+    },
+    {
+      "path": "assets/sprites/phoenix_reign/atlas.png",
+      "sha256": "a8d72ce7b82b4e313954d36b06b8e50b5ee13984fdc4ffbfc7adf31a027ab8ec",
+      "kind": "reference_guided_generated_combat_animation_atlas",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
+      "original_user_file": false,
+      "grid": [
+        4,
+        6
+      ],
+      "unique_poses": 24,
+      "notes": "New illustrated keys, not extracted original animation. Meshes isolate alpha silhouettes within grid cells; six-key gait and short pose blending supply motion."
+    },
+    {
+      "path": "assets/sprites/spinegrin/extra.png",
+      "sha256": "da5a0c47b387ece616dbbdc8ce3dab8b5520fc07e49e8a40dccab00aa6e330d7",
+      "kind": "reference_guided_generated_supplemental_combat_keys",
+      "reference": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
+      "original_user_file": false,
+      "unique_poses": 8,
+      "notes": "Full-silhouette meshes retain extended kick feet outside nominal grid cells. Heavy attacks depict actual kicks or a wolf bite; additional slam/wing/buff keys are shared by appropriate abilities."
+    },
+    {
+      "path": "assets/sprites/lava_stone/extra.png",
+      "sha256": "913aa8f7b259b6aaeed0edc91f60eca78105744025beb2bf716897e2ada150b2",
+      "kind": "reference_guided_generated_supplemental_combat_keys",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
+      "original_user_file": false,
+      "unique_poses": 8,
+      "notes": "Full-silhouette meshes retain extended kick feet outside nominal grid cells. Heavy attacks depict actual kicks or a wolf bite; additional slam/wing/buff keys are shared by appropriate abilities."
+    },
+    {
+      "path": "assets/sprites/crystal_fang/extra.png",
+      "sha256": "ce9a35552f1d9d29e299642dc26bd6b0ed93e6e103a25bdd950bd4b51b9037aa",
+      "kind": "reference_guided_generated_supplemental_combat_keys",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
+      "original_user_file": false,
+      "unique_poses": 8,
+      "notes": "Full-silhouette meshes retain extended kick feet outside nominal grid cells. Heavy attacks depict actual kicks or a wolf bite; additional slam/wing/buff keys are shared by appropriate abilities."
+    },
+    {
+      "path": "assets/sprites/phoenix_reign/extra.png",
+      "sha256": "276a32677477cd53890b710faa052534a379e38e636022f4c99f0b9051403179",
+      "kind": "reference_guided_generated_supplemental_combat_keys",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
+      "original_user_file": false,
+      "unique_poses": 8,
+      "notes": "Full-silhouette meshes retain extended kick feet outside nominal grid cells. Heavy attacks depict actual kicks or a wolf bite; additional slam/wing/buff keys are shared by appropriate abilities."
     }
   ],
   "gallery_views": {
@@ -343,5 +444,6 @@
       "assets/reference/nachtelf_sheet.tres",
       "assets/reference/poisonboy_sheet.tres"
     ]
-  }
+  },
+  "roster_update_date": "2026-10-29"
 }

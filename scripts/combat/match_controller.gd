@@ -202,17 +202,22 @@ func finish_round() -> void:
 	Sound.play("round")
 
 func _spawn_projectile(fighter: DuelFighter, move: AttackData) -> void:
-	var owned: Array[DuelProjectile] = []
-	for existing in projectiles:
-		if existing.source == fighter: owned.append(existing)
-	if owned.size() >= 3:
-		projectiles.erase(owned[0])
-		owned[0].queue_free()
-	var projectile := DuelProjectile.new()
-	projectile.setup(fighter,move)
-	add_child(projectile)
-	move_child(projectile,0)
-	projectiles.append(projectile)
+	var count := 3 if fighter.attack_kind(move.id) in ["spike_volley", "spineburst", "cheese_storm", "crystal_storm"] else 1
+	for i in count:
+		var owned: Array[DuelProjectile] = []
+		for existing in projectiles:
+			if existing.source == fighter: owned.append(existing)
+		if owned.size() >= 3:
+			projectiles.erase(owned[0])
+			owned[0].queue_free()
+		var projectile := DuelProjectile.new()
+		projectile.spawn_index = i
+		var projectile_move: AttackData = move.duplicate()
+		projectile_move.damage = move.damage / count + (1 if i < move.damage % count else 0)
+		projectile.setup(fighter,projectile_move)
+		add_child(projectile)
+		move_child(projectile,0)
+		projectiles.append(projectile)
 
 func update_hud() -> void:
 	if not hud: return
@@ -224,6 +229,8 @@ func update_hud() -> void:
 		names[i].text = "%s  /  %s" % ["CPU" if solo and i == 1 else "P%d" % (i+1),profiles[i].display_name.to_upper()]
 		round_tokens[i].text = "◆ ".repeat(wins[i])+"◇ ".repeat(2-wins[i])
 		meter_labels[i].text = "%d HP    /    SUPER %d%%" % [fighters[i].hp,fighters[i].meter]
+		if fighters[i].armor_time > 0: meter_labels[i].text += "  ARMOR %.1fs" % fighters[i].armor_time
+		if fighters[i].empower_time > 0: meter_labels[i].text += "  POWER %.1fs" % fighters[i].empower_time
 		var info := ""
 		if fighters[i].combo >= 2: info = "%d HIT COMBO\n" % fighters[i].combo
 		if fighters[i].meter >= 100: info += "ULTIMATE READY"

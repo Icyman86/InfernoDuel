@@ -30,3 +30,10 @@ if [ "$status" -ne 0 ]; then exit "$status"; fi
 if rg -q 'SCRIPT ERROR|^ERROR:|instances leaked' "$log_file"; then exit 1; fi
 rg -q 'EXPANSION RESULT: [1-9][0-9]* passed, 0 failed' "$log_file"
 python3 tools/verify_intros.py
+
+status=0
+timeout 150 "${GODOT_BIN:-godot}" --headless --path "$PWD" tests/roster.tscn > "$log_file" 2>&1 || status=$?
+cat "$log_file"
+if [ "$status" -ne 0 ]; then exit "$status"; fi
+if rg -q 'SCRIPT ERROR|^ERROR:|instances leaked' "$log_file"; then exit 1; fi
+rg -q 'ROSTER RESULT: [1-9][0-9]* passed, 0 failed' "$log_file"

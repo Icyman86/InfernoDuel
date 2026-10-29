@@ -1,0 +1,692 @@
+{
+  "sharkbyte": [
+    {
+      "id": "light",
+      "display_name": "Reef Jab",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Shark Bite",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Fin Dash",
+      "slot": "special",
+      "kind": "dash",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Abyssal Frenzy",
+      "slot": "ultimate",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
+  ],
+  "bullet": [
+    {
+      "id": "light",
+      "display_name": "Bull Jab",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Horn Breaker",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Bull Charge",
+      "slot": "special",
+      "kind": "dash",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Stampede Breaker",
+      "slot": "ultimate",
+      "kind": "ground_shock",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
+  ],
+  "nachtelf": [
+    {
+      "id": "light",
+      "display_name": "Shadow Palm",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Ember Cleave",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Ember Bolt",
+      "slot": "special",
+      "kind": "ember_bolt",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Infernal Rift",
+      "slot": "ultimate",
+      "kind": "infernal_rift",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
+  ],
+  "poisonboy": [
+    {
+      "id": "light",
+      "display_name": "Toxic Jab",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Venom Kick",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Toxic Splash",
+      "slot": "special",
+      "kind": "toxic_orb",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Venom Cataclysm",
+      "slot": "ultimate",
+      "kind": "venom_cloud",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
+  ],
+  "spinegrin": [
+    {
+      "id": "light",
+      "display_name": "Thorn Jab",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Spine Kick",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Arm-Spike Volley",
+      "slot": "special",
+      "kind": "spike_volley",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Spineburst",
+      "slot": "ultimate",
+      "kind": "spineburst",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
+  ],
+  "chainveil": [
+    {
+      "id": "light",
+      "display_name": "Chain Jab",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Iron Heel",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Chain Lash",
+      "slot": "special",
+      "kind": "chain",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Iron Widow",
+      "slot": "ultimate",
+      "kind": "chain_super",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
+  ],
+  "cheese_rat": [
+    {
+      "id": "light",
+      "display_name": "Jab \u00b7 Quick Bite",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Cheese Claw",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Cheese Ball",
+      "slot": "special",
+      "kind": "cheese_ball",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "King of the Cheese",
+      "slot": "ultimate",
+      "kind": "cheese_king",
+      "command": "neutral",
+      "animation": "ultimate"
+    },
+    {
+      "id": "tail_whip",
+      "display_name": "Tail Whip",
+      "slot": "light",
+      "kind": "melee",
+      "command": "forward",
+      "animation": "heavy",
+      "damage": 7,
+      "reach": 125,
+      "knockback": 130
+    },
+    {
+      "id": "low_cheese_swipe",
+      "display_name": "Low Cheese Swipe",
+      "slot": "light",
+      "kind": "melee",
+      "command": "down",
+      "animation": "heavy",
+      "damage": 5,
+      "reach": 110,
+      "startup": 0.06,
+      "recovery": 0.16
+    },
+    {
+      "id": "cheese_slide",
+      "display_name": "Cheese Slide",
+      "slot": "special",
+      "kind": "dash",
+      "command": "forward",
+      "animation": "special",
+      "dash_speed": 680,
+      "reach": 130,
+      "damage": 14,
+      "recovery": 0.25
+    },
+    {
+      "id": "cheese_trap",
+      "display_name": "Cheese Trap",
+      "slot": "special",
+      "kind": "cheese_trap",
+      "command": "back",
+      "animation": "special",
+      "damage": 16
+    },
+    {
+      "id": "tail_spin",
+      "display_name": "Tail Spin",
+      "slot": "special",
+      "kind": "area",
+      "command": "down",
+      "animation": "heavy",
+      "damage": 14,
+      "reach": 165,
+      "active": 0.16,
+      "recovery": 0.24
+    },
+    {
+      "id": "rat_rush",
+      "display_name": "Rat Rush",
+      "slot": "ultimate",
+      "kind": "dash",
+      "command": "back",
+      "animation": "ultimate",
+      "dash_speed": 780,
+      "active": 0.42,
+      "reach": 150,
+      "damage": 30
+    },
+    {
+      "id": "cheese_storm",
+      "display_name": "Cheese Storm",
+      "slot": "ultimate",
+      "kind": "cheese_storm",
+      "command": "forward",
+      "animation": "ultimate",
+      "damage": 30
+    }
+  ],
+  "lava_stone": [
+    {
+      "id": "light",
+      "display_name": "Rock Punch",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Lava Kick",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Stone Spikes",
+      "slot": "special",
+      "kind": "stone_spikes",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Metal Beast Mode",
+      "slot": "ultimate",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "ultimate",
+      "armor_time": 6,
+      "damage": 26,
+      "reach": 220,
+      "description": "Heavy strike; six seconds of 50% damage reduction."
+    },
+    {
+      "id": "metal_strike",
+      "display_name": "Metal Strike",
+      "slot": "light",
+      "kind": "melee",
+      "command": "forward",
+      "animation": "strike",
+      "damage": 9,
+      "startup": 0.11,
+      "reach": 105,
+      "recovery": 0.18
+    },
+    {
+      "id": "stone_slam",
+      "display_name": "Stone Slam",
+      "slot": "light",
+      "kind": "melee",
+      "command": "down",
+      "animation": "slam",
+      "damage": 8,
+      "reach": 140,
+      "knockback": 180,
+      "startup": 0.13
+    },
+    {
+      "id": "lava_burst",
+      "display_name": "Lava Burst",
+      "slot": "special",
+      "kind": "area",
+      "command": "forward",
+      "animation": "special",
+      "damage": 18,
+      "reach": 210,
+      "startup": 0.2,
+      "active": 0.15,
+      "recovery": 0.35
+    },
+    {
+      "id": "lava_shield",
+      "display_name": "Lava Shield",
+      "slot": "special",
+      "kind": "buff",
+      "command": "back",
+      "animation": "power",
+      "damage": 0,
+      "armor_time": 2.5,
+      "meter_cost": 20,
+      "recovery": 0.22,
+      "description": "50% damage reduction for 2.5 seconds. Costs 20 meter."
+    },
+    {
+      "id": "metal_armor",
+      "display_name": "Metal Armor",
+      "slot": "special",
+      "kind": "buff",
+      "command": "down",
+      "animation": "power",
+      "damage": 0,
+      "armor_time": 6,
+      "meter_cost": 35,
+      "recovery": 0.3,
+      "description": "50% damage reduction for six seconds. Costs 35 meter."
+    },
+    {
+      "id": "earthquake",
+      "display_name": "Earthquake",
+      "slot": "ultimate",
+      "kind": "earthquake",
+      "command": "back",
+      "animation": "ultimate",
+      "damage": 30,
+      "reach": 300
+    },
+    {
+      "id": "lava_ascension",
+      "display_name": "Lava Ascension",
+      "slot": "ultimate",
+      "kind": "area",
+      "command": "forward",
+      "animation": "ultimate",
+      "damage": 30,
+      "reach": 210,
+      "launch": -470,
+      "active": 0.5,
+      "description": "Leaping area strike."
+    }
+  ],
+  "crystal_fang": [
+    {
+      "id": "light",
+      "display_name": "Claw Slash",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Bite",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Crystal Dash",
+      "slot": "special",
+      "kind": "dash",
+      "command": "neutral",
+      "animation": "special",
+      "dash_speed": 740,
+      "recovery": 0.29
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Full Moon Rage",
+      "slot": "ultimate",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "ultimate",
+      "empower_time": 5,
+      "damage": 28,
+      "description": "Heavy strike; +20% attack damage for five seconds."
+    },
+    {
+      "id": "crystal_punch",
+      "display_name": "Crystal Punch",
+      "slot": "light",
+      "kind": "melee",
+      "command": "forward",
+      "animation": "strike",
+      "damage": 8,
+      "reach": 115,
+      "knockback": 145
+    },
+    {
+      "id": "ground_pound",
+      "display_name": "Ground Pound",
+      "slot": "light",
+      "kind": "melee",
+      "command": "down",
+      "animation": "slam",
+      "damage": 8,
+      "reach": 150,
+      "startup": 0.12,
+      "recovery": 0.19
+    },
+    {
+      "id": "crystal_spikes",
+      "display_name": "Crystal Spikes",
+      "slot": "special",
+      "kind": "crystal_spikes",
+      "command": "forward",
+      "animation": "special",
+      "damage": 16
+    },
+    {
+      "id": "shatter_shield",
+      "display_name": "Shatter Shield",
+      "slot": "special",
+      "kind": "buff",
+      "command": "back",
+      "animation": "guard",
+      "damage": 0,
+      "armor_time": 3,
+      "meter_cost": 20,
+      "recovery": 0.2,
+      "description": "50% damage reduction for three seconds. Costs 20 meter."
+    },
+    {
+      "id": "lunar_howl",
+      "display_name": "Lunar Howl",
+      "slot": "special",
+      "kind": "buff",
+      "command": "down",
+      "animation": "power",
+      "damage": 0,
+      "empower_time": 5,
+      "meter_cost": 25,
+      "description": "+20% attack damage for five seconds. Costs 25 meter."
+    },
+    {
+      "id": "diamond_transformation",
+      "display_name": "Diamond Transformation",
+      "slot": "ultimate",
+      "kind": "buff",
+      "command": "back",
+      "animation": "power",
+      "damage": 0,
+      "invulnerable_time": 1.6,
+      "empower_time": 6,
+      "armor_time": 6,
+      "description": "1.6 seconds invulnerability, then armor and empowered attacks for six seconds."
+    },
+    {
+      "id": "crystal_storm",
+      "display_name": "Crystal Storm",
+      "slot": "ultimate",
+      "kind": "crystal_storm",
+      "command": "forward",
+      "animation": "ultimate",
+      "damage": 30
+    }
+  ],
+  "phoenix_reign": [
+    {
+      "id": "light",
+      "display_name": "Flame Slash",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Fire Kick",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy"
+    },
+    {
+      "id": "special",
+      "display_name": "Phoenix Dash",
+      "slot": "special",
+      "kind": "dash",
+      "command": "neutral",
+      "animation": "special",
+      "dash_speed": 690,
+      "launch": -280,
+      "recovery": 0.28
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Phoenix Rising",
+      "slot": "ultimate",
+      "kind": "area",
+      "command": "neutral",
+      "animation": "ultimate",
+      "launch": -480,
+      "reach": 240,
+      "active": 0.5,
+      "damage": 30
+    },
+    {
+      "id": "bird_bite",
+      "display_name": "Bird Bite",
+      "slot": "light",
+      "kind": "melee",
+      "command": "forward",
+      "animation": "peck",
+      "damage": 8,
+      "reach": 95,
+      "startup": 0.06,
+      "recovery": 0.18
+    },
+    {
+      "id": "wing_beat",
+      "display_name": "Wing Beat",
+      "slot": "light",
+      "kind": "melee",
+      "command": "down",
+      "animation": "wing_beat",
+      "damage": 7,
+      "reach": 145,
+      "knockback": 220
+    },
+    {
+      "id": "heat_wave",
+      "display_name": "Heat Wave",
+      "slot": "special",
+      "kind": "heat_wave",
+      "command": "forward",
+      "animation": "special",
+      "damage": 16
+    },
+    {
+      "id": "rebirth",
+      "display_name": "Rebirth",
+      "slot": "special",
+      "kind": "buff",
+      "command": "back",
+      "animation": "rebirth",
+      "damage": 0,
+      "invulnerable_time": 0.55,
+      "heal": 8,
+      "meter_cost": 35,
+      "cooldown": 2.5,
+      "recovery": 0.18,
+      "description": "Escape hitstun, restore 8 HP and gain brief invulnerability. Costs 35 meter; cannot revive a KO.",
+      "escape_stun": true
+    },
+    {
+      "id": "fire_tornado",
+      "display_name": "Fire Tornado",
+      "slot": "special",
+      "kind": "fire_tornado",
+      "command": "down",
+      "animation": "special",
+      "damage": 16,
+      "hitstun": 0.48
+    },
+    {
+      "id": "eternal_flame",
+      "display_name": "Eternal Flame",
+      "slot": "ultimate",
+      "kind": "buff",
+      "command": "back",
+      "animation": "rebirth",
+      "damage": 0,
+      "heal": 25,
+      "invulnerable_time": 1.0,
+      "description": "Restore 25 HP and gain one second invulnerability. Costs 100 meter; cannot revive a KO."
+    },
+    {
+      "id": "inferno_wings",
+      "display_name": "Inferno Wings",
+      "slot": "ultimate",
+      "kind": "area",
+      "command": "forward",
+      "animation": "ultimate",
+      "reach": 310,
+      "damage": 30,
+      "knockback": 350
+    },
+    {
+      "id": "solar_flare",
+      "display_name": "Solar Flare",
+      "slot": "ultimate",
+      "kind": "solar_flare",
+      "command": "down",
+      "animation": "ultimate",
+      "damage": 28,
+      "hitstun": 0.65,
+      "description": "Bright ranged burst with extended hitstun; no screen-obscuring flash."
+    }
+  ]
+}

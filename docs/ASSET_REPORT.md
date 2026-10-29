@@ -1,3 +1,16 @@
+# Current roster assets — v0.5, 29 October 2026
+
+All ten fighters have playable animated combat sets and animated selection/move-lab
+previews. Five new 24-key base atlases and four eight-key supplemental atlases were
+generated from the supplied designs; alpha/meshes/poses are validated. These are
+new reference-guided derivatives, not original hand-drawn animation. All eight
+original sheets remain byte-identical. See ART_PIPELINE and the provenance manifest
+for exact paths and hashes. Original sheets and all ten intro movies remain
+available. More in-betweens, artist polish, music, Story and on-device balance/feel
+remain separate work; no fighter slot is left marked COMING SOON.
+
+The report below is historical and describes the earlier five-fighter build.
+
 # Asset import report
 
 Status: source files are **never modified**.

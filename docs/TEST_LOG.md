@@ -1,3 +1,63 @@
+# Full roster + interactive move lab v0.5.0 — 29 October 2026
+
+All ten fighters are playable in versus and CPU mode, with animated selection
+and gallery previews. The five missing sets now have reference-guided generated
+combat art. The four detailed new move sheets have all their named moves mapped
+to playable directional inputs. The roster contains 69 attacks/abilities.
+
+| Required check | Result |
+| --- | --- |
+| Original reference integrity | PASS — all 8 original SHA-256 hashes unchanged |
+| Godot import / core gameplay suite | PASS — 70 passed, 0 failed |
+| Ten-fighter artwork / animation suite | PASS — 494 passed, 0 failed |
+| Earlier fighter-expansion suite | PASS — 45 passed, 0 failed |
+| Full roster / real moves / CPU matches | PASS — 287 passed, 0 failed |
+| Ten bundled films | PASS — full decode, 193 frames per film |
+| Real rendered gallery click tests | PASS — 84 passed, 0 failed |
+| Touch / directional variant tests | PASS — 35 passed, 0 failed |
+| Existing Linux rendered integration | PASS — 9 checks, 0 failures |
+| Existing sheets / intros / expansion rendering | PASS — 31 passed, 0 failed |
+| Linux native release-engine package | PASS — official 4.6.3 release engine, menu/move lab/select/fight/damage/pause, normal exit 0 |
+| Android universal APK | Export/signature/alignment/payload checks pass; ARM64 + x86_64, versionCode 500 |
+| Native Android / physical phone/tablet acceptance | NOT RUN for v0.5 — no device attached; prior software-emulator limits remain |
+
+The 1,055 source-level/integration/artwork/rendered assertions are distinct from
+native package checks and media/hash checks. No final suite reports script or
+engine errors or leaked instances. The X11 software display's unsupported V-Sync
+warning is expected. The current tests replace the old assumption that only five
+fighters can ready; all ten must now enter versus.
+
+The roster suite executes every named attack through its actual directional
+binding, verifies exact total damage (including three-projectile volleys), meter
+costs, insufficient-meter rejection, armor/power/invulnerability activation and
+healing. Every CPU must win a complete normal-health match against a passive
+player. Defensive tests check half damage, true invulnerability, no shared attack
+resource mutation, landing jump buffering, smooth acceleration, evading low
+attacks by jumping, capped healing, real Rebirth hitstun escape and no KO revival.
+The touch suite additionally performs Lava Stone armor and P2 Crystal Fang shield
+through simultaneous contacts and facing-relative commands.
+
+The move lab runs the same controllers, hitboxes, projectiles and resource costs
+as combat. Only its preview resets HP/meter between demonstrations. Real GUI
+clicks test every fighter, heavy/ultimate selection (including scrolling), manual
+autoplay interruption/resumption, original sheet toggling and live rendering.
+It also verifies that the automatic tour advances and gait frames change over
+time. Original intro navigation and decoding still work for all ten fighters.
+
+Art inspection and screenshots confirmed preserved identity, transparent
+silhouettes, natural claw feet for Crystal Fang/Phoenix Reign, full extended kick
+feet and recognizable bite/slam/wing/buff poses. Supplemental art replaced heavy
+poses that initially looked like punches instead of named kicks/bites. Heavy
+extension keys now align with the active hit window. These are illustrated
+key-pose animations with 55 ms blending and secondary motion, not fully hand-drawn
+in-betweens. Physical feel, final balance, device thermal/FPS behavior, sound,
+cutouts and two-human ergonomics still require hands-on testing.
+
+The v0.5 APK uses the same retained local development certificate as v0.4, allowing
+an in-place update. It remains a sideloadable preview, not a Play Store release.
+No native Android success is inferred from source tests or APK signature checks.
+The native Linux smoke test uses actual X11 key injection and screenshot checks, not internal scene calls. It reaches the packaged move lab, selects two fighters, starts combat, applies visible attack damage, pauses and exits through the normal Quit confirmation with code 0. An initial smoke-harness OCR check missed the small HP text despite visible damage; the final check reads the actual health-bar change. No application change was needed for that harness correction. Detailed logs, hashes and representative screenshots accompany the new release.
+
 # Android preview v0.4.0 — 29 October 2026
 
 Source milestone: `289326f`. Standard Godot 4.6.3; Android release templates
