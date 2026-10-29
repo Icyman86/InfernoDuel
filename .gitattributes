@@ -1,2 +1,1 @@
-releases/android-v0.4.0/*.apk filter=lfs diff=lfs merge=lfs -text
-releases/android-v0.5.0/*.apk filter=lfs diff=lfs merge=lfs -text
+releases/android-v*/*.apk filter=lfs diff=lfs merge=lfs -text

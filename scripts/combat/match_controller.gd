@@ -26,6 +26,8 @@ var diagnostics: Label
 var debug_boxes := false
 var meter_labels: Array[Label] = []
 var round_tokens: Array[Label] = []
+var input_provider: Callable
+var local_network_slot := -1
 
 func _ready() -> void:
 	for i in 2:
@@ -89,11 +91,14 @@ func _make_hud() -> void:
 	announcement.add_theme_constant_override("outline_size",8)
 	announcement.add_theme_color_override("font_outline_color",Color("130b15"))
 	hud.add_child(UI.place(announcement,100,230,1080,145))
-	var footer_bg := ColorRect.new()
 	if OS.has_feature("android") or "--touch" in OS.get_cmdline_user_args(): return
+	var footer_bg := ColorRect.new()
 	footer_bg.color = Color(0.02,0.015,0.03,0.84)
 	footer_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(UI.place(footer_bg,0,675,1280,45))
+	if local_network_slot >= 0:
+		hud.add_child(UI.place(UI.label("YOUR CONTROLS  A D · W · S · F G H J     /     ESC PAUSE · CONNECTED SESSION",16,UI.IVORY),35,684,1210,28))
+		return
 	hud.add_child(UI.place(UI.label("P1  A D · W · S · F G H J",16,UI.CYAN),35,684,420,28))
 	hud.add_child(UI.place(UI.label("ESC  PAUSE   /   F3  HITBOXES",14,UI.MUTED),455,684,370,28))
 	hud.add_child(UI.place(UI.label("P2  ← → · ↑ · ↓ · I O P L",16,UI.ORANGE),825,684,420,28))
@@ -121,7 +126,11 @@ func _physics_process(delta: float) -> void:
 			announcement.text = "FIGHT"
 			phase_time = 0.65
 	elif phase == "fight":
-		var inputs: Array[Dictionary] = [InputRouter.sample(0),ai.sample(delta,fighters[1],fighters[0]) if solo else InputRouter.sample(1)]
+		var inputs: Array[Dictionary] = []
+		if input_provider.is_valid():
+			inputs = input_provider.call()
+		else:
+			inputs = [InputRouter.sample(0),ai.sample(delta,fighters[1],fighters[0]) if solo else InputRouter.sample(1)]
 		advance_fight(delta,inputs)
 		phase_time -= delta
 		if phase_time <= 0: announcement.text = ""
@@ -226,7 +235,8 @@ func update_hud() -> void:
 	for i in 2:
 		health[i].value = fighters[i].hp
 		meters[i].value = fighters[i].meter
-		names[i].text = "%s  /  %s" % ["CPU" if solo and i == 1 else "P%d" % (i+1),profiles[i].display_name.to_upper()]
+		var owner := "YOU" if local_network_slot == i else ("CPU" if solo and i == 1 else "P%d" % (i+1))
+		names[i].text = "%s  /  %s" % [owner,profiles[i].display_name.to_upper()]
 		round_tokens[i].text = "◆ ".repeat(wins[i])+"◇ ".repeat(2-wins[i])
 		meter_labels[i].text = "%d HP    /    SUPER %d%%" % [fighters[i].hp,fighters[i].meter]
 		if fighters[i].armor_time > 0: meter_labels[i].text += "  ARMOR %.1fs" % fighters[i].armor_time

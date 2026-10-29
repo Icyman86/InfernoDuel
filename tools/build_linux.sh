@@ -30,7 +30,7 @@ exec ./InfernoDuel.x86_64 "$@"
 PLAY
 chmod 755 builds/linux/PLAY.sh
 cat > builds/linux/README.txt <<'README'
-INFERNO DUEL: LEGENDS — Linux full roster v0.5
+INFERNO DUEL: LEGENDS — Linux full roster V6 / v0.6.0
 Made by Rens de Gee en Ted Sondervan
 
 Run ./PLAY.sh on a Linux x86_64 desktop with OpenGL 3.3 support.
@@ -53,7 +53,10 @@ escape hitstun and heal 8 HP. Supers cost 100 meter and cannot revive a KO.
 Each short intro opens on footwear (original claws for Crystal Fang/Phoenix
 Reign), then a front kick toward camera. REPLAY restarts; Esc/BACK returns.
 Original reference sheets are preserved. New sprite/intro art is reference-guided.
-Android touch play is available as a separate APK. Story and music are later milestones.
+CONNECT uses direct session codes between devices on the same reachable Wi-Fi.
+Android has one touchpad per device; offline CPU remains available.
+Rendering follows native device/window pixels; the arena preserves its proportions.
+Android touch play is available as a separate V6 APK. Story and music are later milestones.
 Two-person physical keyboard / ghosting testing is still required.
 README
 printf '\nEngine package: %s\n' "$engine_kind" >> builds/linux/README.txt

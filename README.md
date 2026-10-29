@@ -9,21 +9,29 @@ and its limits are described here and in `docs/TEST_LOG.md`.
 
 ## Android APK — phones and tablets
 
-[Download Android v0.5.0 APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.5.0-android/releases/android-v0.5.0/InfernoDuel-Android-v0.5.0.apk)
+[Download Android V6 (0.6.0) APK](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.6.0-android/releases/android-v0.6.0/InfernoDuel-Android-v0.6.0.apk)
 
 Android 7.0+ with a **64-bit ARM or x86_64 Android OS**, OpenGL ES 3.0 and
 multitouch. Install the APK from your browser/downloads; allow installation from
 that source when Android asks. This is a sideloadable preview signed with a local
 development key, not a Play Store release. See [Android build and validation](docs/ANDROID.md).
 
-Play in landscape. **PLAY · TOUCH VS CPU** is the phone default; **2 PLAYERS ·
-SHARED TABLET** gives both players separate cyan/orange controls on one screen.
-Tap a fighter, ready both sides, and enter the arena. EDIT P2 / CPU changes the
-opponent. Left controls move, jump and guard; right controls light, heavy, special
-and ultimate. Hold guard while facing the opponent; ultimate needs 100% meter.
-Moving and attacking support multiple fingers. Tap **Ⅱ** to pause; Android Back
-returns or pauses, and switching apps pauses the fight. Layouts fit phone and
-tablet aspect ratios and keep controls inside Android's safe display area.
+Play in landscape. **CONNECT · SESSION CODE** connects two separate devices on
+the same Wi-Fi / reachable IPv4 network. The host taps CREATE SESSION and shares
+the complete code; the guest pastes it and taps CONNECT. Each player chooses and
+readies their own fighter. Android has one touchpad per device and no local versus.
+**PLAY · TOUCH VS CPU** remains available offline; EDIT P2 / CPU changes the
+opponent. Direct codes do not provide Internet matchmaking or NAT traversal;
+other Wi-Fi networks and 4G/5G need routing or a relay. See [session setup](docs/NETWORK.md).
+
+Rendering follows the device's actual surface resolution, including changes;
+there is no fixed 1280×720 render target. The arena keeps its proportions inside
+the safe display area. Left controls move, jump and guard; right controls light,
+heavy, special and ultimate. Hold guard while facing the opponent; ultimate needs
+100% meter. Moving and attacking support multiple fingers. Tap **Ⅱ** to pause;
+Android Back returns or pauses, and switching apps pauses the fight. In a connected
+match, either player can pause; both must release their pause request to continue.
+Layouts fit phone and tablet aspect ratios and keep controls inside Android's safe display area.
 
 The APK is stored in Git LFS because it includes both native engines and all ten
 intro movies. A source checkout needs `git lfs pull` to fetch it; the download
@@ -134,10 +142,14 @@ godot --path . --audio-driver Dummy tests/visual.tscn
 godot --path . --audio-driver Dummy tests/expansion_visual.tscn
 ./tools/test_touch.sh
 ./tools/test_gallery.sh
+TEST_NETWORK_RENDERED=1 ./tools/test_v6.sh
 ```
 
 Rendered screenshots are written to `/tmp/inferno-visual/`, `/tmp/inferno-v03-visual/`,
-`/tmp/inferno-touch/` and `/tmp/inferno-roster-visual/`.
+`/tmp/inferno-touch/`, `/tmp/inferno-roster-visual/` and `/tmp/inferno-v6-visual/`.
+The V6 suite checks native framebuffer sizes, Android routes, session-code parsing
+and real multi-process ENet gameplay. The graphical network repeat is optional;
+the default network run is headless. No public relay service is required or bundled.
 Tests do not establish
 physical keyboard rollover, audio-device quality, or real two-person playability.
 See `docs/TEST_LOG.md` for exact results and the manual checklist.
@@ -163,6 +175,9 @@ timeline at 30 FPS before Theora/Vorbis encoding. Optional authoring tool
 these Python packages are not needed to play or run the normal tests.
 
 No external services or credentials are needed to play or test the game.
+Every published update gets a new version, Android versionCode, APK path and Git
+tag; published APKs/tags are retained instead of overwritten. This update is V6,
+version 0.6.0 / Android code 600.
 On restricted cloud hosts use writable XDG data/config/cache directories when
 invoking Godot, e.g. `XDG_DATA_HOME=/workspace/.runtime/data` (and similarly
 `XDG_CONFIG_HOME`, `XDG_CACHE_HOME`). A graphical desktop/OpenGL 3.3 is required

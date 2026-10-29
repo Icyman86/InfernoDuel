@@ -1,4 +1,4 @@
-# Prototype architecture — v0.5
+# Prototype architecture — V6 / v0.6.0
 
 Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 `scenes/main.tscn` is the F5 entry point. No network services or secrets are needed.
@@ -6,8 +6,10 @@ Godot 4.6.3 standard / GDScript, Compatibility renderer, 60 Hz physics.
 - `scripts/core/input_router.gd` reads physical keys from `data/input_layouts.json`.
   Each player owns held and edge-triggered state. Focus loss, countdown, pause,
   rounds and transitions clear inputs.
-- `scripts/ui/game.gd` routes menu, character select, arena, gallery, intro, options,
-  pause and results on a logical 1280×720 stage. Gallery index survives intro playback.
+- `scripts/ui/game.gd` routes menu, connection, character select, arena, gallery,
+  intro, options, pause and results on a logical 1280×720 stage. The root viewport
+  renders at native surface pixels with Godot stretch disabled. The stage fits
+  the safe rectangle without changing arena coordinates. Gallery index survives intro playback.
 - `fighter_controller.gd` owns deterministic movement, facing, attack lifecycle,
   blocking, hitstun, cooldowns and meter. Each fighter duplicates base `AttackData`
   resources before applying data-driven overrides, avoiding shared-state mutations.
@@ -55,9 +57,9 @@ The wrapper changes to its own folder before launching. Authoring intro PNGs,
 tests, tools, docs and release archives are excluded from the pack.
 
 All eight original sheets remain unchanged. DejaVu fonts, Godot's MIT license and
-third-party notices accompany the native package. Five remaining combat sets,
-expanded move lists, final balance, music/voices, physical-keyboard acceptance,
-Story, rebinding and Android are later milestones.
+third-party notices accompany the native package. Final balance, music/voices,
+physical-keyboard acceptance, Story, rebinding and physical Android acceptance
+remain follow-up work. All ten combat sets and the Android APK are implemented.
 
 ## Full roster and move lab
 
@@ -80,4 +82,27 @@ refills meter between demonstrations and has no link to match progression.
 `FighterGallery` offers autoplay, manual scrollable move buttons, original-sheet
 view and existing intro navigation. Changing fighter destroys the previous preview;
 viewing the original sheet stops both its simulation and viewport rendering.
-No combat service, network permission or account is needed.
+The move lab and offline modes need no service or account.
+
+## Direct sessions
+
+`OnlineSession` owns an ENet peer and the host-authoritative lobby. `SessionCode`
+encodes the IPv4 endpoint, random room nonce, protocol and typo checksum; there
+is no directory or NAT traversal. A reliable handshake checks the nonce and
+exact application version. Each peer can edit only its own fighter/ready state.
+Android exposes session-code play and offline CPU, with no local-versus route.
+
+`NetworkMatchDriver` supplies the host's DuelMatch with local and bounded guest
+inputs. The host alone simulates collisions, damage, rounds and wins at 60 Hz.
+Guest input edges use a sequenced reliable channel; held controls expire after
+350 ms without fresh input. Countdown, pause and round transitions gate inputs.
+The guest renders 20 Hz authoritative snapshots with transform smoothing and
+visual-only projectiles. It does not decide damage, and has no rollback or
+client-side movement prediction. This targets low-latency LAN play.
+
+Reliable pause snapshots keep both timers frozen; either peer may pause, and
+all pause votes must be released before resuming. Results are reliable; rematch
+requires both votes and increments an epoch to reject prior-match packets.
+An eight-second gameplay heartbeat timeout stops lost sessions. Disconnects
+close the ENet peer on a deferred call, outside SceneMultiplayer's packet poll.
+See NETWORK.md for endpoint reachability and testing limits.

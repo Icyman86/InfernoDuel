@@ -2,9 +2,12 @@ class_name CharacterSelect
 extends Control
 signal accepted(indices: Array[int])
 signal back_requested
+signal network_choice(index: int)
+signal network_ready(value: bool)
 var roster: Array = []
 var solo := false
 var touch_mode := false
+var online_slot := -1
 var selected: Array[int] = [0,1]
 var ready_players: Array[bool] = [false,false]
 var mouse_player := 0
@@ -19,6 +22,7 @@ var badges: Array[Label] = []
 var hint: Label
 
 func _ready() -> void:
+	if online_slot >= 0: mouse_player = online_slot
 	theme = UI.theme()
 	var shade := ColorRect.new()
 	shade.color = Color(0.015,0.012,0.026,0.83)
@@ -26,7 +30,7 @@ func _ready() -> void:
 	add_child(UI.place(shade,0,0,1280,720))
 	add_child(UI.place(UI.label("THE CITADEL AWAITS",16,UI.GOLD),300,32,680,28))
 	add_child(UI.place(UI.label("CHOOSE YOUR FIGHTER",33,UI.IVORY,true),290,66,700,50))
-	add_child(UI.place(UI.label("SOLO  /  CPU EASY" if solo else ("LOCAL VERSUS  /  SHARED TOUCHSCREEN" if touch_mode else "LOCAL VERSUS  /  ONE KEYBOARD"),16,UI.MUTED),300,122,680,25))
+	add_child(UI.place(UI.label("CONNECTED SESSION · YOU CONTROL P%d" % (online_slot+1) if online_slot >= 0 else ("SOLO  /  CPU EASY" if solo else "LOCAL VERSUS  /  ONE KEYBOARD"),16,UI.MUTED),300,122,680,25))
 	for i in 10:
 		var index := i
 		var f: Dictionary = roster[i]
@@ -79,30 +83,40 @@ func _ready() -> void:
 			mouse_player=p
 			refresh())
 		cursor.add_theme_font_size_override("font_size",16)
+		if online_slot >= 0:
+			cursor.text = "YOUR FIGHTER" if p == online_slot else "REMOTE PLAYER"
+			cursor.disabled = true
 		add_child(UI.place(cursor,x,565,208,40))
 		cursor_buttons.append(cursor)
 		var ready_button := UI.button("READY",func(): confirm(p),true)
+		ready_button.disabled = online_slot >= 0 and p != online_slot
 		add_child(UI.place(ready_button,x,613,148,43))
 		ready_buttons.append(ready_button)
-		var undo := UI.button("↶",func():
-			ready_players[p]=false
-			refresh())
+		var undo := UI.button("↶",func(): unready(p))
+		undo.disabled = online_slot >= 0 and p != online_slot
 		undo.tooltip_text = "Undo ready: G / O"
 		add_child(UI.place(undo,x+156,613,52,43))
 	hint = UI.label("P1  W A S D · F ready · G undo       /       P2  Arrows · I ready · O undo",17,UI.MUTED)
 	if touch_mode:
 		hint.text = "TAP A FIGHTER · EDIT P2 / CPU TO PICK OPPONENT · READY BOTH SIDES"
+	if online_slot >= 0: hint.text = "Choose YOUR fighter and READY. Your opponent controls their own side."
 	add_child(UI.place(hint,220,675,1000,28))
 	add_child(UI.place(UI.button("BACK",func(): back_requested.emit()),34,675,150,38))
 	refresh()
 
 func choose(player: int, index: int) -> void:
+	if online_slot >= 0:
+		if player == online_slot and not ready_players[player]: network_choice.emit(index)
+		return
 	if ready_players[player]: return
 	selected[player] = index
 	Sound.play("confirm")
 	refresh()
 
 func confirm(player: int) -> void:
+	if online_slot >= 0:
+		if player == online_slot: network_ready.emit(true)
+		return
 	if not roster[selected[player]].get("playable",false):
 		hint.text = "IN DEVELOPMENT · Choose a highlighted playable fighter."
 		return
@@ -110,6 +124,18 @@ func confirm(player: int) -> void:
 	Sound.play("confirm")
 	refresh()
 	if ready_players[0] and ready_players[1]: accepted.emit(selected.duplicate())
+
+func unready(player: int) -> void:
+	if online_slot >= 0:
+		if player == online_slot: network_ready.emit(false)
+	else:
+		ready_players[player] = false
+		refresh()
+
+func apply_network_state(indices: Array[int], flags: Array[bool]) -> void:
+	selected.assign(indices)
+	ready_players.assign(flags)
+	refresh()
 
 func refresh() -> void:
 	for i in 10:
@@ -150,6 +176,13 @@ func refresh() -> void:
 				hero_holders[p].add_child(UI.place(portrait,9,10,190,228))
 
 func handle_key(code: int) -> void:
+	if online_slot >= 0:
+		if code in [KEY_F,KEY_I,KEY_ENTER]: confirm(online_slot)
+		elif code in [KEY_G,KEY_O]: unready(online_slot)
+		elif not ready_players[online_slot]:
+			var offset := -1 if code in [KEY_A,KEY_LEFT] else (1 if code in [KEY_D,KEY_RIGHT] else (5 if code in [KEY_W,KEY_S,KEY_UP,KEY_DOWN] else 0))
+			if offset != 0: choose(online_slot,posmod(selected[online_slot]+offset,10))
+		return
 	for p in 2:
 		var left := KEY_A if p == 0 else KEY_LEFT
 		var right := KEY_D if p == 0 else KEY_RIGHT
@@ -158,8 +191,7 @@ func handle_key(code: int) -> void:
 		var accept := KEY_F if p == 0 else KEY_I
 		var undo := KEY_G if p == 0 else KEY_O
 		if code == undo:
-			ready_players[p] = false
-			refresh()
+			unready(p)
 		elif code == accept: confirm(p)
 		elif not ready_players[p]:
 			var offset := 0

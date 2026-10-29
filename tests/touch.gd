@@ -112,7 +112,7 @@ func run() -> void:
 	check(InputRouter.sample(0).axis == 0, "pausing clears held touch input")
 	click(find_button(game.overlay, "OPTIONS"))
 	await get_tree().process_frame
-	check(game.route == "options" and not find_button(game.overlay, "WINDOW · 1280 × 720"), "mobile options replace desktop-only window buttons")
+	check(game.route == "options" and not find_button(game.overlay, "NATIVE WINDOW · FIT SCREEN"), "mobile options replace desktop-only window buttons")
 	click(find_button(game.overlay, "BACK"))
 	await get_tree().process_frame
 	check(game.route == "pause", "mobile options return to pause")
@@ -163,16 +163,13 @@ func run() -> void:
 	contact(3, "heavy", true, 1)
 	var p1: Dictionary = InputRouter.sample(0)
 	var p2: Dictionary = InputRouter.sample(1)
-	check(p1.axis == 1 and p1.light and p2.axis == -1 and p2.heavy, "shared tablet has independent simultaneous player controls")
+	check(p1.axis == 1 and p1.light and p2.axis == -1 and p2.heavy, "desktop two-player touch-controller inputs remain independent")
 	DirAccess.make_dir_recursive_absolute("/tmp/inferno-touch")
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png("/tmp/inferno-touch/shared-tablet.png")
 	pad.release_all()
-	game.show_select(false)
-	game.screen.choose(0, 7)
-	game.screen.choose(1, 8)
-	game.screen.confirm(0)
-	game.screen.confirm(1)
+	game.solo = true
+	game.selected.assign([7, 8])
 	game.start_match()
 	await get_tree().process_frame
 	game.match_node.set_physics_process(false)
@@ -181,12 +178,22 @@ func run() -> void:
 	game.match_node.fighters[1].meter = 100
 	contact(0, "block")
 	contact(1, "special")
-	contact(2, "move_right", true, 1)
-	contact(3, "special", true, 1)
 	var commands: Array[Dictionary] = [InputRouter.sample(0), InputRouter.sample(1)]
 	game.match_node.advance_fight(1.0/60.0, commands)
 	check(game.match_node.fighters[0].attack.id == "metal_armor" and game.match_node.fighters[0].meter == 65, "GUARD plus SPECIAL performs Lava Stone's actual armor move through touch")
-	check(game.match_node.fighters[1].attack.id == "shatter_shield" and game.match_node.fighters[1].meter == 80, "P2 back plus SPECIAL uses facing-relative touch binding for Crystal Fang's shield")
+	game.selected.assign([8, 0])
+	game.start_match()
+	await get_tree().process_frame
+	game.match_node.set_physics_process(false)
+	game.match_node.phase = "fight"
+	game.match_node.fighters[0].meter = 100
+	game.match_node.fighters[0].position.x = 900
+	game.match_node.fighters[1].position.x = 400
+	contact(2, "move_right")
+	contact(3, "special")
+	commands = [InputRouter.sample(0), {}]
+	game.match_node.advance_fight(1.0/60.0, commands)
+	check(game.match_node.fighters[0].attack.id == "shatter_shield" and game.match_node.fighters[0].meter == 80, "back plus SPECIAL uses facing-relative touch binding after sides switch")
 	game.show_menu()
 	await get_tree().process_frame
 	await get_tree().create_timer(0.8).timeout

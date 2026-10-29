@@ -3,6 +3,7 @@ const SelectScreen = preload("res://scripts/ui/character_select.gd")
 const Options = preload("res://scripts/ui/options.gd")
 const Gallery = preload("res://scripts/ui/gallery.gd")
 const MatchScene = preload("res://scenes/combat/match.tscn")
+const ConnectionScreen = preload("res://scripts/ui/online_lobby.gd")
 var stage: Control
 var screen: Control
 var overlay: Control
@@ -17,9 +18,16 @@ var modal: ConfirmationDialog
 var gallery_index := 0
 var touch_controls: TouchControls
 var touch_mode := OS.has_feature("android") or "--touch" in OS.get_cmdline_user_args()
+var networked := false
+var network_driver: NetworkMatchDriver
 
 func _ready() -> void:
 	get_tree().quit_on_go_back = false
+	OnlineSession.lobby_changed.connect(_network_lobby_changed)
+	OnlineSession.match_started.connect(_network_match_started)
+	OnlineSession.match_finished.connect(show_result)
+	OnlineSession.pause_changed.connect(_network_pause_changed)
+	OnlineSession.disconnected.connect(_network_disconnected)
 	roster = JSON.parse_string(FileAccess.get_file_as_string("res://data/fighters.json")).fighters
 	stage = Control.new()
 	stage.theme = UI.theme()
@@ -72,8 +80,11 @@ func end_match() -> void:
 		stage.remove_child(match_node)
 		match_node.queue_free()
 	match_node = null
+	network_driver = null
 
 func show_menu() -> void:
+	if OnlineSession.active(): OnlineSession.close()
+	networked = false
 	end_match()
 	route = "menu"
 	new_screen()
@@ -102,23 +113,28 @@ func show_menu() -> void:
 		hero.scale.x = -1 if i == 1 else 1
 		screen.add_child(hero)
 	var buttons := VBoxContainer.new()
-	UI.place(buttons,140,311,390,320)
+	UI.place(buttons,140,311 if touch_mode else 288,390,370)
 	screen.add_child(buttons)
 	if touch_mode:
-		buttons.add_child(UI.button("PLAY · TOUCH VS CPU",func(): show_select(true),true))
-		buttons.add_child(UI.button("2 PLAYERS · SHARED TABLET",func(): show_select(false)))
+		buttons.add_child(UI.button("CONNECT · SESSION CODE",show_online,true))
+		buttons.add_child(UI.button("PLAY · TOUCH VS CPU",func(): show_select(true)))
 	else:
 		buttons.add_child(UI.button("LOCAL VERSUS",func(): show_select(false),true))
 		buttons.add_child(UI.button("SOLO VS CPU",func(): show_select(true)))
+		buttons.add_child(UI.button("CONNECT · SESSION CODE",show_online))
 	buttons.add_child(UI.button("STORY MODE",show_story))
 	buttons.add_child(UI.button("FIGHTERS",show_gallery))
 	buttons.add_child(UI.button("OPTIONS",func(): show_options("menu")))
 	buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  v0.5",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  V6",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
+	if touch_mode and not cpu:
+		show_online()
+		return
+	networked = false
 	end_match()
 	clear_screen()
 	route = "select"
@@ -134,6 +150,47 @@ func show_select(cpu: bool) -> void:
 	picker.back_requested.connect(show_menu)
 	screen = picker
 	stage.add_child(screen)
+
+func show_online() -> void:
+	end_match()
+	clear_screen()
+	route = "online"
+	var connection := ConnectionScreen.new()
+	connection.back_requested.connect(show_menu)
+	screen = connection
+	stage.add_child(connection)
+
+func _network_lobby_changed() -> void:
+	if route == "online" and OnlineSession.phase == "lobby":
+		networked = true
+		clear_screen()
+		route = "network_select"
+		var picker := SelectScreen.new()
+		picker.roster = roster
+		picker.touch_mode = touch_mode
+		picker.online_slot = OnlineSession.local_slot
+		picker.selected.assign(OnlineSession.selected)
+		picker.ready_players.assign(OnlineSession.ready_players)
+		picker.network_choice.connect(OnlineSession.choose)
+		picker.network_ready.connect(OnlineSession.ready_up)
+		picker.back_requested.connect(show_menu)
+		screen = picker
+		stage.add_child(picker)
+	elif route == "network_select":
+		screen.apply_network_state(OnlineSession.selected, OnlineSession.ready_players)
+	elif route == "online":
+		screen.refresh()
+
+func _network_match_started(indices: Array[int], _generation: int) -> void:
+	networked = true
+	solo = false
+	selected.assign(indices)
+	start_match()
+
+func _network_disconnected(_reason: String) -> void:
+	if route in ["online","network_select","fight","pause","options","result"]:
+		networked = false
+		show_online()
 
 func show_arena() -> void:
 	route = "arena"
@@ -159,17 +216,28 @@ func show_arena() -> void:
 	screen.add_child(UI.place(UI.label("TAP ENTER THE ARENA TO FIGHT" if touch_mode else "ENTER / F  fight     ·     ESC  back",18,UI.MUTED),300,659,680,30))
 
 func start_match() -> void:
+	if touch_mode and not solo and not networked:
+		show_online()
+		return
 	clear_screen()
 	end_match()
 	route = "fight"
 	if touch_controls:
-		touch_controls.solo = solo
+		touch_controls.solo = true if networked else solo
+		touch_controls.local_team = OnlineSession.local_slot if networked else 0
 		touch_controls.rebuild()
 	match_node = MatchScene.instantiate()
 	match_node.profiles = [roster[selected[0]],roster[selected[1]]]
 	match_node.solo = solo
-	match_node.completed.connect(show_result)
+	match_node.local_network_slot = OnlineSession.local_slot if networked else -1
+	if networked:
+		if OnlineSession.local_slot == 0: match_node.completed.connect(OnlineSession.complete_match)
+	else:
+		match_node.completed.connect(show_result)
 	stage.add_child(match_node)
+	if networked:
+		network_driver = NetworkMatchDriver.new()
+		match_node.add_child(network_driver)
 	InputRouter.clear()
 
 func make_overlay() -> VBoxContainer:
@@ -188,25 +256,49 @@ func make_overlay() -> VBoxContainer:
 	return box
 
 func show_pause() -> void:
+	if networked:
+		OnlineSession.request_pause(true)
+		return
+	_render_pause()
+
+func _render_pause() -> void:
 	if not is_instance_valid(match_node): return
 	match_node.set_stopped(true)
 	route = "pause"
 	var box := make_overlay()
 	box.add_child(UI.label("PAUSED",40,UI.GOLD,true))
-	box.add_child(UI.label("The citadel can wait.",18,UI.MUTED))
+	box.add_child(UI.label("Both players must resume to continue." if networked else "The citadel can wait.",18,UI.MUTED))
 	box.add_child(UI.button("RESUME",resume_match,true))
-	box.add_child(UI.button("RESTART MATCH",func(): confirm_action("Restart this match? The current score will be lost.",start_match)))
+	if not networked: box.add_child(UI.button("RESTART MATCH",func(): confirm_action("Restart this match? The current score will be lost.",start_match)))
 	box.add_child(UI.button("OPTIONS",func(): show_options("pause")))
 	box.add_child(UI.button("MAIN MENU",func(): confirm_action("Leave the match? The current score will be lost.",show_menu)))
 	box.get_child(2).grab_focus()
 
 func resume_match() -> void:
+	if networked:
+		OnlineSession.request_pause(false)
+		return
+	_resume_local()
+
+func _resume_local() -> void:
 	clear_overlay()
 	InputRouter.clear()
 	route = "fight"
 	match_node.set_stopped(false)
 
+func _network_pause_changed(paused: bool) -> void:
+	if not networked or not is_instance_valid(match_node): return
+	if OnlineSession.local_slot == 1 and is_instance_valid(network_driver) and not OnlineSession.latest_snapshot.is_empty():
+		network_driver.apply_snapshot(OnlineSession.latest_snapshot)
+		network_driver.applied_sequence = OnlineSession.snapshot_revision
+	match_node.set_stopped(paused)
+	if paused and route in ["fight", "pause"]: _render_pause()
+	elif not paused and route in ["fight","pause","options"]: _resume_local()
+
 func show_result(score: Array[int]) -> void:
+	if not is_instance_valid(match_node): return
+	match_node.wins.assign(score)
+	match_node.phase = "complete"
 	match_node.set_stopped(true)
 	route = "result"
 	var box := make_overlay()
@@ -220,8 +312,17 @@ func show_result(score: Array[int]) -> void:
 	box.add_child(UI.label("P%d WINS" % (winner+1),44,UI.GOLD,true))
 	box.add_child(UI.label(roster[selected[winner]].display_name.to_upper(),26,UI.IVORY))
 	box.add_child(UI.label("%d : %d" % [score[0],score[1]],40,UI.IVORY,true))
-	box.add_child(UI.button("REMATCH",start_match,true))
-	box.add_child(UI.button("CHARACTER SELECT",func(): show_select(solo)))
+	if networked:
+		var rematch := UI.button("REMATCH",func():
+			OnlineSession.request_rematch()
+			if is_instance_valid(overlay):
+				var button: Button = box.get_child(3)
+				button.text = "WAITING FOR OPPONENT…"
+				button.disabled = true,true)
+		box.add_child(rematch)
+	else:
+		box.add_child(UI.button("REMATCH",start_match,true))
+		box.add_child(UI.button("CHARACTER SELECT",func(): show_select(solo)))
 	box.add_child(UI.button("MAIN MENU",show_menu))
 	box.get_child(3).grab_focus()
 
@@ -229,6 +330,7 @@ func show_options(origin: String) -> void:
 	option_origin = origin
 	route = "options"
 	if origin == "pause":
+		if networked: OnlineSession.request_pause(true)
 		make_overlay()
 		for child in overlay.get_children(): child.queue_free()
 		var shade := ColorRect.new()
@@ -236,7 +338,7 @@ func show_options(origin: String) -> void:
 		overlay.add_child(UI.place(shade,0,0,1280,720))
 		var options := Options.new()
 		options.touch_mode = touch_mode
-		options.back_requested.connect(show_pause)
+		options.back_requested.connect(_render_pause)
 		overlay.add_child(options)
 	else:
 		clear_screen()
@@ -274,7 +376,7 @@ func show_story() -> void:
 	new_screen()
 	screen.add_child(UI.place(UI.label("THE ABYSS IS CALLING",40,UI.GOLD,true),90,150,1100,70))
 	screen.add_child(UI.place(UI.label("STORY MODE · COMING IN A LATER MILESTONE",22,UI.MUTED),90,245,1100,40))
-	screen.add_child(UI.place(UI.label("SharkByte's campaign is still in development.\nFor now, enter the citadel in Local Versus or Solo vs CPU.",22,UI.IVORY),150,330,980,110))
+	screen.add_child(UI.place(UI.label("SharkByte's campaign is still in development.\nFor now, play Solo vs CPU or connect with a session code." if touch_mode else "SharkByte's campaign is still in development.\nFor now, enter the citadel in Local Versus or Solo vs CPU.",22,UI.IVORY),150,330,980,110))
 	var back := UI.button("BACK TO MAIN MENU",show_menu,true)
 	screen.add_child(UI.place(back,440,520,400,50))
 	back.grab_focus()
@@ -300,10 +402,12 @@ func _input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo: return
 	if is_instance_valid(modal) and modal.visible: return
 	var key: int = event.physical_keycode if event.physical_keycode else event.keycode
+	var typing := get_viewport().gui_get_focus_owner()
+	if typing is LineEdit and key not in [KEY_ESCAPE,KEY_BACK]: return
 	if key == KEY_ESCAPE or key == KEY_BACK:
 		go_back()
 		get_viewport().set_input_as_handled()
-	elif route == "select":
+	elif route in ["select","network_select"]:
 		screen.handle_key(key)
 		get_viewport().set_input_as_handled()
 	elif route == "arena" and (key == KEY_F or key == KEY_ENTER):
@@ -335,7 +439,7 @@ func go_back() -> void:
 		"options":
 			if option_origin == "pause": show_pause()
 			else: show_menu()
-		"select", "story", "gallery": show_menu()
+		"select", "story", "gallery", "online", "network_select": show_menu()
 		"intro": show_gallery()
 		"arena": show_select(solo)
 		"menu": confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())

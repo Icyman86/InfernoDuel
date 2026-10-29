@@ -7,6 +7,7 @@ var active := false
 var buttons: Array[Dictionary] = []
 var fingers: Dictionary = {}
 var input_generation := -1
+var local_team := 0
 
 static func safe_rect(viewport: Viewport) -> Rect2:
 	var rect := viewport.get_visible_rect()
@@ -112,7 +113,7 @@ func _draw() -> void:
 	for i in buttons.size():
 		var b: Dictionary = buttons[i]
 		var down: bool = i in fingers.values()
-		var color := UI.CYAN if b.player == 0 else UI.ORANGE
+		var color := UI.CYAN if (b.player + local_team) % 2 == 0 else UI.ORANGE
 		var style := UI.style(Color(0.025, 0.02, 0.04, 0.85), Color(color, 0.8), 2)
 		if down: style.bg_color = Color(color, 0.65)
 		style.set_corner_radius_all(12)

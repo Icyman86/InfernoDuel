@@ -16,10 +16,13 @@ with zipfile.ZipFile(apk) as archive:
         assert f"assets/{script}.gdc" in names, f"Missing compiled {script}"
     for script in ("scripts/ui/gallery", "scripts/ui/move_showcase", "scripts/combat/move_catalog"):
         assert f"assets/{script}.gdc" in names, f"Missing move lab {script}"
+    for script in ('scripts/network/session_code', 'scripts/network/online_session',
+                   'scripts/network/network_match_driver', 'scripts/ui/online_lobby'):
+        assert f'assets/{script}.gdc' in names, f'Missing V6 connection script {script}'
     import json
     fighters = json.loads(archive.read('assets/data/fighters.json'))['fighters']
     moves = json.loads(archive.read('assets/data/move_sets.json'))
     assert len(fighters) == 10 and all(f['playable'] and f['sprite_ready'] for f in fighters)
     assert sum(map(len, moves.values())) == 69
     assert not any(name.startswith(("assets/tests/", "assets/releases/")) for name in names)
-print(f"APK PAYLOAD PASS: ARM64 + x86_64, ten playable fighters, 69 moves, live move lab, touch, ten films ({apk.stat().st_size} bytes)")
+print(f"APK PAYLOAD PASS: ARM64 + x86_64, native-resolution V6 session scripts, ten playable fighters, 69 moves, touch ({apk.stat().st_size} bytes)")

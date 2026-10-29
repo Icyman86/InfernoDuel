@@ -1,3 +1,73 @@
+# V6 native resolution + direct sessions — 29 October 2026
+
+This supersedes earlier Android shared-tablet and fixed-render-resolution behavior.
+V6 / 0.6.0 (Android versionCode 600) follows the actual device surface, preserves
+logical arena proportions and replaces Android local versus with a session-code
+connection between two devices. CPU solo remains offline. Direct IPv4/UDP requires
+a reachable host, normally the same Wi-Fi. No Internet relay or NAT traversal is
+bundled; different networks / 4G / 5G are not automatically connected by a code.
+
+| Final check | Result and limits |
+| --- | --- |
+| Original sheets + ten intro films | PASS — eight SHA-256 hashes unchanged; ten full film decodes |
+| Core / artwork / expansion / roster | PASS — 70 + 494 + 45 + 287 = 896 assertions |
+| Existing rendered touch / gallery / Linux / expansion | PASS — 35 + 84 + 9 + 31 = 159 assertions |
+| Session-code, input validation and Android routes | PASS — 35 assertions |
+| Real ENet multi-process gameplay | PASS — 25 assertions, three processes over loopback UDP |
+| Rendered ENet repeat | PASS — the same 25 assertions with real X11-rendered peers |
+| Native framebuffer and mobile UI | PASS — 20 assertions; framebuffer, viewport and root track actual pixels |
+| Native Linux release engine + PCK | PASS — X11 keyboard menu / move lab / select / fight / damage / pause / normal Quit; exit 0 |
+| Android export / payload / archive integrity | PASS — signed universal ARM64 + x86_64 APK; compiled V6 scripts and ten films |
+| Android signing / alignment / manifest | PASS — v2/v3 signatures, 16-KiB alignment, code 600 / version 0.6.0, API 24 minimum / 36 target, landscape; INTERNET + ACCESS_NETWORK_STATE |
+| Physical Android / Wi-Fi acceptance | NOT RUN — no physical devices attached; no native Android end-to-end success claimed |
+
+The source suites execute 1,135 distinct assertions, with the 25 network assertions
+also repeated under rendering (1,160 successful assertion executions). Hash,
+film and native-package checks are separate. Final logs contain no engine/script
+errors or leaked-instance warnings. The software X11 display's unsupported V-Sync
+warning is a known display limitation, not a device performance measurement.
+
+The native-resolution suite checks actual framebuffer image dimensions as well
+as the viewport/root at 960×540, 1280×720, 1920×1080, 2560×1440, 1280×800,
+1024×768 and 2400×1080. It checks stage aspect, live Options pixel readout,
+Android route removal, offline CPU and one nine-button touchpad. Godot Window.size
+must be used in resize tests: changing DisplayServer's low-level window size
+alone does not resize the engine framebuffer, which a framebuffer assertion caught.
+
+The network test launches a host, wrong-nonce client and then valid guest. It
+checks rejection/recovery, owned character selection, both-ready start, countdown
+input lock, guest move/light/projectile damage at the host, host damage at the
+guest, exact synchronized HP, shared pause votes, frozen time, matching best-of-three
+results, mutual rematch with a new epoch and host disconnect back to usable UI.
+Fixture KOs set low HP to exercise round transitions; this does not establish a
+human-played full network match. Tests use separate real processes and UDP,
+but do not establish physical Android/Wi-Fi, lossy Internet or carrier NAT behavior.
+The legacy shared-pad component layout remains tested in isolation for desktop
+reuse; Android's menus and match entry points prohibit local versus.
+
+Network testing caught and fixed unsafe peer replacement during an ENet callback,
+forced-disconnect bookkeeping, a paused guest's stale timer readout and an existing
+Android HUD footer allocation leak. Peer shutdown is deferred outside polling,
+rejection disconnects gracefully after its error response, pause sends an exact
+reliable state, and the footer is allocated only on desktop. Final headless and
+rendered runs have no corresponding errors/leaks. Countdown and paused controls
+are dropped on both sides; no delayed attack should escape into the next round.
+
+Native Linux smoke uses OS key injection and rendered screenshots outside the
+editor. Android checks validate the actual final APK's CRCs, libraries, films,
+compiled code, manifest, signature and alignment; Linux results are not presented
+as Android runtime results. The retained v0.4/v0.5 certificate signs V6 for in-place
+updates. The APK remains a sideload preview using a local development key.
+
+Still required: install this exact APK on two phones/tablets and test host/join,
+owned touch movement/attacks, background/pause/resume, result/rematch/disconnect,
+physical multitouch, Wi-Fi isolation, cutouts, audio, thermal behavior and native
+high-resolution frame rate. Native resolution can increase GPU load. The guest
+uses smoothed host snapshots without prediction/rollback; high latency will be
+felt. Prior cloud emulator limitations remain recorded below. All final logs,
+artifact checksum, source hashes and representative screenshots accompany V6.
+Published tags and APKs are retained; each future update must get a new version.
+
 # Full roster + interactive move lab v0.5.0 — 29 October 2026
 
 All ten fighters are playable in versus and CPU mode, with animated selection
