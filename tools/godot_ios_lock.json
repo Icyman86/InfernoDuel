@@ -1,0 +1,7 @@
+{
+  "version": "4.6.3",
+  "macos_archive": "Godot_v4.6.3-stable_macos.universal.zip",
+  "macos_sha512": "0155bbc8dcf179edab4ef08e3dbbd4480d7434ab1990cb3fb25517d453b1b65787c7fe6dfc8824b15ff25e1fdcec59e8584f765054106894fee00311868c3964",
+  "templates_archive": "Godot_v4.6.3-stable_export_templates.tpz",
+  "templates_sha512": "da606b61c10157844f8300172df374472665f95015495cb1a7cd132c40ede404faa96cc1016a4b9662db9909ddea69632c4948b2cd11163438dad4808881fb68"
+}

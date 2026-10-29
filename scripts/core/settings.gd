@@ -26,11 +26,11 @@ func _ready() -> void:
 func apply() -> void:
 	for entry in [["Master", master], ["Music", music], ["SFX", sfx]]:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(entry[0]), linear_to_db(maxf(0.0001, entry[1])))
-	if DisplayServer.get_name() != "headless" and not OS.has_feature("android"):
+	if DisplayServer.get_name() != "headless" and not GamePlatform.handheld():
 		get_window().mode = Window.MODE_FULLSCREEN if fullscreen else Window.MODE_WINDOWED
 
 func fit_device_resolution() -> void:
-	if DisplayServer.get_name() == "headless" or OS.has_feature("android") or fullscreen: return
+	if DisplayServer.get_name() == "headless" or GamePlatform.handheld() or fullscreen: return
 	var usable := DisplayServer.screen_get_usable_rect()
 	if usable.has_area():
 		get_window().size = usable.size

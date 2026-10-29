@@ -17,7 +17,7 @@ var option_origin := "menu"
 var modal: ConfirmationDialog
 var gallery_index := 0
 var touch_controls: TouchControls
-var touch_mode := OS.has_feature("android") or "--touch" in OS.get_cmdline_user_args()
+var touch_mode := GamePlatform.touch_enabled()
 var networked := false
 var network_driver: NetworkMatchDriver
 
@@ -41,6 +41,7 @@ func _ready() -> void:
 		touch_controls = TouchControls.new()
 		add_child(touch_controls)
 		touch_controls.pause_requested.connect(show_pause)
+		touch_controls.safe_area_changed.connect(_resize_stage)
 	show_menu()
 
 func _resize_stage() -> void:
@@ -125,7 +126,8 @@ func show_menu() -> void:
 	buttons.add_child(UI.button("STORY MODE",show_story))
 	buttons.add_child(UI.button("FIGHTERS",show_gallery))
 	buttons.add_child(UI.button("OPTIONS",func(): show_options("menu")))
-	buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
+	if not OS.has_feature("ios"):
+		buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
 	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  V9",14,UI.MUTED),920,677,320,28))

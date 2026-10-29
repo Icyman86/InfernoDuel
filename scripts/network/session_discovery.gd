@@ -13,6 +13,25 @@ var started := 0.0
 var retry_at := 0.0
 var destinations := PackedStringArray(["255.255.255.255"])
 var replies: Dictionary = {}
+var destination_cursor := 0
+
+static func wifi_destinations(addresses: PackedStringArray) -> PackedStringArray:
+	# iOS broadcast needs a restricted multicast entitlement. Probe only the
+	# nearby private /24 over ordinary unicast, without special signing rights.
+	var prefixes := PackedStringArray()
+	for address in addresses:
+		if not address.is_valid_ip_address() or address.contains(":"): continue
+		var bytes := address.split(".")
+		var private_ip := bytes[0] == "10" or (bytes[0] == "192" and bytes[1] == "168") or (bytes[0] == "172" and int(bytes[1]) >= 16 and int(bytes[1]) <= 31)
+		if not private_ip: continue
+		var prefix := ".".join(bytes.slice(0,3))+"."
+		if prefix not in prefixes and prefixes.size() < 2: prefixes.append(prefix)
+	var result := PackedStringArray()
+	for prefix in prefixes:
+		for host in range(1,255):
+			var address := prefix+str(host)
+			if address not in addresses: result.append(address)
+	return result
 
 func stop() -> void:
 	if socket: socket.close()
@@ -35,16 +54,20 @@ func advertise(code: String, port: int, token: String) -> Error:
 
 func find(code: String) -> Error:
 	stop()
+	if OS.has_feature("ios"):
+		destinations = wifi_destinations(IP.get_local_addresses())
+		if destinations.is_empty(): return ERR_UNAVAILABLE
 	socket = PacketPeerUDP.new()
 	var error := socket.bind(0, "0.0.0.0", 8192)
 	if error != OK:
 		stop()
 		return error
-	socket.set_broadcast_enabled(true)
+	socket.set_broadcast_enabled(not OS.has_feature("ios"))
 	requested = code
 	query = Crypto.new().generate_random_bytes(8).hex_encode()
 	started = Time.get_ticks_msec()/1000.0
 	retry_at = 0.0
+	destination_cursor = 0
 	return OK
 
 func poll() -> Dictionary:
@@ -53,7 +76,10 @@ func poll() -> Dictionary:
 	if requested != "" and now >= retry_at:
 		retry_at = now + .65
 		var request := JSON.stringify({"app":MAGIC,"room":requested,"query":query}).to_utf8_buffer()
-		for address in destinations:
+		# Bound discovery traffic and frame work even with a full private subnet.
+		for _target in mini(64,destinations.size()):
+			var address := destinations[destination_cursor % destinations.size()]
+			destination_cursor += 1
 			socket.set_dest_address(address,PORT)
 			socket.put_packet(request)
 	# Bound work per frame and ignore malformed / oversized datagrams.

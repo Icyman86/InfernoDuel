@@ -1,6 +1,7 @@
 .godot/
 builds/*
 !builds/.gitkeep
+!builds/.gdignore
 *.tmp
 __pycache__/
 *.pyc

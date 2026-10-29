@@ -20,6 +20,7 @@ window/stretch/mode="disabled"
 window/stretch/aspect="expand"
 window/dpi/allow_hidpi=true
 window/handheld/orientation=0
+window/handheld/orientation.ios=4
 
 [input_devices]
 pointing/emulate_mouse_from_touch=true
@@ -27,6 +28,8 @@ pointing/emulate_mouse_from_touch=true
 [rendering]
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.ios="mobile"
+rendering_device/driver.ios="metal"
 textures/default_filters/use_nearest_mipmap_filter=false
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.043, 0.035, 0.067, 1)

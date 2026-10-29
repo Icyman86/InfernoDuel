@@ -1,3 +1,46 @@
+# iPhone-port van V9 / 0.9.0 — 29 October 2026
+
+Een iOS-preset voor ARM64, iOS 15+, build 900 is toegevoegd. Godot 4.6.3 exporteert
+het echte Xcode-project en 100-MiB PCK op deze Linux-host, met de officiële,
+checksum-gecontroleerde iOS-engine-template. De PCK-verifier controleert iedere
+bestands-MD5, tien fighters/films, 69 moves, 49 actieclips en gecompileerde
+platform/touch/network-code; project/plist-checks controleren versie, device-engine,
+landschap en de local-network-prompt. Dit is nog geen gebouwde of geteste iPhone-app.
+
+GamePlatform behandelt iOS en Android als handheld: touch, geen lokale versus,
+geen desktop-window/fullscreen-operaties, native pixels en safe areas. iOS gebruikt
+Metal/Mobile-rendering en beide landschaporiëntaties. Wijzigende safe areas bouwen
+controls opnieuw op en passen de logische arena aan. App background/focusverlies
+pauzeert de fight. iOS toont geen desktop Quit-knop of Android Back-instructie.
+
+SessionDiscovery gebruikt op iOS gewone unicast naar maximaal twee nabijgelegen
+private /24-netwerken, 64 doelen per 650 ms, zodat geen beperkt multicast-entitlement
+nodig is. De code/nonce/versiecontrole blijft gelijk. Dit vindt niet iedere mogelijke
+LAN-indeling en omzeilt geen clientisolatie of internetrouters. Met de bestaande
+Android V9-APK wordt Android als host aanbevolen. Tests oefenen echte unicast-
+request/reply-sockets op loopback; geen fysieke iPhone-Wi-Fi-acceptatie wordt geclaimd.
+
+De aparte GitHub Actions workflow bouwt op macos-15 met Xcode, zonder Apple
+credentials, een unsigned device IPA. Publicatie gebeurt alleen als de echte
+ARM64 iPhoneOS executable, versie/plist, volledige ZIP-CRCs en alle PCK-bestanden
+zijn gevalideerd. AltStore ondertekent op de computer van de gebruiker. Gratis
+Apple-accounts vragen normaal elke zeven dagen om vernieuwen; de Nederlandstalige
+handleiding behandelt Windows/Mac, developer trust/mode en netwerktoestemming.
+Native iPhone-installatie, Metal-beelden, audio, notches/rotatie, prestaties en
+fysieke twee-device sessies zijn niet getest in deze Linux-omgeving.
+
+Voor deze port zijn 1.004 broncontroles opnieuw geslaagd: core/art/expansion/roster
+896, iOS/mobile/unicast 25, echte drie-processen netwerk-integratie 25, touch 38
+en native-resolutielayouts 20. Acht originele hashes en tien volledige films zijn
+ook opnieuw gecontroleerd. De export bevat geen tests, docs of buildbestanden.
+Een builds/.gdignore voorkomt dat gegenereerde Xcode-iconen opnieuw als game-
+assets worden geïmporteerd bij een volgende export.
+
+Deze port houdt versie 0.9.0 zoals gevraagd. Het bestaande Android-artifact,
+ondertekening, tag en alle oorspronkelijke artwork blijven ongewijzigd.
+
+---
+
 # V9 whole attacks, planted movement and ultimate readiness — 29 October 2026
 
 V9 / 0.9.0, Android code 900. All ten fighters now render continuous whole-attack

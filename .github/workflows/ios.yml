@@ -1,0 +1,59 @@
+name: iPhone V0.9 sideload build
+
+on:
+  push:
+    tags: ['v*-ios']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  iphone:
+    runs-on: macos-15
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - name: Install checksum-pinned Godot editor and iOS template
+        run: python3 tools/setup_ios_ci.py
+      - name: Build real device app and unsigned sideload IPA
+        run: ./tools/build_ios.sh 2>&1 | tee builds/ios-build.log
+      - name: Upload validated IPA and build evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: InfernoDuel-iPhone-0.9.0
+          path: |
+            builds/ios/*-unsigned.ipa
+            builds/ios/SHA256SUMS
+            builds/ios-build.log
+            docs/IPHONE_INSTALLATIE.md
+          if-no-files-found: error
+      - name: Publish downloadable sideload build
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            builds/ios/*-unsigned.ipa builds/ios/SHA256SUMS \
+            docs/IPHONE_INSTALLATIE.md \
+            --title 'Inferno Duel 0.9 — iPhone sideload preview' \
+            --notes-file docs/IOS_RELEASE_NOTES.md \
+            --prerelease --verify-tag
+      - name: Retain failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iPhone-build-diagnostics
+          path: builds/ios-build.log

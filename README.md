@@ -42,6 +42,27 @@ The APK is stored in Git LFS because it includes both native engines and all ten
 intro movies. A source checkout needs `git lfs pull` to fetch it; the download
 link above serves the APK directly. Linux play and keyboard controls remain supported.
 
+## iPhone 0.9 — zonder App Store
+
+Voor iPhone/iPad is een iOS 15+ exportprofiel toegevoegd met Metal-rendering,
+native resolutie, touchbediening en dezelfde V9-content. De aparte
+[iPhone-buildworkflow](https://github.com/Icyman86/InfernoDuel/actions/workflows/ios.yml)
+bouwt op een macOS/Xcode-runner een echte ARM64-app en unsigned IPA.
+Na een geslaagde tagbuild staat het bestand bij de
+[iOS 0.9 release](https://github.com/Icyman86/InfernoDuel/releases/tag/v0.9.0-ios).
+Een Xcode-export of broncode-zip is geen installeerbare IPA.
+
+Installeer met AltStore Classic + AltServer op Windows of Mac en je eigen Apple
+Account. Een gratis account vraagt normaal elke zeven dagen om vernieuwen.
+Geen jailbreak of betaald account vereist; alleen het IPA-bestand in Safari
+openen werkt niet. Volg de [Nederlandse installatiehandleiding](docs/IPHONE_INSTALLATIE.md).
+
+iPhone gebruikt voor sessiecodes beperkte unicast-discovery op maximaal twee
+nabije private /24-netwerken, zonder een betaald multicast-entitlement. Gebruik
+Android als host bij de bestaande Android V9-APK. Native iPhone-installatie,
+Metal-rendering, echte safe areas, wifi en prestaties zijn nog niet gevalideerd.
+De bestaande Android APK/tag worden voor deze port niet overschreven.
+
 ## Earlier Linux download — v0.3.0
 
 [Download Linux v0.3.0](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.3.0/releases/v0.3.0/InfernoDuel-Linux-v0.3.tar.xz)

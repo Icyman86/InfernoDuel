@@ -2,6 +2,7 @@ class_name TouchControls
 extends Control
 ## Fixed thumbsticks retain finger ownership while attack contacts slide/release.
 signal pause_requested
+signal safe_area_changed
 var solo := true
 var active := false
 var buttons: Array[Dictionary] = []
@@ -13,10 +14,11 @@ var local_team := 0
 var match_state: DuelMatch
 var glow_clock := 0.0
 const DEADZONE := .17
+var previous_safe_rect := Rect2()
 
 static func safe_rect(viewport: Viewport) -> Rect2:
 	var rect := viewport.get_visible_rect()
-	if OS.has_feature("android"):
+	if GamePlatform.handheld():
 		var safe := Rect2(DisplayServer.get_display_safe_area())
 		if safe.has_area():
 			var inverse := viewport.get_screen_transform().affine_inverse()
@@ -43,7 +45,8 @@ func rebuild() -> void:
 	release_all()
 	buttons.clear()
 	sticks.clear()
-	var safe := safe_rect(get_viewport()).grow(-18)
+	previous_safe_rect = safe_rect(get_viewport())
+	var safe := previous_safe_rect.grow(-18)
 	var unit := minf(safe.size.x/1244.0,safe.size.y/684.0) * (1.0 if solo else .62)
 	for p in (1 if solo else 2):
 		var region := safe
@@ -75,6 +78,9 @@ func release_all() -> void:
 	queue_redraw()
 
 func _process(_delta: float) -> void:
+	if GamePlatform.handheld() and safe_rect(get_viewport()) != previous_safe_rect:
+		rebuild()
+		safe_area_changed.emit()
 	if not is_instance_valid(match_state) or not match_state.stopped: glow_clock += _delta
 	if input_generation != InputRouter.generation: release_all()
 	if visible: queue_redraw()
