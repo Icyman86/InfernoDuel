@@ -35,6 +35,7 @@ var local_network_slot := -1
 var chrome: CombatChrome
 var portraits: Array[Control] = []
 var timer_panel: PanelContainer
+var ultimate_banners: Array[UltimateBanner] = []
 var footer: Control
 
 func _ready() -> void:
@@ -104,6 +105,10 @@ func _make_hud() -> void:
 		var combo_label := UI.label("",22,c)
 		hud.add_child(UI.place(combo_label,95 if i == 0 else 780,163,405,75))
 		combos.append(combo_label)
+		var ultimate_banner := UltimateBanner.new()
+		ultimate_banner.actor = fighters[i]
+		hud.add_child(UI.place(ultimate_banner,95 if i == 0 else 780,158,405,100))
+		ultimate_banners.append(ultimate_banner)
 	timer_panel = UI.panel()
 	var timer_style := UI.style(Color("0d1726"),Color("334a62"),1)
 	timer_style.set_corner_radius_all(18)
@@ -149,6 +154,7 @@ func layout_hud(safe: Rect2) -> void:
 		meters[i].size.x = bar_width+8
 		round_tokens[i].position.x = side_width-137 if i == 0 else width*.5+109
 		combos[i].position.x = 95 if i == 0 else width-500
+		ultimate_banners[i].position.x = combos[i].position.x
 	timer_panel.position.x = width*.5-63
 	timer_label.position.x = width*.5-65
 	round_label.position.x = width*.5-72
@@ -279,6 +285,9 @@ func _resolve_bodies() -> void:
 func finish_round() -> void:
 	if phase != "fight": return
 	phase = "round_over"
+	for fighter in fighters:
+		fighter.ultimate_time = 0
+		fighter.ultimate_move = ""
 	phase_time = 2.0
 	InputRouter.clear()
 	var a := fighters[0].hp
@@ -330,6 +339,10 @@ func update_hud() -> void:
 		if fighters[i].meter >= 100: info += "ULTIMATE READY"
 		elif fighters[i].special_cooldown > 0: info += "SPECIAL %.1fs" % fighters[i].special_cooldown
 		combos[i].text = info
+		var active := phase == "fight" and fighters[i].ultimate_time > 0
+		ultimate_banners[i].visible = active
+		combos[i].position.y = 266 if active else 163
+		ultimate_banners[i].refresh()
 
 func set_stopped(value: bool) -> void:
 	stopped = value

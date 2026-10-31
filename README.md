@@ -7,6 +7,16 @@ Based on the supplied v1.1 Word specification and Linux starter package.
 The original design documents remain in `docs/`; the current implementation
 and its limits are described here and in `docs/TEST_LOG.md`.
 
+## Android V14 — nieuwe arena's en ultimate power
+
+[Download de aparte V14-preview-app](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.14.0-android-preview/releases/android-v0.14.0/InfernoDuel-Android-v0.14.0-preview.apk).
+Installeert **naast V11**, onder de naam Inferno Duel V14 Preview.
+
+Na character select: kies Infernal Citadel, **Nachtelvenbos — Hart van het Bos**,
+**Spinegrins ruimteschip — Levende Brug**, of **RANDOM**. De host kiest in een sessie.
+Een ultimate toont nu een grote melding en drie seconden aura/ACTIVE-status,
+met +20% schade op vervolgaanvallen. [Beelden en details](releases/android-v0.14.0/README.md).
+
 ## Linux V13 — 3D Fighter Gallery
 
 [Download Linux V13](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.13.0-linux-gallery/releases/linux-v0.13.0/InfernoDuel-Linux-v0.13.0.tar.xz).

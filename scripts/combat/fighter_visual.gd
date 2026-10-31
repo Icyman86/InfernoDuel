@@ -154,6 +154,9 @@ func _update_pose(delta := 0.0) -> void:
 		turn_age += delta
 		shown_facing = facing_target
 		scale.x = shown_facing
+		var aura := 1.0 if actor.ultimate_time > 0 else 0.0
+		material_fx.set_shader_parameter("ultimate_glow",aura)
+		material_fx.set_shader_parameter("ultimate_color",Color(actor.profile.get("accent","ffd468")))
 		var flash := minf(1.0,actor.flash/.12)
 		material_fx.set_shader_parameter("hit_flash",flash)
 		previous_material.set_shader_parameter("hit_flash",flash)

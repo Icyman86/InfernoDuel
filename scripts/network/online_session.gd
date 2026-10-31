@@ -21,6 +21,7 @@ var selected: Array[int] = [0,1]
 var ready_players: Array[bool] = [false,false]
 var pause_flags: Array[bool] = [false,false]
 var rematch_flags: Array[bool] = [false,false]
+var selected_arena := "citadel"
 var epoch := 0
 var latest_snapshot: Dictionary = {}
 var snapshot_revision := 0
@@ -117,6 +118,7 @@ func close() -> void:
 	token = ""
 	last_error = ""
 	selected.assign([0,1])
+	selected_arena = "citadel"
 	ready_players.assign([false,false])
 	pause_flags.assign([false,false])
 	rematch_flags.assign([false,false])
@@ -239,7 +241,10 @@ func _ready_up(slot: int, value: bool) -> void:
 	if phase != "lobby": return
 	ready_players[slot] = value
 	_publish_lobby()
-	if ready_players[0] and ready_players[1]: _begin_match()
+	if ready_players[0] and ready_players[1]:
+		phase = "arena"
+		_arena_selection.rpc_id(opponent)
+		lobby_changed.emit()
 
 func _publish_lobby() -> void:
 	_lobby.rpc_id(opponent, selected, ready_players)
@@ -252,6 +257,17 @@ func _lobby(indices: Array, flags: Array) -> void:
 	ready_players.assign(flags)
 	lobby_changed.emit()
 
+@rpc("authority", "call_remote", "reliable")
+func _arena_selection() -> void:
+	if local_slot != 1 or phase != "lobby": return
+	phase = "arena"
+	lobby_changed.emit()
+
+func start_arena(id: String) -> void:
+	if local_slot != 0 or phase != "arena" or not ArenaCatalog.valid(id): return
+	selected_arena = id
+	_begin_match()
+
 func _begin_match() -> void:
 	epoch += 1
 	phase = "fight"
@@ -259,13 +275,14 @@ func _begin_match() -> void:
 	rematch_flags.assign([false,false])
 	clear_inputs()
 	last_input_time = now()
-	_start.rpc_id(opponent, selected, epoch)
+	_start.rpc_id(opponent, selected, epoch, selected_arena)
 	match_started.emit(selected.duplicate(), epoch)
 
 @rpc("authority", "call_remote", "reliable")
-func _start(indices: Array, generation: int) -> void:
-	if local_slot != 1 or generation <= epoch or phase not in ["lobby", "finished"]: return
+func _start(indices: Array, generation: int, arena_id: String) -> void:
+	if local_slot != 1 or generation <= epoch or phase not in ["arena", "finished"] or not ArenaCatalog.valid(arena_id): return
 	selected.assign(indices)
+	selected_arena = arena_id
 	epoch = generation
 	phase = "fight"
 	pause_flags.assign([false,false])

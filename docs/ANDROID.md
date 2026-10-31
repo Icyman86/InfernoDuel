@@ -1,3 +1,9 @@
+# V14 / 0.14.0 — aparte arena/ultimate-preview
+
+Zie [V14 Android](V14_ANDROID.md) voor de gekozen maps, random/host-keuze,
+ultimate power en het aparte preview-pakket dat naast V11 installeert.
+De eerdere signing- en releasegegevens hieronder blijven historische V11/V10-informatie.
+
 # V11 / 0.11.0 portrait update
 
 VersionCode 1100; same signing certificate and installation requirements as V10.

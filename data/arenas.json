@@ -1,0 +1,5 @@
+{"arenas":[
+ {"id":"citadel","name":"Infernal Citadel","description":"Molten depths and broken stone.","path":"assets/arenas/infernal_citadel.png","accent":"f2a754"},
+ {"id":"nightelf_forest","name":"Nachtelvenbos","description":"Hart van het Bos · glowing mushrooms and crimson leaves.","path":"assets/arenas/nightelf_forest.png","accent":"bd75ff"},
+ {"id":"living_ship","name":"Spinegrins ruimteschip","description":"Levende Brug · green veins and a living red hull.","path":"assets/arenas/living_ship.png","accent":"8ae35b"}
+]}

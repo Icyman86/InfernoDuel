@@ -11,6 +11,7 @@ var backdrop: Node2D
 var match_node: DuelMatch
 var roster: Array = []
 var selected: Array[int] = [0,1]
+var arena_choice := "citadel"
 var solo := false
 var route := "menu"
 var option_origin := "menu"
@@ -96,6 +97,7 @@ func show_menu() -> void:
 	networked = false
 	end_match()
 	route = "menu"
+	if is_instance_valid(backdrop): backdrop.choose_arena("citadel")
 	new_screen()
 	var shade := ColorRect.new()
 	shade.color = Color(0.012,0.008,0.023,0.62)
@@ -138,7 +140,7 @@ func show_menu() -> void:
 		buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("V13 · 3D FIGHTER GALLERY",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("V14 · NEW ARENAS + ULTIMATE POWER",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	if touch_mode and not cpu:
@@ -171,6 +173,10 @@ func show_online() -> void:
 	stage.add_child(connection)
 
 func _network_lobby_changed() -> void:
+	if OnlineSession.phase == "arena":
+		networked = true
+		show_arena()
+		return
 	if route == "online" and OnlineSession.phase == "lobby":
 		networked = true
 		clear_screen()
@@ -195,35 +201,30 @@ func _network_match_started(indices: Array[int], _generation: int) -> void:
 	networked = true
 	solo = false
 	selected.assign(indices)
+	arena_choice = OnlineSession.selected_arena
 	start_match()
 
 func _network_disconnected(_reason: String) -> void:
-	if route in ["online","network_select","fight","pause","options","result"]:
+	if route in ["online","network_select","arena","fight","pause","options","result"]:
 		networked = false
 		show_online()
 
 func show_arena() -> void:
 	route = "arena"
-	new_screen()
-	screen.add_child(UI.place(UI.label("CHOOSE ARENA",40,UI.IVORY,true),40,65,1200,70))
-	for i in 2:
-		var portrait := FighterPortrait.new()
-		portrait.setup(roster[selected[i]])
-		screen.add_child(UI.place(portrait,110 if i == 0 else 980,230,190,220))
-	var panel := UI.panel()
-	UI.place(panel,340,230,600,220)
-	screen.add_child(panel)
-	var box := VBoxContainer.new()
-	panel.add_child(box)
-	box.add_child(UI.label("01 / GLADIATOR CRUCIBLE",30,UI.GOLD,true))
-	box.add_child(UI.label("3D stone ring · timed clamp traps · throw escapes",20,UI.IVORY))
-	box.add_child(UI.label("60 SECONDS · FIRST TO TWO ROUNDS",18,UI.MUTED))
-	box.add_child(UI.label("%s   VS   %s" % [roster[selected[0]].display_name,roster[selected[1]].display_name],22,UI.CYAN))
-	var start := UI.button("ENTER THE ARENA",start_match,true)
-	screen.add_child(UI.place(start,440,510,400,56))
-	start.grab_focus()
-	screen.add_child(UI.place(UI.button("BACK",func(): show_select(solo)),440,586,400,46))
-	screen.add_child(UI.place(UI.label("TAP ENTER THE ARENA TO FIGHT" if touch_mode else "ENTER / F  fight     ·     ESC  back",18,UI.MUTED),300,659,680,30))
+	clear_screen()
+	var picker := ArenaSelect.new()
+	picker.selection = arena_choice
+	picker.can_choose = not networked or OnlineSession.local_slot == 0
+	picker.chosen.connect(func(id: String):
+		if networked: OnlineSession.start_arena(id)
+		else:
+			arena_choice = id
+			start_match())
+	picker.back_requested.connect(func():
+		if networked: show_menu()
+		else: show_select(solo))
+	screen = picker
+	stage.add_child(screen)
 
 func start_match() -> void:
 	if touch_mode and not solo and not networked:
@@ -232,6 +233,7 @@ func start_match() -> void:
 	clear_screen()
 	end_match()
 	route = "fight"
+	backdrop.choose_arena(arena_choice)
 	if touch_controls:
 		touch_controls.solo = true if networked else solo
 		touch_controls.local_team = OnlineSession.local_slot if networked else 0
@@ -239,7 +241,7 @@ func start_match() -> void:
 	match_node = MatchScene.instantiate()
 	match_node.profiles = [roster[selected[0]],roster[selected[1]]]
 	match_node.solo = solo
-	match_node.modern_rules = not touch_mode and not networked
+	match_node.modern_rules = not touch_mode and not networked and arena_choice == "citadel"
 	match_node.local_network_slot = OnlineSession.local_slot if networked else -1
 	if networked:
 		if OnlineSession.local_slot == 0: match_node.completed.connect(OnlineSession.complete_match)
@@ -424,7 +426,7 @@ func _input(event: InputEvent) -> void:
 		screen.handle_key(key)
 		get_viewport().set_input_as_handled()
 	elif route == "arena" and (key == KEY_F or key == KEY_ENTER):
-		start_match()
+		screen.confirm()
 		get_viewport().set_input_as_handled()
 	elif route == "fight" and key == KEY_F3:
 		match_node.toggle_hitboxes()
@@ -454,7 +456,9 @@ func go_back() -> void:
 			else: show_menu()
 		"select", "story", "gallery", "online", "network_select": show_menu()
 		"intro": show_gallery()
-		"arena": show_select(solo)
+		"arena":
+			if networked: show_menu()
+			else: show_select(solo)
 		"menu": confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())
 
 func _notification(what: int) -> void:
@@ -481,7 +485,7 @@ func _controller_action(player: int, action: String) -> void:
 		if networked: p = OnlineSession.local_slot
 		var codes := {"left":KEY_A if p == 0 else KEY_LEFT,"right":KEY_D if p == 0 else KEY_RIGHT,"up":KEY_W if p == 0 else KEY_UP,"down":KEY_S if p == 0 else KEY_DOWN,"accept":KEY_F if p == 0 else KEY_I,"ready":KEY_F if p == 0 else KEY_I,"undo":KEY_G if p == 0 else KEY_O}
 		if codes.has(action): screen.handle_key(codes[action])
-	elif route == "arena" and action == "accept": start_match()
+	elif route == "arena" and action == "accept": screen.confirm()
 	elif route != "fight":
 		var focused := get_viewport().gui_get_focus_owner()
 		if focused is Slider and action in ["left","right"]:

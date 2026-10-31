@@ -73,6 +73,9 @@ func _process(delta: float) -> void:
 		OnlineSession.choose(0 if role == "host" else 3)
 		# These ordered RPCs use the normal selection and ready protocol.
 		OnlineSession.ready_up(true)
+	if OnlineSession.phase == "arena" and once("arena"):
+		check(game.route == "arena","ready players reach arena selection before countdown")
+		if role == "host": OnlineSession.start_arena("living_ship")
 	if is_instance_valid(game.match_node) and OnlineSession.epoch == 1:
 		var duel: DuelMatch = game.match_node
 		if duel.phase == "countdown":
@@ -83,6 +86,7 @@ func _process(delta: float) -> void:
 				check(duel.fighters[1].position.x == 890 and duel.fighters[0].hp == DuelFighter.MAX_HEALTH,"guest input cannot move or attack during the host countdown")
 		if duel.phase == "fight" and fight_started < 0:
 			fight_started = elapsed
+			check(OnlineSession.selected_arena == "living_ship" and game.backdrop.arena_id == "living_ship","host-selected arena is the same on both real peers")
 			check(game.networked and not duel.solo,"session starts a genuine two-device fight without CPU")
 		if fight_started >= 0:
 			var t := elapsed - fight_started

@@ -197,4 +197,4 @@ func sync(delta: float, paused: bool) -> void:
 		elbows[i].rotation.z = bend
 		legs[i].rotation.z = wave*.52 + (attack_weight*.85 if heavy and i == 1 else -.06)
 		knees[i].rotation.z = -.15-maxf(0,-wave)*.7
-	accent.emission_energy_multiplier = 3.2 if actor.meter >= 100 else 1.2
+	accent.emission_energy_multiplier = 4.5 if actor.ultimate_time > 0 else (3.2 if actor.meter >= 100 else 1.2)

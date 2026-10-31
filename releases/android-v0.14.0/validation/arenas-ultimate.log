@@ -1,0 +1,182 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS Android readied character selection goes to map picker
+PASS picker contains existing map, both selected designs and RANDOM
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random returns an available arena
+PASS random can select each of the three available maps
+PASS only resolved known arena IDs are accepted for networking
+PASS actual map picker loads citadel
+PASS map has high-resolution artwork: citadel
+PASS ultimate starts with full meter on citadel
+PASS activation displays a large ultimate banner
+PASS character aura is visible above the arena background
+PASS initial ultimate keeps its catalog damage
+PASS subsequent heavy is boosted 20% with rounding
+PASS existing empowerment does not stack multiplicatively with ultimate power
+PASS pause freezes the boost and its visual timer
+PASS ultimate aura and power expire after three seconds of simulation
+PASS normal damage returns after expiry
+PASS failed ultimate attempt neither glows nor grants power
+PASS round end clears ultimate effects
+PASS round reset removes stale power and announcements
+PASS actual map picker loads nightelf_forest
+PASS map has high-resolution artwork: nightelf_forest
+PASS ultimate starts with full meter on nightelf_forest
+PASS activation displays a large ultimate banner
+PASS character aura is visible above the arena background
+PASS initial ultimate keeps its catalog damage
+PASS subsequent heavy is boosted 20% with rounding
+PASS existing empowerment does not stack multiplicatively with ultimate power
+PASS pause freezes the boost and its visual timer
+PASS ultimate aura and power expire after three seconds of simulation
+PASS normal damage returns after expiry
+PASS failed ultimate attempt neither glows nor grants power
+PASS round end clears ultimate effects
+PASS round reset removes stale power and announcements
+PASS actual map picker loads living_ship
+PASS map has high-resolution artwork: living_ship
+PASS ultimate starts with full meter on living_ship
+PASS activation displays a large ultimate banner
+PASS character aura is visible above the arena background
+PASS initial ultimate keeps its catalog damage
+PASS subsequent heavy is boosted 20% with rounding
+PASS existing empowerment does not stack multiplicatively with ultimate power
+PASS pause freezes the boost and its visual timer
+PASS ultimate aura and power expire after three seconds of simulation
+PASS normal damage returns after expiry
+PASS failed ultimate attempt neither glows nor grants power
+PASS round end clears ultimate effects
+PASS round reset removes stale power and announcements
+PASS guest snapshot restores ultimate aura time and announcement
+PASS guest cannot force a match or pick a different arena
+ARENAS ULTIMATE RESULT: 176 passed, 0 failed

@@ -51,5 +51,9 @@ with zipfile.ZipFile(apk) as archive:
         assert len(data['animations']['walk']['frames']) == 12
         assert len(data['animations']['heavy']['frames']) == 12
         assert data['animations']['heavy']['contact_frame'] == 6
+    arenas = json.loads(archive.read('assets/data/arenas.json'))['arenas']
+    assert {a['id'] for a in arenas} == {'citadel','nightelf_forest','living_ship'}
+    for script in ['scripts/core/arena_catalog','scripts/ui/arena_select','scripts/combat/ultimate_aura','scripts/ui/ultimate_banner']:
+        assert f'assets/{script}.gdc' in names, f'Missing V14 feature {script}'
     assert not any(name.startswith(("assets/tests/", "assets/releases/", "assets/builds/")) for name in names)
-print(f"APK PAYLOAD PASS: ARM64 + x86_64, V10 full-surface HUD, 240 drawn poses, ten half-body portraits and glowing ultimate UI, ten playable fighters, 69 moves, touch ({apk.stat().st_size} bytes)")
+print(f"APK PAYLOAD PASS: ARM64 + x86_64, V14 arena selection and ultimate power, full-surface HUD, 240 drawn poses, ten half-body portraits and glowing ultimate UI, ten playable fighters, 69 moves, touch ({apk.stat().st_size} bytes)")

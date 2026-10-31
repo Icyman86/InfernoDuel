@@ -172,7 +172,8 @@ func _draw() -> void:
 		var color := UI.CYAN if (b.player+local_team)%2 == 0 else UI.ORANGE
 		if b.action == "ultimate": color = UI.GOLD
 		var lock := cooldown(b)
-		if b.action == "ultimate" and fighter_for(b.player) and lock == 0:
+		var ultimate_active: bool = b.action == "ultimate" and fighter_for(b.player) != null and fighter_for(b.player).ultimate_time > 0
+		if b.action == "ultimate" and fighter_for(b.player) and (lock == 0 or ultimate_active):
 			var pulse := .65+.35*sin(glow_clock*5.5)
 			for layer in range(4,0,-1):
 				draw_circle(b.center,b.radius+layer*3,Color(UI.GOLD,.035*pulse))
@@ -180,13 +181,16 @@ func _draw() -> void:
 		draw_circle(b.center,b.radius+5,Color(.01,.02,.04,.3))
 		draw_circle(b.center,b.radius,Color(color,.6) if down else Color(.035,.065,.10,.85))
 		draw_arc(b.center,b.radius,0,TAU,64,Color(color,.85 if lock == 0 else .28),2,true)
-		if lock > 0:
+		if ultimate_active:
+			draw_arc(b.center,b.radius-5,-PI/2,-PI/2+TAU*fighter_for(b.player).ultimate_time/DuelFighter.ULTIMATE_AURA_DURATION,48,UI.GOLD,4,true)
+		elif lock > 0:
 			draw_arc(b.center,b.radius-5,-PI/2,-PI/2+TAU*(1-lock),48,color,3,true)
 		var text: String = b.label
 		if b.action == "ultimate" and fighter_for(b.player): text = "%d%%" % fighter_for(b.player).meter if lock > 0 else "ULT"
+		if ultimate_active: text = "ACTIVE"
 		var font_size := maxi(11,int(b.radius*.35))
 		var extent := UI.BODY.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size)
-		draw_string(UI.BODY,b.center+Vector2(-extent.x/2,UI.BODY.get_ascent(font_size)*.35),text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,UI.IVORY if lock == 0 else UI.MUTED)
+		draw_string(UI.BODY,b.center+Vector2(-extent.x/2,UI.BODY.get_ascent(font_size)*.35),text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,UI.GOLD if ultimate_active else (UI.IVORY if lock == 0 else UI.MUTED))
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and is_inside_tree(): release_all()

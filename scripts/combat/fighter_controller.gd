@@ -3,6 +3,10 @@ extends Node2D
 signal projectile_requested(fighter: DuelFighter, attack: AttackData)
 const MAX_HEALTH := 200
 const RECEIVED_METER_RATIO := 0.35
+const ULTIMATE_AURA_DURATION := 3.0
+const ULTIMATE_POWER_MULTIPLIER := 1.2
+var ultimate_time := 0.0
+var ultimate_move := ""
 const FLOOR := 590.0
 const LEFT := 70.0
 const RIGHT := 1210.0
@@ -79,6 +83,9 @@ func _ready() -> void:
 		rush.damage = 18
 		rush.animation = "heavy"
 		moves[rush.id] = rush
+	var aura := UltimateAura.new()
+	aura.actor = self
+	add_child(aura)
 	visual = FighterVisual.new()
 	visual.profile = profile
 	visual.actor = self
@@ -86,6 +93,8 @@ func _ready() -> void:
 	add_child(visual)
 
 func reset_at(x: float, keep_meter := false) -> void:
+	ultimate_time = 0
+	ultimate_move = ""
 	commands.reset()
 	command_notice = ""
 	notice_time = 0
@@ -128,6 +137,7 @@ func grounded() -> bool:
 	return position.y >= FLOOR - 0.1
 
 func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
+	ultimate_time = maxf(0,ultimate_time-delta)
 	grapple_pose = maxf(0,grapple_pose-delta)
 	throw_pose = maxf(0,throw_pose-delta)
 	grab_cooldown = maxf(0,grab_cooldown-delta)
@@ -236,7 +246,10 @@ func begin_attack(id: String) -> bool:
 	if id.begins_with("v12_"):
 		command_notice = move.display_name.to_upper()
 		notice_time = 1.2
-	if empower_time > 0 and attack.damage > 0: attack.damage = int(ceil(attack.damage * 1.2))
+	# The aura boosts follow-ups, preserving the initial super's own move data.
+	# Existing empowerment is the same tier and never stacks into 44% damage.
+	if (empower_time > 0 or (ultimate_time > 0 and move.slot != "ultimate")) and attack.damage > 0:
+		attack.damage = int(ceil(attack.damage * ULTIMATE_POWER_MULTIPLIER))
 	attack_time = 0.0
 	hit_connected = false
 	emitted = false
@@ -246,7 +259,10 @@ func begin_attack(id: String) -> bool:
 		buffered = ""
 		immunity = maxf(immunity, move.invulnerable_time)
 	if attack.launch < 0 and grounded(): velocity.y = attack.launch
-	if move.slot == "ultimate": Sound.play("ultimate")
+	if move.slot == "ultimate":
+		ultimate_time = ULTIMATE_AURA_DURATION
+		ultimate_move = move.display_name
+		Sound.play("ultimate")
 	return true
 
 func is_active() -> bool:
@@ -283,6 +299,9 @@ func receive_hit(move: AttackData, attacker_x: float) -> bool:
 	var damage := maxi(1, int(ceil(move.damage * 0.25))) if blocked else move.damage
 	if armor_time > 0: damage = maxi(1, int(ceil(damage * 0.5)))
 	hp = maxi(0, hp - damage)
+	if hp == 0:
+		ultimate_time = 0
+		ultimate_move = ""
 	flash = 0.12
 	if blocked:
 		meter = mini(100, meter + 4)

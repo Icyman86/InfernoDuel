@@ -719,6 +719,22 @@
       "authoring_script": "tools/modeling/build_roster.py",
       "date": "2026-10-31",
       "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/arenas/nightelf_forest.png",
+      "sha256": "7e7fb64fc0e2e8af5f165c54a76ec88f8e16f5ab8f729b5a56f128737caa8b26",
+      "kind": "generated_arena_plate",
+      "reference": "User-selected A3 Hart van het Bos",
+      "original_user_file": false,
+      "date": "2026-10-31"
+    },
+    {
+      "path": "assets/arenas/living_ship.png",
+      "sha256": "c68e4ceecfe8dcbdad56b2103064845e59ecff3dcd09bb1a9bc36e769ad8bbab",
+      "kind": "generated_arena_plate",
+      "reference": "User-selected B1 Levende Brug",
+      "original_user_file": false,
+      "date": "2026-10-31"
     }
   ],
   "gallery_views": {

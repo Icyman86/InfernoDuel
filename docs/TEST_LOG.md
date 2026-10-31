@@ -835,3 +835,27 @@ in dit menu de geëxtrudeerde illustratie; de gevechtsmodellen zijn V12. Het
 modelleerrecept kan opnieuw worden gedraaid, maar Blender/OpenVDB kan de
 vertexvolgorde wijzigen: er wordt geen byte-identieke rebuild geclaimd. Er is geen
 fysieke controller-, echte gamehardware-FPS-, facial-capture- of mobiele V13-test.
+
+
+# Android V14 — 31 oktober 2026
+
+De gebruiker koos A3 Hart van het Bos en B1 Levende Brug. Beide finale arena-platen
+zijn gegenereerd naar die gekozen ontwerpen. Mapselectie volgt nu op character
+select; RANDOM trekt eenmaal bij bevestigen. In de echte ENet-test kiezen beide
+readied peers eerst een map, daarna laden host en guest dezelfde hostkeuze.
+
+- 176 arena/ultimate-checks geslaagd, 0 mislukt; gerenderd met `--touch`.
+- 1.151 bestaande checks geslaagd; alle tien introfilms gedecodeerd.
+- 29 netwerkchecks geslaagd over drie echte processen; host-selected map op beide peers.
+- Ultimate: succesvolle activatie, drie seconden aftellen, +20% afgeronde vervolghit,
+  niet stapelen, mislukte activatie, pauze, ronde-einde/reset en guestsnapshot getest.
+- Screenshots tonen beide gekozen achtergronden, de arena-picker, grote ULTIMATE!
+  banner, fighter-aura en ACTIVE-status met duur op de touchknop.
+- Android SDK-archieven via officiële Google-metadata gecontroleerd; Godot-templates
+  tegen de bestaande gepinde SHA-512 gecontroleerd. APK-payload, signing, alignment
+  en pakketgegevens gecontroleerd. Geen fysieke Android-test.
+
+De oorspronkelijke V11-keystore is niet beschikbaar. De publieke certificaatgegevens
+van V11 en de nieuwe lokale signer verschillen. De gebruiker koos daarom een aparte
+installeerbare preview met pakket-ID `org.infernoduel.legends.preview`. Er wordt geen
+V11-updatecompatibiliteit geclaimd en de bestaande APK/tags zijn behouden.

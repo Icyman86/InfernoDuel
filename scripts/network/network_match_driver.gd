@@ -51,7 +51,7 @@ func capture() -> Dictionary:
 		fighters.append({"p":[f.position.x,f.position.y],"v":[f.velocity.x,f.velocity.y],
 			"travel":f.walk_distance,"locomotion":f.locomotion_speed,"hp":f.hp,"meter":f.meter,"facing":f.facing,"guard":f.guarding,"stun":f.stun,
 			"immunity":f.immunity,"cooldown":f.special_cooldown,"armor":f.armor_time,
-			"power":f.empower_time,"flash":f.flash,"combo":f.combo,"combo_time":f.combo_time,
+			"ultimate_time":f.ultimate_time,"ultimate_move":f.ultimate_move,"power":f.empower_time,"flash":f.flash,"combo":f.combo,"combo_time":f.combo_time,
 			"attack":f.attack.id if f.attack else "","attack_time":f.attack_time})
 	var objects: Array = []
 	for p in duel.projectiles:
@@ -93,6 +93,8 @@ func apply_snapshot(snapshot: Dictionary) -> void:
 		f.special_cooldown = data.cooldown
 		f.armor_time = data.armor
 		f.empower_time = data.power
+		f.ultimate_time = data.get("ultimate_time",0.0)
+		f.ultimate_move = data.get("ultimate_move","")
 		f.flash = data.flash
 		f.combo = data.combo
 		f.combo_time = data.combo_time
@@ -134,6 +136,7 @@ func interpolate(delta: float) -> void:
 	var alpha := 1.0 - exp(-delta*25)
 	for i in 2:
 		var f := duel.fighters[i]
+		f.ultimate_time = maxf(0,f.ultimate_time-delta)
 		var data: Dictionary = state.fighters[i]
 		f.walk_distance = lerpf(f.walk_distance,float(data.get("travel",f.walk_distance)),alpha)
 		f.position = f.position.lerp(Vector2(data.p[0],data.p[1]),alpha)
