@@ -13,7 +13,7 @@ with zipfile.ZipFile(apk) as archive:
     for fighter in ("sharkbyte", "bullet", "nachtelf", "poisonboy", "chainveil",
                     "spinegrin", "cheese_rat", "lava_stone", "crystal_fang", "phoenix_reign", "bamboo_blade", "sawtina"):
         assert f"assets/assets/intros/{fighter}.ogv" in names, f"Missing {fighter} intro"
-    for script in ("scripts/core/progression", "scripts/core/input_router", "scripts/ui/game", "scripts/ui/touch_controls"):
+    for script in ("scripts/core/story_catalog", "scripts/ui/story_select", "scripts/core/progression", "scripts/core/input_router", "scripts/ui/game", "scripts/ui/touch_controls"):
         assert f"assets/{script}.gdc" in names, f"Missing compiled {script}"
     for script in ("scripts/ui/fighter_illustration", "scripts/ui/gallery", "scripts/ui/fighter_presentation", "scripts/combat/move_catalog", "scripts/combat/fighter_motion", "scripts/combat/walk_pose_fields", "scripts/combat/action_pose_fields", "scripts/ui/ultimate_gauge", "scripts/ui/combat_chrome", "scripts/ui/fighter_bust"):
         assert f"assets/{script}.gdc" in names, f"Missing character presentation {script}"
@@ -23,6 +23,21 @@ with zipfile.ZipFile(apk) as archive:
     import json
     fighters = json.loads(archive.read('assets/data/fighters.json'))['fighters']
     moves = json.loads(archive.read('assets/data/move_sets.json'))
+    campaign = json.loads(archive.read('assets/data/story_campaign.json'))
+    assert campaign['player'] == 'sharkbyte'
+    assert [(level['opponent'],level['arena']) for level in campaign['levels']] == [
+        ('bullet','citadel'),('nachtelf','nightelf_forest'),('spinegrin','living_ship'),('crystal_fang','crystal_mine')]
+    cinematic_art = json.loads(archive.read('assets/data/intro_atlases.json'))
+    assert set(cinematic_art) == {f['id'] for f in fighters}
+    # V16 omitted these PNGs despite the gallery's runtime JSON references.
+    # Check the actual import remap AND its imported payload for every fighter.
+    for fighter, artwork in cinematic_art.items():
+        remap_path = 'assets/'+artwork['path']+'.import'
+        assert remap_path in names, f'Missing {fighter} gallery texture remap'
+        remap = archive.read(remap_path).decode().rstrip('\0')
+        imported = re.search(r'path="res://([^"]+)"',remap)
+        assert imported and 'assets/'+imported.group(1) in names, f'Missing {fighter} gallery texture payload'
+
     assert len(fighters) == 12 and all(f['playable'] and f['sprite_ready'] for f in fighters)
     assert sum(map(len, moves.values())) == 77
     movement = json.loads(archive.read('assets/data/movement_animations.json'))
@@ -68,4 +83,4 @@ with zipfile.ZipFile(apk) as archive:
     for script in ['scripts/core/arena_catalog','scripts/ui/arena_select','scripts/combat/ultimate_aura','scripts/ui/ultimate_banner']:
         assert f'assets/{script}.gdc' in names, f'Missing V14 feature {script}'
     assert not any(name.startswith(("assets/tests/", "assets/releases/", "assets/builds/")) for name in names)
-print(f"APK PAYLOAD PASS: ARM64 + x86_64, V16 four arenas, twelve animated fighters, 77 moves, two 200-coin unlocks, persisted wallet, twelve intros, unicast discovery and compact snapshots, touch ({apk.stat().st_size} bytes)")
+print(f"APK PAYLOAD PASS: ARM64 + x86_64, V17 four story levels, all twelve gallery textures, four arenas, twelve animated fighters, 77 moves, two 200-coin unlocks, persisted wallet, twelve intros, unicast discovery and compact snapshots, touch ({apk.stat().st_size} bytes)")

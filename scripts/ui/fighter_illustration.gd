@@ -14,11 +14,23 @@ var framed_rect := Rect2()
 var image_size := Vector2.ZERO
 var cached_size := Vector2.ZERO
 var accent := Color.WHITE
+var custom_size := Vector2.ZERO
+var show_background := true
+var facing := 1
+var fallback_used := false
 
 func _ready() -> void:
 	accent = Color(profile.accent)
 	metadata = JSON.parse_string(FileAccess.get_file_as_string("res://data/intro_atlases.json"))[profile.id]
-	texture = load("res://"+metadata.path)
+	var path := "res://"+str(metadata.path)
+	if ResourceLoader.exists(path): texture = load(path)
+	if not texture:
+		# A failed export must still show a real portrait, never an untextured mesh.
+		fallback_used = true
+		texture = load("res://"+str(profile.reference_art_path))
+		var r: Array = profile.portrait_region
+		var frame := {"rect":r,"polygons":[[[0,0],[r[2],0],[r[2],r[3]],[0,r[3]]]]}
+		metadata = {"frames":[frame,frame,frame,frame]}
 	figure = Node2D.new()
 	add_child(figure)
 	build_pose()
@@ -46,9 +58,9 @@ func build_pose() -> void:
 	frame_image()
 
 func frame_image() -> void:
-	cached_size = get_viewport().get_visible_rect().size
+	cached_size = canvas_size()
 	var scale_factor := minf(cached_size.x*.90/image_size.x,cached_size.y*.88/image_size.y)
-	figure.scale = Vector2.ONE*scale_factor
+	figure.scale = Vector2(facing,1)*scale_factor
 	var size := image_size*scale_factor
 	framed_rect = Rect2((cached_size-size)*.5,size)
 	figure.position = cached_size*.5
@@ -72,14 +84,18 @@ func replay() -> void:
 
 func _process(delta: float) -> void:
 	elapsed += delta
-	if cached_size != get_viewport().get_visible_rect().size: frame_image()
+	if cached_size != canvas_size(): frame_image()
 	figure.modulate.a = smoothstep(0,.25,elapsed)
 	figure.position = cached_size*.5+Vector2(0,14*pow(1-clampf(elapsed/.6,0,1),2))
 	if elapsed >= .6 and not finished:
 		finished = true
 		completed.emit()
 
+func canvas_size() -> Vector2:
+	return custom_size if custom_size.x > 0 and custom_size.y > 0 else get_viewport().get_visible_rect().size
+
 func _draw() -> void:
+	if not show_background: return
 	draw_rect(Rect2(Vector2.ZERO,cached_size),Color("080d16"))
 	for layer in range(8,0,-1):
 		draw_circle(cached_size*Vector2(.5,.44),cached_size.y*(.20+layer*.035),Color(accent,.010))

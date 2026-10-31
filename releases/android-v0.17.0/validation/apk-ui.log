@@ -1,0 +1,49 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS APK menu uses two different fighters
+PASS APK menu loads its real high-resolution texture
+PASS APK menu loads its real high-resolution texture
+PASS sharkbyte gallery texture loads from exported APK
+PASS sharkbyte illustration resource exists in exported pack
+PASS sharkbyte APK render has detailed colored artwork instead of a white silhouette
+PASS bullet gallery texture loads from exported APK
+PASS bullet illustration resource exists in exported pack
+PASS bullet APK render has detailed colored artwork instead of a white silhouette
+PASS nachtelf gallery texture loads from exported APK
+PASS nachtelf illustration resource exists in exported pack
+PASS nachtelf APK render has detailed colored artwork instead of a white silhouette
+PASS poisonboy gallery texture loads from exported APK
+PASS poisonboy illustration resource exists in exported pack
+PASS poisonboy APK render has detailed colored artwork instead of a white silhouette
+PASS spinegrin gallery texture loads from exported APK
+PASS spinegrin illustration resource exists in exported pack
+PASS spinegrin APK render has detailed colored artwork instead of a white silhouette
+PASS chainveil gallery texture loads from exported APK
+PASS chainveil illustration resource exists in exported pack
+PASS chainveil APK render has detailed colored artwork instead of a white silhouette
+PASS cheese_rat gallery texture loads from exported APK
+PASS cheese_rat illustration resource exists in exported pack
+PASS cheese_rat APK render has detailed colored artwork instead of a white silhouette
+PASS lava_stone gallery texture loads from exported APK
+PASS lava_stone illustration resource exists in exported pack
+PASS lava_stone APK render has detailed colored artwork instead of a white silhouette
+PASS crystal_fang gallery texture loads from exported APK
+PASS crystal_fang illustration resource exists in exported pack
+PASS crystal_fang APK render has detailed colored artwork instead of a white silhouette
+PASS phoenix_reign gallery texture loads from exported APK
+PASS phoenix_reign illustration resource exists in exported pack
+PASS phoenix_reign APK render has detailed colored artwork instead of a white silhouette
+PASS bamboo_blade gallery texture loads from exported APK
+PASS bamboo_blade illustration resource exists in exported pack
+PASS bamboo_blade APK render has detailed colored artwork instead of a white silhouette
+PASS sawtina gallery texture loads from exported APK
+PASS sawtina illustration resource exists in exported pack
+PASS sawtina APK render has detailed colored artwork instead of a white silhouette
+PASS APK contains all four story levels
+PASS APK starts SharkByte versus Bullet in the first story level
+PASS APK story victory saves its checkpoint and five coins
+PASS APK story result has a single main-menu action
+APK UI RESULT: 43 passed, 0 failed

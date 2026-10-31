@@ -1,3 +1,12 @@
+# Actuele V17-menu's
+
+STORY MODE opent vier opeenvolgende duels met SharkByte, met eigen briefings,
+checkpoint/retry en coins. De levelkaart toont Bullet in de Citadel, Nachtelf in
+zijn bos, Spinegrin op zijn schip en Crystal Fang in zijn mijn. Zie
+[V17 Android](V17_ANDROID.md). De oude specificatie hieronder beschrijft eerdere
+milestones; FIGHTERS gebruikt inmiddels twaalf grote 2D-illustraties en het
+hoofdmenu kiest twee verschillende, afzonderlijk gekaderde willekeurige fighters.
+
 # Menu- en UI-specificatie (Pixel-independent Godot UI)
 
 **Basisresolutie:** 1280×720, breedbeeld, desktop/landscape. Godot Controls/Containers/anchors; niet op exacte screenshotpixels vastspijkeren. Safe margins ≥36 px aan alle kanten. Gebruik `canvas_items`-schaalgedrag, vaste interne verhoudingen, 16:9 voorkeursaspect.

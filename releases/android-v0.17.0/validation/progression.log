@@ -1,0 +1,166 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS fresh installation has zero coins and both new fighters locked
+PASS existing ten fighters stay available
+PASS incomplete matches and draws give no coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed win earns exactly five coins
+PASS completed loss earns exactly one coin
+PASS completed loss earns exactly one coin
+PASS completed loss earns exactly one coin
+PASS completed loss earns exactly one coin
+PASS 199 coins cannot buy a 200-coin fighter and balance is unchanged
+PASS exactly 200 coins unlock Bamboo Blade
+PASS each fighter costs 200 independently
+PASS buying an owned fighter cannot charge twice
+PASS wallet and unlock survive reload from disk
+PASS duplicate match remains unpaid after reload
+PASS remote P2 winner earns five per match on their own device
+PASS all twelve fighters are visible in the picker
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS fighter card fits the logical phone menu
+PASS locked selection shows its 200 coin unlock action
+PASS real unlock button spends 200 and waits for ready
+PASS purchased fighter can enter arena selection
+PASS unlocked Sawtina enters actual combat
+PASS result refresh cannot pay twice
+PASS abandoning or restarting a fight gives no coins
+PASS gallery shows persisted ownership
+PASS Sawtina gallery uses high-resolution 2D character art
+PASS bamboo_blade renders intact idle animation
+PASS bamboo_blade renders intact idle animation
+PASS bamboo_blade renders intact idle animation
+PASS bamboo_blade renders intact idle animation
+PASS bamboo_blade renders intact walk animation
+PASS bamboo_blade renders intact walk animation
+PASS bamboo_blade renders intact walk animation
+PASS bamboo_blade renders intact walk animation
+PASS bamboo_blade renders intact light animation
+PASS bamboo_blade renders intact light animation
+PASS bamboo_blade renders intact light animation
+PASS bamboo_blade renders intact light animation
+PASS bamboo_blade renders intact heavy animation
+PASS bamboo_blade renders intact heavy animation
+PASS bamboo_blade renders intact heavy animation
+PASS bamboo_blade renders intact heavy animation
+PASS bamboo_blade renders intact guard animation
+PASS bamboo_blade renders intact guard animation
+PASS bamboo_blade renders intact guard animation
+PASS bamboo_blade renders intact guard animation
+PASS bamboo_blade renders intact jump animation
+PASS bamboo_blade renders intact jump animation
+PASS bamboo_blade renders intact jump animation
+PASS bamboo_blade renders intact jump animation
+PASS bamboo_blade renders intact special animation
+PASS bamboo_blade renders intact special animation
+PASS bamboo_blade renders intact special animation
+PASS bamboo_blade renders intact special animation
+PASS bamboo_blade renders intact ultimate animation
+PASS bamboo_blade renders intact ultimate animation
+PASS bamboo_blade renders intact ultimate animation
+PASS bamboo_blade renders intact ultimate animation
+PASS bamboo_blade renders intact hit animation
+PASS bamboo_blade renders intact hit animation
+PASS bamboo_blade renders intact hit animation
+PASS bamboo_blade renders intact hit animation
+PASS bamboo_blade renders intact ko animation
+PASS bamboo_blade renders intact ko animation
+PASS bamboo_blade renders intact ko animation
+PASS bamboo_blade renders intact ko animation
+PASS bamboo_blade uses distinct actual drawings across motion and attacks
+PASS sawtina renders intact idle animation
+PASS sawtina renders intact idle animation
+PASS sawtina renders intact idle animation
+PASS sawtina renders intact idle animation
+PASS sawtina renders intact walk animation
+PASS sawtina renders intact walk animation
+PASS sawtina renders intact walk animation
+PASS sawtina renders intact walk animation
+PASS sawtina renders intact light animation
+PASS sawtina renders intact light animation
+PASS sawtina renders intact light animation
+PASS sawtina renders intact light animation
+PASS sawtina renders intact heavy animation
+PASS sawtina renders intact heavy animation
+PASS sawtina renders intact heavy animation
+PASS sawtina renders intact heavy animation
+PASS sawtina renders intact guard animation
+PASS sawtina renders intact guard animation
+PASS sawtina renders intact guard animation
+PASS sawtina renders intact guard animation
+PASS sawtina renders intact jump animation
+PASS sawtina renders intact jump animation
+PASS sawtina renders intact jump animation
+PASS sawtina renders intact jump animation
+PASS sawtina renders intact special animation
+PASS sawtina renders intact special animation
+PASS sawtina renders intact special animation
+PASS sawtina renders intact special animation
+PASS sawtina renders intact ultimate animation
+PASS sawtina renders intact ultimate animation
+PASS sawtina renders intact ultimate animation
+PASS sawtina renders intact ultimate animation
+PASS sawtina renders intact hit animation
+PASS sawtina renders intact hit animation
+PASS sawtina renders intact hit animation
+PASS sawtina renders intact hit animation
+PASS sawtina renders intact ko animation
+PASS sawtina renders intact ko animation
+PASS sawtina renders intact ko animation
+PASS sawtina renders intact ko animation
+PASS sawtina uses distinct actual drawings across motion and attacks
+PASS bamboo_blade full projectile damage connects at point-blank range in either direction
+PASS bamboo_blade full projectile damage connects at point-blank range in either direction
+PASS sawtina full projectile damage connects at point-blank range in either direction
+PASS sawtina full projectile damage connects at point-blank range in either direction
+PASS unicast room search reaches both ends of a Wi-Fi subnet
+PASS both paid unlocks and final balance survive a fresh load
+PASS save recovery works if the app stopped between atomic file renames
+V16 PROGRESSION RESULT: 163 passed, 0 failed

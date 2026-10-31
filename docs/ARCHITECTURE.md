@@ -55,12 +55,12 @@ See `ART_PIPELINE.md` for artwork provenance and the film generation commands.
 Linux release template, or falls back to the editor engine if none is supplied.
 The published v0.3 uses the official 4.6.3 Linux release template. The executable
 and PCK share the InfernoDuel basename, allowing standard adjacent-pack discovery.
-The wrapper changes to its own folder before launching. Authoring intro PNGs,
-tests, tools, docs and release archives are excluded from the pack.
+The wrapper changes to its own folder before launching. The cinematic PNGs are runtime gallery/menu assets in V17 and are included.
+Tests, tools, docs and release archives remain excluded.
 
 All eight original sheets remain unchanged. DejaVu fonts, Godot's MIT license and
 third-party notices accompany the native package. Final balance, music/voices,
-physical-keyboard acceptance, Story, rebinding and physical Android acceptance
+physical-keyboard acceptance, later story chapters, rebinding and physical Android acceptance
 remain follow-up work. All ten combat sets and the Android APK are implemented.
 
 ## Full roster and character presentation
@@ -167,3 +167,20 @@ cap at 100. CombatChrome draws bounded angular HUD plates. UltimateGauge uses a
 small canvas shader with a gold pulse/streak at 100; TouchControls adds a matching
 ULT halo. Gauge/touch clocks pause with combat. The ready state follows actual
 meter, so spending or a new round updates it without separate readiness flags.
+
+
+## V17 menu and story state
+
+StoryCatalog reads four ordered levels from data/story_campaign.json. StorySelect
+uses PlayerProgression.story_completed to gate cards. game.gd presents a briefing,
+starts the normal DuelMatch with SharkByte and the specified CPU/map, and routes
+results to retry, next-level or chapter-complete actions. Completed best-of-three
+results still pay the ordinary wallet once; checkpoint persistence preserves the
+V16 save fields and supplies zero story progress when the new field is absent.
+
+FighterIllustration can frame into an explicit menu/briefing rectangle and face
+either direction. Two distinct random profiles occupy separate menu rectangles.
+Its main gallery path stays at native viewport density. The APK verifier follows
+every illustration's import remap, and test_apk_ui.py runs only exported Android
+assets in a temporary resourcepack. This detects missing textures that editor-only
+renders cannot detect.

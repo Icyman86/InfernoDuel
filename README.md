@@ -7,6 +7,20 @@ Based on the supplied v1.1 Word specification and Linux starter package.
 The original design documents remain in `docs/`; the current implementation
 and its limits are described here and in `docs/TEST_LOG.md`.
 
+## Android V17 — menuherstel en vier storylevels
+
+[Download V17-preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.17.0-android-preview/releases/android-v0.17.0/InfernoDuel-Android-v0.17.0-preview.apk).
+Werkt de bestaande V14–V16-preview bij en behoudt coins en aankopen.
+
+Het hoofdmenu toont telkens twee verschillende willekeurige fighters tegenover
+elkaar. De witte vlakken in FIGHTERS zijn hersteld: de APK bevat nu alle twaalf
+ontbrekende illustraties. De controle rendert ook de echte geëxporteerde APK-assets.
+
+**STORY MODE** bevat vier duels met SharkByte: **Bullet → Nachtelf in zijn bos →
+Spinegrin op zijn schip → Crystal Fang in zijn mijn**. Win een best-of-three om het
+volgende level te openen. Briefings, retry, replay en opgeslagen voortgang zijn
+actief; winst geeft 5 coins en verlies 1. [Details en beelden](releases/android-v0.17.0/README.md).
+
 ## Android V16 — Bamboo Blade, Sawtina en coins
 
 [Download V16-preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.16.0-android-preview/releases/android-v0.16.0/InfernoDuel-Android-v0.16.0-preview.apk).

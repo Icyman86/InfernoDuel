@@ -104,12 +104,12 @@ func poll() -> Dictionary:
 				"port":host_port,"token":host_token,"version":ProjectSettings.get_setting("application/config/version")}).to_utf8_buffer())
 		elif requested != "" and data.get("room") == requested and data.get("query") == query:
 			if data.get("version") != ProjectSettings.get_setting("application/config/version"):
-				return {"error":"Game versions differ. Install V16 on both devices."}
+				return {"error":"Game versions differ. Install V17 on both devices."}
 			var target_port: Variant = data.get("port",0)
 			var nonce: Variant = data.get("token","")
 			if typeof(target_port) not in [TYPE_INT,TYPE_FLOAT] or target_port < 1 or target_port > 65535: continue
 			if not nonce is String or nonce.length() != 16 or not nonce.is_valid_hex_number(false): continue
 			return {"address":address,"port":int(target_port),"token":nonce}
 	if requested != "" and now-started > 14:
-		return {"error":"Session not found. Use V16 on both devices, the same Wi-Fi, and keep the host open. Disable VPN or guest Wi-Fi isolation. Codes do not connect different networks."}
+		return {"error":"Session not found. Use V17 on both devices, the same Wi-Fi, and keep the host open. Disable VPN or guest Wi-Fi isolation. Codes do not connect different networks."}
 	return {}

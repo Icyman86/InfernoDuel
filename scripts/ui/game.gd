@@ -23,6 +23,10 @@ var networked := false
 var network_driver: NetworkMatchDriver
 var reward_id := ""
 var reward_amount := 0
+var story_mode := false
+var story_index := 0
+var menu_pair: Array[int] = []
+var menu_previews: Array[FighterIllustration] = []
 
 func _ready() -> void:
 	get_tree().quit_on_go_back = false
@@ -95,6 +99,7 @@ func end_match() -> void:
 	network_driver = null
 
 func show_menu() -> void:
+	story_mode = false
 	if OnlineSession.active(): OnlineSession.close()
 	networked = false
 	end_match()
@@ -116,15 +121,23 @@ func show_menu() -> void:
 	screen.add_child(UI.place(title,45,95,600,100))
 	screen.add_child(UI.place(UI.label("D U E L : L E G E N D S",29,UI.GOLD,true),45,189,600,53))
 	screen.add_child(UI.place(UI.label("ENTER THE CITADEL",16,UI.MUTED),65,258,550,25))
-	for i in [1,0]:
-		var hero := FighterVisual.new()
-		hero.profile = roster[i]
-		hero.accent = UI.CYAN if i == 0 else UI.ORANGE
-		hero.target_height = 420 if i == 0 else 370
-		hero.preview_pose = "guard" if i == 0 else "idle"
-		hero.position = Vector2(832 if i == 0 else 1089,648 if i == 0 else 610)
-		hero.scale.x = -1 if i == 1 else 1
+	var pair: Array[int] = [randi_range(0,roster.size()-1),0]
+	pair[1] = posmod(pair[0]+randi_range(1,roster.size()-1),roster.size())
+	if pair == menu_pair: pair.reverse()
+	menu_pair.assign(pair)
+	menu_previews.clear()
+	for side_index in 2:
+		var hero := FighterIllustration.new()
+		hero.profile = roster[menu_pair[side_index]]
+		hero.custom_size = Vector2(285,430)
+		hero.show_background = false
+		hero.facing = 1 if side_index == 0 else -1
+		hero.position = Vector2(650+side_index*320,210)
 		screen.add_child(hero)
+		menu_previews.append(hero)
+		var color := UI.CYAN if side_index == 0 else UI.ORANGE
+		screen.add_child(UI.place(UI.label(hero.profile.display_name.to_upper(),18,color),650+side_index*320,646,285,28))
+	screen.add_child(UI.place(UI.label("VS",24,UI.GOLD,true),934,396,40,40))
 	screen.add_child(UI.place(UI.label("%d COINS · WIN +5 / LOSE +1" % Progression.coins,16,UI.GOLD),680,55,550,30))
 	var buttons := VBoxContainer.new()
 	UI.place(buttons,140,311 if touch_mode else 288,390,370)
@@ -143,9 +156,10 @@ func show_menu() -> void:
 		buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("V16 · BAMBOO BLADE & SAWTINA",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("V17 · SHARKBYTE STORY",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
+	story_mode = false
 	if touch_mode and not cpu:
 		show_online()
 		return
@@ -167,6 +181,7 @@ func show_select(cpu: bool) -> void:
 	stage.add_child(screen)
 
 func show_online() -> void:
+	story_mode = false
 	end_match()
 	clear_screen()
 	route = "online"
@@ -246,7 +261,7 @@ func start_match() -> void:
 	match_node = MatchScene.instantiate()
 	match_node.profiles = [roster[selected[0]],roster[selected[1]]]
 	match_node.solo = solo
-	match_node.modern_rules = not touch_mode and not networked and arena_choice == "citadel"
+	match_node.modern_rules = not touch_mode and not networked and not story_mode and arena_choice == "citadel"
 	match_node.local_network_slot = OnlineSession.local_slot if networked else -1
 	if networked:
 		if OnlineSession.local_slot == 0: match_node.completed.connect(OnlineSession.complete_match)
@@ -338,7 +353,9 @@ func show_result(score: Array[int]) -> void:
 	var reward_label := UI.label("+%d COINS · BALANCE %d" % [reward_amount,Progression.coins],20,UI.GOLD)
 	if reward_amount == 0 and not Progression.last_error.is_empty(): reward_label.text = Progression.last_error
 	box.add_child(reward_label)
-	if networked:
+	if story_mode:
+		story_result(box,score)
+	elif networked:
 		var rematch := UI.button("REMATCH",func():
 			OnlineSession.request_rematch()
 			if is_instance_valid(overlay):
@@ -375,6 +392,7 @@ func show_options(origin: String) -> void:
 		stage.add_child(screen)
 
 func show_gallery() -> void:
+	story_mode = false
 	end_match()
 	clear_screen()
 	route = "gallery"
@@ -397,15 +415,89 @@ func show_fighter_intro(index: int) -> void:
 	stage.add_child(screen)
 
 func show_story() -> void:
+	story_mode = false
+	if OnlineSession.active(): OnlineSession.close()
+	networked = false
 	end_match()
+	clear_screen()
 	route = "story"
+	backdrop.choose_arena("citadel")
+	var picker := StorySelect.new()
+	picker.roster = roster
+	picker.level_chosen.connect(show_story_briefing)
+	picker.back_requested.connect(show_menu)
+	screen = picker
+	stage.add_child(screen)
+
+func show_story_briefing(index: int) -> void:
+	if not Progression.story_available(index): return
+	story_index = index
+	story_mode = false
+	end_match()
+	route = "story_briefing"
 	new_screen()
-	screen.add_child(UI.place(UI.label("THE ABYSS IS CALLING",40,UI.GOLD,true),90,150,1100,70))
-	screen.add_child(UI.place(UI.label("STORY MODE · COMING IN A LATER MILESTONE",22,UI.MUTED),90,245,1100,40))
-	screen.add_child(UI.place(UI.label("SharkByte's campaign is still in development.\nFor now, play Solo vs CPU or connect with a session code." if touch_mode else "SharkByte's campaign is still in development.\nFor now, enter the citadel in Local Versus or Solo vs CPU.",22,UI.IVORY),150,330,980,110))
-	var back := UI.button("BACK TO MAIN MENU",show_menu,true)
-	screen.add_child(UI.place(back,440,520,400,50))
-	back.grab_focus()
+	var level: Dictionary = StoryCatalog.levels()[index]
+	backdrop.choose_arena(level.arena)
+	var shade := ColorRect.new()
+	shade.color = Color(.01,.015,.025,.82)
+	screen.add_child(UI.place(shade,0,0,1280,720))
+	screen.add_child(UI.place(UI.label("CHAPTER ONE · LEVEL %d / 4" % (index+1),19,UI.CYAN),40,38,1200,36))
+	screen.add_child(UI.place(UI.label(level.title,35,UI.IVORY,true),40,88,1200,58))
+	var player_index := StoryCatalog.fighter_index(roster,StoryCatalog.campaign().player)
+	var opponent_index := StoryCatalog.fighter_index(roster,level.opponent)
+	for side_index in 2:
+		var hero := FighterIllustration.new()
+		hero.profile = roster[player_index if side_index == 0 else opponent_index]
+		hero.custom_size = Vector2(300,390)
+		hero.show_background = false
+		hero.facing = 1 if side_index == 0 else -1
+		hero.position = Vector2(50+side_index*880,200)
+		screen.add_child(hero)
+		screen.add_child(UI.place(UI.label(hero.profile.display_name.to_upper(),23,UI.CYAN if side_index == 0 else UI.ORANGE),50+side_index*880,590,300,38))
+	var text := UI.label(level.briefing,22,UI.IVORY)
+	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	screen.add_child(UI.place(text,400,190,480,248))
+	screen.add_child(UI.place(UI.label(ArenaCatalog.get_arena(level.arena).name,18,UI.GOLD),370,454,540,40))
+	var play := UI.button("BEGIN DUEL",func(): start_story_level(index),true)
+	screen.add_child(UI.place(play,450,515,380,56))
+	screen.add_child(UI.place(UI.button("LEVEL SELECT",show_story),450,590,380,44))
+	play.grab_focus()
+
+func start_story_level(index: int) -> void:
+	if not Progression.story_available(index): return
+	if OnlineSession.active(): OnlineSession.close()
+	story_index = index
+	story_mode = true
+	networked = false
+	solo = true
+	var level: Dictionary = StoryCatalog.levels()[index]
+	selected.assign([StoryCatalog.fighter_index(roster,StoryCatalog.campaign().player),StoryCatalog.fighter_index(roster,level.opponent)])
+	arena_choice = level.arena
+	start_match()
+
+func story_result(box: VBoxContainer, score: Array[int]) -> void:
+	var won := score[0] == 2
+	var last := story_index == StoryCatalog.levels().size()-1
+	var saved := Progression.complete_story_level(story_index) if won else true
+	var heading: Label = box.get_child(0)
+	heading.text = ("CHAPTER COMPLETE" if last else "LEVEL COMPLETE") if won else "TRY AGAIN"
+	heading.add_theme_font_size_override("font_size",32)
+	var level: Dictionary = StoryCatalog.levels()[story_index]
+	var text := UI.label(level.victory if won else "SharkByte's journey continues. Try this duel again.",19,UI.IVORY)
+	if not saved: text.text = Progression.last_error
+	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	overlay.add_child(UI.place(text,930,230,300,230))
+	if won and not last:
+		var next := UI.button("NEXT LEVEL",func(): show_story_briefing(story_index+1),true)
+		next.disabled = not saved
+		box.add_child(next)
+	elif won:
+		box.add_child(UI.button("LEVEL SELECT",show_story,true))
+	else:
+		box.add_child(UI.button("RETRY LEVEL",func(): start_story_level(story_index),true))
+	if won: box.add_child(UI.button("REPLAY LEVEL",func(): start_story_level(story_index)))
+	if not won or not last: box.add_child(UI.button("LEVEL SELECT",show_story))
 
 func confirm_action(message: String, action: Callable) -> void:
 	if is_instance_valid(modal) and modal.visible: return
@@ -467,6 +559,10 @@ func go_back() -> void:
 			else: show_menu()
 		"select", "story", "gallery", "online", "network_select": show_menu()
 		"intro": show_gallery()
+		"story_briefing": show_story()
+		"result":
+			if story_mode: show_story()
+			else: show_menu()
 		"arena":
 			if networked: show_menu()
 			else: show_select(solo)

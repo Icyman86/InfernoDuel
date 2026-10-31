@@ -1,0 +1,39 @@
+{
+  "id": "sharkbyte_chapter_one",
+  "title": "THE FIRST DESCENT",
+  "player": "sharkbyte",
+  "levels": [
+    {
+      "id": "citadel_gate",
+      "title": "THE GATEKEEPER",
+      "opponent": "bullet",
+      "arena": "citadel",
+      "briefing": "SharkByte reaches the gates of the Infernal Citadel. Bullet stands in his way. Win the duel and follow the crimson trail into the forest.",
+      "victory": "Bullet steps aside. Beyond the citadel, red leaves glow in the dark. Nachtelf is waiting."
+    },
+    {
+      "id": "crimson_forest",
+      "title": "WHISPERS IN THE FOREST",
+      "opponent": "nachtelf",
+      "arena": "nightelf_forest",
+      "briefing": "Glowing mushrooms light SharkByte's path beneath the crimson leaves. Nachtelf guards the heart of the forest. Defeat him to discover where the living ship has landed.",
+      "victory": "The forest falls quiet. A strange green light reveals the entrance to Spinegrin's living ship."
+    },
+    {
+      "id": "living_hull",
+      "title": "THE LIVING SHIP",
+      "opponent": "spinegrin",
+      "arena": "living_ship",
+      "briefing": "SharkByte boards a ship that breathes. Red tissue and green veins pulse around its bridge. Spinegrin attacks before SharkByte can reach the vessel's secrets.",
+      "victory": "Spinegrin yields. The ship's final signal points to a mine filled with glowing pink diamonds."
+    },
+    {
+      "id": "diamond_heart",
+      "title": "THE HEART OF THE MINE",
+      "opponent": "crystal_fang",
+      "arena": "crystal_mine",
+      "briefing": "Deep inside Crystal Fang zijn mijn, pink diamonds illuminate the stone. Crystal Fang protects the mine's heart. This duel decides the end of SharkByte's first journey.",
+      "victory": "The diamonds settle and the mine grows still. SharkByte has overcome all four guardians. Chapter One is complete."
+    }
+  ]
+}

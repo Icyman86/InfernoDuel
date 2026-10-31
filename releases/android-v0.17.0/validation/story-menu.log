@@ -1,0 +1,145 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS V16 save migrates without losing coins or purchased fighters
+PASS unbeaten story levels cannot be skipped through progression API
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu draws two different random fighters and changes its last pairing
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu uses complete textured artwork facing the opposite fighter
+PASS menu fighters do not overlap each other or the buttons
+PASS menu randomizes across the roster
+PASS story menu opens four level cards
+PASS new campaign starts with Bullet and locks later levels
+PASS locked card cannot bypass story gating
+PASS first card opens Bullet's story briefing
+PASS story starts a native solo duel with touch support
+PASS losing grants one coin and does not unlock the next level
+PASS story defeat has one main-menu action
+PASS retry restarts the same level with fresh rounds
+PASS story supports the real pause flow
+PASS level 1 uses SharkByte against the requested opponent
+PASS level 1 loads its requested arena
+PASS winning level 1 saves progress and grants five coins
+PASS story victory has one main-menu action
+PASS reopening results cannot duplicate coins or skip another level
+PASS story checkpoint and previous purchase survive reload
+PASS next level presents its own story briefing
+PASS level 2 uses SharkByte against the requested opponent
+PASS level 2 loads its requested arena
+PASS winning level 2 saves progress and grants five coins
+PASS story victory has one main-menu action
+PASS reopening results cannot duplicate coins or skip another level
+PASS story checkpoint and previous purchase survive reload
+PASS next level presents its own story briefing
+PASS level 3 uses SharkByte against the requested opponent
+PASS level 3 loads its requested arena
+PASS winning level 3 saves progress and grants five coins
+PASS story victory has one main-menu action
+PASS reopening results cannot duplicate coins or skip another level
+PASS story checkpoint and previous purchase survive reload
+PASS next level presents its own story briefing
+PASS level 4 uses SharkByte against the requested opponent
+PASS level 4 loads its requested arena
+PASS winning level 4 saves progress and grants five coins
+PASS story victory has one main-menu action
+PASS reopening results cannot duplicate coins or skip another level
+PASS story checkpoint and previous purchase survive reload
+PASS fourth victory finishes the chapter without a nonexistent fifth level
+PASS completed campaign permits replaying all four levels
+PASS replaying an earlier level cannot reduce completed progress
+PASS returning to menu exits story cleanly and preserves earned coins
+V17 STORY MENU RESULT: 139 passed, 0 failed

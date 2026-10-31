@@ -1,3 +1,8 @@
+# Android V17
+
+Nieuwste build: [menuherstel en vier storylevels](V17_ANDROID.md).
+Installeer over de bestaande preview; beide apparaten gebruiken V17 voor wifi.
+
 # Android V16
 
 Nieuwste build: [Bamboo Blade, Sawtina en coins](V16_ANDROID.md).

@@ -118,3 +118,13 @@ of anatomieën vervormd; Polygon2D gebruikt de bestaande transparante silhouette
 metadata. De volledige illustratie past met marge in de native preview.
 De afgewezen nieuwe 3D-iteraties staan alleen in de genegeerde lokale buildsmap.
 Oudere V13-bestanden en downloads blijven behouden.
+
+## V17 — packaged gallery artwork
+
+The original user artwork and generated PNG pixels are unchanged. V16's export
+filter excluded the cinematic PNGs now used by FIGHTERS, leaving white Polygon2D
+shapes in the shipped app. V17 removes the exclusion and checks the remap and
+imported texture for each of twelve fighters. A separate renderer reads only the
+built APK assets and confirms real colored characters, including Cheese Rat.
+The same illustrations now supply distinct, non-overlapping random menu rivals
+and story briefings. No new character artwork was invented for the story levels.

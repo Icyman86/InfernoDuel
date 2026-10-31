@@ -909,3 +909,36 @@ De finale preview-APK bevat de 2D-gallery en alle nieuwe assets, ARM64/x86_64,
 V2/V3-signature en gecontroleerde 16-KiB alignment. Pakket-ID en certificaat zijn
 gelijk aan V15-preview, versiecode 1600. Geen fysieke Android-/routertest uitgevoerd.
 Bronnen, APK, logs en screenshots staan in releases/android-v0.16.0/.
+
+
+## 31 oktober 2026 — V17: witte vlakken, random menuduel en vier storylevels
+
+De twee nieuwe screenshots tonen overlappende hoofdmenufiguren en een wit Cheese
+Rat-silhouet. De V16-APK mist assets/intros/*_poses.png.import en de bijbehorende
+geïmporteerde texturen omdat die bron-PNGs door het exportfilter waren uitgesloten.
+De editor had de PNGs wel. V17 verwijdert die uitsluiting voor de presets en volgt
+in de APK-verifier de remap naar de payload voor alle twaalf fighters. Een
+portretfallback voorkomt een wit polygon bij een onverwacht ontbrekende illustratie;
+de releasechecks eisen echte illustraties zonder die fallback.
+
+Het menu kiest twee verschillende random profielen per bezoek, naar elkaar gericht
+in afzonderlijke kaders, zonder overlapping of botsing met de knoppen. StoryCatalog
+definieert vier duels met SharkByte: Bullet/citadel, Nachtelf/nightelf_forest,
+Spinegrin/living_ship en Crystal Fang/crystal_mine. Briefings, twee gewonnen rondes,
+next-level, retry, replay, hoofdstukafsluiting en opgeslagen checkpoints zijn actief.
+Coins blijven +5/+1 per voltooide wedstrijd; eerdere V16-aankopen en saldo migreren
+zonder reset. Een dubbele uitslag betaalt of ontgrendelt niet nogmaals.
+
+Resultaten: 139 story/menuchecks; 43 APK-resourcepackchecks; 74 gameplay + 825 art +
+45 expansion + 319 roster = 1.263; 174 gallery; 37 echte netwerkchecks over drie
+processen; 163 coin/unlock; 53 sessie-UI. Twaalf introfilms gedecodeerd en tien
+originele artworkhashes ongewijzigd. De geautomatiseerde storyresultaatfixtures
+zetten gecontroleerde KO-HP en doorlopen de echte round/completed/result-flow;
+roster-tests blijven echte moves en volledige CPU-matches controleren.
+
+De APK-resourcepacktest start uitsluitend de werkelijk geëxporteerde game-assets
+met Godot buiten de editorprojectmap. Alle twaalf figures renderen echte gekleurde
+artwork, inclusief Cheese Rat; geen fallback is gebruikt. Er is geen fysieke
+Android-/routertest uitgevoerd. APK bevat ARM64/x86_64, V2/V3-signature, 16-KiB
+alignment en hetzelfde preview-certificaat als V16, versiecode 1700. Bron, APK,
+logs, hash en screenshots staan in releases/android-v0.17.0/.

@@ -8,6 +8,7 @@ var coins := 0
 var unlocked: Array[String] = []
 var rewarded: Array[String] = []
 var last_error := ""
+var story_completed := 0
 var prices: Dictionary = {}
 var fighter_ids: Array[String] = []
 
@@ -62,6 +63,20 @@ func purchase(id: String) -> bool:
 	changed.emit()
 	return true
 
+func story_available(index: int) -> bool:
+	return StoryCatalog.valid(index) and index <= story_completed
+
+func complete_story_level(index: int) -> bool:
+	if not story_available(index): return false
+	if index < story_completed: return true
+	var previous := story_completed
+	story_completed = index+1
+	if not save_progress():
+		story_completed = previous
+		return false
+	changed.emit()
+	return true
+
 func _read(path: String) -> bool:
 	var config := ConfigFile.new()
 	if config.load(path) != OK or config.get_value("progress","version",0) != 1: return false
@@ -69,6 +84,9 @@ func _read(path: String) -> bool:
 	var owned: Variant = config.get_value("progress","unlocked",[])
 	var history: Variant = config.get_value("progress","rewarded",[])
 	if typeof(balance) != TYPE_INT or balance < 0 or balance > MAX_COINS or not owned is Array or not history is Array: return false
+	var story: Variant = config.get_value("progress","story_completed",0)
+	if typeof(story) != TYPE_INT or story < 0 or story > StoryCatalog.levels().size(): return false
+	story_completed = story
 	coins = balance
 	unlocked.clear()
 	for id in owned:
@@ -79,6 +97,7 @@ func _read(path: String) -> bool:
 	return true
 
 func load_progress() -> void:
+	story_completed = 0
 	coins = 0
 	unlocked.clear()
 	rewarded.clear()
@@ -89,6 +108,7 @@ func load_progress() -> void:
 func save_progress() -> bool:
 	var config := ConfigFile.new()
 	config.set_value("progress","version",1)
+	config.set_value("progress","story_completed",story_completed)
 	config.set_value("progress","coins",coins)
 	config.set_value("progress","unlocked",unlocked)
 	config.set_value("progress","rewarded",rewarded)
