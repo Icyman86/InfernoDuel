@@ -5,6 +5,10 @@ const FighterScene = preload("res://scenes/combat/fighter.tscn")
 var fighters: Array[DuelFighter] = []
 var projectiles: Array[DuelProjectile] = []
 var profiles: Array[Dictionary] = []
+var modern_rules := false
+var arena_rules := ArenaRules.new()
+var arena_3d: GladiatorArena3D
+var hitstop := 0.0
 var solo := false
 var ai := DuelAI.new()
 var wins: Array[int] = [0,0]
@@ -36,12 +40,18 @@ var footer: Control
 func _ready() -> void:
 	for i in 2:
 		var fighter: DuelFighter = FighterScene.instantiate()
+		fighter.modern_rules = modern_rules
 		fighter.player = i
 		fighter.profile = profiles[i]
 		fighter.tint = UI.CYAN if i == 0 else UI.ORANGE
 		fighter.projectile_requested.connect(_spawn_projectile)
 		fighters.append(fighter)
 		add_child(fighter)
+	if modern_rules:
+		arena_3d = GladiatorArena3D.new()
+		arena_3d.duel = self
+		add_child(arena_3d)
+		move_child(arena_3d,0)
 	_make_hud()
 	start_round(false)
 
@@ -116,9 +126,9 @@ func _make_hud() -> void:
 	if local_network_slot >= 0:
 		hud.add_child(UI.place(UI.label("YOUR CONTROLS  A D · W · S · F G H J     /     ESC PAUSE · CONNECTED SESSION",16,UI.IVORY),35,684,1210,28))
 		return
-	hud.add_child(UI.place(UI.label("P1  A D · W · S · F G H J",16,UI.CYAN),35,684,420,28))
+	hud.add_child(UI.place(UI.label("P1 AD/W/S · FGHJ · R GRAB · T ESCAPE",16,UI.CYAN),35,684,420,28))
 	hud.add_child(UI.place(UI.label("ESC  PAUSE   /   F3  HITBOXES",14,UI.MUTED),455,684,370,28))
-	hud.add_child(UI.place(UI.label("P2  ← → · ↑ · ↓ · I O P L",16,UI.ORANGE),825,684,420,28))
+	hud.add_child(UI.place(UI.label("P2 ARROWS · IOPL · U GRAB · K ESCAPE",16,UI.ORANGE),825,684,420,28))
 
 func layout_hud(safe: Rect2) -> void:
 	if not hud: return
@@ -150,6 +160,8 @@ func layout_hud(safe: Rect2) -> void:
 
 
 func start_round(keep_meter := true) -> void:
+	arena_rules.reset()
+	hitstop = 0
 	for projectile in projectiles: projectile.queue_free()
 	projectiles.clear()
 	for i in 2: fighters[i].reset_at(390.0 if i == 0 else 890.0,keep_meter)
@@ -162,6 +174,9 @@ func start_round(keep_meter := true) -> void:
 
 func _physics_process(delta: float) -> void:
 	if stopped: return
+	if modern_rules and hitstop > 0:
+		hitstop = maxf(0,hitstop-delta)
+		return
 	if phase == "countdown":
 		InputRouter.clear()
 		phase_time -= delta
@@ -193,6 +208,7 @@ func _physics_process(delta: float) -> void:
 
 func advance_fight(delta: float, inputs: Array[Dictionary]) -> void:
 	for i in 2: fighters[i].step(delta,inputs[i],fighters[1-i])
+	if modern_rules: arena_rules.step(delta,fighters,inputs)
 	_resolve_bodies()
 	# Correct visual travel after push-box resolution. Feet do not cycle while
 	# pushing into another fighter or an arena boundary.
@@ -222,12 +238,17 @@ func advance_fight(delta: float, inputs: Array[Dictionary]) -> void:
 		var move: AttackData = event.move
 		var was_blocking := target.guarding
 		var clean_hit := target.receive_hit(move,event.x)
+		if modern_rules and clean_hit and move.slot in ["heavy","ultimate"]: hitstop = .05
 		var burst := HitBurst.new()
 		burst.position = target.position + Vector2((1 if event.x > target.position.x else -1)*23,-175)
 		burst.color = UI.CYAN if was_blocking and not clean_hit else UI.GOLD
 		burst.blocked = was_blocking and not clean_hit
 		burst.seed_angle = remaining
-		add_child(burst)
+		if modern_rules:
+			arena_3d.impact_at(target,was_blocking and not clean_hit)
+			burst.free()
+		else:
+			add_child(burst)
 		source.meter = mini(100,source.meter+move.meter_gain)
 		if clean_hit:
 			source.combo += 1
@@ -247,6 +268,13 @@ func _resolve_bodies() -> void:
 		var direction := 1.0 if distance >= 0 else -1.0
 		fighters[0].position.x = clampf(fighters[0].position.x - correction*direction,DuelFighter.LEFT,DuelFighter.RIGHT)
 		fighters[1].position.x = clampf(fighters[1].position.x + correction*direction,DuelFighter.LEFT,DuelFighter.RIGHT)
+		# Preserve separation when half of the correction was clipped at a wall.
+		if modern_rules:
+			var left := fighters[0] if direction > 0 else fighters[1]
+			var right := fighters[1] if direction > 0 else fighters[0]
+			if right.position.x-left.position.x < 86:
+				if left.position.x <= DuelFighter.LEFT: right.position.x = left.position.x+86
+				elif right.position.x >= DuelFighter.RIGHT: left.position.x = right.position.x-86
 
 func finish_round() -> void:
 	if phase != "fight": return
@@ -297,7 +325,8 @@ func update_hud() -> void:
 		if fighters[i].armor_time > 0: meter_labels[i].text += "  ARMOR %.1fs" % fighters[i].armor_time
 		if fighters[i].empower_time > 0: meter_labels[i].text += "  POWER %.1fs" % fighters[i].empower_time
 		var info := ""
-		if fighters[i].combo >= 2: info = "%d HIT COMBO\n" % fighters[i].combo
+		if modern_rules and fighters[i].command_notice != "": info = fighters[i].command_notice+"\n"
+		if fighters[i].combo >= 2: info += "%d HIT COMBO\n" % fighters[i].combo
 		if fighters[i].meter >= 100: info += "ULTIMATE READY"
 		elif fighters[i].special_cooldown > 0: info += "SPECIAL %.1fs" % fighters[i].special_cooldown
 		combos[i].text = info

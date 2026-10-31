@@ -1,3 +1,5 @@
 releases/android-v*/*.apk filter=lfs diff=lfs merge=lfs -text
 
 releases/ios-v*/*.zip filter=lfs diff=lfs merge=lfs -text
+
+releases/linux-v*/*.tar.xz filter=lfs diff=lfs merge=lfs -text

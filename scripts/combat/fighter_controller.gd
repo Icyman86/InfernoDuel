@@ -11,6 +11,16 @@ const ATTACKS := {
 	"heavy": preload("res://data/attacks/heavy.tres"),
 	"special": preload("res://data/attacks/special.tres"),
 	"ultimate": preload("res://data/attacks/ultimate.tres")}
+var modern_rules := false
+var commands := MotionCommands.new()
+var command_notice := ""
+var notice_time := 0.0
+var grab_cooldown := 0.0
+var throw_protection := 0.0
+var escape_cooldown := 0.0
+var trapped := false
+var grapple_pose := 0.0
+var throw_pose := 0.0
 var player := 0
 var profile: Dictionary = {}
 var tint := Color("49c4d7")
@@ -49,6 +59,26 @@ var last_walk_delta := 0.0
 
 func _ready() -> void:
 	moves = MoveCatalog.build(profile, ATTACKS)
+	if modern_rules:
+		var rising: AttackData = moves.special.duplicate()
+		rising.id = "v12_rising"
+		rising.display_name = "Rising Breaker"
+		rising.damage = 22
+		rising.kind = "melee"
+		rising.launch = -460
+		rising.reach = 115
+		rising.hitstun = .38
+		rising.cooldown = 2.0
+		rising.animation = "special"
+		moves[rising.id] = rising
+		var rush: AttackData = moves.heavy.duplicate()
+		rush.id = "v12_rush"
+		rush.display_name = "Momentum Strike"
+		rush.kind = "dash"
+		rush.dash_speed = 460
+		rush.damage = 18
+		rush.animation = "heavy"
+		moves[rush.id] = rush
 	visual = FighterVisual.new()
 	visual.profile = profile
 	visual.actor = self
@@ -56,6 +86,15 @@ func _ready() -> void:
 	add_child(visual)
 
 func reset_at(x: float, keep_meter := false) -> void:
+	commands.reset()
+	command_notice = ""
+	notice_time = 0
+	grab_cooldown = 0
+	throw_protection = 0
+	escape_cooldown = 0
+	trapped = false
+	grapple_pose = 0
+	throw_pose = 0
 	position = Vector2(x, FLOOR)
 	velocity = Vector2.ZERO
 	hp = MAX_HEALTH
@@ -89,6 +128,23 @@ func grounded() -> bool:
 	return position.y >= FLOOR - 0.1
 
 func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
+	grapple_pose = maxf(0,grapple_pose-delta)
+	throw_pose = maxf(0,throw_pose-delta)
+	grab_cooldown = maxf(0,grab_cooldown-delta)
+	throw_protection = maxf(0,throw_protection-delta)
+	escape_cooldown = maxf(0,escape_cooldown-delta)
+	notice_time = maxf(0,notice_time-delta)
+	if notice_time == 0: command_notice = ""
+	if modern_rules and input.get("escape",false) and stun > 0 and meter >= 35 and escape_cooldown == 0:
+		meter -= 35
+		stun = 0
+		trapped = false
+		immunity = .45
+		throw_protection = .65
+		escape_cooldown = 3
+		velocity.x = -facing*360
+		command_notice = "BREAK FREE · 35 METER"
+		notice_time = 1.2
 	step_start_x = position.x
 	last_walk_delta = 0
 	locomotion_speed = 0
@@ -100,6 +156,7 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 	if input.get("jump", false): jump_buffer = 0.12
 	flash = maxf(0.0, flash - delta)
 	stun = maxf(0.0, stun - delta)
+	if stun == 0: trapped = false
 	immunity = maxf(0.0, immunity - delta)
 	special_cooldown = maxf(0.0, special_cooldown - delta)
 	combo_time = maxf(0.0, combo_time - delta)
@@ -113,6 +170,10 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 	var requested := ""
 	for id in ["light", "heavy", "special", "ultimate"]:
 		if input.get(id, false): requested = MoveCatalog.resolve(moves, id, input, facing)
+	if modern_rules:
+		var motion := commands.sample(delta,input,facing)
+		if motion != "":
+			requested = "v12_rising" if motion == "rising" else "v12_rush"
 	guarding = input.get("block", false) and requested == "" and grounded() and not attack and stun == 0.0 and hp > 0
 	if requested != "" and stun > 0 and moves[requested].escape_stun:
 		begin_attack(requested)
@@ -148,7 +209,7 @@ func step(delta: float, input: Dictionary, opponent: DuelFighter) -> void:
 				jump_buffer = 0.0
 				coyote_time = 0.0
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, delta * 1800)
+		velocity.x = move_toward(velocity.x, 0.0, delta * (700 if modern_rules and stun > 0 else 1800))
 	if attack and attack_kind(attack.id) == "dash" and is_active():
 		velocity.x = facing * (attack.dash_speed if attack.dash_speed > 0 else float(profile.get("combat",{}).get("dash_speed",500.0)))
 	if not grounded() or velocity.y < 0: velocity.y += 1800.0 * delta
@@ -172,6 +233,9 @@ func begin_attack(id: String) -> bool:
 	meter -= move.meter_cost
 	if move.slot == "special": special_cooldown = move.cooldown
 	attack = move.duplicate()
+	if id.begins_with("v12_"):
+		command_notice = move.display_name.to_upper()
+		notice_time = 1.2
 	if empower_time > 0 and attack.damage > 0: attack.damage = int(ceil(attack.damage * 1.2))
 	attack_time = 0.0
 	hit_connected = false

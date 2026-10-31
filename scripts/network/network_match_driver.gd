@@ -20,7 +20,7 @@ func _ready() -> void:
 		duel.stopped = false
 
 func host_inputs() -> Array[Dictionary]:
-	var inputs: Array[Dictionary] = [InputRouter.sample(0), OnlineSession.consume_remote_input()]
+	var inputs: Array[Dictionary] = [InputRouter.network_sample(0), OnlineSession.consume_remote_input()]
 	return inputs
 
 func can_accept_remote_input() -> bool:
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		var input := {}
 		if OnlineSession.phase == "fight" and duel.phase == "fight" and not duel.stopped:
-			input = InputRouter.sample(0)
+			input = InputRouter.network_sample(0)
 		else:
 			InputRouter.clear()
 		OnlineSession.send_input(input)

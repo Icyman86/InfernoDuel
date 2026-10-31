@@ -7,6 +7,20 @@ Based on the supplied v1.1 Word specification and Linux starter package.
 The original design documents remain in `docs/`; the current implementation
 and its limits are described here and in `docs/TEST_LOG.md`.
 
+## Linux V12 — 0.12.0 preview
+
+[Download de Linux V12-preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.12.0-linux-preview/releases/linux-v0.12.0/InfernoDuel-Linux-v0.12.0-preview.tar.xz).
+Pak uit en start `InfernoDuel-Linux/PLAY.sh`.
+
+Local Versus en Solo hebben nu een echte 3D-gladiatorenarena en tien nieuwe,
+eenvoudige gelede volumemodellen, controllerondersteuning, directionele commando's,
+grabs/throws met throw-tech, stunontsnapping en aangekondigde klemvallen.
+**Dit is een technisch 3D-prototype; het gevraagde moderne character- en
+animatiekwaliteitsniveau is nog niet bereikt.** Gedetailleerde productiemodellen,
+skinning, texturen en professionele animatiepolish ontbreken nog.
+[Bediening, concrete regels, testcommando's en beperkingen](docs/V12_LINUX.md).
+LAN en Android houden hun bestaande 2D-routes; er is geen nieuwe mobiele build.
+
 ## Android APK — phones and tablets
 
 V11 replaces character-select portraits with ten newly painted frontal half-body

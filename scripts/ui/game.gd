@@ -23,6 +23,9 @@ var network_driver: NetworkMatchDriver
 
 func _ready() -> void:
 	get_tree().quit_on_go_back = false
+	InputRouter.controller_action.connect(_controller_action)
+	InputRouter.controller_removed.connect(func(_player: int):
+		if route == "fight": show_pause())
 	OnlineSession.lobby_changed.connect(_network_lobby_changed)
 	OnlineSession.match_started.connect(_network_match_started)
 	OnlineSession.match_finished.connect(show_result)
@@ -135,7 +138,7 @@ func show_menu() -> void:
 		buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("INFERNAL CITADEL  /  V11",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("V12 · LINUX 3D PROTOTYPE",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	if touch_mode and not cpu:
@@ -212,8 +215,8 @@ func show_arena() -> void:
 	screen.add_child(panel)
 	var box := VBoxContainer.new()
 	panel.add_child(box)
-	box.add_child(UI.label("01 / INFERNAL CITADEL",30,UI.GOLD,true))
-	box.add_child(UI.label("Broken stone. Molten depths. No escape.",20,UI.IVORY))
+	box.add_child(UI.label("01 / GLADIATOR CRUCIBLE",30,UI.GOLD,true))
+	box.add_child(UI.label("3D stone ring · timed clamp traps · throw escapes",20,UI.IVORY))
 	box.add_child(UI.label("60 SECONDS · FIRST TO TWO ROUNDS",18,UI.MUTED))
 	box.add_child(UI.label("%s   VS   %s" % [roster[selected[0]].display_name,roster[selected[1]].display_name],22,UI.CYAN))
 	var start := UI.button("ENTER THE ARENA",start_match,true)
@@ -236,6 +239,7 @@ func start_match() -> void:
 	match_node = MatchScene.instantiate()
 	match_node.profiles = [roster[selected[0]],roster[selected[1]]]
 	match_node.solo = solo
+	match_node.modern_rules = not touch_mode and not networked
 	match_node.local_network_slot = OnlineSession.local_slot if networked else -1
 	if networked:
 		if OnlineSession.local_slot == 0: match_node.completed.connect(OnlineSession.complete_match)
@@ -458,3 +462,32 @@ func _notification(what: int) -> void:
 		show_pause()
 	elif what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		go_back()
+
+func _controller_action(player: int, action: String) -> void:
+	if is_instance_valid(modal) and modal.visible:
+		if action == "accept": modal.confirmed.emit()
+		elif action == "back": modal.canceled.emit()
+		return
+	if route == "select" and solo and action == "pause":
+		screen.confirm(0)
+		screen.confirm(1)
+		return
+	if action in ["pause","back"]:
+		if route == "fight" and action == "back": return
+		go_back()
+		return
+	if route in ["select","network_select"]:
+		var p := player
+		if networked: p = OnlineSession.local_slot
+		var codes := {"left":KEY_A if p == 0 else KEY_LEFT,"right":KEY_D if p == 0 else KEY_RIGHT,"up":KEY_W if p == 0 else KEY_UP,"down":KEY_S if p == 0 else KEY_DOWN,"accept":KEY_F if p == 0 else KEY_I,"ready":KEY_F if p == 0 else KEY_I,"undo":KEY_G if p == 0 else KEY_O}
+		if codes.has(action): screen.handle_key(codes[action])
+	elif route == "arena" and action == "accept": start_match()
+	elif route != "fight":
+		var focused := get_viewport().gui_get_focus_owner()
+		if focused is Slider and action in ["left","right"]:
+			focused.value += .05 if action == "right" else -.05
+			return
+		if action in ["down","right","up","left"] and focused:
+			var next := focused.find_next_valid_focus() if action in ["down","right"] else focused.find_prev_valid_focus()
+			if next: next.grab_focus()
+		elif action == "accept" and focused is Button: focused.pressed.emit()

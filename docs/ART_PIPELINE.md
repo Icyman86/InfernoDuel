@@ -246,3 +246,22 @@ and kick frames across all ten movies. See `TEST_LOG.md` for results and limits.
 Original reference likeness, costume consistency, silhouette isolation and camera
 framing were reviewed from rendered screenshots. Physical two-player keyboard,
 real speaker output, balance and final artist review remain outstanding.
+
+
+## Linux V12-prototype — echte procedurele volumes
+
+`scripts/v12/fighter_model.gd` maakt tien nieuwe 3D-volumemodellen met een
+hiërarchie van torso-, hoofd-, schouder-, elleboog-, heup- en kniegewrichten.
+MeshInstances met StandardMaterial3D worden verlicht en werpen schaduwen in de
+arena. Geometrie is nieuw procedureel werk, geen uitgesneden, geëxtrudeerde of
+gebillboarde characterillustratie. Vinnen/hoorns/staarten, rattenoren en geel shirt,
+rugspikes, roze kristallen, kettingen en vleugels volgen de aangeleverde
+identiteitskenmerken. Crystal Fang en Phoenix behouden klauwvoeten. Geen logo's
+of oorspronkelijke artworkbestanden zijn gewijzigd.
+
+Dit is een eenvoudige gestileerde basis met gedeelde animatiepatronen, geen
+productiesculpt, gewogen SkeletalMesh, mocap of uitgewerkte PBR-characterasset.
+Lijkenis, anatomie, gezicht en character-specifieke animaties vereisen verdere
+artistieke productie. De oude V11-portretten, sprites, galerij en films blijven
+bewaard en worden op de bestaande mobiele/LAN-routes gebruikt. Blender 4.3.2 is
+beschikbaar maar niet nodig voor deze procedurele modellen of de build.

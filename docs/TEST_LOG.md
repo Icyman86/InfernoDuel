@@ -763,3 +763,46 @@ and its X11 menu → avatars → arena → simultaneous movement/attacks → pau
 was exercised without runtime errors. Package evidence and implementation hashes
 are included in the release's `validation/` directory. The native bundle uses the
 full installed Godot engine; a stripped export-template build is still untested.
+
+
+# Linux V12-preview — 31 oktober 2026
+
+Huidige controles, geen overgenomen historische claims:
+
+| Controle | Resultaat |
+| --- | --- |
+| Oorspronkelijke artwork SHA-256 | 8/8 onveranderd |
+| Basissuite `tools/test.sh` | 74 gameplay, 745 artwork, 45 expansion, 287 roster: 1.151 geslaagd, 0 mislukt |
+| Intromedia | Alle tien films volledig gedecodeerd en onderscheidend |
+| `tools/test_v10.sh` zonder grafisch scherm | 53 sessie, 25 netwerk (drie echte processen), 121 motion, 160 quality: 359 geslaagd, 0 mislukt |
+| `TEST_V12_RENDERED=1 tools/test_v12.sh` | 76 geslaagd, 0 mislukt; geen scriptfouten of objectlekkages |
+| Bestaande rendered keyboard-flow | Negen checks geslaagd; `VISUAL RESULT: 0 failed` |
+| Native Linux-export | PCK en exact passende meegebundelde Godot 4.6.3-editorengine; export geslaagd |
+| Native OS-input | `tools/test_native.py`: echte X11-events naar exported engine/PCK; menu/selectie/gevecht, twee bewegende spelers, schade (194/194 HP) en bevroren pauzetimer gecontroleerd |
+
+V12 test commandovensters in beide richtingen, verbruikte/verouderde historie,
+alle twintig nieuwe motion-aanvallen met exacte schade, controllerownership,
+analoge deadzone, hotplug/vervanging, een ongebonden derde controller, volledige
+controller-UI-flow, solo-ready met één controller en pauze na loskoppelen.
+Grabs testen bereik, guard, gelijktijdige en tijdige tech, te late tech, omgekeerde
+worp, regrabprotectie en onderbreking door traps. Stuns testen meterkosten en
+break-free; vallen testen waarschuwing, activatie, geen schade, springen, herstel,
+ontsnapping zonder onmiddellijk opnieuw klemmen, pauze en round-reset. Alle tien
+gelede volumemodellen zijn gebouwd; de arena is daadwerkelijk gerenderd.
+
+De eerste regressierun vond een echte LAN-fout: de nieuwe lokale `grab`/`escape`
+velden overschreden de strikte pakketgrootte. De netwerkroute stuurt nu expliciet
+alleen het eerdere schema. Alle 25 ENet-checks slagen na de fix. De roster-test
+blijft alle 69 eerdere single-inputaanvallen controleren; de nieuwe motion-inputs
+worden apart via echte sequenties voor alle tien fighters getest.
+
+Xorg-dummy/Mesa llvmpipe is een virtueel softwarescherm. De waarschuwing over
+niet ondersteunde V-Sync-moduswissels blijft een schermbeperking. Geen fysieke
+controller, keyboard-rollover, speakers, tweepersoonsbeleving of gamehardware-FPS
+getest. Het native observatiescript kijkt alleen; het schrijft geen speltoestand.
+
+De V12 3D-modellen zijn eenvoudige originele procedurele volumes met een
+transform-rig en gedeelde gewrichtsanimatie. Productieklare sculpted models,
+skinning, PBR-texturen, mocap en professionele animatiepolish ontbreken. Dit is
+**geen afgeronde moderne 3D-fighter**. Zie `docs/V12_LINUX.md` voor het exacte
+bereik. Android en LAN houden 2D-regels; geen nieuwe Android/iOS-build geclaimd.

@@ -33,6 +33,10 @@ func run() -> void:
 		var target := duel.fighters[1]
 		check(hero.visual.sprite != null and not hero.visual.metadata.is_empty(), profile.id + " has an animated combat sprite")
 		for id in hero.moves:
+			# This suite verifies the original 69 single-input bindings on both
+			# renderers. The twenty motion commands need history; tests/v12.gd
+			# exercises their actual input sequences and damage for all fighters.
+			if id.begins_with("v12_"): continue
 			all_moves += 1
 			duel.start_round(false)
 			duel.phase = "fight"

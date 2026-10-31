@@ -8,7 +8,9 @@
     "light": "F",
     "heavy": "G",
     "special": "H",
-    "ultimate": "J"
+    "ultimate": "J",
+    "grab": "R",
+    "escape": "T"
   },
   "player_2": {
     "move_left": "Left",
@@ -18,7 +20,9 @@
     "light": "I",
     "heavy": "O",
     "special": "P",
-    "ultimate": "L"
+    "ultimate": "L",
+    "grab": "U",
+    "escape": "K"
   },
   "global": {
     "pause": "Escape"

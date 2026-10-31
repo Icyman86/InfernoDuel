@@ -30,38 +30,45 @@ exec ./InfernoDuel.x86_64 "$@"
 PLAY
 chmod 755 builds/linux/PLAY.sh
 cat > builds/linux/README.txt <<'README'
-INFERNO DUEL: LEGENDS — Linux full roster V10 / v0.10.0
+INFERNO DUEL: LEGENDS — Linux V12 / 0.12.0 preview
 Made by Rens de Gee en Ted Sondervan
 
-Run ./PLAY.sh on a Linux x86_64 desktop with OpenGL 3.3 support.
-This build bundles the Godot engine and a game PCK. No installed Godot is required.
+Run ./PLAY.sh on Linux x86_64 with OpenGL 3.3.
+This self-contained package includes the matching Godot engine and game PCK.
 
-P1: A/D move, W jump, S block, F light, G heavy, H special, J ultimate.
-P2: arrows move/jump/block, I light, O heavy, P special, L ultimate.
-ESC pauses. F3 displays hitboxes. Win two rounds to win a match.
-Select: P1 WASD + F ready / G undo. P2 arrows + I ready / O undo.
-Mouse: choose the P1/P2 edit button before clicking a fighter.
+Local Versus / Solo use the new Gladiator Crucible 3D prototype.
+Ten original procedural articulated volume models; no sprite billboards.
+These simple stylized models and procedural animation are NOT production-quality
+modern fighter assets. Detailed sculpted models, skinning, textures and authored
+animation polish are still missing. Previous portraits/gallery/intros are kept.
 
-All ten fighters are playable: SharkByte, Bullet, Nachtelf, PoisonBoy, Spinegrin,
-Chainveil, Cheese Rat, Lava Stone, Crystal Fang and Phoenix Reign.
-FIGHTERS presents each legend on a perspective 3D stage for one signature move,
-then keeps the same lit character and rings during breathing idle. REPLAY PRESENTATION restarts it. ORIGINAL SHEET and PLAY INTRO preserve all reference art.
-The 69 attacks/abilities include directional variants: hold forward, backward
-or guard plus LIGHT, SPECIAL or ULT. Directional variants remain available in combat.
-V10 fills wide phone/tablet screens, adds ten crisp half-body select portraits
-and 240 new drawn walk/heavy poses. Flow warping is removed.
-Distance-driven walking and the gold ultimate-ready glow remain. All fighters have 200 HP. Taking damage
-also grants 35% of damage as meter (rounded up). Rendering targets 60 FPS; native-device performance still needs testing.
-Armor halves damage; power buffs add 20%; Phoenix Rebirth spends 35 meter to
-escape hitstun and heal 8 HP. Supers cost 100 meter and cannot revive a KO.
-Each short intro opens on footwear (original claws for Crystal Fang/Phoenix
-Reign), then a front kick toward camera. REPLAY restarts; Esc/BACK returns.
-Original reference sheets are preserved. New sprite/intro art is reference-guided.
-CONNECT uses six-character session codes with automatic same-Wi-Fi discovery.
-Android has one touchpad per device; offline CPU remains available.
-Rendering follows native device/window pixels; the arena preserves its proportions.
-Android touch play is available as a separate V10 APK. Story and music are later milestones.
-Two-person physical keyboard / ghosting testing is still required.
+P1: A/D move, W jump, S block, F/G/H/J light/heavy/special/ultimate.
+P2: arrows move/jump/block, I/O/P/L attacks.
+P1 R grab / T break free. P2 U grab / K break free.
+Controllers: first connected = P1; second = P2. Left stick or D-pad move,
+A jump, X light, Y heavy, B special, LT block, RT ultimate, LB grab/throw,
+RB break free (35 meter), Start pause. Unplugging pauses the match.
+Menus: D-pad/stick navigate, A confirm, B back. In selection A/X ready,
+Y undo. Solo: Start readies your fighter and CPU opponent.
+
+Down, down-forward, forward + special within 380 ms: Rising Breaker (22 damage).
+Forward, neutral, forward + heavy within 380 ms: Momentum Strike (18 damage).
+Forward/backward are relative to your opponent. Down uses your BLOCK control.
+Close grounded grab range is 115 units; hold backward to reverse the throw.
+Defender LB/grab within 220 ms techs the grab. Simultaneous grabs also tech.
+Throws deal 18 damage and grant 1.3 s regrab protection.
+RB/escape breaks stun or a clamp for 35 meter with a 3 s cooldown.
+Gold floor rings warn for 1.2 s before a 0.45 s clamp activation. Jump or move
+away; a caught fighter is stunned for 0.75 s, with no trap damage. Each trap
+cycles every eight seconds; the two traps are offset by 3.6 seconds.
+Escape or wait to recover. F3 displays actual collision boxes in 3D.
+Heavy clean hits add 50 ms hitstop. Best of three; 200 HP; 60-second rounds.
+
+LAN sessions retain the previous 2D combat rules/rendering and no new local
+V12 actions. Both devices need the same app version. Existing published Android
+APKs are preserved. No Android/iOS V12 build is included.
+No physical controller or two-person hardware acceptance is claimed.
+
 README
 printf '\nEngine package: %s\n' "$engine_kind" >> builds/linux/README.txt
 printf 'Built: %s/builds/linux/PLAY.sh\n' "$PWD"
