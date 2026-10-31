@@ -9,6 +9,8 @@ import subprocess
 import time
 
 root = Path(__file__).resolve().parent.parent
+output_dir = Path('/tmp/inferno-v13-native')
+output_dir.mkdir(parents=True, exist_ok=True)
 state_path = Path('/tmp/inferno-v12-native.json')
 state_path.unlink(missing_ok=True)
 x11 = ctypes.CDLL('libX11.so.6')
@@ -54,7 +56,7 @@ with log_path.open('w') as log:
     process = subprocess.Popen([str(package_dir/'PLAY.sh'), '--audio-driver', 'Dummy', '--script', str(root/'tests/native_probe.gd')], stdout=log, stderr=subprocess.STDOUT)
     try:
         state = wait_for(lambda s: s['route'] == 'menu')
-        assert state['version'] == '0.12.0', state
+        assert state['version'] == '0.13.0', state
         tap(ord('f'))
         wait_for(lambda s: s['route'] == 'select')
         tap(ord('f'))
@@ -78,8 +80,26 @@ with log_path.open('w') as log:
         time.sleep(.35)
         frozen = wait_for(lambda s: s['elapsed'] > paused['elapsed'] + .2)
         assert frozen['remaining'] == paused['remaining'], (paused, frozen)
-        subprocess.run(['import', '-display', os.environ['DISPLAY'], '-window', 'root', '/tmp/inferno-v12/native-package.png'], check=True)
-        print('NATIVE RESULT: exported 0.12.0 PCK loads; X11 menu/select/fight, two-player movement, damage and pause verified')
+        subprocess.run(['import', '-display', os.environ['DISPLAY'], '-window', 'root', str(output_dir/'native-package.png')], check=True)
+        print('NATIVE RESULT: exported 0.13.0 PCK loads; X11 menu/select/fight, two-player movement, damage and pause verified')
+        # Return through the actual pause menu and confirmation dialog.
+        for _ in range(3): tap(0xff54)  # Down: restart, options, main menu
+        tap(0xff0d)
+        wait_for(lambda s: s.get('dialog'))
+        tap(0xff0d)
+        wait_for(lambda s: s['route'] == 'menu')
+        for _ in range(4): tap(0xff54)  # Fighters
+        tap(0xff0d)
+        wait_for(lambda s: s['route'] == 'gallery' and s.get('bones',0) >= 16)
+        for index in range(10):
+            if index:
+                tap(0xff53)  # Right: next roster card
+                tap(ord('f'))
+            state = wait_for(lambda s: s.get('current') == index and s.get('bones',0) >= 16)
+            assert state['triangles'] >= 30000, state
+            print(f'NATIVE GALLERY PASS: packaged character {index+1}/10, {state["bones"]} bones')
+        subprocess.run(['import', '-display', os.environ['DISPLAY'], '-window', 'root', str(output_dir/'native-gallery.png')], check=True)
+        print('NATIVE GALLERY RESULT: all ten packed GLB characters selected through real X11 keyboard input')
     finally:
         process.terminate()
         try:

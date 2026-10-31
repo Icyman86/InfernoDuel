@@ -1,185 +1,186 @@
 class_name FighterPresentation
 extends Node3D
-## A textured, extruded silhouette in real perspective; preserves authored art.
-## This is a 2.5D presentation, not a newly modelled skeletal character.
+## Imported, skinned Blender sculptures with an actual volume and skeleton.
+## Full-body framing uses all eight corners of each character's model bounds.
+signal completed
 var profile: Dictionary
-var visual: FighterVisual
+var model: Node3D
 var rig: Node3D
-var face: MeshInstance3D
-var edge: MeshInstance3D
+var skeleton: Skeleton3D
+var animator: AnimationPlayer
 var rings: Array[MeshInstance3D] = []
 var camera: Camera3D
 var elapsed := 0.0
 var finished := false
-var cached_key := ""
-var hero_scale := 1.0
-var stage_offset := 0.0
 var accent := Color("55d9ef")
-var front_material: ShaderMaterial
-var mesh_cache: Dictionary = {}
-signal completed
+var model_bounds := AABB()
+var framed_points: Array[Vector3] = []
+var yaw := .40
+var portrait := false
+var model_triangles := 0
+var model_bones := 0
+var frame_fill := .90
+var cached_aspect := 0.0
+var target := Vector3.ZERO
+var camera_distance := 5.0
+var material_count := 0
+const CATALOG := "res://data/character_models.json"
 
-func solid(color: Color, emission := 0.0) -> StandardMaterial3D:
+func solid(color: Color, metal := .0, glow := .0) -> StandardMaterial3D:
 	var material := StandardMaterial3D.new()
 	material.albedo_color = color
-	material.roughness = .36
-	material.metallic = .45
-	if emission > 0:
+	material.roughness = .35
+	material.metallic = metal
+	if glow > 0:
 		material.emission_enabled = true
 		material.emission = color
-		material.emission_energy_multiplier = emission
+		material.emission_energy_multiplier = glow
 	return material
 
 func cylinder(radius: float, height: float, y: float, material: Material) -> void:
 	var node := MeshInstance3D.new()
-	var mesh := CylinderMesh.new()
-	mesh.top_radius = radius
-	mesh.bottom_radius = radius
-	mesh.height = height
-	mesh.radial_segments = 64
-	node.mesh = mesh
+	var shape := CylinderMesh.new()
+	shape.top_radius = radius
+	shape.bottom_radius = radius
+	shape.height = height
+	shape.radial_segments = 96
+	node.mesh = shape
 	node.material_override = material
 	node.position.y = y
 	add_child(node)
 
 func _ready() -> void:
 	accent = Color(profile.get("accent","55d9ef"))
-	var world := WorldEnvironment.new()
-	world.environment = Environment.new()
-	world.environment.background_mode = Environment.BG_COLOR
-	world.environment.background_color = Color("0b101b")
-	world.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	world.environment.ambient_light_color = Color("a2b7ce")
-	world.environment.ambient_light_energy = .68
-	add_child(world)
+	var env := WorldEnvironment.new()
+	env.environment = Environment.new()
+	env.environment.background_mode = Environment.BG_COLOR
+	env.environment.background_color = Color("080d16")
+	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.environment.ambient_light_color = Color("9facbf")
+	env.environment.ambient_light_energy = .32
+	env.environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	add_child(env)
 	camera = Camera3D.new()
-	camera.fov = 37
+	camera.fov = 34
+	camera.near = .05
+	camera.far = 50
 	add_child(camera)
 	camera.current = true
-	for item in [[Vector3(-3,6,5),Color("c8edff"),1.3],[Vector3(3,3,-2),accent,2.1]]:
+	var key := DirectionalLight3D.new()
+	key.rotation_degrees = Vector3(-32,-28,0)
+	key.light_color = Color("f0e5d2")
+	key.light_energy = .9
+	key.shadow_enabled = true
+	key.directional_shadow_max_distance = 12
+	key.light_angular_distance = .4
+	add_child(key)
+	for item in [[Vector3(-2.5,2.6,3),Color("8ebcff"),.7],[Vector3(2.4,2.8,-1.8),accent,1.5],[Vector3(-2,1.5,-1),Color("c8def5"),.6]]:
 		var light := OmniLight3D.new()
 		light.position = item[0]
 		light.light_color = item[1]
 		light.light_energy = item[2]
-		light.omni_range = 12
+		light.omni_range = 7
 		add_child(light)
-	cylinder(2.4,.24,-.18,solid(Color("151f31")))
-	cylinder(2.44,.025,-.055,solid(accent,.8))
-	cylinder(2.34,.04,-.02,solid(Color("101724")))
-	for radius in [1.76,2.12]:
+	cylinder(1.38,.12,-.09,solid(Color("141b27"),.65))
+	cylinder(1.39,.012,-.026,solid(accent,.6,.55))
+	cylinder(1.32,.022,-.014,solid(Color("1d2632"),.5))
+	for radius in [1.08,1.25]:
 		var ring := MeshInstance3D.new()
 		var torus := TorusMesh.new()
 		torus.inner_radius = radius
-		torus.outer_radius = radius+.015
-		torus.rings = 48
+		torus.outer_radius = radius+.009
+		torus.rings = 64
 		torus.ring_segments = 8
 		ring.mesh = torus
-		ring.material_override = solid(Color(accent,.8),.7)
-		ring.position.y = .01
+		ring.material_override = solid(accent,.45,.8)
+		ring.position.y = -.001
 		add_child(ring)
 		rings.append(ring)
+	var floor_node := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(200,200)
+	floor_node.mesh = plane
+	floor_node.material_override = solid(Color("0c131e"),.3)
+	floor_node.position.y = -.16
+	add_child(floor_node)
+	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(CATALOG)).fighters
+	var info: Dictionary = catalog[profile.id]
+	model_triangles = int(info.triangles)
+	model_bones = int(info.bones)
+	material_count = int(info.materials)
+	var low := Vector3(info.bounds_min[0],info.bounds_min[1],info.bounds_min[2])
+	var high := Vector3(info.bounds_max[0],info.bounds_max[1],info.bounds_max[2])
+	model_bounds = AABB(Vector3(-.5*(high.x-low.x),0,-.5*(high.z-low.z)),high-low)
 	rig = Node3D.new()
 	add_child(rig)
-	face = MeshInstance3D.new()
-	edge = MeshInstance3D.new()
-	rig.add_child(edge)
-	rig.add_child(face)
-	front_material = ShaderMaterial.new()
-	front_material.shader = preload("res://assets/shaders/presentation.gdshader")
-	face.material_override = front_material
-	edge.material_override = solid(accent.darkened(.73))
-	visual = FighterVisual.new()
-	visual.profile = profile
-	visual.target_height = 300
-	visual.visible = false
-	add_child(visual)
-	# Drive once from this timeline; the hidden 2D node must not advance again.
-	visual.set_process(false)
-	# Supplementary bite/kick silhouettes can extend far beyond the idle pivot.
-	# Fit the whole authored entrance once, keep the support foot fixed on the podium.
-	var envelope := Rect2(Vector2.ZERO,Vector2.ZERO)
-	var first := true
-	var frames: Array = []
-	var signature: Dictionary = visual.metadata.animations.heavy
-	for index in signature.frames:
-		frames.append([visual.frame_data(signature.get("atlas","core"),index),Vector2.ZERO])
-	var idle_animation: Dictionary = visual.metadata.animations.idle
-	frames.append([visual.frame_data(idle_animation.get("atlas","core"),idle_animation.frames[0]),Vector2.ZERO])
-	for entry in frames:
-		var frame: Dictionary = entry[0]
-		for point in frame.vertices:
-			var world_point: Vector2 = ((point-Vector2(frame.pivot))*float(frame.scale)+Vector2(entry[1]))/80.0
-			if first:
-				envelope = Rect2(world_point,Vector2.ZERO)
-				first = false
-			else: envelope = envelope.expand(world_point)
-	hero_scale = minf(1.0,minf(3.8/maxf(envelope.size.x,.01),3.55/maxf(envelope.size.y,.01)))
-	stage_offset = -envelope.get_center().x*hero_scale
+	model = (load("res://"+info.path) as PackedScene).instantiate()
+	model.position = Vector3(-.5*(high.x+low.x),-low.y,-.5*(high.z+low.z))
+	rig.add_child(model)
+	_find_rig(model)
+	for i in 8: framed_points.append(model_bounds.get_endpoint(i))
+	if animator:
+		for animation in animator.get_animation_list():
+			if "Gallery_Idle" in animation:
+				animator.get_animation(animation).loop_mode = Animation.LOOP_LINEAR
+				animator.play(animation)
+				break
+	frame_camera()
 	replay()
+
+func _find_rig(node: Node) -> void:
+	if node is Skeleton3D: skeleton = node
+	if node is AnimationPlayer: animator = node
+	for child in node.get_children(): _find_rig(child)
 
 func replay() -> void:
 	elapsed = 0
 	finished = false
 	set_process(true)
+	if animator: animator.seek(0,true)
 
-func build_mesh() -> void:
-	var sprite := visual.sprite
-	if not sprite or sprite.polygon.size() < 3: return
-	var key: String = sprite.get_meta("frame_key",visual.last_key)
-	if key == cached_key: return
-	cached_key = key
-	if not mesh_cache.has(key):
-		var vertices := PackedVector3Array()
-		var uv := PackedVector2Array()
-		var normals := PackedVector3Array()
-		for i in sprite.polygon.size():
-			var base: Dictionary = sprite.get_meta("frame_data")
-			var p: Vector2 = (sprite.polygon[i]-visual.current_pivot)*float(base.scale)/80.0
-			vertices.append(Vector3(p.x,-p.y,.075))
-			uv.append(sprite.uv[i]/sprite.texture.get_size())
-			normals.append(Vector3(0,0,1))
-		var arrays := []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_TEX_UV] = uv
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_INDEX] = Geometry2D.triangulate_polygon(sprite.polygon)
-		var mesh := ArrayMesh.new()
-		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
-		var walls := SurfaceTool.new()
-		walls.begin(Mesh.PRIMITIVE_TRIANGLES)
-		var boundary: PackedVector2Array = sprite.get_meta("frame_data").vertices
-		var scale_factor: float = sprite.get_meta("frame_data").scale/80.0
-		for i in boundary.size():
-			var p_a: Vector2 = (boundary[i]-visual.current_pivot)*scale_factor
-			var p_b: Vector2 = (boundary[(i+1)%boundary.size()]-visual.current_pivot)*scale_factor
-			var a := Vector3(p_a.x,-p_a.y,.075)
-			var b := Vector3(p_b.x,-p_b.y,.075)
-			var back_a := a-Vector3(0,0,.15)
-			var back_b := b-Vector3(0,0,.15)
-			for v in [a,back_a,b,b,back_a,back_b]: walls.add_vertex(v)
-		walls.generate_normals()
-		mesh_cache[key] = [mesh,walls.commit(),sprite.texture]
-	face.mesh = mesh_cache[key][0]
-	edge.mesh = mesh_cache[key][1]
-	front_material.set_shader_parameter("base_texture",mesh_cache[key][2])
+func turn(amount: float) -> void:
+	yaw += amount
+	frame_camera()
+
+func set_portrait(value: bool) -> void:
+	portrait = value
+	frame_camera()
+
+func frame_camera() -> void:
+	if not camera: return
+	var size: Vector2 = get_viewport().get_visible_rect().size
+	if size.y <= 0: return
+	var aspect := size.x/size.y
+	cached_aspect = aspect
+	var bounds := model_bounds
+	if portrait:
+		bounds.position.y = model_bounds.size.y*.52
+		bounds.size.y = model_bounds.size.y*.48
+		bounds.position.x *= .6
+		bounds.size.x *= .6
+	target = rig.transform*bounds.get_center()
+	# Match Camera3D's vertical FOV and aspect, including rotation and depth.
+	var direction := Vector3(sin(yaw),.045,cos(yaw)).normalized()
+	var right := Vector3(cos(yaw),0,-sin(yaw))
+	var up := direction.cross(right).normalized()
+	var tangent_v := tan(deg_to_rad(camera.fov)*.5)
+	var tangent_h := tangent_v*aspect
+	camera_distance = 0
+	for corner in 8:
+		var p := rig.transform*bounds.get_endpoint(corner)-target
+		var depth := p.dot(direction)
+		camera_distance = maxf(camera_distance,depth+absf(p.dot(up))/(tangent_v*frame_fill))
+		camera_distance = maxf(camera_distance,depth+absf(p.dot(right))/(tangent_h*frame_fill))
+	camera.position = target+direction*camera_distance
+	camera.look_at(target)
 
 func _process(delta: float) -> void:
 	elapsed += delta
-	visual.clock += delta
-	var progress := clampf((elapsed-.65)/1.35,0.0,.999)
-	visual.preview_pose = "heavy" if elapsed >= .65 and elapsed < 2.0 else "idle"
-	visual.preview_progress = progress if visual.preview_pose == "heavy" else 0.0
-	visual._update_pose(delta)
-	build_mesh()
-	var swing := sin(progress*PI) if visual.preview_pose == "heavy" else 0.0
-	var camera_time := minf(elapsed,2.8)
-	var idle_time := maxf(0.0,elapsed-2.8)
-	rig.rotation.y = sin(camera_time*1.5)*.1-swing*.16+sin(idle_time*1.4)*.012
-	rig.position.x = stage_offset+swing*.08+visual.support_anchor.x/80.0*hero_scale if face.mesh else 0.0
-	rig.scale = Vector3(hero_scale*visual.motion.stretch.x,hero_scale*visual.motion.stretch.y,hero_scale)
-	camera.position = Vector3(1.2*cos(camera_time*.65),2.1,7.5-swing*.35)
-	camera.look_at(Vector3(0,1.65,0))
-	if elapsed > 2.8 and not finished:
+	if not finished:
+		rig.rotation.y = -.16*pow(1-clampf(elapsed/1.4,0,1),2)
+		frame_camera()
+	elif cached_aspect != get_viewport().get_visible_rect().size.aspect(): frame_camera()
+	# The skeleton drives breathing; feet and the model's scale remain fixed.
+	if elapsed >= 1.4 and not finished:
 		finished = true
 		completed.emit()

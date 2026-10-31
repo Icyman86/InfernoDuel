@@ -265,3 +265,28 @@ Lijkenis, anatomie, gezicht en character-specifieke animaties vereisen verdere
 artistieke productie. De oude V11-portretten, sprites, galerij en films blijven
 bewaard en worden op de bestaande mobiele/LAN-routes gebruikt. Blender 4.3.2 is
 beschikbaar maar niet nodig voor deze procedurele modellen of de build.
+
+
+## V13 — nieuwe Blender-personages voor het Fighters-menu
+
+De galerij gebruikt nu tien nieuwe geskinnde GLB-volumemodellen onder
+`assets/models/v13/`, met eigen 16-bone skeletons, huidgewichten en een cyclische
+skelet-idle. Het betreft nieuw procedureel gemodelleerd werk naar de originele
+character sheets. Bullet en PoisonBoy hebben menselijke gezichten; Nachtelf heeft
+elfenoren; Chainveil heeft lang haar, korsetdetails en afzonderlijke kettingschakels.
+De overige silhouetten behouden onder meer vinnen, schubben, rattenoren,
+basaltplaten, kristallen, vleugels en klauwvoeten. Geen merktekens zijn toegevoegd.
+
+Het herhaalbare Blender-recept staat in `tools/modeling/build_roster.py`.
+Voxel-union maakt aaneengesloten huidvormen; buis-/loft-geometrie maakt haar,
+vingers, kleding en details. Blender exporteert echt genormaliseerde skin-gewichten,
+normal maps, fysieke materialen, huid-countershading en animatie in de GLB.
+`data/character_models.json` bevat de grenzen/statistieken en SHA-256 van de
+geleverde modellen. De detailtexturen zijn wiskundig gemaakte oppervlaktestructuren,
+geen bewerkte oorspronkelijke artwork of achtergronden die als 3D worden verkocht.
+
+De nieuwe camera en grotere viewer tonen iedere fighter volledig en groot.
+De modellen zijn gestileerd en bevatten vereenvoudigde gezichten/anatomie; geen
+facial capture of dynamische haar-/kledingsimulatie. De combat-modellen uit V12
+blijven apart behouden. De oorspronkelijke afbeeldingen en films zijn niet gewijzigd.
+Zie `docs/V13_GALLERY.md` en de echte releasebeelden voor het resultaat.

@@ -14,8 +14,12 @@ func _process(delta: float) -> bool:
 	elapsed += delta
 	frames += 1
 	if frames%3 == 0:
-		var state := {"route":game.route,"version":ProjectSettings.get_setting("application/config/version"),"elapsed":elapsed}
+		var state := {"dialog":is_instance_valid(game.modal) and game.modal.visible,"route":game.route,"version":ProjectSettings.get_setting("application/config/version"),"elapsed":elapsed}
 		if game.route == "select": state.ready = game.screen.ready_players
+		if game.route == "gallery":
+			state.current = game.screen.current
+			state.bones = game.screen.presentation.skeleton.get_bone_count()
+			state.triangles = game.screen.presentation.model_triangles
 		if is_instance_valid(game.match_node):
 			var duel = game.match_node
 			state.phase = duel.phase

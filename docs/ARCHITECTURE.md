@@ -90,14 +90,18 @@ all ten current fighters have fields. Idle/attack transitions preserve opacity
 through corrected over-compositing. Foot pivots anchor stretch/lean. Shared cached
 motion textures are primed during match creation, before the countdown ends.
 
-`FighterGallery` now selects ten characters and plays one `FighterPresentation`
-3D podium shot, then retains the same live world, character, lights and rings. The presentation
-extrudes existing silhouette polygons into textured front meshes and sidewalls,
-with perspective/lighting/camera motion; it is 2.5D art, not a skeletal model.
-The camera settles after the entrance while breathing/sway continues. Only
-original-sheet view disables the 3D viewport and timeline; returning resumes it. Replay and
-original intro navigation remain. The old executable move list/tour is removed;
-MoveShowcase remains an unused internal authoring helper, outside the player flow.
+`FighterGallery` now loads one of ten real skinned Blender GLB characters through
+`FighterPresentation`. `data/character_models.json` records each asset, immutable
+shipped hash and full volume bounds. A Skeleton3D/AnimationPlayer drives the idle;
+feet and model scale stay fixed. Standard physical materials carry embedded normal
+maps and skin vertex colors. A TextureRect displays a dedicated SubViewport at
+actual stage pixel density. Full-body perspective fitting projects every AABB
+corner onto camera right/up axes with depth and framing margins, recalculating for
+orbit and aspect changes. Portrait mode intentionally uses the upper envelope;
+FULL BODY restores the complete character. Real mouse dragging and turn buttons
+orbit the camera. Original sheet mode pauses both the presentation and animator.
+See V13_GALLERY.md for the Blender recipe and validation. The old illustrated
+presentation shader is retained for historical assets; it is not the new model.
 
 `TouchControls` owns fixed analog thumbsticks separately from circular contacts.
 A thumb owns its stick until release/cancel, with clamped travel and a deadzone.

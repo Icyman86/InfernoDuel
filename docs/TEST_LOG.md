@@ -806,3 +806,32 @@ transform-rig en gedeelde gewrichtsanimatie. Productieklare sculpted models,
 skinning, PBR-texturen, mocap en professionele animatiepolish ontbreken. Dit is
 **geen afgeronde moderne 3D-fighter**. Zie `docs/V12_LINUX.md` voor het exacte
 bereik. Android en LAN houden 2D-regels; geen nieuwe Android/iOS-build geclaimd.
+
+
+# Linux V13 / 0.13.0 — Fighters-galerij, 31 oktober 2026
+
+| Controle | Uitgevoerd resultaat |
+| --- | --- |
+| Oorspronkelijke artwork | 8/8 SHA-256 onveranderd |
+| `tools/test.sh` | 74 gameplay + 745 artwork + 45 expansion + 287 roster = 1.151 geslaagd, 0 mislukt; alle tien films gedecodeerd |
+| `tools/verify_models.py` | Tien verschillende GLB-bestanden gevalideerd: 16 bones, echte meshes, fysieke materialen, ingebedde texturen, animatie, eindige/genormaliseerde gewichten en juiste SHA-256 |
+| `tools/test_gallery.sh` | 256 geslaagde rendered UI-/model-/camera-/bedieningscontroles, 0 mislukt |
+| Linux-export | PCK met alle tien nieuwe modelassets en exact passende Godot 4.6.3-engine gebouwd |
+| Native pakket | X11-invoer door menu/selectie/gevecht, beweging van twee spelers, schade en pauze gecontroleerd; daarna alle tien nieuwe models via de echte rosterkaarten in het verpakte Fighters-menu geselecteerd, elk met een daadwerkelijk geladen 16-bone Skeleton3D |
+
+De galerijtest controleert afzonderlijke normal-mapped materialen, echte skinning,
+skelet-idle zonder modelstretch/voetverschuiving en live behoud van model/podium.
+Alle tien personages zijn getest op volledige modelgrenzen (incl. haar, vinnen,
+staarten, vleugels en voeten) en minstens 72% verticale vulling van hun envelop.
+Zij- en achteraanzicht worden opnieuw gekadreerd. De echte draaiknoppen en
+muissleepbediening werken; portret/full-body, replay en originele bronbladen zijn
+via hun echte UI gecontroleerd. De framebuffer schaalt naar echte pixels bij
+960×540, 1280×720 en 1920×1080. De source- en native-logs bevatten geen
+scriptfouten, engine-errors of objectlekkages. De bekende Xorg-dummy V-Sync-
+waarschuwing blijft een virtuele-displaybeperking.
+
+De renders tonen de werkelijk gemaakte, gestileerde Blender-assets. Ze vervangen
+in dit menu de geëxtrudeerde illustratie; de gevechtsmodellen zijn V12. Het
+modelleerrecept kan opnieuw worden gedraaid, maar Blender/OpenVDB kan de
+vertexvolgorde wijzigen: er wordt geen byte-identieke rebuild geclaimd. Er is geen
+fysieke controller-, echte gamehardware-FPS-, facial-capture- of mobiele V13-test.

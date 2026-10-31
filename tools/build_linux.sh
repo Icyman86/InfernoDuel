@@ -30,15 +30,24 @@ exec ./InfernoDuel.x86_64 "$@"
 PLAY
 chmod 755 builds/linux/PLAY.sh
 cat > builds/linux/README.txt <<'README'
-INFERNO DUEL: LEGENDS — Linux V12 / 0.12.0 preview
+INFERNO DUEL: LEGENDS — Linux V13 / 0.13.0 gallery update
 Made by Rens de Gee en Ted Sondervan
 
 Run ./PLAY.sh on Linux x86_64 with OpenGL 3.3.
 This self-contained package includes the matching Godot engine and game PCK.
 
 Local Versus / Solo use the new Gladiator Crucible 3D prototype.
-Ten original procedural articulated volume models; no sprite billboards.
-These simple stylized models and procedural animation are NOT production-quality
+FIGHTERS now presents ten detailed original Blender volume models with real
+16-bone skins, idle animation, normal maps, cloth/leather/skin/metal materials,
+faces, fingers and character-specific silhouettes. About 89k-128k triangles each.
+The gallery keeps the entire character large in frame, including wings/tails.
+Drag to rotate; use TURN, PORTRAIT VIEW / FULL BODY and ORIGINAL SHEET.
+The arena combat renderer retains its V12 prototype models and mechanics.
+The new gallery models are a stylized artist/programmatic interpretation;
+they are not a claim of AAA or photorealistic character production.
+
+Ten original procedural articulated COMBAT volume models; no sprite billboards.
+These simple stylized COMBAT models and procedural animation are NOT production-quality
 modern fighter assets. Detailed sculpted models, skinning, textures and authored
 animation polish are still missing. Previous portraits/gallery/intros are kept.
 

@@ -1,13 +1,14 @@
 extends Node
-const OUTPUT := "/tmp/inferno-roster-visual"
+const OUTPUT := "/tmp/inferno-v13-gallery"
 var game: Control
 var passed := 0
 var failed := 0
+var seen_images := {}
 
 func check(ok: bool, message: String) -> void:
 	if ok:
 		passed += 1
-		print("PASS ", message)
+		print("PASS ",message)
 	else:
 		failed += 1
 		push_error(message)
@@ -16,7 +17,7 @@ func click(button: Button) -> void:
 	button.grab_focus()
 	await get_tree().process_frame
 	await get_tree().process_frame
-	for down in [true, false]:
+	for down in [true,false]:
 		var event := InputEventMouseButton.new()
 		event.button_index = MOUSE_BUTTON_LEFT
 		event.position = button.get_global_rect().get_center()
@@ -27,7 +28,27 @@ func click(button: Button) -> void:
 func capture(name: String) -> void:
 	await get_tree().process_frame
 	await RenderingServer.frame_post_draw
-	get_viewport().get_texture().get_image().save_png(OUTPUT + "/" + name + ".png")
+	get_viewport().get_texture().get_image().save_png(OUTPUT+"/"+name+".png")
+
+func meshes(node: Node, output: Array[MeshInstance3D]) -> void:
+	if node is MeshInstance3D: output.append(node)
+	for child in node.get_children(): meshes(child,output)
+
+func projected_bounds(presentation: FighterPresentation, size: Vector2) -> Rect2:
+	var rect := Rect2()
+	for i in 8:
+		var point := presentation.rig.global_transform*presentation.model_bounds.get_endpoint(i)
+		var pixel := presentation.camera.unproject_position(point)
+		if i == 0: rect = Rect2(pixel,Vector2.ZERO)
+		else: rect = rect.expand(pixel)
+	return rect
+
+func check_framing(gallery: FighterGallery, label: String) -> void:
+	var size := Vector2(gallery.demo_viewport.size)
+	var bounds := projected_bounds(gallery.presentation,size)
+	var safe := Rect2(size*.025,size*.95)
+	check(safe.encloses(bounds),label+" full mesh envelope including feet, hair, wings and tail fits with margin")
+	check(bounds.size.y >= size.y*.72,label+" character occupies at least 72% of viewport height")
 
 func _ready() -> void:
 	call_deferred("run")
@@ -39,51 +60,99 @@ func run() -> void:
 	game.show_gallery()
 	for index in game.roster.size():
 		var gallery: FighterGallery = game.screen
+		var id: String = game.roster[index].id
 		await click(gallery.fighter_buttons[index])
-		check(gallery.current == index,game.roster[index].id+" is selectable through its actual roster card")
-		await get_tree().create_timer(.95).timeout
-		check(gallery.presentation.face.mesh != null and gallery.presentation.edge.mesh != null and gallery.demo_viewport.find_world_3d() != null,game.roster[index].id+" has a textured extruded silhouette in a real perspective 3D world")
-		check(gallery.presentation.visual.preview_pose == "heavy" and gallery.preview.visible,game.roster[index].id+" performs one signature move on entry")
-		var framed := true
-		var bounds := gallery.presentation.face.mesh.get_aabb()
-		for corner in 8:
-			var world := gallery.presentation.face.global_transform*bounds.get_endpoint(corner)
-			framed = framed and Rect2(Vector2.ZERO,Vector2(gallery.demo_viewport.size)).has_point(gallery.presentation.camera.unproject_position(world))
-		check(framed,game.roster[index].id+" full signature silhouette remains inside the camera frame")
-		var stage_id := gallery.presentation.get_instance_id()
-		var ring_id := gallery.presentation.rings[0].get_instance_id()
-		var world_id := gallery.demo_viewport.find_world_3d().get_instance_id()
-		await capture("presentation-"+game.roster[index].id)
-		await get_tree().create_timer(2.0).timeout
-		check(gallery.preview.visible and gallery.presentation.finished and gallery.presentation.is_processing() and gallery.presentation.get_instance_id() == stage_id and gallery.presentation.rings[0].get_instance_id() == ring_id and gallery.demo_viewport.find_world_3d().get_instance_id() == world_id,game.roster[index].id+" keeps the same live 3D world, character and rings after the signature move")
-		var foot := gallery.presentation.rig.position
-		var scale_before := gallery.presentation.rig.scale.y
-		await get_tree().create_timer(.16).timeout
-		check(gallery.presentation.rig.position == foot and gallery.presentation.rig.scale.y != scale_before,game.roster[index].id+" breathes on the existing ring without moving its feet")
-		await capture("idle-"+game.roster[index].id)
+		check(gallery.current == index,id+" selects through its real roster card")
+		await get_tree().create_timer(.3).timeout
+		var stage := gallery.presentation
+		var model_meshes: Array[MeshInstance3D] = []
+		meshes(stage.model,model_meshes)
+		var actual_triangles := 0
+		var surfaces := 0
+		var normal_maps := 0
+		var skinned := true
+		for node in model_meshes:
+			skinned = skinned and node.skin != null
+			for surface in node.mesh.get_surface_count():
+				surfaces += 1
+				actual_triangles += node.mesh.surface_get_array_index_len(surface)/3
+				var material := node.get_active_material(surface) as StandardMaterial3D
+				if material and material.normal_enabled and material.normal_texture: normal_maps += 1
+		check(actual_triangles >= 30000 and skinned,id+" has an actual detailed, skinned volume mesh ("+str(actual_triangles)+" triangles)")
+		check(stage.skeleton != null and stage.skeleton.get_bone_count() >= 16,id+" has a real imported skeleton")
+		check(surfaces >= 8 and normal_maps >= 3,id+" renders separate physical materials and normal maps")
+		check_framing(gallery,id+" entrance")
+		var stage_id := stage.get_instance_id()
+		var ring_id := stage.rings[0].get_instance_id()
+		await get_tree().create_timer(1.2).timeout
+		check(stage.finished and gallery.preview.visible and stage.get_instance_id() == stage_id,id+" retains the same live 3D model after entrance")
+		var spine := stage.skeleton.find_bone("spine")
+		var pose := stage.skeleton.get_bone_pose_rotation(spine)
+		var foot := stage.rig.position
+		await get_tree().create_timer(.23).timeout
+		check(stage.skeleton.get_bone_pose_rotation(spine) != pose and stage.rig.position == foot and stage.rig.scale == Vector3.ONE,id+" breathes through the skeleton without stretching the model or sliding feet")
+		check_framing(gallery,id+" idle")
+		await capture("full-"+id)
+		var image := gallery.demo_viewport.get_texture().get_image()
+		var hash := image.get_data().hex_encode().sha256_text()
+		check(not seen_images.has(hash),id+" has a distinct rendered 3D character")
+		seen_images[hash] = true
+		# Test quarter, side and rear views against the same adaptive camera.
+		for angle in [PI*.5,PI]:
+			stage.yaw = angle
+			stage.frame_camera()
+			check_framing(gallery,id+" rotated "+str(int(rad_to_deg(angle))))
+		stage.yaw = .4
+		stage.frame_camera()
+		await click(gallery.turn_buttons[1])
+		check(stage.yaw > .8,id+" TURN RIGHT rotates the actual model view")
+		await click(gallery.turn_buttons[0])
+		check(is_equal_approx(stage.yaw,.4),id+" TURN LEFT returns to the original angle")
+		var center := gallery.preview.get_global_rect().get_center()
+		var press := InputEventMouseButton.new()
+		press.button_index = MOUSE_BUTTON_LEFT
+		press.pressed = true
+		press.position = center
+		get_viewport().push_input(press)
+		var motion := InputEventMouseMotion.new()
+		motion.position = center+Vector2(40,0)
+		motion.relative = Vector2(40,0)
+		get_viewport().push_input(motion)
+		press.pressed = false
+		get_viewport().push_input(press)
+		check(stage.yaw < .3,id+" dragging inside the viewport rotates the character")
+		stage.yaw = .4
+		stage.frame_camera()
+		await click(gallery.portrait_button)
+		check(stage.portrait and stage.camera.position.distance_to(stage.target) < stage.camera_distance+0.01,id+" portrait button switches to the actual 3D close view")
+		await capture("portrait-"+id)
+		await click(gallery.portrait_button)
+		check(not stage.portrait,id+" full-body button restores complete framing")
+		check_framing(gallery,id+" restored")
 		await click(gallery.sheet_button)
-		check(gallery.art.visible and not gallery.preview.visible and not gallery.presentation.is_processing(),game.roster[index].id+" original reference sheet remains separately accessible")
+		check(gallery.art.visible and not gallery.preview.visible and not stage.is_processing() and not stage.animator.active,id+" original sheet remains accessible and pauses the 3D animation")
 		await click(gallery.sheet_button)
-		check(gallery.preview.visible and not gallery.art.visible and gallery.presentation.rings[0].get_instance_id() == ring_id,game.roster[index].id+" returns from the sheet to the same persistent podium")
+		check(gallery.preview.visible and stage.animator.active and stage.rings[0].get_instance_id() == ring_id,id+" returns to the same live model and podium")
 		await click(gallery.replay_button)
-		check(gallery.preview.visible and not gallery.presentation.finished and gallery.presentation.rings[0].get_instance_id() == ring_id,game.roster[index].id+" presentation replay restarts the entrance")
-	var gallery: FighterGallery = game.screen
-	check(gallery.get("move_buttons") == null and gallery.get("showcase") == null,"old automatic movement tour and executable move list are removed from Fighters")
-	# Mobile/touch UI stays usable after the roster/gallery expansion.
-	game.touch_mode = true
-	game.show_select(true)
-	game.screen.choose(0,8)
-	game.screen.confirm(0)
-	game.screen.confirm(1)
-	game.start_match()
+		check(not stage.finished and stage.get_instance_id() == stage_id,id+" replay restarts the real model presentation")
+	# Native stage scaling keeps the character sharp and large at smaller windows.
+	get_window().size = Vector2i(960,540)
 	await get_tree().create_timer(.2).timeout
-	game.match_node.phase = "fight"
-	game.match_node.phase_time = 0.0
-	await capture("crystal-fang-match")
-	check(game.match_node.fighters[0].visual.sprite.texture != null, "new roster fighter also renders in actual combat")
+	var gallery: FighterGallery = game.screen
+	var expected := Vector2i((gallery.preview.size*gallery.preview.get_global_transform().get_scale()).round())
+	check(gallery.demo_viewport.size == expected,"gallery renders at actual native pixel density after resize")
+	check_framing(gallery,"960x540")
+	await capture("gallery-960x540")
+	get_window().size = Vector2i(1920,1080)
+	await get_tree().create_timer(.2).timeout
+	expected = Vector2i((gallery.preview.size*gallery.preview.get_global_transform().get_scale()).round())
+	check(gallery.demo_viewport.size == expected,"gallery increases its 3D framebuffer for a larger native window")
+	check_framing(gallery,"1920x1080")
+	await capture("gallery-1920x1080")
+	get_window().size = Vector2i(1280,720)
 	game.show_menu()
 	await get_tree().process_frame
 	await get_tree().process_frame
 	await get_tree().create_timer(.8).timeout
-	print("GALLERY VISUAL RESULT: %d passed, %d failed" % [passed, failed])
-	get_tree().quit(0 if failed == 0 else 1)
+	print("GALLERY VISUAL RESULT: %d passed, %d failed" % [passed,failed])
+	get_tree().quit(1 if failed else 0)

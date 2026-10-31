@@ -1,0 +1,206 @@
+{
+  "version": 13,
+  "provenance": "Original procedural Blender mesh sculptures, derived from the supplied character identity references. No source artwork modified.",
+  "fighters": {
+    "sharkbyte": {
+      "path": "assets/models/v13/sharkbyte.glb",
+      "vertices": 51150,
+      "triangles": 101408,
+      "bones": 16,
+      "materials": 9,
+      "bounds_min": [
+        -0.6872276067733765,
+        0.0030000004917383194,
+        -0.8799999952316284
+      ],
+      "bounds_max": [
+        0.6872276067733765,
+        2.7432632446289062,
+        0.38619911670684814
+      ],
+      "sha256": "71c0f0defc891d82a26703fa4c4b43d1ec6d1cdcbbf2dd52db6d1dbc83c06e35",
+      "bytes": 4555932,
+      "animation": "Gallery_Idle"
+    },
+    "bullet": {
+      "path": "assets/models/v13/bullet.glb",
+      "vertices": 64316,
+      "triangles": 126424,
+      "bones": 16,
+      "materials": 15,
+      "bounds_min": [
+        -0.7734915614128113,
+        0.0030000004917383194,
+        -0.22499999403953552
+      ],
+      "bounds_max": [
+        0.7734916806221008,
+        2.549999952316284,
+        0.37999993562698364
+      ],
+      "sha256": "dfbca2484142c1f18f1a8ea9be220a0be9c0e5b6e1c0eccc307727c10124c569",
+      "bytes": 5662952,
+      "animation": "Gallery_Idle"
+    },
+    "nachtelf": {
+      "path": "assets/models/v13/nachtelf.glb",
+      "vertices": 57854,
+      "triangles": 113984,
+      "bones": 16,
+      "materials": 15,
+      "bounds_min": [
+        -0.6456000208854675,
+        0.0030000004917383194,
+        -0.31546318531036377
+      ],
+      "bounds_max": [
+        0.8133885264396667,
+        2.549999952316284,
+        0.4036571979522705
+      ],
+      "sha256": "27b10b26cad2e73e0867342f00a9531f5b86b42860297fbc6051a5bdac36f360",
+      "bytes": 5152768,
+      "animation": "Gallery_Idle"
+    },
+    "poisonboy": {
+      "path": "assets/models/v13/poisonboy.glb",
+      "vertices": 53726,
+      "triangles": 106084,
+      "bones": 16,
+      "materials": 14,
+      "bounds_min": [
+        -0.6284999847412109,
+        0.0030000004917383194,
+        -0.22499999403953552
+      ],
+      "bounds_max": [
+        0.8133885264396667,
+        2.5999999046325684,
+        0.4036571979522705
+      ],
+      "sha256": "8bcebaf159594549cfb14445e7f0cadf537299fa10232fb15a02ed70cc73b84a",
+      "bytes": 4828720,
+      "animation": "Gallery_Idle"
+    },
+    "spinegrin": {
+      "path": "assets/models/v13/spinegrin.glb",
+      "vertices": 57632,
+      "triangles": 114352,
+      "bones": 16,
+      "materials": 10,
+      "bounds_min": [
+        -0.6580684781074524,
+        0.0030000004917383194,
+        -0.900628924369812
+      ],
+      "bounds_max": [
+        0.6580684781074524,
+        2.5379114151000977,
+        0.37999993562698364
+      ],
+      "sha256": "5e6481e4efa47e36d5fbb9a31a18ecd0adea60b231d705e25e3df4a9277406b3",
+      "bytes": 5142952,
+      "animation": "Gallery_Idle"
+    },
+    "chainveil": {
+      "path": "assets/models/v13/chainveil.glb",
+      "vertices": 65002,
+      "triangles": 127780,
+      "bones": 16,
+      "materials": 14,
+      "bounds_min": [
+        -0.6119999885559082,
+        0.0030000004917383194,
+        -0.30297335982322693
+      ],
+      "bounds_max": [
+        0.6119999885559082,
+        2.549999952316284,
+        0.37999993562698364
+      ],
+      "sha256": "45d7fa18d4db2b7035dfe6ae919f3a34291315d07befefe8e4b7c9f4839afb46",
+      "bytes": 5637300,
+      "animation": "Gallery_Idle"
+    },
+    "cheese_rat": {
+      "path": "assets/models/v13/cheese_rat.glb",
+      "vertices": 56342,
+      "triangles": 111740,
+      "bones": 16,
+      "materials": 12,
+      "bounds_min": [
+        -0.6114000082015991,
+        0.0030000004917383194,
+        -0.22499999403953552
+      ],
+      "bounds_max": [
+        0.6114000082015991,
+        2.591444253921509,
+        0.3799999952316284
+      ],
+      "sha256": "58e6f5c5f0e700f3db90e2db32e883ac126f1e9ad9dba332087bc6ad62cb08a0",
+      "bytes": 5049396,
+      "animation": "Gallery_Idle"
+    },
+    "lava_stone": {
+      "path": "assets/models/v13/lava_stone.glb",
+      "vertices": 52440,
+      "triangles": 103712,
+      "bones": 16,
+      "materials": 10,
+      "bounds_min": [
+        -0.8182983994483948,
+        0.0030000004917383194,
+        -0.2754059433937073
+      ],
+      "bounds_max": [
+        0.8182983994483948,
+        2.522956371307373,
+        0.37999993562698364
+      ],
+      "sha256": "aee8f5b9b2e13df7598a7ffd22b2dbda5eaab8a83105c27561b9757ab8509bcd",
+      "bytes": 4921312,
+      "animation": "Gallery_Idle"
+    },
+    "crystal_fang": {
+      "path": "assets/models/v13/crystal_fang.glb",
+      "vertices": 48438,
+      "triangles": 95588,
+      "bones": 16,
+      "materials": 11,
+      "bounds_min": [
+        -0.7223159074783325,
+        0.004999995231628418,
+        -0.6571713089942932
+      ],
+      "bounds_max": [
+        0.7223159074783325,
+        2.68050479888916,
+        0.43072211742401123
+      ],
+      "sha256": "6f8352df02f76e5c8acbbb71fe28968a965fade486368216ba791baba2390ff2",
+      "bytes": 4296308,
+      "animation": "Gallery_Idle"
+    },
+    "phoenix_reign": {
+      "path": "assets/models/v13/phoenix_reign.glb",
+      "vertices": 45086,
+      "triangles": 89060,
+      "bones": 16,
+      "materials": 10,
+      "bounds_min": [
+        -1.5011509656906128,
+        0.004999995231628418,
+        -0.6508313417434692
+      ],
+      "bounds_max": [
+        1.5011509656906128,
+        2.770153284072876,
+        0.43072211742401123
+      ],
+      "sha256": "2a45be15c008f846bf49a9e33c5d076efad4c3e6621b8723f0305143702efe76",
+      "bytes": 4021776,
+      "animation": "Gallery_Idle"
+    }
+  }
+}

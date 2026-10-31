@@ -7,6 +7,20 @@ Based on the supplied v1.1 Word specification and Linux starter package.
 The original design documents remain in `docs/`; the current implementation
 and its limits are described here and in `docs/TEST_LOG.md`.
 
+## Linux V13 — 3D Fighter Gallery
+
+[Download Linux V13](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.13.0-linux-gallery/releases/linux-v0.13.0/InfernoDuel-Linux-v0.13.0.tar.xz).
+Pak uit en start `InfernoDuel-Linux/PLAY.sh`.
+
+**FIGHTERS** toont tien nieuwe Blender-volumemodellen met echte skeletons,
+skin-gewichten, idle-animatie, ogen/vingers, kleding- en characterdetails en
+normal maps. Het grotere 3D-vlak houdt iedere fighter inclusief voeten, haar,
+staarten en vleugels in beeld. Sleep om te draaien of kies **PORTRAIT VIEW** /
+**FULL BODY**. Studiobelichting en schaduwen laten de materialen en vormen zien.
+De modellen zijn gestileerde interpretaties; de combat-modellen uit V12 blijven
+behouden. [Alle tien bekijken](releases/linux-v0.13.0/README.md) ·
+[Bediening en modelpipeline](docs/V13_GALLERY.md).
+
 ## Linux V12 — 0.12.0 preview
 
 [Download de Linux V12-preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.12.0-linux-preview/releases/linux-v0.12.0/InfernoDuel-Linux-v0.12.0-preview.tar.xz).
@@ -113,15 +127,13 @@ Bullet, Nachtelf, PoisonBoy, Spinegrin, Chainveil, Cheese Rat, Lava Stone,
 Crystal Fang and Phoenix Reign. Every fighter has animated selection art and a
 complete basic/special/ultimate set; the full roster has **69 attacks/abilities**.
 
-**FIGHTERS** is now a character showcase. Ten portrait cards select each legend.
-A short entrance uses the existing illustrated character art as an extruded,
-textured silhouette on a lit perspective **3D podium**, performs one signature
-move, then keeps the **same lit character and rings** on screen with breathing
-and a small idle sway. The camera settles; the 3D view is retained.
-REPLAY PRESENTATION repeats the entrance. ORIGINAL SHEET and PLAY INTRO retain
-the original references and existing films. The old movement tour, dummy and
-executable move list are removed. This is a 2.5D art presentation, not ten new
-fully modelled/rigged 3D characters.
+**FIGHTERS** presents ten new skinned Blender characters on a persistent lit
+3D stage. Each has a real skeleton, an idle animation, character-specific mesh
+details and normal-mapped materials. Drag to rotate or choose TURN and PORTRAIT
+VIEW / FULL BODY. Automatic framing retains the entire silhouette; the 3D target
+tracks native pixel density. Original-sheet view and the existing intro films
+remain available. This V13 gallery replaces the earlier extruded illustration
+presentation; the V12 arena combat models remain unchanged.
 
 V10 replaces flow-warped animation with intact illustrated poses. Each of the ten
 fighters gets **12 walk drawings and 12 heavy-attack drawings**: 240 new indexed

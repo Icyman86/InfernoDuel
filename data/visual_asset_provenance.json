@@ -619,6 +619,106 @@
       "sha256": "02ac23dc8568fe901b521132da179900383480c3caaeb6fc32a15326111821ce",
       "kind": "reference_guided_generated_frontal_half_body_portraits",
       "original_user_file": false
+    },
+    {
+      "path": "assets/models/v13/sharkbyte.glb",
+      "sha256": "71c0f0defc891d82a26703fa4c4b43d1ec6d1cdcbbf2dd52db6d1dbc83c06e35",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/SharkByte Fighting Game Character Sheet.png",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/bullet.glb",
+      "sha256": "dfbca2484142c1f18f1a8ea9be220a0be9c0e5b6e1c0eccc307727c10124c569",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/nachtelf.glb",
+      "sha256": "27b10b26cad2e73e0867342f00a9531f5b86b42860297fbc6051a5bdac36f360",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/poisonboy.glb",
+      "sha256": "8bcebaf159594549cfb14445e7f0cadf537299fa10232fb15a02ed70cc73b84a",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/Dark Fantasy Fighting Game Character Sheet.png",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/spinegrin.glb",
+      "sha256": "5e6481e4efa47e36d5fbb9a31a18ecd0adea60b231d705e25e3df4a9277406b3",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/Spinegrin_ Inferno Duel Character Sheet.png",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/chainveil.glb",
+      "sha256": "45d7fa18d4db2b7035dfe6ae919f3a34291315d07befefe8e4b7c9f4839afb46",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/Chainveil_ Inferno Duel Character Sheet.png",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/cheese_rat.glb",
+      "sha256": "58e6f5c5f0e700f3db90e2db32e883ac126f1e9ad9dba332087bc6ad62cb08a0",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 18.59.15.jpeg",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/lava_stone.glb",
+      "sha256": "aee8f5b9b2e13df7598a7ffd22b2dbda5eaab8a83105c27561b9757ab8509bcd",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-25 at 19.53.45.jpeg",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/crystal_fang.glb",
+      "sha256": "6f8352df02f76e5c8acbbb71fe28968a965fade486368216ba791baba2390ff2",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.17.30.jpeg",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
+    },
+    {
+      "path": "assets/models/v13/phoenix_reign.glb",
+      "sha256": "2a45be15c008f846bf49a9e33c5d076efad4c3e6621b8723f0305143702efe76",
+      "kind": "original_procedural_skinned_blender_model",
+      "reference": "assets/originals/character_sheets_2026-10-27/WhatsApp Image 2026-10-27 at 20.18.10.jpeg",
+      "original_user_file": false,
+      "authoring_script": "tools/modeling/build_roster.py",
+      "date": "2026-10-31",
+      "scope": "V13 Fighters gallery; combat renderer unchanged"
     }
   ],
   "gallery_views": {
