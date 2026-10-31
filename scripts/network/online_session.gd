@@ -18,6 +18,8 @@ var code := ""
 var token := ""
 var last_error := ""
 var selected: Array[int] = [0,1]
+var owned_by_slot: Array = [[],[]]
+var roster: Array = []
 var ready_players: Array[bool] = [false,false]
 var pause_flags: Array[bool] = [false,false]
 var rematch_flags: Array[bool] = [false,false]
@@ -39,6 +41,7 @@ var closing := false
 var disconnect_pending := false
 
 func _ready() -> void:
+	roster = JSON.parse_string(FileAccess.get_file_as_string("res://data/fighters.json")).fighters
 	multiplayer.peer_connected.connect(_peer_connected)
 	multiplayer.peer_disconnected.connect(_peer_disconnected)
 	multiplayer.connected_to_server.connect(_connected)
@@ -69,6 +72,7 @@ func host(_address := "", requested_port := 0) -> String:
 		last_error = "Cannot create a session. Another game session may already be open on this device."
 		return ""
 	local_slot = 0
+	owned_by_slot[0] = Progression.owned_indices()
 	phase = "hosting"
 	multiplayer.multiplayer_peer = peer
 	connection_started = now()
@@ -85,6 +89,7 @@ func join(invitation: String) -> bool:
 		last_error = "Cannot search for the session. Check your Wi-Fi connection."
 		return false
 	local_slot = 1
+	owned_by_slot[1] = Progression.owned_indices()
 	phase = "discovering"
 	connection_started = now()
 	lobby_changed.emit()
@@ -118,6 +123,7 @@ func close() -> void:
 	token = ""
 	last_error = ""
 	selected.assign([0,1])
+	owned_by_slot = [[],[]]
 	selected_arena = "citadel"
 	ready_players.assign([false,false])
 	pause_flags.assign([false,false])
@@ -169,10 +175,10 @@ func _peer_connected(id: int) -> void:
 		connection_started = now()
 
 func _connected() -> void:
-	if local_slot == 1: _hello.rpc_id(1, token, SessionCode.PROTOCOL, build_version)
+	if local_slot == 1: _hello.rpc_id(1, token, SessionCode.PROTOCOL, build_version, Progression.owned_indices())
 
 @rpc("any_peer", "call_remote", "reliable")
-func _hello(room_token: String, protocol: int, build: String) -> void:
+func _hello(room_token: String, protocol: int, build: String, owned: Array) -> void:
 	if local_slot != 0 or phase != "hosting": return
 	var sender := multiplayer.get_remote_sender_id()
 	if sender != pending_peer or room_token != token or protocol != SessionCode.PROTOCOL or build != build_version:
@@ -180,12 +186,13 @@ func _hello(room_token: String, protocol: int, build: String) -> void:
 		peer.get_host().flush()
 		_reject_peer(sender)
 		return
+	owned_by_slot[1] = sanitize_owned(owned)
 	opponent = sender
 	pending_peer = 0
 	phase = "lobby"
 	discovery.stop()
 	last_input_time = now()
-	_accept.rpc_id(opponent, selected, ready_players)
+	_accept.rpc_id(opponent, selected, ready_players, owned_by_slot[0])
 	lobby_changed.emit()
 
 func _reject_peer(id: int) -> void:
@@ -200,9 +207,10 @@ func _rejected(reason: String) -> void:
 	if local_slot == 1 and phase == "connecting": fail(reason)
 
 @rpc("authority", "call_remote", "reliable")
-func _accept(indices: Array, flags: Array) -> void:
+func _accept(indices: Array, flags: Array, owned: Array) -> void:
 	if local_slot != 1 or phase != "connecting": return
 	opponent = 1
+	owned_by_slot[0] = sanitize_owned(owned)
 	phase = "lobby"
 	selected.assign(indices)
 	ready_players.assign(flags)
@@ -217,28 +225,39 @@ func _peer_disconnected(id: int) -> void:
 		fail("Your opponent left the session. Create or join a new session.")
 
 func choose(index: int) -> void:
+	if local_slot not in [0,1] or phase != "lobby": return
+	if index < 0 or index >= roster.size() or not Progression.available(roster[index].id): return
+	owned_by_slot[local_slot] = Progression.owned_indices()
 	if local_slot == 0: _choose(0, index)
-	elif local_slot == 1 and phase == "lobby": _choice.rpc_id(1,index)
+	elif local_slot == 1 and phase == "lobby": _choice.rpc_id(1,index,owned_by_slot[1])
+
+func sanitize_owned(indices: Array) -> Array[int]:
+	var result: Array[int] = []
+	for i in roster.size():
+		if int(roster[i].get("unlock_cost",0)) == 0 or (i in indices and indices.size() <= roster.size()): result.append(i)
+	return result
 
 func ready_up(value: bool) -> void:
 	if local_slot == 0: _ready_up(0,value)
 	elif local_slot == 1 and phase == "lobby": _ready_vote.rpc_id(1,value)
 
 @rpc("any_peer", "call_remote", "reliable")
-func _choice(index: int) -> void:
-	if local_slot == 0 and multiplayer.get_remote_sender_id() == opponent: _choose(1,index)
+func _choice(index: int, owned: Array) -> void:
+	if local_slot == 0 and multiplayer.get_remote_sender_id() == opponent:
+		owned_by_slot[1] = sanitize_owned(owned)
+		_choose(1,index)
 
 @rpc("any_peer", "call_remote", "reliable")
 func _ready_vote(value: bool) -> void:
 	if local_slot == 0 and multiplayer.get_remote_sender_id() == opponent: _ready_up(1,value)
 
 func _choose(slot: int, index: int) -> void:
-	if phase != "lobby" or ready_players[slot] or index < 0 or index >= 10: return
+	if phase != "lobby" or ready_players[slot] or index < 0 or index >= roster.size() or index not in owned_by_slot[slot]: return
 	selected[slot] = index
 	_publish_lobby()
 
 func _ready_up(slot: int, value: bool) -> void:
-	if phase != "lobby": return
+	if phase != "lobby" or (value and selected[slot] not in owned_by_slot[slot]): return
 	ready_players[slot] = value
 	_publish_lobby()
 	if ready_players[0] and ready_players[1]:
@@ -337,11 +356,16 @@ func clear_inputs() -> void:
 
 func send_snapshot(state: Dictionary, sequence: int) -> void:
 	if local_slot == 0 and opponent != 0 and phase in ["fight", "finished"]:
-		_state.rpc_id(opponent, state, sequence, epoch)
+		_state.rpc_id(opponent, var_to_bytes(state).compress(FileAccess.COMPRESSION_DEFLATE), sequence, epoch)
 
 @rpc("authority", "call_remote", "unreliable_ordered", 1)
-func _state(state: Dictionary, sequence: int, generation: int) -> void:
+func _state(payload: PackedByteArray, sequence: int, generation: int) -> void:
 	if local_slot != 1 or generation != epoch or sequence <= last_snapshot_sequence or phase not in ["fight","finished"]: return
+	if payload.is_empty() or payload.size() > 8192: return
+	var decoded := payload.decompress_dynamic(65536,FileAccess.COMPRESSION_DEFLATE)
+	if decoded.is_empty(): return
+	var state: Variant = bytes_to_var(decoded)
+	if not state is Dictionary or state.get("fighters",[]).size() != 2: return
 	last_snapshot_sequence = sequence
 	last_state_time = now()
 	latest_snapshot = state

@@ -67,3 +67,21 @@ fire/air; mensachtige feniks met gevederde vleugels, leren outfit, intense vlamm
 - `data/uploaded_character_sheets.json` bevat SHA-256, formaat, afmetingen en bronbestandsnaam.
 - Run `python3 tools/verify_assets.py` op Linux in de projectroot; verwacht `8/8 OK`.
 - Geen extra plaatjes uit oudere conversaties zijn in deze update verzonnen of als echte beelden gepresenteerd.
+
+## Bamboo Blade en Sawtina — upload 31 oktober 2026
+
+De twee nieuwe JPEGs blijven ongewijzigd onder
+`assets/originals/character_sheets_2026-10-31/`. Hun hashes en oorspronkelijke
+bestandsnamen staan in `data/uploaded_character_sheets.json` (nu 10 bronbeelden).
+Deze afbeeldingen zijn ontwerp-/movesheets, geen animaties. De aparte gegenereerde
+RGBA-atlassen hebben elk 24 combatkeys, twee extra ultimate-poses en vier introbeelden; de indexers wijzigen
+geen pixels. Provenance staat in `data/visual_asset_provenance.json`.
+
+- **Bamboo Blade:** rode panda, zwart-rode kleding, bronzen bracers, fruitmand en
+  groene bamboezwaarden. Bamboo Slash, Twin Bamboo Cleave, Fruit Throw en Crimson Harvest.
+- **Sawtina:** magenta haar, elfenoren, zwart-roze jurk, munitieriemen en zaaglaarzen.
+  Cartridge Jab, Razor Heel, Bullet Tutu en Razor Rhapsody.
+
+Beide zijn in V16 speelbaar na aankoop voor 200 verdiende coins per fighter.
+De twaalf fighterprofielen gebruiken een 6×2-selectie. De gallery toont grote, volledige 2D-illustraties en de zes seconden durende introfilms zijn ook vóór
+ontgrendeling te bekijken.

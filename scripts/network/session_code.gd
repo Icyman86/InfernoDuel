@@ -2,7 +2,7 @@ class_name SessionCode
 extends RefCounted
 ## Six random, human-readable symbols. Room lookup is separate from transport.
 const ALPHABET := "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
-const PROTOCOL := 3
+const PROTOCOL := 4
 
 static func generate() -> String:
 	var result := ""

@@ -21,6 +21,9 @@ func run() -> void:
 	var all_moves := 0
 	for index in game.roster.size():
 		var profile: Dictionary = game.roster[index]
+		if not Progression.available(profile.id):
+			Progression.coins = 200
+			Progression.purchase(profile.id)
 		game.show_select(false)
 		game.screen.choose(0, index)
 		game.screen.confirm(0)
@@ -83,7 +86,7 @@ func run() -> void:
 			if duel.phase == "complete": break
 		check(duel.phase == "complete" and duel.wins[1] == 2, profile.id + " CPU wins a full normal-health match against a passive player")
 		await get_tree().process_frame
-	check(all_moves == 69, "all 69 defined attacks and abilities were exercised")
+	check(all_moves == 77, "all 77 defined attacks and abilities were exercised")
 	# Test defensive semantics separately from catalogue activation.
 	game.selected.assign([7, 0])
 	game.start_match()

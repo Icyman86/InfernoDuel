@@ -1,3 +1,8 @@
+# Android V16
+
+Nieuwste build: [Bamboo Blade, Sawtina en coins](V16_ANDROID.md).
+De V16-preview werkt de bestaande preview bij; beide spelers gebruiken V16 voor een sessie.
+
 # V15 / 0.15.0 — Crystal Fang zijn mijn
 
 Zie [V15 Android](V15_ANDROID.md) voor de vierde arena en de preview-update.

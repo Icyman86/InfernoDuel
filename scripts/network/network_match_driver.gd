@@ -55,9 +55,9 @@ func capture() -> Dictionary:
 			"attack":f.attack.id if f.attack else "","attack_time":f.attack_time})
 	var objects: Array = []
 	for p in duel.projectiles:
-		objects.append({"source":p.source.player,"move":p.move.id,"kind":p.kind,
-			"p":[p.position.x,p.position.y],"age":p.age,"direction":p.direction,
-			"size":[p.size.x,p.size.y],"speed":p.speed,"lifetime":p.lifetime})
+		# Compact ordered records keep three-projectile volleys below the UDP MTU.
+		objects.append([p.source.player,p.move.id,p.kind,p.position.x,p.position.y,
+			p.age,p.direction,p.size.x,p.size.y,p.speed,p.lifetime,p.spawn_index])
 	return {"fighters":fighters,"projectiles":objects,"phase":duel.phase,
 		"phase_time":duel.phase_time,"remaining":duel.remaining,"round":duel.round_number,
 		"wins":duel.wins,"result":duel.result_text,"announcement":duel.announcement.text,
@@ -118,15 +118,19 @@ func apply_snapshot(snapshot: Dictionary) -> void:
 	projectile_targets = state.get("projectiles",[])
 	for data in projectile_targets:
 		var p := DuelProjectile.new()
-		p.source = duel.fighters[data.source]
-		p.move = p.source.moves[data.move]
-		p.kind = data.kind
-		p.position = Vector2(data.p[0],data.p[1])
-		p.age = data.age
-		p.direction = data.direction
-		p.size = Vector2(data.size[0],data.size[1])
-		p.speed = data.speed
-		p.lifetime = data.lifetime
+		if not data is Array or data.size() != 12:
+			p.free()
+			continue
+		p.source = duel.fighters[int(data[0])]
+		p.move = p.source.moves[data[1]]
+		p.kind = data[2]
+		p.position = Vector2(data[3],data[4])
+		p.age = data[5]
+		p.direction = data[6]
+		p.size = Vector2(data[7],data[8])
+		p.speed = data[9]
+		p.lifetime = data[10]
+		p.spawn_index = data[11]
 		duel.add_child(p)
 		duel.projectiles.append(p)
 	duel.update_hud()

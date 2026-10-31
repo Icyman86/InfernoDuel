@@ -44,7 +44,7 @@ func run() -> void:
 	game.show_select(false)
 	check(game.route == "online","Android cannot enter local versus through the selection API")
 	var lobby: OnlineLobby = game.screen
-	check(lobby.code_input.max_length == 6 and not lobby.get("address_picker"),"connection UI accepts only six symbols and has no address picker")
+	check(lobby.code_input.max_length >= 8 and not lobby.get("address_picker"),"connection UI permits pasted separators, validates six symbols, and has no address picker")
 	lobby.code_input.grab_focus()
 	for letter in ["f","s","i"]:
 		var event := InputEventKey.new()

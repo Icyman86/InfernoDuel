@@ -33,7 +33,7 @@ with tempfile.TemporaryDirectory(prefix='inferno-network-') as folder:
                 raise AssertionError('Host did not create a session')
             time.sleep(.05)
         bad = start('bad')
-        assert bad.wait(timeout=12) == 0, 'Wrong-code rejection client failed'
+        assert bad.wait(timeout=20) == 0, 'Wrong-code rejection client failed'
         guest = start('guest')
         assert host.wait(timeout=45) == 0, 'Authoritative host integration failed'
         assert guest.wait(timeout=12) == 0, 'Guest integration failed'

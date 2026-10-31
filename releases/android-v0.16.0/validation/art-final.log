@@ -1,0 +1,828 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS sharkbyte portrait is a valid crop of its original sheet
+PASS bullet portrait is a valid crop of its original sheet
+PASS nachtelf portrait is a valid crop of its original sheet
+PASS poisonboy portrait is a valid crop of its original sheet
+PASS spinegrin portrait is a valid crop of its original sheet
+PASS chainveil portrait is a valid crop of its original sheet
+PASS cheese_rat portrait is a valid crop of its original sheet
+PASS lava_stone portrait is a valid crop of its original sheet
+PASS crystal_fang portrait is a valid crop of its original sheet
+PASS phoenix_reign portrait is a valid crop of its original sheet
+PASS bamboo_blade portrait is a valid crop of its original sheet
+PASS sawtina portrait is a valid crop of its original sheet
+PASS all twelve roster avatars are distinct
+PASS sharkbyte core has genuine alpha transparency
+PASS sharkbyte core frame 0 has a bounded textured mesh
+PASS sharkbyte core frame 1 has a bounded textured mesh
+PASS sharkbyte core frame 2 has a bounded textured mesh
+PASS sharkbyte core frame 3 has a bounded textured mesh
+PASS sharkbyte core frame 4 has a bounded textured mesh
+PASS sharkbyte core frame 5 has a bounded textured mesh
+PASS sharkbyte core frame 6 has a bounded textured mesh
+PASS sharkbyte core frame 7 has a bounded textured mesh
+PASS sharkbyte core frame 8 has a bounded textured mesh
+PASS sharkbyte core frame 9 has a bounded textured mesh
+PASS sharkbyte core frame 10 has a bounded textured mesh
+PASS sharkbyte core frame 11 has a bounded textured mesh
+PASS sharkbyte core frame 12 has a bounded textured mesh
+PASS sharkbyte core frame 13 has a bounded textured mesh
+PASS sharkbyte core frame 14 has a bounded textured mesh
+PASS sharkbyte core frame 15 has a bounded textured mesh
+PASS sharkbyte actions has genuine alpha transparency
+PASS sharkbyte actions frame 16 has a bounded textured mesh
+PASS sharkbyte actions frame 17 has a bounded textured mesh
+PASS sharkbyte actions frame 18 has a bounded textured mesh
+PASS sharkbyte actions frame 19 has a bounded textured mesh
+PASS sharkbyte actions frame 20 has a bounded textured mesh
+PASS sharkbyte actions frame 21 has a bounded textured mesh
+PASS sharkbyte actions frame 22 has a bounded textured mesh
+PASS sharkbyte actions frame 23 has a bounded textured mesh
+PASS sharkbyte walk has genuine alpha transparency
+PASS sharkbyte walk frame 24 has a bounded textured mesh
+PASS sharkbyte walk frame 25 has a bounded textured mesh
+PASS sharkbyte walk frame 26 has a bounded textured mesh
+PASS sharkbyte walk frame 27 has a bounded textured mesh
+PASS sharkbyte walk frame 28 has a bounded textured mesh
+PASS sharkbyte walk frame 29 has a bounded textured mesh
+PASS sharkbyte drawn has genuine alpha transparency
+PASS sharkbyte drawn frame 30 has a bounded textured mesh
+PASS sharkbyte drawn frame 31 has a bounded textured mesh
+PASS sharkbyte drawn frame 32 has a bounded textured mesh
+PASS sharkbyte drawn frame 33 has a bounded textured mesh
+PASS sharkbyte drawn frame 34 has a bounded textured mesh
+PASS sharkbyte drawn frame 35 has a bounded textured mesh
+PASS sharkbyte drawn frame 36 has a bounded textured mesh
+PASS sharkbyte drawn frame 37 has a bounded textured mesh
+PASS sharkbyte drawn frame 38 has a bounded textured mesh
+PASS sharkbyte drawn frame 39 has a bounded textured mesh
+PASS sharkbyte drawn frame 40 has a bounded textured mesh
+PASS sharkbyte drawn frame 41 has a bounded textured mesh
+PASS sharkbyte drawn frame 42 has a bounded textured mesh
+PASS sharkbyte drawn frame 43 has a bounded textured mesh
+PASS sharkbyte drawn frame 44 has a bounded textured mesh
+PASS sharkbyte drawn frame 45 has a bounded textured mesh
+PASS sharkbyte drawn frame 46 has a bounded textured mesh
+PASS sharkbyte drawn frame 47 has a bounded textured mesh
+PASS sharkbyte drawn frame 48 has a bounded textured mesh
+PASS sharkbyte drawn frame 49 has a bounded textured mesh
+PASS sharkbyte drawn frame 50 has a bounded textured mesh
+PASS sharkbyte drawn frame 51 has a bounded textured mesh
+PASS sharkbyte drawn frame 52 has a bounded textured mesh
+PASS sharkbyte drawn frame 53 has a bounded textured mesh
+PASS sharkbyte has its complete unique pose set
+PASS sharkbyte renders idle
+PASS sharkbyte renders walk
+PASS sharkbyte renders light
+PASS sharkbyte renders heavy
+PASS sharkbyte renders guard
+PASS sharkbyte renders jump
+PASS sharkbyte renders special
+PASS sharkbyte renders ultimate
+PASS sharkbyte renders hit
+PASS sharkbyte renders ko
+PASS bullet core has genuine alpha transparency
+PASS bullet core frame 0 has a bounded textured mesh
+PASS bullet core frame 1 has a bounded textured mesh
+PASS bullet core frame 2 has a bounded textured mesh
+PASS bullet core frame 3 has a bounded textured mesh
+PASS bullet core frame 4 has a bounded textured mesh
+PASS bullet core frame 5 has a bounded textured mesh
+PASS bullet core frame 6 has a bounded textured mesh
+PASS bullet core frame 7 has a bounded textured mesh
+PASS bullet core frame 8 has a bounded textured mesh
+PASS bullet core frame 9 has a bounded textured mesh
+PASS bullet core frame 10 has a bounded textured mesh
+PASS bullet core frame 11 has a bounded textured mesh
+PASS bullet core frame 12 has a bounded textured mesh
+PASS bullet core frame 13 has a bounded textured mesh
+PASS bullet core frame 14 has a bounded textured mesh
+PASS bullet core frame 15 has a bounded textured mesh
+PASS bullet actions has genuine alpha transparency
+PASS bullet actions frame 16 has a bounded textured mesh
+PASS bullet actions frame 17 has a bounded textured mesh
+PASS bullet actions frame 18 has a bounded textured mesh
+PASS bullet actions frame 19 has a bounded textured mesh
+PASS bullet actions frame 20 has a bounded textured mesh
+PASS bullet actions frame 21 has a bounded textured mesh
+PASS bullet actions frame 22 has a bounded textured mesh
+PASS bullet actions frame 23 has a bounded textured mesh
+PASS bullet walk has genuine alpha transparency
+PASS bullet walk frame 24 has a bounded textured mesh
+PASS bullet walk frame 25 has a bounded textured mesh
+PASS bullet walk frame 26 has a bounded textured mesh
+PASS bullet walk frame 27 has a bounded textured mesh
+PASS bullet walk frame 28 has a bounded textured mesh
+PASS bullet walk frame 29 has a bounded textured mesh
+PASS bullet drawn has genuine alpha transparency
+PASS bullet drawn frame 30 has a bounded textured mesh
+PASS bullet drawn frame 31 has a bounded textured mesh
+PASS bullet drawn frame 32 has a bounded textured mesh
+PASS bullet drawn frame 33 has a bounded textured mesh
+PASS bullet drawn frame 34 has a bounded textured mesh
+PASS bullet drawn frame 35 has a bounded textured mesh
+PASS bullet drawn frame 36 has a bounded textured mesh
+PASS bullet drawn frame 37 has a bounded textured mesh
+PASS bullet drawn frame 38 has a bounded textured mesh
+PASS bullet drawn frame 39 has a bounded textured mesh
+PASS bullet drawn frame 40 has a bounded textured mesh
+PASS bullet drawn frame 41 has a bounded textured mesh
+PASS bullet drawn frame 42 has a bounded textured mesh
+PASS bullet drawn frame 43 has a bounded textured mesh
+PASS bullet drawn frame 44 has a bounded textured mesh
+PASS bullet drawn frame 45 has a bounded textured mesh
+PASS bullet drawn frame 46 has a bounded textured mesh
+PASS bullet drawn frame 47 has a bounded textured mesh
+PASS bullet drawn frame 48 has a bounded textured mesh
+PASS bullet drawn frame 49 has a bounded textured mesh
+PASS bullet drawn frame 50 has a bounded textured mesh
+PASS bullet drawn frame 51 has a bounded textured mesh
+PASS bullet drawn frame 52 has a bounded textured mesh
+PASS bullet drawn frame 53 has a bounded textured mesh
+PASS bullet has its complete unique pose set
+PASS bullet renders idle
+PASS bullet renders walk
+PASS bullet renders light
+PASS bullet renders heavy
+PASS bullet renders guard
+PASS bullet renders jump
+PASS bullet renders special
+PASS bullet renders ultimate
+PASS bullet renders hit
+PASS bullet renders ko
+PASS poisonboy core has genuine alpha transparency
+PASS poisonboy core frame 0 has a bounded textured mesh
+PASS poisonboy core frame 1 has a bounded textured mesh
+PASS poisonboy core frame 2 has a bounded textured mesh
+PASS poisonboy core frame 3 has a bounded textured mesh
+PASS poisonboy core frame 4 has a bounded textured mesh
+PASS poisonboy core frame 5 has a bounded textured mesh
+PASS poisonboy core frame 6 has a bounded textured mesh
+PASS poisonboy core frame 7 has a bounded textured mesh
+PASS poisonboy core frame 8 has a bounded textured mesh
+PASS poisonboy core frame 9 has a bounded textured mesh
+PASS poisonboy core frame 10 has a bounded textured mesh
+PASS poisonboy core frame 11 has a bounded textured mesh
+PASS poisonboy core frame 12 has a bounded textured mesh
+PASS poisonboy core frame 13 has a bounded textured mesh
+PASS poisonboy core frame 14 has a bounded textured mesh
+PASS poisonboy core frame 15 has a bounded textured mesh
+PASS poisonboy actions has genuine alpha transparency
+PASS poisonboy actions frame 16 has a bounded textured mesh
+PASS poisonboy actions frame 17 has a bounded textured mesh
+PASS poisonboy actions frame 18 has a bounded textured mesh
+PASS poisonboy actions frame 19 has a bounded textured mesh
+PASS poisonboy actions frame 20 has a bounded textured mesh
+PASS poisonboy actions frame 21 has a bounded textured mesh
+PASS poisonboy actions frame 22 has a bounded textured mesh
+PASS poisonboy actions frame 23 has a bounded textured mesh
+PASS poisonboy walk has genuine alpha transparency
+PASS poisonboy walk frame 24 has a bounded textured mesh
+PASS poisonboy walk frame 25 has a bounded textured mesh
+PASS poisonboy walk frame 26 has a bounded textured mesh
+PASS poisonboy walk frame 27 has a bounded textured mesh
+PASS poisonboy drawn has genuine alpha transparency
+PASS poisonboy drawn frame 28 has a bounded textured mesh
+PASS poisonboy drawn frame 29 has a bounded textured mesh
+PASS poisonboy drawn frame 30 has a bounded textured mesh
+PASS poisonboy drawn frame 31 has a bounded textured mesh
+PASS poisonboy drawn frame 32 has a bounded textured mesh
+PASS poisonboy drawn frame 33 has a bounded textured mesh
+PASS poisonboy drawn frame 34 has a bounded textured mesh
+PASS poisonboy drawn frame 35 has a bounded textured mesh
+PASS poisonboy drawn frame 36 has a bounded textured mesh
+PASS poisonboy drawn frame 37 has a bounded textured mesh
+PASS poisonboy drawn frame 38 has a bounded textured mesh
+PASS poisonboy drawn frame 39 has a bounded textured mesh
+PASS poisonboy drawn_heavy has genuine alpha transparency
+PASS poisonboy drawn_heavy frame 40 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 41 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 42 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 43 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 44 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 45 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 46 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 47 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 48 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 49 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 50 has a bounded textured mesh
+PASS poisonboy drawn_heavy frame 51 has a bounded textured mesh
+PASS poisonboy has its complete unique pose set
+PASS poisonboy renders idle
+PASS poisonboy renders walk
+PASS poisonboy renders light
+PASS poisonboy renders heavy
+PASS poisonboy renders guard
+PASS poisonboy renders jump
+PASS poisonboy renders special
+PASS poisonboy renders ultimate
+PASS poisonboy renders hit
+PASS poisonboy renders ko
+PASS chainveil core has genuine alpha transparency
+PASS chainveil core frame 0 has a bounded textured mesh
+PASS chainveil core frame 1 has a bounded textured mesh
+PASS chainveil core frame 2 has a bounded textured mesh
+PASS chainveil core frame 3 has a bounded textured mesh
+PASS chainveil core frame 4 has a bounded textured mesh
+PASS chainveil core frame 5 has a bounded textured mesh
+PASS chainveil core frame 6 has a bounded textured mesh
+PASS chainveil core frame 7 has a bounded textured mesh
+PASS chainveil core frame 8 has a bounded textured mesh
+PASS chainveil core frame 9 has a bounded textured mesh
+PASS chainveil core frame 10 has a bounded textured mesh
+PASS chainveil core frame 11 has a bounded textured mesh
+PASS chainveil core frame 12 has a bounded textured mesh
+PASS chainveil core frame 13 has a bounded textured mesh
+PASS chainveil core frame 14 has a bounded textured mesh
+PASS chainveil core frame 15 has a bounded textured mesh
+PASS chainveil actions has genuine alpha transparency
+PASS chainveil actions frame 16 has a bounded textured mesh
+PASS chainveil actions frame 17 has a bounded textured mesh
+PASS chainveil actions frame 18 has a bounded textured mesh
+PASS chainveil actions frame 19 has a bounded textured mesh
+PASS chainveil actions frame 20 has a bounded textured mesh
+PASS chainveil actions frame 21 has a bounded textured mesh
+PASS chainveil actions frame 22 has a bounded textured mesh
+PASS chainveil actions frame 23 has a bounded textured mesh
+PASS chainveil walk has genuine alpha transparency
+PASS chainveil walk frame 24 has a bounded textured mesh
+PASS chainveil walk frame 25 has a bounded textured mesh
+PASS chainveil walk frame 26 has a bounded textured mesh
+PASS chainveil walk frame 27 has a bounded textured mesh
+PASS chainveil drawn has genuine alpha transparency
+PASS chainveil drawn frame 28 has a bounded textured mesh
+PASS chainveil drawn frame 29 has a bounded textured mesh
+PASS chainveil drawn frame 30 has a bounded textured mesh
+PASS chainveil drawn frame 31 has a bounded textured mesh
+PASS chainveil drawn frame 32 has a bounded textured mesh
+PASS chainveil drawn frame 33 has a bounded textured mesh
+PASS chainveil drawn frame 34 has a bounded textured mesh
+PASS chainveil drawn frame 35 has a bounded textured mesh
+PASS chainveil drawn frame 36 has a bounded textured mesh
+PASS chainveil drawn frame 37 has a bounded textured mesh
+PASS chainveil drawn frame 38 has a bounded textured mesh
+PASS chainveil drawn frame 39 has a bounded textured mesh
+PASS chainveil drawn frame 40 has a bounded textured mesh
+PASS chainveil drawn frame 41 has a bounded textured mesh
+PASS chainveil drawn frame 42 has a bounded textured mesh
+PASS chainveil drawn frame 43 has a bounded textured mesh
+PASS chainveil drawn frame 44 has a bounded textured mesh
+PASS chainveil drawn frame 45 has a bounded textured mesh
+PASS chainveil drawn frame 46 has a bounded textured mesh
+PASS chainveil drawn frame 47 has a bounded textured mesh
+PASS chainveil drawn frame 48 has a bounded textured mesh
+PASS chainveil drawn frame 49 has a bounded textured mesh
+PASS chainveil drawn frame 50 has a bounded textured mesh
+PASS chainveil drawn frame 51 has a bounded textured mesh
+PASS chainveil has its complete unique pose set
+PASS chainveil renders idle
+PASS chainveil renders walk
+PASS chainveil renders light
+PASS chainveil renders heavy
+PASS chainveil renders guard
+PASS chainveil renders jump
+PASS chainveil renders special
+PASS chainveil renders ultimate
+PASS chainveil renders hit
+PASS chainveil renders ko
+PASS cheese_rat core has genuine alpha transparency
+PASS cheese_rat core frame 0 has a bounded textured mesh
+PASS cheese_rat core frame 1 has a bounded textured mesh
+PASS cheese_rat core frame 2 has a bounded textured mesh
+PASS cheese_rat core frame 3 has a bounded textured mesh
+PASS cheese_rat core frame 4 has a bounded textured mesh
+PASS cheese_rat core frame 5 has a bounded textured mesh
+PASS cheese_rat core frame 6 has a bounded textured mesh
+PASS cheese_rat core frame 7 has a bounded textured mesh
+PASS cheese_rat core frame 8 has a bounded textured mesh
+PASS cheese_rat core frame 9 has a bounded textured mesh
+PASS cheese_rat core frame 10 has a bounded textured mesh
+PASS cheese_rat core frame 11 has a bounded textured mesh
+PASS cheese_rat core frame 12 has a bounded textured mesh
+PASS cheese_rat core frame 13 has a bounded textured mesh
+PASS cheese_rat core frame 14 has a bounded textured mesh
+PASS cheese_rat core frame 15 has a bounded textured mesh
+PASS cheese_rat actions has genuine alpha transparency
+PASS cheese_rat actions frame 16 has a bounded textured mesh
+PASS cheese_rat actions frame 17 has a bounded textured mesh
+PASS cheese_rat actions frame 18 has a bounded textured mesh
+PASS cheese_rat actions frame 19 has a bounded textured mesh
+PASS cheese_rat actions frame 20 has a bounded textured mesh
+PASS cheese_rat actions frame 21 has a bounded textured mesh
+PASS cheese_rat actions frame 22 has a bounded textured mesh
+PASS cheese_rat actions frame 23 has a bounded textured mesh
+PASS cheese_rat walk has genuine alpha transparency
+PASS cheese_rat walk frame 24 has a bounded textured mesh
+PASS cheese_rat walk frame 25 has a bounded textured mesh
+PASS cheese_rat walk frame 26 has a bounded textured mesh
+PASS cheese_rat walk frame 27 has a bounded textured mesh
+PASS cheese_rat drawn has genuine alpha transparency
+PASS cheese_rat drawn frame 28 has a bounded textured mesh
+PASS cheese_rat drawn frame 29 has a bounded textured mesh
+PASS cheese_rat drawn frame 30 has a bounded textured mesh
+PASS cheese_rat drawn frame 31 has a bounded textured mesh
+PASS cheese_rat drawn frame 32 has a bounded textured mesh
+PASS cheese_rat drawn frame 33 has a bounded textured mesh
+PASS cheese_rat drawn frame 34 has a bounded textured mesh
+PASS cheese_rat drawn frame 35 has a bounded textured mesh
+PASS cheese_rat drawn frame 36 has a bounded textured mesh
+PASS cheese_rat drawn frame 37 has a bounded textured mesh
+PASS cheese_rat drawn frame 38 has a bounded textured mesh
+PASS cheese_rat drawn frame 39 has a bounded textured mesh
+PASS cheese_rat drawn frame 40 has a bounded textured mesh
+PASS cheese_rat drawn frame 41 has a bounded textured mesh
+PASS cheese_rat drawn frame 42 has a bounded textured mesh
+PASS cheese_rat drawn frame 43 has a bounded textured mesh
+PASS cheese_rat drawn frame 44 has a bounded textured mesh
+PASS cheese_rat drawn frame 45 has a bounded textured mesh
+PASS cheese_rat drawn frame 46 has a bounded textured mesh
+PASS cheese_rat drawn frame 47 has a bounded textured mesh
+PASS cheese_rat drawn frame 48 has a bounded textured mesh
+PASS cheese_rat drawn frame 49 has a bounded textured mesh
+PASS cheese_rat drawn frame 50 has a bounded textured mesh
+PASS cheese_rat drawn frame 51 has a bounded textured mesh
+PASS cheese_rat has its complete unique pose set
+PASS cheese_rat renders idle
+PASS cheese_rat renders walk
+PASS cheese_rat renders light
+PASS cheese_rat renders heavy
+PASS cheese_rat renders guard
+PASS cheese_rat renders jump
+PASS cheese_rat renders special
+PASS cheese_rat renders ultimate
+PASS cheese_rat renders hit
+PASS cheese_rat renders ko
+PASS nachtelf core has genuine alpha transparency
+PASS nachtelf core frame 0 has a bounded textured mesh
+PASS nachtelf core frame 1 has a bounded textured mesh
+PASS nachtelf core frame 2 has a bounded textured mesh
+PASS nachtelf core frame 3 has a bounded textured mesh
+PASS nachtelf core frame 4 has a bounded textured mesh
+PASS nachtelf core frame 5 has a bounded textured mesh
+PASS nachtelf core frame 6 has a bounded textured mesh
+PASS nachtelf core frame 7 has a bounded textured mesh
+PASS nachtelf core frame 8 has a bounded textured mesh
+PASS nachtelf core frame 9 has a bounded textured mesh
+PASS nachtelf core frame 10 has a bounded textured mesh
+PASS nachtelf core frame 11 has a bounded textured mesh
+PASS nachtelf core frame 12 has a bounded textured mesh
+PASS nachtelf core frame 13 has a bounded textured mesh
+PASS nachtelf core frame 14 has a bounded textured mesh
+PASS nachtelf core frame 15 has a bounded textured mesh
+PASS nachtelf actions has genuine alpha transparency
+PASS nachtelf actions frame 16 has a bounded textured mesh
+PASS nachtelf actions frame 17 has a bounded textured mesh
+PASS nachtelf actions frame 18 has a bounded textured mesh
+PASS nachtelf actions frame 19 has a bounded textured mesh
+PASS nachtelf actions frame 20 has a bounded textured mesh
+PASS nachtelf actions frame 21 has a bounded textured mesh
+PASS nachtelf actions frame 22 has a bounded textured mesh
+PASS nachtelf actions frame 23 has a bounded textured mesh
+PASS nachtelf walk has genuine alpha transparency
+PASS nachtelf walk frame 24 has a bounded textured mesh
+PASS nachtelf walk frame 25 has a bounded textured mesh
+PASS nachtelf walk frame 26 has a bounded textured mesh
+PASS nachtelf walk frame 27 has a bounded textured mesh
+PASS nachtelf walk frame 28 has a bounded textured mesh
+PASS nachtelf walk frame 29 has a bounded textured mesh
+PASS nachtelf drawn has genuine alpha transparency
+PASS nachtelf drawn frame 30 has a bounded textured mesh
+PASS nachtelf drawn frame 31 has a bounded textured mesh
+PASS nachtelf drawn frame 32 has a bounded textured mesh
+PASS nachtelf drawn frame 33 has a bounded textured mesh
+PASS nachtelf drawn frame 34 has a bounded textured mesh
+PASS nachtelf drawn frame 35 has a bounded textured mesh
+PASS nachtelf drawn frame 36 has a bounded textured mesh
+PASS nachtelf drawn frame 37 has a bounded textured mesh
+PASS nachtelf drawn frame 38 has a bounded textured mesh
+PASS nachtelf drawn frame 39 has a bounded textured mesh
+PASS nachtelf drawn frame 40 has a bounded textured mesh
+PASS nachtelf drawn frame 41 has a bounded textured mesh
+PASS nachtelf drawn frame 42 has a bounded textured mesh
+PASS nachtelf drawn frame 43 has a bounded textured mesh
+PASS nachtelf drawn frame 44 has a bounded textured mesh
+PASS nachtelf drawn frame 45 has a bounded textured mesh
+PASS nachtelf drawn frame 46 has a bounded textured mesh
+PASS nachtelf drawn frame 47 has a bounded textured mesh
+PASS nachtelf drawn frame 48 has a bounded textured mesh
+PASS nachtelf drawn frame 49 has a bounded textured mesh
+PASS nachtelf drawn frame 50 has a bounded textured mesh
+PASS nachtelf drawn frame 51 has a bounded textured mesh
+PASS nachtelf drawn frame 52 has a bounded textured mesh
+PASS nachtelf drawn frame 53 has a bounded textured mesh
+PASS nachtelf has its complete unique pose set
+PASS nachtelf renders idle
+PASS nachtelf renders walk
+PASS nachtelf renders light
+PASS nachtelf renders heavy
+PASS nachtelf renders guard
+PASS nachtelf renders jump
+PASS nachtelf renders special
+PASS nachtelf renders ultimate
+PASS nachtelf renders hit
+PASS nachtelf renders ko
+PASS spinegrin core has genuine alpha transparency
+PASS spinegrin core frame 0 has a bounded textured mesh
+PASS spinegrin core frame 1 has a bounded textured mesh
+PASS spinegrin core frame 2 has a bounded textured mesh
+PASS spinegrin core frame 3 has a bounded textured mesh
+PASS spinegrin core frame 4 has a bounded textured mesh
+PASS spinegrin core frame 5 has a bounded textured mesh
+PASS spinegrin core frame 6 has a bounded textured mesh
+PASS spinegrin core frame 7 has a bounded textured mesh
+PASS spinegrin core frame 8 has a bounded textured mesh
+PASS spinegrin core frame 9 has a bounded textured mesh
+PASS spinegrin core frame 10 has a bounded textured mesh
+PASS spinegrin core frame 11 has a bounded textured mesh
+PASS spinegrin core frame 12 has a bounded textured mesh
+PASS spinegrin core frame 13 has a bounded textured mesh
+PASS spinegrin core frame 14 has a bounded textured mesh
+PASS spinegrin core frame 15 has a bounded textured mesh
+PASS spinegrin actions has genuine alpha transparency
+PASS spinegrin actions frame 16 has a bounded textured mesh
+PASS spinegrin actions frame 17 has a bounded textured mesh
+PASS spinegrin actions frame 18 has a bounded textured mesh
+PASS spinegrin actions frame 19 has a bounded textured mesh
+PASS spinegrin actions frame 20 has a bounded textured mesh
+PASS spinegrin actions frame 21 has a bounded textured mesh
+PASS spinegrin actions frame 22 has a bounded textured mesh
+PASS spinegrin actions frame 23 has a bounded textured mesh
+PASS spinegrin walk has genuine alpha transparency
+PASS spinegrin walk frame 24 has a bounded textured mesh
+PASS spinegrin walk frame 25 has a bounded textured mesh
+PASS spinegrin walk frame 26 has a bounded textured mesh
+PASS spinegrin walk frame 27 has a bounded textured mesh
+PASS spinegrin walk frame 28 has a bounded textured mesh
+PASS spinegrin walk frame 29 has a bounded textured mesh
+PASS spinegrin extra has genuine alpha transparency
+PASS spinegrin extra frame 30 has a bounded textured mesh
+PASS spinegrin extra frame 31 has a bounded textured mesh
+PASS spinegrin extra frame 32 has a bounded textured mesh
+PASS spinegrin extra frame 33 has a bounded textured mesh
+PASS spinegrin extra frame 34 has a bounded textured mesh
+PASS spinegrin extra frame 35 has a bounded textured mesh
+PASS spinegrin extra frame 36 has a bounded textured mesh
+PASS spinegrin extra frame 37 has a bounded textured mesh
+PASS spinegrin drawn has genuine alpha transparency
+PASS spinegrin drawn frame 38 has a bounded textured mesh
+PASS spinegrin drawn frame 39 has a bounded textured mesh
+PASS spinegrin drawn frame 40 has a bounded textured mesh
+PASS spinegrin drawn frame 41 has a bounded textured mesh
+PASS spinegrin drawn frame 42 has a bounded textured mesh
+PASS spinegrin drawn frame 43 has a bounded textured mesh
+PASS spinegrin drawn frame 44 has a bounded textured mesh
+PASS spinegrin drawn frame 45 has a bounded textured mesh
+PASS spinegrin drawn frame 46 has a bounded textured mesh
+PASS spinegrin drawn frame 47 has a bounded textured mesh
+PASS spinegrin drawn frame 48 has a bounded textured mesh
+PASS spinegrin drawn frame 49 has a bounded textured mesh
+PASS spinegrin drawn frame 50 has a bounded textured mesh
+PASS spinegrin drawn frame 51 has a bounded textured mesh
+PASS spinegrin drawn frame 52 has a bounded textured mesh
+PASS spinegrin drawn frame 53 has a bounded textured mesh
+PASS spinegrin drawn frame 54 has a bounded textured mesh
+PASS spinegrin drawn frame 55 has a bounded textured mesh
+PASS spinegrin drawn frame 56 has a bounded textured mesh
+PASS spinegrin drawn frame 57 has a bounded textured mesh
+PASS spinegrin drawn frame 58 has a bounded textured mesh
+PASS spinegrin drawn frame 59 has a bounded textured mesh
+PASS spinegrin drawn frame 60 has a bounded textured mesh
+PASS spinegrin drawn frame 61 has a bounded textured mesh
+PASS spinegrin has its complete unique pose set
+PASS spinegrin renders idle
+PASS spinegrin renders walk
+PASS spinegrin renders light
+PASS spinegrin renders heavy
+PASS spinegrin renders guard
+PASS spinegrin renders jump
+PASS spinegrin renders special
+PASS spinegrin renders ultimate
+PASS spinegrin renders hit
+PASS spinegrin renders ko
+PASS lava_stone core has genuine alpha transparency
+PASS lava_stone core frame 0 has a bounded textured mesh
+PASS lava_stone core frame 1 has a bounded textured mesh
+PASS lava_stone core frame 2 has a bounded textured mesh
+PASS lava_stone core frame 3 has a bounded textured mesh
+PASS lava_stone core frame 4 has a bounded textured mesh
+PASS lava_stone core frame 5 has a bounded textured mesh
+PASS lava_stone core frame 6 has a bounded textured mesh
+PASS lava_stone core frame 7 has a bounded textured mesh
+PASS lava_stone core frame 8 has a bounded textured mesh
+PASS lava_stone core frame 9 has a bounded textured mesh
+PASS lava_stone core frame 10 has a bounded textured mesh
+PASS lava_stone core frame 11 has a bounded textured mesh
+PASS lava_stone core frame 12 has a bounded textured mesh
+PASS lava_stone core frame 13 has a bounded textured mesh
+PASS lava_stone core frame 14 has a bounded textured mesh
+PASS lava_stone core frame 15 has a bounded textured mesh
+PASS lava_stone actions has genuine alpha transparency
+PASS lava_stone actions frame 16 has a bounded textured mesh
+PASS lava_stone actions frame 17 has a bounded textured mesh
+PASS lava_stone actions frame 18 has a bounded textured mesh
+PASS lava_stone actions frame 19 has a bounded textured mesh
+PASS lava_stone actions frame 20 has a bounded textured mesh
+PASS lava_stone actions frame 21 has a bounded textured mesh
+PASS lava_stone actions frame 22 has a bounded textured mesh
+PASS lava_stone actions frame 23 has a bounded textured mesh
+PASS lava_stone walk has genuine alpha transparency
+PASS lava_stone walk frame 24 has a bounded textured mesh
+PASS lava_stone walk frame 25 has a bounded textured mesh
+PASS lava_stone walk frame 26 has a bounded textured mesh
+PASS lava_stone walk frame 27 has a bounded textured mesh
+PASS lava_stone walk frame 28 has a bounded textured mesh
+PASS lava_stone walk frame 29 has a bounded textured mesh
+PASS lava_stone extra has genuine alpha transparency
+PASS lava_stone extra frame 30 has a bounded textured mesh
+PASS lava_stone extra frame 31 has a bounded textured mesh
+PASS lava_stone extra frame 32 has a bounded textured mesh
+PASS lava_stone extra frame 33 has a bounded textured mesh
+PASS lava_stone extra frame 34 has a bounded textured mesh
+PASS lava_stone extra frame 35 has a bounded textured mesh
+PASS lava_stone extra frame 36 has a bounded textured mesh
+PASS lava_stone extra frame 37 has a bounded textured mesh
+PASS lava_stone drawn has genuine alpha transparency
+PASS lava_stone drawn frame 38 has a bounded textured mesh
+PASS lava_stone drawn frame 39 has a bounded textured mesh
+PASS lava_stone drawn frame 40 has a bounded textured mesh
+PASS lava_stone drawn frame 41 has a bounded textured mesh
+PASS lava_stone drawn frame 42 has a bounded textured mesh
+PASS lava_stone drawn frame 43 has a bounded textured mesh
+PASS lava_stone drawn frame 44 has a bounded textured mesh
+PASS lava_stone drawn frame 45 has a bounded textured mesh
+PASS lava_stone drawn frame 46 has a bounded textured mesh
+PASS lava_stone drawn frame 47 has a bounded textured mesh
+PASS lava_stone drawn frame 48 has a bounded textured mesh
+PASS lava_stone drawn frame 49 has a bounded textured mesh
+PASS lava_stone drawn frame 50 has a bounded textured mesh
+PASS lava_stone drawn frame 51 has a bounded textured mesh
+PASS lava_stone drawn frame 52 has a bounded textured mesh
+PASS lava_stone drawn frame 53 has a bounded textured mesh
+PASS lava_stone drawn frame 54 has a bounded textured mesh
+PASS lava_stone drawn frame 55 has a bounded textured mesh
+PASS lava_stone drawn frame 56 has a bounded textured mesh
+PASS lava_stone drawn frame 57 has a bounded textured mesh
+PASS lava_stone drawn frame 58 has a bounded textured mesh
+PASS lava_stone drawn frame 59 has a bounded textured mesh
+PASS lava_stone drawn frame 60 has a bounded textured mesh
+PASS lava_stone drawn frame 61 has a bounded textured mesh
+PASS lava_stone has its complete unique pose set
+PASS lava_stone renders idle
+PASS lava_stone renders walk
+PASS lava_stone renders light
+PASS lava_stone renders heavy
+PASS lava_stone renders guard
+PASS lava_stone renders jump
+PASS lava_stone renders special
+PASS lava_stone renders ultimate
+PASS lava_stone renders hit
+PASS lava_stone renders ko
+PASS lava_stone renders strike
+PASS lava_stone renders slam
+PASS lava_stone renders power
+PASS crystal_fang core has genuine alpha transparency
+PASS crystal_fang core frame 0 has a bounded textured mesh
+PASS crystal_fang core frame 1 has a bounded textured mesh
+PASS crystal_fang core frame 2 has a bounded textured mesh
+PASS crystal_fang core frame 3 has a bounded textured mesh
+PASS crystal_fang core frame 4 has a bounded textured mesh
+PASS crystal_fang core frame 5 has a bounded textured mesh
+PASS crystal_fang core frame 6 has a bounded textured mesh
+PASS crystal_fang core frame 7 has a bounded textured mesh
+PASS crystal_fang core frame 8 has a bounded textured mesh
+PASS crystal_fang core frame 9 has a bounded textured mesh
+PASS crystal_fang core frame 10 has a bounded textured mesh
+PASS crystal_fang core frame 11 has a bounded textured mesh
+PASS crystal_fang core frame 12 has a bounded textured mesh
+PASS crystal_fang core frame 13 has a bounded textured mesh
+PASS crystal_fang core frame 14 has a bounded textured mesh
+PASS crystal_fang core frame 15 has a bounded textured mesh
+PASS crystal_fang actions has genuine alpha transparency
+PASS crystal_fang actions frame 16 has a bounded textured mesh
+PASS crystal_fang actions frame 17 has a bounded textured mesh
+PASS crystal_fang actions frame 18 has a bounded textured mesh
+PASS crystal_fang actions frame 19 has a bounded textured mesh
+PASS crystal_fang actions frame 20 has a bounded textured mesh
+PASS crystal_fang actions frame 21 has a bounded textured mesh
+PASS crystal_fang actions frame 22 has a bounded textured mesh
+PASS crystal_fang actions frame 23 has a bounded textured mesh
+PASS crystal_fang walk has genuine alpha transparency
+PASS crystal_fang walk frame 24 has a bounded textured mesh
+PASS crystal_fang walk frame 25 has a bounded textured mesh
+PASS crystal_fang walk frame 26 has a bounded textured mesh
+PASS crystal_fang walk frame 27 has a bounded textured mesh
+PASS crystal_fang walk frame 28 has a bounded textured mesh
+PASS crystal_fang walk frame 29 has a bounded textured mesh
+PASS crystal_fang extra has genuine alpha transparency
+PASS crystal_fang extra frame 30 has a bounded textured mesh
+PASS crystal_fang extra frame 31 has a bounded textured mesh
+PASS crystal_fang extra frame 32 has a bounded textured mesh
+PASS crystal_fang extra frame 33 has a bounded textured mesh
+PASS crystal_fang extra frame 34 has a bounded textured mesh
+PASS crystal_fang extra frame 35 has a bounded textured mesh
+PASS crystal_fang extra frame 36 has a bounded textured mesh
+PASS crystal_fang extra frame 37 has a bounded textured mesh
+PASS crystal_fang drawn has genuine alpha transparency
+PASS crystal_fang drawn frame 38 has a bounded textured mesh
+PASS crystal_fang drawn frame 39 has a bounded textured mesh
+PASS crystal_fang drawn frame 40 has a bounded textured mesh
+PASS crystal_fang drawn frame 41 has a bounded textured mesh
+PASS crystal_fang drawn frame 42 has a bounded textured mesh
+PASS crystal_fang drawn frame 43 has a bounded textured mesh
+PASS crystal_fang drawn frame 44 has a bounded textured mesh
+PASS crystal_fang drawn frame 45 has a bounded textured mesh
+PASS crystal_fang drawn frame 46 has a bounded textured mesh
+PASS crystal_fang drawn frame 47 has a bounded textured mesh
+PASS crystal_fang drawn frame 48 has a bounded textured mesh
+PASS crystal_fang drawn frame 49 has a bounded textured mesh
+PASS crystal_fang drawn frame 50 has a bounded textured mesh
+PASS crystal_fang drawn frame 51 has a bounded textured mesh
+PASS crystal_fang drawn frame 52 has a bounded textured mesh
+PASS crystal_fang drawn frame 53 has a bounded textured mesh
+PASS crystal_fang drawn frame 54 has a bounded textured mesh
+PASS crystal_fang drawn frame 55 has a bounded textured mesh
+PASS crystal_fang drawn frame 56 has a bounded textured mesh
+PASS crystal_fang drawn frame 57 has a bounded textured mesh
+PASS crystal_fang drawn frame 58 has a bounded textured mesh
+PASS crystal_fang drawn frame 59 has a bounded textured mesh
+PASS crystal_fang drawn frame 60 has a bounded textured mesh
+PASS crystal_fang drawn frame 61 has a bounded textured mesh
+PASS crystal_fang has its complete unique pose set
+PASS crystal_fang renders idle
+PASS crystal_fang renders walk
+PASS crystal_fang renders light
+PASS crystal_fang renders heavy
+PASS crystal_fang renders guard
+PASS crystal_fang renders jump
+PASS crystal_fang renders special
+PASS crystal_fang renders ultimate
+PASS crystal_fang renders hit
+PASS crystal_fang renders ko
+PASS crystal_fang renders strike
+PASS crystal_fang renders slam
+PASS crystal_fang renders power
+PASS phoenix_reign core has genuine alpha transparency
+PASS phoenix_reign core frame 0 has a bounded textured mesh
+PASS phoenix_reign core frame 1 has a bounded textured mesh
+PASS phoenix_reign core frame 2 has a bounded textured mesh
+PASS phoenix_reign core frame 3 has a bounded textured mesh
+PASS phoenix_reign core frame 4 has a bounded textured mesh
+PASS phoenix_reign core frame 5 has a bounded textured mesh
+PASS phoenix_reign core frame 6 has a bounded textured mesh
+PASS phoenix_reign core frame 7 has a bounded textured mesh
+PASS phoenix_reign core frame 8 has a bounded textured mesh
+PASS phoenix_reign core frame 9 has a bounded textured mesh
+PASS phoenix_reign core frame 10 has a bounded textured mesh
+PASS phoenix_reign core frame 11 has a bounded textured mesh
+PASS phoenix_reign core frame 12 has a bounded textured mesh
+PASS phoenix_reign core frame 13 has a bounded textured mesh
+PASS phoenix_reign core frame 14 has a bounded textured mesh
+PASS phoenix_reign core frame 15 has a bounded textured mesh
+PASS phoenix_reign actions has genuine alpha transparency
+PASS phoenix_reign actions frame 16 has a bounded textured mesh
+PASS phoenix_reign actions frame 17 has a bounded textured mesh
+PASS phoenix_reign actions frame 18 has a bounded textured mesh
+PASS phoenix_reign actions frame 19 has a bounded textured mesh
+PASS phoenix_reign actions frame 20 has a bounded textured mesh
+PASS phoenix_reign actions frame 21 has a bounded textured mesh
+PASS phoenix_reign actions frame 22 has a bounded textured mesh
+PASS phoenix_reign actions frame 23 has a bounded textured mesh
+PASS phoenix_reign walk has genuine alpha transparency
+PASS phoenix_reign walk frame 24 has a bounded textured mesh
+PASS phoenix_reign walk frame 25 has a bounded textured mesh
+PASS phoenix_reign walk frame 26 has a bounded textured mesh
+PASS phoenix_reign walk frame 27 has a bounded textured mesh
+PASS phoenix_reign walk frame 28 has a bounded textured mesh
+PASS phoenix_reign walk frame 29 has a bounded textured mesh
+PASS phoenix_reign extra has genuine alpha transparency
+PASS phoenix_reign extra frame 30 has a bounded textured mesh
+PASS phoenix_reign extra frame 31 has a bounded textured mesh
+PASS phoenix_reign extra frame 32 has a bounded textured mesh
+PASS phoenix_reign extra frame 33 has a bounded textured mesh
+PASS phoenix_reign extra frame 34 has a bounded textured mesh
+PASS phoenix_reign extra frame 35 has a bounded textured mesh
+PASS phoenix_reign extra frame 36 has a bounded textured mesh
+PASS phoenix_reign extra frame 37 has a bounded textured mesh
+PASS phoenix_reign drawn has genuine alpha transparency
+PASS phoenix_reign drawn frame 38 has a bounded textured mesh
+PASS phoenix_reign drawn frame 39 has a bounded textured mesh
+PASS phoenix_reign drawn frame 40 has a bounded textured mesh
+PASS phoenix_reign drawn frame 41 has a bounded textured mesh
+PASS phoenix_reign drawn frame 42 has a bounded textured mesh
+PASS phoenix_reign drawn frame 43 has a bounded textured mesh
+PASS phoenix_reign drawn frame 44 has a bounded textured mesh
+PASS phoenix_reign drawn frame 45 has a bounded textured mesh
+PASS phoenix_reign drawn frame 46 has a bounded textured mesh
+PASS phoenix_reign drawn frame 47 has a bounded textured mesh
+PASS phoenix_reign drawn frame 48 has a bounded textured mesh
+PASS phoenix_reign drawn frame 49 has a bounded textured mesh
+PASS phoenix_reign drawn frame 50 has a bounded textured mesh
+PASS phoenix_reign drawn frame 51 has a bounded textured mesh
+PASS phoenix_reign drawn frame 52 has a bounded textured mesh
+PASS phoenix_reign drawn frame 53 has a bounded textured mesh
+PASS phoenix_reign drawn frame 54 has a bounded textured mesh
+PASS phoenix_reign drawn frame 55 has a bounded textured mesh
+PASS phoenix_reign drawn frame 56 has a bounded textured mesh
+PASS phoenix_reign drawn frame 57 has a bounded textured mesh
+PASS phoenix_reign drawn frame 58 has a bounded textured mesh
+PASS phoenix_reign drawn frame 59 has a bounded textured mesh
+PASS phoenix_reign drawn frame 60 has a bounded textured mesh
+PASS phoenix_reign drawn frame 61 has a bounded textured mesh
+PASS phoenix_reign has its complete unique pose set
+PASS phoenix_reign renders idle
+PASS phoenix_reign renders walk
+PASS phoenix_reign renders light
+PASS phoenix_reign renders heavy
+PASS phoenix_reign renders guard
+PASS phoenix_reign renders jump
+PASS phoenix_reign renders special
+PASS phoenix_reign renders ultimate
+PASS phoenix_reign renders hit
+PASS phoenix_reign renders ko
+PASS phoenix_reign renders peck
+PASS phoenix_reign renders wing_beat
+PASS phoenix_reign renders rebirth
+PASS bamboo_blade core has genuine alpha transparency
+PASS bamboo_blade core frame 0 has a bounded textured mesh
+PASS bamboo_blade core frame 1 has a bounded textured mesh
+PASS bamboo_blade core frame 2 has a bounded textured mesh
+PASS bamboo_blade core frame 3 has a bounded textured mesh
+PASS bamboo_blade core frame 4 has a bounded textured mesh
+PASS bamboo_blade core frame 5 has a bounded textured mesh
+PASS bamboo_blade core frame 6 has a bounded textured mesh
+PASS bamboo_blade core frame 7 has a bounded textured mesh
+PASS bamboo_blade core frame 8 has a bounded textured mesh
+PASS bamboo_blade core frame 9 has a bounded textured mesh
+PASS bamboo_blade core frame 10 has a bounded textured mesh
+PASS bamboo_blade core frame 11 has a bounded textured mesh
+PASS bamboo_blade core frame 12 has a bounded textured mesh
+PASS bamboo_blade core frame 13 has a bounded textured mesh
+PASS bamboo_blade core frame 14 has a bounded textured mesh
+PASS bamboo_blade core frame 15 has a bounded textured mesh
+PASS bamboo_blade core frame 16 has a bounded textured mesh
+PASS bamboo_blade core frame 17 has a bounded textured mesh
+PASS bamboo_blade core frame 18 has a bounded textured mesh
+PASS bamboo_blade core frame 19 has a bounded textured mesh
+PASS bamboo_blade core frame 20 has a bounded textured mesh
+PASS bamboo_blade core frame 21 has a bounded textured mesh
+PASS bamboo_blade core frame 22 has a bounded textured mesh
+PASS bamboo_blade core frame 23 has a bounded textured mesh
+PASS bamboo_blade ultimate_keys has genuine alpha transparency
+PASS bamboo_blade ultimate_keys frame 24 has a bounded textured mesh
+PASS bamboo_blade ultimate_keys frame 25 has a bounded textured mesh
+PASS bamboo_blade has its complete unique pose set
+PASS bamboo_blade renders idle
+PASS bamboo_blade renders walk
+PASS bamboo_blade renders light
+PASS bamboo_blade renders heavy
+PASS bamboo_blade renders guard
+PASS bamboo_blade renders jump
+PASS bamboo_blade renders special
+PASS bamboo_blade renders ultimate
+PASS bamboo_blade renders hit
+PASS bamboo_blade renders ko
+PASS sawtina core has genuine alpha transparency
+PASS sawtina core frame 0 has a bounded textured mesh
+PASS sawtina core frame 1 has a bounded textured mesh
+PASS sawtina core frame 2 has a bounded textured mesh
+PASS sawtina core frame 3 has a bounded textured mesh
+PASS sawtina core frame 4 has a bounded textured mesh
+PASS sawtina core frame 5 has a bounded textured mesh
+PASS sawtina core frame 6 has a bounded textured mesh
+PASS sawtina core frame 7 has a bounded textured mesh
+PASS sawtina core frame 8 has a bounded textured mesh
+PASS sawtina core frame 9 has a bounded textured mesh
+PASS sawtina core frame 10 has a bounded textured mesh
+PASS sawtina core frame 11 has a bounded textured mesh
+PASS sawtina core frame 12 has a bounded textured mesh
+PASS sawtina core frame 13 has a bounded textured mesh
+PASS sawtina core frame 14 has a bounded textured mesh
+PASS sawtina core frame 15 has a bounded textured mesh
+PASS sawtina core frame 16 has a bounded textured mesh
+PASS sawtina core frame 17 has a bounded textured mesh
+PASS sawtina core frame 18 has a bounded textured mesh
+PASS sawtina core frame 19 has a bounded textured mesh
+PASS sawtina core frame 20 has a bounded textured mesh
+PASS sawtina core frame 21 has a bounded textured mesh
+PASS sawtina core frame 22 has a bounded textured mesh
+PASS sawtina core frame 23 has a bounded textured mesh
+PASS sawtina ultimate_keys has genuine alpha transparency
+PASS sawtina ultimate_keys frame 24 has a bounded textured mesh
+PASS sawtina ultimate_keys frame 25 has a bounded textured mesh
+PASS sawtina has its complete unique pose set
+PASS sawtina renders idle
+PASS sawtina renders walk
+PASS sawtina renders light
+PASS sawtina renders heavy
+PASS sawtina renders guard
+PASS sawtina renders jump
+PASS sawtina renders special
+PASS sawtina renders ultimate
+PASS sawtina renders hit
+PASS sawtina renders ko
+PASS heavy full-extension artwork coincides with active hitbox
+PASS guard input selects authored block pose
+PASS KO selects authored defeated pose
+PASS pause freezes sprite animation clock
+ART RESULT: 825 passed, 0 failed

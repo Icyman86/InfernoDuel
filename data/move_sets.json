@@ -688,5 +688,75 @@
       "hitstun": 0.65,
       "description": "Bright ranged burst with extended hitstun; no screen-obscuring flash."
     }
+  ],
+  "bamboo_blade": [
+    {
+      "id": "light",
+      "display_name": "Bamboo Slash",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Twin Bamboo Cleave",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy",
+      "reach": 175
+    },
+    {
+      "id": "special",
+      "display_name": "Fruit Throw",
+      "slot": "special",
+      "kind": "fruit_throw",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Crimson Harvest",
+      "slot": "ultimate",
+      "kind": "fruit_storm",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
+  ],
+  "sawtina": [
+    {
+      "id": "light",
+      "display_name": "Cartridge Jab",
+      "slot": "light",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "light"
+    },
+    {
+      "id": "heavy",
+      "display_name": "Razor Heel",
+      "slot": "heavy",
+      "kind": "melee",
+      "command": "neutral",
+      "animation": "heavy",
+      "reach": 175
+    },
+    {
+      "id": "special",
+      "display_name": "Bullet Tutu",
+      "slot": "special",
+      "kind": "bullet_volley",
+      "command": "neutral",
+      "animation": "special"
+    },
+    {
+      "id": "ultimate",
+      "display_name": "Razor Rhapsody",
+      "slot": "ultimate",
+      "kind": "saw_cyclone",
+      "command": "neutral",
+      "animation": "ultimate"
+    }
   ]
 }

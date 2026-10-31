@@ -2,7 +2,7 @@
   "schema_version": 1,
   "source_upload": "Character sheets.zip",
   "extraction_date": "2026-10-27",
-  "total_files": 8,
+  "total_files": 10,
   "purpose": "UNEDITED_ORIGINAL_CHARACTER_SHEETS_NOT_READY_TO_ANIMATE",
   "items": [
     {
@@ -126,6 +126,36 @@
       "animation_frames_ready": false,
       "sha256": "f9da2cd583d11abb63a07b442d8d1bf5c96d34533e28ba60a6880dcf871682c9",
       "note": "Phoenix Reign: artwork, basisaanvallen, specials en supers"
+    },
+    {
+      "source_filename": "1000000117.jpg",
+      "path": "assets/originals/character_sheets_2026-10-31/Bamboo Blade.jpg",
+      "slug": "bamboo_blade",
+      "fighters": [
+        "Bamboo Blade"
+      ],
+      "kind": "move_reference_sheet",
+      "width": 1280,
+      "height": 962,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "fc82c93d9217c4e24aa8197c7ae35198149093d15ae8798136ac28a42561f134",
+      "note": "User upload 2026-10-31; preserved unmodified. Separate animation keys are derived artwork."
+    },
+    {
+      "source_filename": "1000000118.jpg",
+      "path": "assets/originals/character_sheets_2026-10-31/Sawtina.jpg",
+      "slug": "sawtina",
+      "fighters": [
+        "Sawtina"
+      ],
+      "kind": "move_reference_sheet",
+      "width": 1280,
+      "height": 960,
+      "image_mode": "RGB",
+      "animation_frames_ready": false,
+      "sha256": "f8ec4906bf8548d702b90d3f8a685ee00ff3d8a9c8401d5ec6175f66ce2e9407",
+      "note": "User upload 2026-10-31; preserved unmodified. Separate animation keys are derived artwork."
     }
   ]
 }

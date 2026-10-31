@@ -1,0 +1,77 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS both paid fighters show their lock action and coin balance
+PASS sharkbyte gallery uses a high-resolution 2D illustration
+PASS sharkbyte complete body illustration stays inside the preview
+PASS sharkbyte complete portrait illustration stays inside the preview
+PASS sharkbyte complete signature illustration stays inside the preview
+PASS sharkbyte finishes the entrance at full brightness
+PASS bullet gallery uses a high-resolution 2D illustration
+PASS bullet complete body illustration stays inside the preview
+PASS bullet complete portrait illustration stays inside the preview
+PASS bullet complete signature illustration stays inside the preview
+PASS bullet finishes the entrance at full brightness
+PASS nachtelf gallery uses a high-resolution 2D illustration
+PASS nachtelf complete body illustration stays inside the preview
+PASS nachtelf complete portrait illustration stays inside the preview
+PASS nachtelf complete signature illustration stays inside the preview
+PASS nachtelf finishes the entrance at full brightness
+PASS poisonboy gallery uses a high-resolution 2D illustration
+PASS poisonboy complete body illustration stays inside the preview
+PASS poisonboy complete portrait illustration stays inside the preview
+PASS poisonboy complete signature illustration stays inside the preview
+PASS poisonboy finishes the entrance at full brightness
+PASS spinegrin gallery uses a high-resolution 2D illustration
+PASS spinegrin complete body illustration stays inside the preview
+PASS spinegrin complete portrait illustration stays inside the preview
+PASS spinegrin complete signature illustration stays inside the preview
+PASS spinegrin finishes the entrance at full brightness
+PASS chainveil gallery uses a high-resolution 2D illustration
+PASS chainveil complete body illustration stays inside the preview
+PASS chainveil complete portrait illustration stays inside the preview
+PASS chainveil complete signature illustration stays inside the preview
+PASS chainveil finishes the entrance at full brightness
+PASS cheese_rat gallery uses a high-resolution 2D illustration
+PASS cheese_rat complete body illustration stays inside the preview
+PASS cheese_rat complete portrait illustration stays inside the preview
+PASS cheese_rat complete signature illustration stays inside the preview
+PASS cheese_rat finishes the entrance at full brightness
+PASS lava_stone gallery uses a high-resolution 2D illustration
+PASS lava_stone complete body illustration stays inside the preview
+PASS lava_stone complete portrait illustration stays inside the preview
+PASS lava_stone complete signature illustration stays inside the preview
+PASS lava_stone finishes the entrance at full brightness
+PASS crystal_fang gallery uses a high-resolution 2D illustration
+PASS crystal_fang complete body illustration stays inside the preview
+PASS crystal_fang complete portrait illustration stays inside the preview
+PASS crystal_fang complete signature illustration stays inside the preview
+PASS crystal_fang finishes the entrance at full brightness
+PASS phoenix_reign gallery uses a high-resolution 2D illustration
+PASS phoenix_reign complete body illustration stays inside the preview
+PASS phoenix_reign complete portrait illustration stays inside the preview
+PASS phoenix_reign complete signature illustration stays inside the preview
+PASS phoenix_reign finishes the entrance at full brightness
+PASS bamboo_blade gallery uses a high-resolution 2D illustration
+PASS bamboo_blade complete body illustration stays inside the preview
+PASS bamboo_blade complete portrait illustration stays inside the preview
+PASS bamboo_blade complete signature illustration stays inside the preview
+PASS bamboo_blade finishes the entrance at full brightness
+PASS bamboo_blade intro actually decodes and plays
+PASS sawtina gallery uses a high-resolution 2D illustration
+PASS sawtina complete body illustration stays inside the preview
+PASS sawtina complete portrait illustration stays inside the preview
+PASS sawtina complete signature illustration stays inside the preview
+PASS sawtina finishes the entrance at full brightness
+PASS sawtina intro actually decodes and plays
+PASS bamboo_blade activates its own ultimate
+PASS compressed projectile snapshot stays within a single Wi-Fi datagram
+PASS all three ultimate projectiles survive snapshot reconstruction
+PASS sawtina activates its own ultimate
+PASS compressed projectile snapshot stays within a single Wi-Fi datagram
+PASS all three ultimate projectiles survive snapshot reconstruction
+PASS rendered result shows the five-coin victory reward
+PASS pasted session code normalizes spaces and hyphens before length validation
+V16 VISUAL RESULT: 71 passed, 0 failed

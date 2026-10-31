@@ -42,7 +42,7 @@ func run() -> void:
 	var available := 0
 	for profile in roster:
 		if profile.playable: available += 1
-	check(available == 10,"all ten complete fighters are available")
+	check(available == 12,"all twelve complete fighter profiles are present")
 	for id in ["poisonboy","chainveil","cheese_rat"]:
 		game.show_select(false)
 		game.screen.choose(0,index_of(id))

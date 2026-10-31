@@ -21,6 +21,8 @@ var touch_controls: TouchControls
 var touch_mode := GamePlatform.touch_enabled()
 var networked := false
 var network_driver: NetworkMatchDriver
+var reward_id := ""
+var reward_amount := 0
 
 func _ready() -> void:
 	get_tree().quit_on_go_back = false
@@ -107,7 +109,7 @@ func show_menu() -> void:
 	side.color = Color(0.018,0.012,0.032,0.6)
 	side.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	screen.add_child(UI.place(side,0,0,610,720))
-	screen.add_child(UI.place(UI.label("O N E   A R E N A .   T E N   L E G E N D S .",16,UI.GOLD),65,50,550,32))
+	screen.add_child(UI.place(UI.label("F O U R   A R E N A S .   T W E L V E   L E G E N D S .",16,UI.GOLD),65,50,550,32))
 	var title := UI.label("INFERNO",69,UI.IVORY,true)
 	title.add_theme_constant_override("outline_size",5)
 	title.add_theme_color_override("font_outline_color",Color("241420"))
@@ -123,6 +125,7 @@ func show_menu() -> void:
 		hero.position = Vector2(832 if i == 0 else 1089,648 if i == 0 else 610)
 		hero.scale.x = -1 if i == 1 else 1
 		screen.add_child(hero)
+	screen.add_child(UI.place(UI.label("%d COINS · WIN +5 / LOSE +1" % Progression.coins,16,UI.GOLD),680,55,550,30))
 	var buttons := VBoxContainer.new()
 	UI.place(buttons,140,311 if touch_mode else 288,390,370)
 	screen.add_child(buttons)
@@ -140,7 +143,7 @@ func show_menu() -> void:
 		buttons.add_child(UI.button("QUIT",func(): confirm_action("Quit Inferno Duel: Legends?",func(): get_tree().quit())))
 	buttons.get_child(0).grab_focus()
 	screen.add_child(UI.place(UI.label("Made by Rens de Gee en Ted Sondervan",16,UI.IVORY),35,677,630,28))
-	screen.add_child(UI.place(UI.label("V15 · CRYSTAL FANG ZIJN MIJN",14,UI.MUTED),920,677,320,28))
+	screen.add_child(UI.place(UI.label("V16 · BAMBOO BLADE & SAWTINA",14,UI.MUTED),920,677,320,28))
 
 func show_select(cpu: bool) -> void:
 	if touch_mode and not cpu:
@@ -227,6 +230,8 @@ func show_arena() -> void:
 	stage.add_child(screen)
 
 func start_match() -> void:
+	reward_id = Progression.match_id()
+	reward_amount = 0
 	if touch_mode and not solo and not networked:
 		show_online()
 		return
@@ -316,6 +321,9 @@ func show_result(score: Array[int]) -> void:
 	match_node.phase = "complete"
 	match_node.set_stopped(true)
 	route = "result"
+	var local_player := OnlineSession.local_slot if networked else 0
+	var earned := Progression.award_match(reward_id,score,local_player)
+	if earned > 0: reward_amount = earned
 	var box := make_overlay()
 	var winner := 0 if score[0] > score[1] else 1
 	var hero := FighterVisual.new()
@@ -327,11 +335,14 @@ func show_result(score: Array[int]) -> void:
 	box.add_child(UI.label("P%d WINS" % (winner+1),44,UI.GOLD,true))
 	box.add_child(UI.label(roster[selected[winner]].display_name.to_upper(),26,UI.IVORY))
 	box.add_child(UI.label("%d : %d" % [score[0],score[1]],40,UI.IVORY,true))
+	var reward_label := UI.label("+%d COINS · BALANCE %d" % [reward_amount,Progression.coins],20,UI.GOLD)
+	if reward_amount == 0 and not Progression.last_error.is_empty(): reward_label.text = Progression.last_error
+	box.add_child(reward_label)
 	if networked:
 		var rematch := UI.button("REMATCH",func():
 			OnlineSession.request_rematch()
 			if is_instance_valid(overlay):
-				var button: Button = box.get_child(3)
+				var button: Button = box.get_child(4)
 				button.text = "WAITING FOR OPPONENT…"
 				button.disabled = true,true)
 		box.add_child(rematch)
@@ -339,7 +350,7 @@ func show_result(score: Array[int]) -> void:
 		box.add_child(UI.button("REMATCH",start_match,true))
 		box.add_child(UI.button("CHARACTER SELECT",func(): show_select(solo)))
 	box.add_child(UI.button("MAIN MENU",show_menu))
-	box.get_child(3).grab_focus()
+	box.get_child(4).grab_focus()
 
 func show_options(origin: String) -> void:
 	option_origin = origin

@@ -8,9 +8,10 @@ import struct
 root=Path(__file__).resolve().parent.parent
 catalog=json.loads((root/'data/character_models.json').read_text())['fighters']
 roster=json.loads((root/'data/fighters.json').read_text())['fighters']
-assert set(catalog)=={f['id'] for f in roster}, 'Every roster slot needs a model'
+assert set(catalog) <= {f['id'] for f in roster}, 'Legacy models must reference known fighters'
 seen=set()
 for fighter in roster:
+    if fighter['id'] not in catalog: continue  # V16 gallery uses 2D art; retained V13 models are optional.
     meta=catalog[fighter['id']]
     path=root/meta['path']; raw=path.read_bytes()
     magic,version,length=struct.unpack_from('<III',raw)

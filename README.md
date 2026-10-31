@@ -7,6 +7,21 @@ Based on the supplied v1.1 Word specification and Linux starter package.
 The original design documents remain in `docs/`; the current implementation
 and its limits are described here and in `docs/TEST_LOG.md`.
 
+## Android V16 — Bamboo Blade, Sawtina en coins
+
+[Download V16-preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.16.0-android-preview/releases/android-v0.16.0/InfernoDuel-Android-v0.16.0-preview.apk).
+Werkt de bestaande V14-/V15-preview bij.
+
+**Bamboo Blade** en **Sawtina** hebben eigen combat-animaties, specials, ultimates,
+grote 2D-galleryillustraties en introfilms. Beide kosten **200 coins**. Een voltooide
+wedstrijd geeft **5 coins bij winst** of **1 bij verlies**, tegen CPU of in een
+sessie. Je saldo en unlocks worden op het apparaat bewaard. Ontgrendel via
+**FIGHTERS** of de fighterselectie. De bestaande tien fighters blijven beschikbaar.
+
+Sessiecodes zoeken nu ook rechtstreeks binnen het lokale wifi-netwerk wanneer
+broadcast niet werkt. Gebruik **V16 op beide apparaten**, op hetzelfde wifi-netwerk
+of een hotspot. [Beelden, tests en details](releases/android-v0.16.0/README.md).
+
 ## Android V15 — Crystal Fang zijn mijn
 
 [Download V15-preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.15.0-android-preview/releases/android-v0.15.0/InfernoDuel-Android-v0.15.0-preview.apk).

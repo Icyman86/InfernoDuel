@@ -423,8 +423,75 @@
         "ultimate_kind": "area"
       },
       "move_set": "data/move_sets.json"
+    },
+    {
+      "id": "bamboo_blade",
+      "display_name": "Bamboo Blade",
+      "archetype": "sword_fruit",
+      "special": "Fruit Throw",
+      "ultimate": "Crimson Harvest",
+      "story_status": "coin_unlock",
+      "unlock_cost": 200,
+      "sprite_ready": true,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-31/Bamboo Blade.jpg",
+      "reference_art_available": true,
+      "portrait_region": [
+        904,
+        418,
+        180,
+        245
+      ],
+      "accent": "f85547",
+      "animation_atlas": "assets/sprites/bamboo_blade/atlas.png",
+      "sprite_provenance": "Reference-guided generated animation keys; uploaded original preserved unchanged.",
+      "playable": true,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-31/Bamboo Blade.jpg",
+      "intro": {
+        "video_path": "assets/intros/bamboo_blade.ogv",
+        "art_path": "assets/intros/bamboo_blade_poses.png"
+      },
+      "combat": {
+        "speed": 300,
+        "special_kind": "fruit_throw",
+        "ultimate_kind": "fruit_storm"
+      },
+      "move_set": "data/move_sets.json"
+    },
+    {
+      "id": "sawtina",
+      "display_name": "Sawtina",
+      "archetype": "saw_bullet",
+      "special": "Bullet Tutu",
+      "ultimate": "Razor Rhapsody",
+      "story_status": "coin_unlock",
+      "unlock_cost": 200,
+      "sprite_ready": true,
+      "reference_art_path": "assets/originals/character_sheets_2026-10-31/Sawtina.jpg",
+      "reference_art_available": true,
+      "portrait_region": [
+        902,
+        419,
+        180,
+        246
+      ],
+      "accent": "ff369d",
+      "animation_atlas": "assets/sprites/sawtina/atlas.png",
+      "sprite_provenance": "Reference-guided generated animation keys; uploaded original preserved unchanged.",
+      "playable": true,
+      "gallery_art_path": "assets/originals/character_sheets_2026-10-31/Sawtina.jpg",
+      "intro": {
+        "video_path": "assets/intros/sawtina.ogv",
+        "art_path": "assets/intros/sawtina_poses.png"
+      },
+      "combat": {
+        "speed": 340,
+        "special_kind": "bullet_volley",
+        "ultimate_kind": "saw_cyclone"
+      },
+      "move_set": "data/move_sets.json"
     }
   ],
-  "roster_count": 10,
-  "reference_images_are_animation_sprites": false
+  "roster_count": 12,
+  "reference_images_are_animation_sprites": false,
+  "coin_unlocks_override_versus_availability": true
 }

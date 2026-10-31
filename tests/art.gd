@@ -25,7 +25,7 @@ func run() -> void:
 		check(region.size.x > 100 and Rect2(Vector2.ZERO,atlas_size).encloses(region),profile.id+" portrait is a valid crop of its original sheet")
 		unique_portraits[profile.reference_art_path+str(region)] = true
 		portrait.free()
-	check(unique_portraits.size() == 10,"all ten roster avatars are distinct")
+	check(unique_portraits.size() == 12,"all twelve roster avatars are distinct")
 	for id in data:
 		var fighter_data: Dictionary = data[id]
 		var count := 0

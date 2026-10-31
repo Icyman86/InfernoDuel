@@ -8,7 +8,8 @@ from PIL import Image
 from scipy import ndimage
 from scipy.spatial import ConvexHull
 
-result = {}
+metadata_path = Path("data/intro_atlases.json")
+result = json.loads(metadata_path.read_text()) if metadata_path.exists() else {}
 for path in sorted(Path('assets/intros').glob('*_poses.png')):
     image = np.asarray(Image.open(path))
     height, width = image.shape[:2]

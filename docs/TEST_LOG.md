@@ -875,3 +875,37 @@ mijn heeft roze ambient licht/deeltjes en zit in de RANDOM-keuze.
 - APK: vier maps plus geïmporteerde mijntextuur, ARM64/x86_64-payload, V2/V3-signing,
   16-KiB alignment, versie 0.15.0/code 1500 en preview-pakket-ID gecontroleerd.
 - V15 behoudt aantoonbaar de signing identity van V14-preview en kan die bijwerken.
+
+
+## 31 oktober 2026 — Android V16: twee coin-fighters en 2D-gallery
+
+Bamboo Blade en Sawtina toegevoegd op basis van de twee nieuwe, ongewijzigde
+uploads. Elke fighter heeft 24 core-poses plus twee extra, volledige ultimate-poses,
+eigen projectielen en een gedecodeerde introfilm van 6,43s. De gebruiker koos
+uiteindelijk grote 2D-illustraties voor alle twaalf fighters in FIGHTERS; de
+3D-menuweergave is vervangen. Volledig lichaam, portret en signature-pose zijn
+gekaderd zonder anatomische vervorming. Afgewezen nieuwe 3D-iteraties worden niet
+uitgeleverd. De oorspronkelijke V13-assets/download blijven bewaard.
+
+Beide nieuwe fighters kosten 200 coins. Een afgeronde best-of-three geeft de
+lokale winnaar vijf en de verliezer één coin; restart, afbreken en dubbel openen
+van de uitslag betalen niet nogmaals uit. Wallet, unlocks en reward-IDs worden
+atomisch opgeslagen met backupherstel. Network peers hebben afzonderlijke wallets
+en eigen unlocklijsten. De bestaande tien fighters blijven vrij beschikbaar.
+
+Sessiecodes proberen op Android nu ook unicast op de nabije private wifi-/24,
+naast broadcast. Gekopieerde spaties/streepjes normaliseren voor validatie. Compacte,
+DEFLATE-gecomprimeerde snapshots voorkomen oversized unreliable volley-pakketten.
+De drie-hit-escape blijft gelden. De gebruiker bevestigde wifi-/hotspot-play;
+er is geen publieke internetrelay toegevoegd.
+
+Geslaagde controles: 74 gameplay + 825 art + 45 expansion + 319 roster = 1.263;
+163 progression; 174 gallery via daadwerkelijke knoppen en 960/1920-breedte;
+71 aanvullende renderchecks; 37 echte netwerkchecks inclusief vijf/één coins op
+afzonderlijke testwallets; 53 sessie-UI; 196 arena-/ultimate-checks. Twaalf introfilms
+volledig gedecodeerd; tien oorspronkelijke bestanden behouden hun SHA-256.
+
+De finale preview-APK bevat de 2D-gallery en alle nieuwe assets, ARM64/x86_64,
+V2/V3-signature en gecontroleerde 16-KiB alignment. Pakket-ID en certificaat zijn
+gelijk aan V15-preview, versiecode 1600. Geen fysieke Android-/routertest uitgevoerd.
+Bronnen, APK, logs en screenshots staan in releases/android-v0.16.0/.

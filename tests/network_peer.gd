@@ -39,6 +39,11 @@ func _ready() -> void:
 	call_deferred("run")
 
 func run() -> void:
+	Progression.save_path = directory+"/"+role+"-wallet.cfg"
+	Progression.load_progress()
+	if role in ["host","guest"]:
+		Progression.coins = 200
+		check(Progression.purchase("bamboo_blade" if role == "host" else "sawtina"),"each test device owns only its own purchased fighter")
 	game = preload("res://scenes/main.tscn").instantiate()
 	game.touch_mode = true
 	add_child(game)
@@ -54,6 +59,8 @@ func run() -> void:
 		if role == "bad":
 			code = ("2" if code[0] != "2" else "3")+code.substr(1)
 		check(OnlineSession.join(code),"real client starts a session-code connection")
+		# Exercise Android fallback without relying on broadcast or a manual endpoint.
+		OnlineSession.discovery.destinations = PackedStringArray(["127.0.0.1"])
 	set_process(true)
 
 func _process(delta: float) -> void:
@@ -70,7 +77,9 @@ func _process(delta: float) -> void:
 		return
 	if OnlineSession.phase == "lobby" and once("ready"):
 		check(game.route == "network_select" and game.screen.online_slot == (0 if role == "host" else 1),"connection enters owned fighter selection")
-		OnlineSession.choose(0 if role == "host" else 3)
+		OnlineSession.choose(11 if role == "host" else 10)
+		check(OnlineSession.selected[OnlineSession.local_slot] < 10,"locked fighter cannot be selected through the session API")
+		OnlineSession.choose(10 if role == "host" else 11)
 		# These ordered RPCs use the normal selection and ready protocol.
 		OnlineSession.ready_up(true)
 	if OnlineSession.phase == "arena" and once("arena"):
@@ -88,6 +97,7 @@ func _process(delta: float) -> void:
 			fight_started = elapsed
 			check(OnlineSession.selected_arena == "crystal_mine" and game.backdrop.arena_id == "crystal_mine","host-selected arena is the same on both real peers")
 			check(game.networked and not duel.solo,"session starts a genuine two-device fight without CPU")
+			check(duel.profiles[0].id == "bamboo_blade" and duel.profiles[1].id == "sawtina","both new purchased fighters are playable over real unicast discovery and ENet")
 		if fight_started >= 0:
 			var t := elapsed - fight_started
 			if role == "guest":
@@ -99,7 +109,7 @@ func _process(delta: float) -> void:
 			else:
 				if t >= 3.2 and once("heavy"): InputRouter.pressed[0].heavy = true
 				if t >= 3.9 and once("damage"):
-					check(duel.fighters[0].hp == DuelFighter.MAX_HEALTH - 22,"guest movement, light and projectile damage reach authoritative host")
+					check(duel.fighters[0].hp == DuelFighter.MAX_HEALTH - 17,"jab plus volley obeys the three-hit combo escape on the authoritative host; hp="+str(duel.fighters[0].hp))
 					check(duel.fighters[1].hp == DuelFighter.MAX_HEALTH - 12,"host attack applies authoritative guest damage")
 					capture("fight")
 			if true in OnlineSession.pause_flags:
@@ -119,13 +129,14 @@ func _process(delta: float) -> void:
 			elif paused_at >= 0 and not resumed:
 				resumed = true
 				check(game.route == "fight" and not duel.stopped,"both resume votes restart the shared fight")
-				if role == "guest": check(duel.fighters[0].hp == DuelFighter.MAX_HEALTH - 22 and duel.fighters[1].hp == DuelFighter.MAX_HEALTH - 12,"guest renders the host's exact health state")
+				if role == "guest": check(duel.fighters[0].hp == DuelFighter.MAX_HEALTH - 17 and duel.fighters[1].hp == DuelFighter.MAX_HEALTH - 12,"guest renders the host's exact health state; hp="+str(duel.fighters[0].hp))
 			if role == "host" and resumed and t > 6 and duel.phase == "fight":
 				# Two normal round transitions; only the test fixture sets final KO HP.
 				if once("ko_"+str(duel.round_number)):
 					duel.fighters[1].hp = 0
 	if OnlineSession.phase == "finished" and once("rematch"):
 		check(game.route == "result" and game.match_node.wins == [2,0],"host and guest agree on the best-of-three result")
+		check(Progression.coins == (5 if role == "host" else 1),"host victory pays five coins and guest defeat pays one on separate device wallets")
 		OnlineSession.request_rematch()
 	if OnlineSession.epoch == 2 and once("epoch2"):
 		check(game.route == "fight" and game.match_node.phase == "countdown" and game.match_node.fighters[0].hp == DuelFighter.MAX_HEALTH,"mutual rematch starts a fresh synchronized match generation")

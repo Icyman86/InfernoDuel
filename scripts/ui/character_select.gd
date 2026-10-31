@@ -20,6 +20,8 @@ var hero_names: Array[Label] = []
 var hero_ids: Array[String] = ["",""]
 var badges: Array[Label] = []
 var hint: Label
+var wallet: Label
+const COLUMNS := 6
 
 func _ready() -> void:
 	if online_slot >= 0: mouse_player = online_slot
@@ -31,33 +33,35 @@ func _ready() -> void:
 	add_child(UI.place(UI.label("THE CITADEL AWAITS",16,UI.GOLD),300,32,680,28))
 	add_child(UI.place(UI.label("CHOOSE YOUR FIGHTER",33,UI.IVORY,true),290,66,700,50))
 	add_child(UI.place(UI.label("CONNECTED SESSION · YOU CONTROL P%d" % (online_slot+1) if online_slot >= 0 else ("SOLO  /  CPU EASY" if solo else "LOCAL VERSUS  /  ONE KEYBOARD"),16,UI.MUTED),300,122,680,25))
-	for i in 10:
+	for i in roster.size():
 		var index := i
 		var f: Dictionary = roster[i]
 		var b := UI.button("",func(): choose(mouse_player,index))
-		UI.place(b,300+(i%5)*138,174+(i/5)*185,130,173)
+		UI.place(b,300+(i%COLUMNS)*115,174+(i/COLUMNS)*185,107,173)
 		b.clip_contents = true
 		add_child(b)
 		var portrait := FighterPortrait.new()
 		portrait.setup(f)
-		b.add_child(UI.place(portrait,3,3,124,128))
+		b.add_child(UI.place(portrait,3,3,101,128))
 		if not f.get("playable",false): portrait.modulate = Color(0.68,0.62,0.66)
 		var stripe := ColorRect.new()
 		stripe.color = Color(f.accent)
 		stripe.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		b.add_child(UI.place(stripe,3,126,124,2))
-		var name_label := UI.label(f.display_name.to_upper().replace(" ","\n"),16,UI.IVORY)
+		b.add_child(UI.place(stripe,3,126,101,2))
+		var name_label := UI.label(f.display_name.to_upper().replace(" ","\n"),14,UI.IVORY)
 		if not " " in f.display_name: name_label.text = f.display_name.to_upper()
 		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		b.add_child(UI.place(name_label,2,131,126,40))
+		b.add_child(UI.place(name_label,2,131,103,40))
 		var badge := UI.label("",14,UI.GOLD)
 		badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		b.add_child(UI.place(badge,4,7,122,21))
+		b.add_child(UI.place(badge,4,7,99,21))
 		badges.append(badge)
 		cards.append(b)
 	add_child(UI.place(UI.label("SELECT YOUR LEGEND",16,UI.MUTED),300,556,680,28))
-	add_child(UI.place(UI.label("ALL TEN FIGHTERS READY · MEET EVERY LEGEND IN FIGHTERS",16,UI.MUTED),260,588,760,26))
+	wallet = UI.label("",16,UI.GOLD)
+	add_child(UI.place(wallet,260,588,760,26))
+	Progression.changed.connect(refresh)
 	for i in 2:
 		var p := i
 		var x := 34+i*1004
@@ -106,7 +110,11 @@ func _ready() -> void:
 
 func choose(player: int, index: int) -> void:
 	if online_slot >= 0:
-		if player == online_slot and not ready_players[player]: network_choice.emit(index)
+		if player == online_slot and not ready_players[player]:
+			if Progression.available(roster[index].id): network_choice.emit(index)
+			else:
+				selected[player] = index
+				refresh()
 		return
 	if ready_players[player]: return
 	selected[player] = index
@@ -114,6 +122,14 @@ func choose(player: int, index: int) -> void:
 	refresh()
 
 func confirm(player: int) -> void:
+	if online_slot >= 0 and player != online_slot: return
+	var fighter: Dictionary = roster[selected[player]]
+	if not Progression.available(fighter.id):
+		if Progression.purchase(fighter.id):
+			if online_slot >= 0: network_choice.emit(selected[player])
+			refresh()
+		else: hint.text = Progression.last_error
+		return
 	if online_slot >= 0:
 		if player == online_slot: network_ready.emit(true)
 		return
@@ -138,7 +154,8 @@ func apply_network_state(indices: Array[int], flags: Array[bool]) -> void:
 	refresh()
 
 func refresh() -> void:
-	for i in 10:
+	wallet.text = "%d COINS · WIN +5 / LOSE +1 · NEW FIGHTERS 200 EACH" % Progression.coins
+	for i in roster.size():
 		var color := Color("473944")
 		var badge := ""
 		if selected[0] == i:
@@ -149,13 +166,13 @@ func refresh() -> void:
 			badge += "   CPU" if solo else "   P2"
 		if selected[0] == i and selected[1] == i: color = UI.GOLD
 		cards[i].add_theme_stylebox_override("normal",UI.style(Color("15111a"),color,2))
-		badges[i].text = badge.strip_edges() if badge != "" else ("COMING SOON" if not roster[i].get("playable",false) else "")
+		badges[i].text = badge.strip_edges() if badge != "" else ("200 COINS" if not Progression.available(roster[i].id) else "")
 		badges[i].add_theme_color_override("font_color",color if badge != "" else UI.MUTED)
 	for p in 2:
 		var f: Dictionary = roster[selected[p]]
 		hero_names[p].text = f.display_name.to_upper().replace(" ","\n")
 		previews[p].text = "%s\n%s" % [f.special,f.ultimate]
-		ready_buttons[p].text = "READY ✓" if ready_players[p] else "READY"
+		ready_buttons[p].text = "READY ✓" if ready_players[p] else ("UNLOCK · 200" if not Progression.available(f.id) and (online_slot < 0 or p == online_slot) else "READY")
 		cursor_buttons[p].modulate = (UI.CYAN if p == 0 else UI.ORANGE) if mouse_player == p else Color.WHITE
 		if hero_ids[p] != f.id:
 			for child in hero_holders[p].get_children():
@@ -178,8 +195,8 @@ func handle_key(code: int) -> void:
 		if code in [KEY_F,KEY_I,KEY_ENTER]: confirm(online_slot)
 		elif code in [KEY_G,KEY_O]: unready(online_slot)
 		elif not ready_players[online_slot]:
-			var offset := -1 if code in [KEY_A,KEY_LEFT] else (1 if code in [KEY_D,KEY_RIGHT] else (5 if code in [KEY_W,KEY_S,KEY_UP,KEY_DOWN] else 0))
-			if offset != 0: choose(online_slot,posmod(selected[online_slot]+offset,10))
+			var offset := -1 if code in [KEY_A,KEY_LEFT] else (1 if code in [KEY_D,KEY_RIGHT] else (COLUMNS if code in [KEY_W,KEY_S,KEY_UP,KEY_DOWN] else 0))
+			if offset != 0: choose(online_slot,posmod(selected[online_slot]+offset,roster.size()))
 		return
 	for p in 2:
 		var left := KEY_A if p == 0 else KEY_LEFT
@@ -195,5 +212,5 @@ func handle_key(code: int) -> void:
 			var offset := 0
 			if code == left: offset = -1
 			elif code == right: offset = 1
-			elif code == up or code == down: offset = 5
-			if offset != 0: choose(p,posmod(selected[p]+offset,10))
+			elif code == up or code == down: offset = COLUMNS
+			if offset != 0: choose(p,posmod(selected[p]+offset,roster.size()))

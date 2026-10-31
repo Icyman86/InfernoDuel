@@ -18,6 +18,16 @@ func setup(fighter: DuelFighter, data: AttackData) -> void:
 	kind = fighter.attack_kind(data.id)
 	position = fighter.position + Vector2(direction*45,-55)
 	match kind:
+		"fruit_throw", "fruit_storm":
+			speed = 540 + spawn_index*35
+			size = Vector2(62,62) if kind == "fruit_throw" else Vector2(76,76)
+			position.y = fighter.position.y-130-spawn_index*35
+			position.x -= direction*spawn_index*32
+		"bullet_volley", "saw_cyclone":
+			speed = 760 if kind == "bullet_volley" else 570
+			size = Vector2(68,36) if kind == "bullet_volley" else Vector2(96,96)
+			position.y = fighter.position.y-100-spawn_index*35
+			position.x -= direction*spawn_index*8
 		"toxic_orb":
 			speed = 460
 			lifetime = 2.2
@@ -87,7 +97,36 @@ func hitbox() -> Rect2:
 	return Rect2(position-size*0.5,size)
 
 func _draw() -> void:
-	if kind in ["toxic_orb","venom_cloud"]:
+	if kind in ["fruit_throw","fruit_storm"]:
+		var radius := size.x*.38
+		var color := Color("ffb347") if spawn_index%2 == 0 else Color("ef5267")
+		draw_circle(Vector2.ZERO,radius+10,Color("ff473d",.14))
+		draw_circle(Vector2.ZERO,radius,color)
+		draw_arc(Vector2.ZERO,radius*.73,0,TAU,24,Color("ffe3a0"),2,true)
+		for i in 6:
+			var angle := age*3+i*TAU/6
+			draw_line(Vector2.ZERO,Vector2.from_angle(angle)*radius*.68,Color("fff0a9"),1.6,true)
+		draw_line(Vector2(0,-radius),Vector2(4,-radius-10),Color("6c8d39"),3,true)
+		draw_colored_polygon(PackedVector2Array([Vector2(3,-radius-5),Vector2(19,-radius-13),Vector2(16,-radius-2)]),Color("91ce56"))
+	elif kind == "bullet_volley":
+		draw_set_transform(Vector2.ZERO,0,Vector2(direction,1))
+		draw_line(Vector2(-52,0),Vector2(18,0),Color("ff3d9b",.35),10,true)
+		draw_line(Vector2(-38,0),Vector2(18,0),Color("ffd59a"),3,true)
+		draw_style_box(UI.style(Color("d7a356"),Color("ffe3b1"),1),Rect2(-5,-5,27,10))
+		draw_set_transform(Vector2.ZERO)
+	elif kind == "saw_cyclone":
+		var radius := size.x*.40
+		draw_circle(Vector2.ZERO,radius+10,Color("ff3098",.18))
+		draw_circle(Vector2.ZERO,radius,Color("7c889a"))
+		for i in 16:
+			var a := age*15+i*TAU/16
+			var p := Vector2.from_angle(a)*radius
+			var q := Vector2.from_angle(a+.15)*(radius+7)
+			var r := Vector2.from_angle(a+.28)*radius
+			draw_colored_polygon(PackedVector2Array([p,q,r]),Color("d8e5ed"))
+		draw_arc(Vector2.ZERO,radius*.7,0,TAU,32,Color("ff4eac"),3,true)
+		draw_circle(Vector2.ZERO,radius*.20,Color("191b2c"))
+	elif kind in ["toxic_orb","venom_cloud"]:
 		var color := Color("94df59")
 		var radius := 28.0 if kind == "toxic_orb" else 77.0
 		for layer in range(4,0,-1):

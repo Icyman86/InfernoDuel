@@ -100,6 +100,26 @@
         397
       ],
       "kind": "new frontal half-body painting looking directly at the player"
+    },
+    "bamboo_blade": {
+      "path": "assets/intros/bamboo_blade_poses.png",
+      "rect": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "kind": "reference-guided cinematic half-body painting"
+    },
+    "sawtina": {
+      "path": "assets/intros/sawtina_poses.png",
+      "rect": [
+        0,
+        0,
+        724,
+        543
+      ],
+      "kind": "reference-guided cinematic half-body painting"
     }
   }
 }

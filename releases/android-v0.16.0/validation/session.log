@@ -1,0 +1,56 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS generated room code has exactly six human-readable random symbols
+PASS codes normalize case, copied spacing and separators
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS bad length, ambiguous symbols and addresses cannot be room codes
+PASS remote input is clamped and cannot carry health changes
+PASS network input preserves partial thumbstick movement
+PASS non-numeric remote movement is rejected
+PASS non-finite remote movement is rejected
+PASS string input cannot masquerade as an attack button
+PASS Android menu has session-code connection
+PASS Android menu has no local-versus or shared-tablet option
+PASS offline CPU play remains available
+PASS Android cannot enter local versus through the selection API
+PASS connection UI permits pasted separators, validates six symbols, and has no address picker
+PASS session text entry does not lose F/S/I to menu shortcuts
+PASS bad code shows a usable error instead of starting a fake match
+PASS rendering uses the actual surface size with no fixed-resolution target
+PASS guest cannot choose or ready the opponent's fighter
+SESSION RESULT: 53 passed, 0 failed

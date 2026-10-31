@@ -743,6 +743,54 @@
       "reference": "User-selected C1, with requested display name Crystal Fang zijn mijn",
       "original_user_file": false,
       "date": "2026-10-31"
+    },
+    {
+      "path": "assets/sprites/bamboo_blade/atlas.png",
+      "sha256": "c821425ca4dd1c0cef6d52cb7f5bb40a6c03e619b71665680bf42c96a6c092a8",
+      "kind": "reference_guided_generated_combat_animation_atlas",
+      "reference": "assets/originals/character_sheets_2026-10-31/Bamboo Blade.jpg",
+      "original_user_file": false,
+      "date": "2026-10-31",
+      "notes": "Separate generated artwork. Original user JPEG preserved; PNG pixels unchanged by indexer."
+    },
+    {
+      "path": "assets/intros/bamboo_blade_poses.png",
+      "sha256": "bd3c2b1a11aa87ef6d2cecf137da7d87ec5e9e807d66d911d32116a7f772a23a",
+      "kind": "reference_guided_generated_cinematic_views",
+      "reference": "assets/originals/character_sheets_2026-10-31/Bamboo Blade.jpg",
+      "original_user_file": false,
+      "date": "2026-10-31",
+      "notes": "Separate generated artwork. Original user JPEG preserved; PNG pixels unchanged by indexer."
+    },
+    {
+      "path": "assets/sprites/sawtina/atlas.png",
+      "sha256": "1b7f4e3973660ba70760ae64bb6fa3f4f12fda9a951337de6da3491841704969",
+      "kind": "reference_guided_generated_combat_animation_atlas",
+      "reference": "assets/originals/character_sheets_2026-10-31/Sawtina.jpg",
+      "original_user_file": false,
+      "date": "2026-10-31",
+      "notes": "Separate generated artwork. Original user JPEG preserved; PNG pixels unchanged by indexer."
+    },
+    {
+      "path": "assets/intros/sawtina_poses.png",
+      "sha256": "c9edcf47200dea77e219de9222ca199d18606da370ac5be100b85789a8ec34bf",
+      "kind": "reference_guided_generated_cinematic_views",
+      "reference": "assets/originals/character_sheets_2026-10-31/Sawtina.jpg",
+      "original_user_file": false,
+      "date": "2026-10-31",
+      "notes": "Separate generated artwork. Original user JPEG preserved; PNG pixels unchanged by indexer."
+    },
+    {
+      "path": "assets/sprites/v16_ultimates.png",
+      "sha256": "84ab8a1f8c9f043e3395f8fd616b6f28720945151d6ca9554bde4bcfc44f5185",
+      "kind": "reference_guided_generated_supplemental_ultimate_keys",
+      "references": [
+        "assets/originals/character_sheets_2026-10-31/Bamboo Blade.jpg",
+        "assets/originals/character_sheets_2026-10-31/Sawtina.jpg"
+      ],
+      "original_user_file": false,
+      "date": "2026-10-31",
+      "notes": "Four complete high-resolution silhouettes without baked energy borders; alpha components indexed across nominal cell boundaries, PNG pixels unchanged."
     }
   ],
   "gallery_views": {
@@ -754,5 +802,5 @@
       "assets/reference/poisonboy_sheet.tres"
     ]
   },
-  "roster_update_date": "2026-10-29"
+  "roster_update_date": "2026-10-31"
 }

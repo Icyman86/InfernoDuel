@@ -290,7 +290,7 @@ func attack_kind(id: String) -> String:
 	return profile.get("combat",{}).get(id+"_kind","melee")
 
 func is_projectile_attack(id: String) -> bool:
-	return attack_kind(id) in ["ground_shock", "toxic_orb", "venom_cloud", "cheese_ball", "cheese_king", "cheese_trap", "cheese_storm", "ember_bolt", "infernal_rift", "spike_volley", "spineburst", "stone_spikes", "earthquake", "crystal_spikes", "crystal_storm", "heat_wave", "fire_tornado", "solar_flare"]
+	return attack_kind(id) in ["fruit_throw", "fruit_storm", "bullet_volley", "saw_cyclone", "ground_shock", "toxic_orb", "venom_cloud", "cheese_ball", "cheese_king", "cheese_trap", "cheese_storm", "ember_bolt", "infernal_rift", "spike_volley", "spineburst", "stone_spikes", "earthquake", "crystal_spikes", "crystal_storm", "heat_wave", "fire_tornado", "solar_flare"]
 
 func receive_hit(move: AttackData, attacker_x: float) -> bool:
 	if immunity > 0.0 or hp <= 0: return false

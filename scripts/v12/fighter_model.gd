@@ -65,7 +65,7 @@ func pivot(parent: Node3D, at: Vector3) -> Node3D:
 
 func _ready() -> void:
 	var id: String = actor.profile.id
-	var colors := {"sharkbyte":"597d9a","bullet":"9b5842","nachtelf":"6e3834","poisonboy":"80a251","spinegrin":"829c45","chainveil":"d1b6b0","cheese_rat":"34323b","lava_stone":"44444c","crystal_fang":"322c43","phoenix_reign":"a34b24"}
+	var colors := {"sharkbyte":"597d9a","bullet":"9b5842","nachtelf":"6e3834","poisonboy":"80a251","spinegrin":"829c45","chainveil":"d1b6b0","cheese_rat":"34323b","lava_stone":"44444c","crystal_fang":"322c43","phoenix_reign":"a34b24","bamboo_blade":"962d2a","sawtina":"d6b294"}
 	body = material(Color(colors[id]),.15 if id == "lava_stone" else 0)
 	dark = material(Color("151922"),.45)
 	cloth = material(Color("e1dccc") if id == "sharkbyte" else (Color("d9a928") if id == "cheese_rat" else Color("292b37")))
@@ -79,7 +79,7 @@ func _ready() -> void:
 	box(torso,Vector3(.24,.40,0),Vector3(.04,.34,.36),accent)
 	head = pivot(torso,Vector3(0,.78,0))
 	orb(head,Vector3(0,.16,0),Vector3(.47,.49,.45),body)
-	var animal: bool = id in ["sharkbyte","bullet","cheese_rat","crystal_fang","phoenix_reign"]
+	var animal: bool = id in ["sharkbyte","bullet","cheese_rat","crystal_fang","phoenix_reign","bamboo_blade"]
 	if animal:
 		orb(head,Vector3(.22,.10,0),Vector3(.51,.22,.34),body)
 		box(head,Vector3(.29,.04,0),Vector3(.3,.04,.27),dark)
@@ -150,6 +150,33 @@ func _ready() -> void:
 	if id in ["nachtelf","poisonboy"]:
 		spike(head,Vector3(-.03,.49,0),.52,.23,dark,-.3)
 		for side in [-1,1]: box(torso,Vector3(-.16,-.15,side*.26),Vector3(.20,.8,.22),dark)
+	if id == "bamboo_blade":
+		for side in [-1,1]:
+			orb(head,Vector3(-.03,.39,side*.21),Vector3(.16,.19,.15),dark)
+			orb(head,Vector3(.21,.12,side*.12),Vector3(.21,.21,.18),bone)
+			orb(head,Vector3(.20,.22,side*.19),Vector3(.085,.09,.07),dark)
+			var hand_root := elbows[0 if side < 0 else 1]
+			var blade := box(hand_root,Vector3(.16,-.7,0),Vector3(.07,.62,.04),material(Color("8dbf44"),.6,.2))
+			blade.rotation.z = -.25
+			box(torso,Vector3(.28,.15,side*.17),Vector3(.08,.50,.09),accent)
+		box(torso,Vector3(-.32,.22,0),Vector3(.22,.58,.54),material(Color("987142")))
+		for i in 7: orb(torso,Vector3(-.32,.57,(i-3)*.065),Vector3(.15,.15,.15),material(Color("ef8e3c") if i%2 == 0 else Color("e94865")))
+		root.scale = Vector3(1.15,.94,1.15)
+	if id == "sawtina":
+		var pink := material(Color("e52e8b"),.1,.15)
+		for i in 12:
+			var lock := box(head,Vector3(-.10,.02,(i-5.5)*.035),Vector3(.12,.80,.06),pink)
+			lock.rotation.z = -.25
+		for side in [-1,1]:
+			spike(head,Vector3(0,.24,side*.25),.25,.08,body,side*.6)
+			var disk := TorusMesh.new()
+			disk.inner_radius = .11
+			disk.outer_radius = .18
+			var saw := shape(knees[0 if side < 0 else 1],disk,Vector3(0,-.45,0),Vector3.ONE,dark)
+			saw.rotation.x = PI*.5
+		for i in 12:
+			var a := i*TAU/12
+			box(torso,Vector3(cos(a)*.24,-.10,sin(a)*.33),Vector3(.09,.30,.12),pink if i%3 == 0 else dark)
 	if id == "bullet": root.scale = Vector3(1.17,1.07,1.2)
 	elif id == "cheese_rat": root.scale = Vector3(.9,.93,.9)
 	elif id == "lava_stone": root.scale = Vector3(1.18,1.05,1.18)

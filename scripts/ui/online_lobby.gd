@@ -15,7 +15,7 @@ func _ready() -> void:
 	add_child(UI.place(shade,0,0,1280,720))
 	add_child(UI.place(UI.label("PLAY TOGETHER",17,UI.CYAN),70,44,1140,32))
 	add_child(UI.place(UI.label("ONE CODE. ONE DUEL.",42,UI.IVORY,true),60,88,1160,65))
-	add_child(UI.place(UI.label("The host keeps the session open · Two devices on the same Wi-Fi · V11",19,UI.MUTED),65,166,1150,38))
+	add_child(UI.place(UI.label("The host keeps the session open · Two devices on the same Wi-Fi · V16 on both devices",19,UI.MUTED),65,166,1150,38))
 	for x in [70,670]:
 		var panel := UI.panel()
 		panel.add_theme_stylebox_override("panel",UI.style(Color("131827"),Color("2b344b"),1))
@@ -32,10 +32,16 @@ func _ready() -> void:
 			message.text = "Code copied. Share these six characters with the other player."),100,498,480,42))
 	code_input = LineEdit.new()
 	code_input.placeholder_text = "6 CHARACTERS"
-	code_input.max_length = 6
+	code_input.max_length = 16
 	code_input.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	code_input.add_theme_font_size_override("font_size",37)
-	code_input.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_PASSWORD
+	code_input.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_DEFAULT
+	code_input.virtual_keyboard_enabled = true
+	code_input.text_changed.connect(func(text: String):
+		var cleaned := SessionCode.normalize(text)
+		if cleaned != text:
+			code_input.text = cleaned
+			code_input.caret_column = cleaned.length())
 	add_child(UI.place(code_input,700,336,480,65))
 	code_input.text_submitted.connect(func(_text: String): join_session())
 	join_button = UI.button("CONNECT",join_session,true)
@@ -45,10 +51,10 @@ func _ready() -> void:
 		message.text = "Session closed. Create a new code or join your friend."
 		refresh())
 	add_child(UI.place(cancel_button,700,498,480,42))
-	message = UI.label("Create a code or enter your friend's code. No address to enter.",18,UI.IVORY)
+	message = UI.label("Create a code or paste your friend's six-character code.",18,UI.IVORY)
 	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(UI.place(message,100,578,1080,52))
-	add_child(UI.place(UI.label("Keep both games open. Guest Wi-Fi isolation can prevent connecting. Different networks need a relay.",14,UI.MUTED),70,631,1140,25))
+	add_child(UI.place(UI.label("Keep both games open. Use regular Wi-Fi or a phone hotspot. Guest isolation and VPN can block connecting. Codes work on the same network.",14,UI.MUTED),70,631,1140,25))
 	add_child(UI.place(UI.button("BACK",func(): back_requested.emit()),440,667,400,42))
 	refresh()
 

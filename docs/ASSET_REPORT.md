@@ -101,3 +101,20 @@ Source integrity remains 8/8 SHA-256 matches. See `ART_PIPELINE.md` for the auth
 pipeline and `TEST_LOG.md` for validation. The remaining five combat characters,
 extra move variants, animation in-betweens, final music/voices and balance remain
 future work; the old v0.1 Next art tasks list is historical.
+
+## V16 — twee nieuwe fighters en 2D-gallery
+
+Bamboo Blade en Sawtina gebruiken hun twee ongewijzigde JPEG-uploads als bron.
+Elke fighter heeft een afzonderlijk gegenereerde transparante 24-key combat-atlas,
+twee extra ultimate-poses, vier cinematic views en een daadwerkelijk gerenderde
+6,43s Theora-intro. Het zijn afgeleide game-assets; ze worden niet als originele
+uploadframes voorgesteld. De authoringtools `index_v16_art.py`,
+`index_intro_art.py` en `render_intros.sh` maken dit herhaalbaar.
+
+De gebruiker wees de 3D-gallery af vanwege de kwaliteit en lichaamsverhoudingen.
+FIGHTERS toont daarom voor alle twaalf fighters de hoge-resolutie 2D-illustraties,
+met volledig lichaam, portret en signature-pose. Er worden geen PNG-pixels bewerkt
+of anatomieën vervormd; Polygon2D gebruikt de bestaande transparante silhouette-
+metadata. De volledige illustratie past met marge in de native preview.
+De afgewezen nieuwe 3D-iteraties staan alleen in de genegeerde lokale buildsmap.
+Oudere V13-bestanden en downloads blijven behouden.

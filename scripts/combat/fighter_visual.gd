@@ -178,7 +178,7 @@ func _update_pose(delta := 0.0) -> void:
 		else:
 			# Original attacks keep their drawn windup/contact/recovery keys.
 			frame_number = mini(indices.size()-1,int(progress*indices.size()))
-	elif state not in ["idle","guard"]:
+	elif state != "guard" and indices.size() > 1:
 		frame_number = int(clock*float(animation.get("fps",8)))%indices.size()
 	var data := frame_data(animation.get("atlas","core"),indices[frame_number])
 	assign_frame(sprite,data)

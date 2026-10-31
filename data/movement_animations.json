@@ -110,6 +110,28 @@
       "land": 0.07,
       "arm_swing": 0.027999999999999997,
       "leg_swing": 0.025
+    },
+    "bamboo_blade": {
+      "stride": 210,
+      "bounce": 0.8999999999999999,
+      "sway": 0.84,
+      "lean": 0.021,
+      "breath": 0.007,
+      "tempo": 0.94,
+      "land": 0.075,
+      "arm_swing": 0.027999999999999997,
+      "leg_swing": 0.022
+    },
+    "sawtina": {
+      "stride": 245,
+      "bounce": 0.72,
+      "sway": 0.78,
+      "lean": 0.021,
+      "breath": 0.005,
+      "tempo": 0.98,
+      "land": 0.065,
+      "arm_swing": 0.020999999999999998,
+      "leg_swing": 0.023
     }
   },
   "clips": {

@@ -302,7 +302,7 @@ func finish_round() -> void:
 	Sound.play("round")
 
 func _spawn_projectile(fighter: DuelFighter, move: AttackData) -> void:
-	var count := 3 if fighter.attack_kind(move.id) in ["spike_volley", "spineburst", "cheese_storm", "crystal_storm"] else 1
+	var count := 3 if fighter.attack_kind(move.id) in ["spike_volley", "spineburst", "cheese_storm", "crystal_storm", "fruit_storm", "bullet_volley", "saw_cyclone"] else 1
 	for i in count:
 		var owned: Array[DuelProjectile] = []
 		for existing in projectiles:

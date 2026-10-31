@@ -11,13 +11,14 @@ var host_port := 0
 var host_token := ""
 var started := 0.0
 var retry_at := 0.0
-var destinations := PackedStringArray(["255.255.255.255"])
+var destinations := PackedStringArray()
+var broadcast_enabled := false
 var replies: Dictionary = {}
 var destination_cursor := 0
 
 static func wifi_destinations(addresses: PackedStringArray) -> PackedStringArray:
-	# iOS broadcast needs a restricted multicast entitlement. Probe only the
-	# nearby private /24 over ordinary unicast, without special signing rights.
+	# Android routers often suppress global broadcast; iOS restricts it too.
+	# Probe nearby private /24 addresses with ordinary unicast on both platforms.
 	var prefixes := PackedStringArray()
 	for address in addresses:
 		if not address.is_valid_ip_address() or address.contains(":"): continue
@@ -54,15 +55,16 @@ func advertise(code: String, port: int, token: String) -> Error:
 
 func find(code: String) -> Error:
 	stop()
-	if OS.has_feature("ios"):
-		destinations = wifi_destinations(IP.get_local_addresses())
-		if destinations.is_empty(): return ERR_UNAVAILABLE
+	destinations = wifi_destinations(IP.get_local_addresses())
+	broadcast_enabled = not OS.has_feature("ios")
+	if broadcast_enabled: destinations.insert(0,"255.255.255.255")
+	if destinations.is_empty(): return ERR_UNAVAILABLE
 	socket = PacketPeerUDP.new()
 	var error := socket.bind(0, "0.0.0.0", 8192)
 	if error != OK:
 		stop()
 		return error
-	socket.set_broadcast_enabled(not OS.has_feature("ios"))
+	socket.set_broadcast_enabled(broadcast_enabled)
 	requested = code
 	query = Crypto.new().generate_random_bytes(8).hex_encode()
 	started = Time.get_ticks_msec()/1000.0
@@ -102,12 +104,12 @@ func poll() -> Dictionary:
 				"port":host_port,"token":host_token,"version":ProjectSettings.get_setting("application/config/version")}).to_utf8_buffer())
 		elif requested != "" and data.get("room") == requested and data.get("query") == query:
 			if data.get("version") != ProjectSettings.get_setting("application/config/version"):
-				return {"error":"Install the same V11 version on both devices."}
+				return {"error":"Game versions differ. Install V16 on both devices."}
 			var target_port: Variant = data.get("port",0)
 			var nonce: Variant = data.get("token","")
 			if typeof(target_port) not in [TYPE_INT,TYPE_FLOAT] or target_port < 1 or target_port > 65535: continue
 			if not nonce is String or nonce.length() != 16 or not nonce.is_valid_hex_number(false): continue
 			return {"address":address,"port":int(target_port),"token":nonce}
-	if requested != "" and now-started > 8:
-		return {"error":"Session not found. Check the six-character code, use the same Wi-Fi and keep the host open. Guest Wi-Fi isolation may block discovery."}
+	if requested != "" and now-started > 14:
+		return {"error":"Session not found. Use V16 on both devices, the same Wi-Fi, and keep the host open. Disable VPN or guest Wi-Fi isolation. Codes do not connect different networks."}
 	return {}

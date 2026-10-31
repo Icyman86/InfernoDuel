@@ -10,7 +10,7 @@ var intro_button: Button
 var fighter_buttons: Array[Button] = []
 var demo_viewport: SubViewport
 var preview: TextureRect
-var presentation: FighterPresentation
+var presentation: FighterIllustration
 var sheet_button: Button
 var replay_button: Button
 var sheet_open := false
@@ -19,10 +19,10 @@ var number_label: Label
 var role_label: Label
 var move_label: Label
 var portrait_button: Button
-var turn_buttons: Array[Button] = []
-var dragging := false
 var move_details: Label
 var status_label: Label
+var buy_button: Button
+var wallet: Label
 
 func _ready() -> void:
 	theme = UI.theme()
@@ -37,13 +37,12 @@ func _ready() -> void:
 	add_child(UI.place(panel,282,83,752,507))
 	preview = TextureRect.new()
 	preview.mouse_filter = Control.MOUSE_FILTER_STOP
-	preview.gui_input.connect(_preview_input)
+	preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	add_child(UI.place(preview,284,85,748,503))
 	demo_viewport = SubViewport.new()
 	demo_viewport.size = Vector2i(1122,754)
-	demo_viewport.msaa_3d = Viewport.MSAA_2X
-	demo_viewport.own_world_3d = true
+	demo_viewport.disable_3d = true
 	demo_viewport.handle_input_locally = false
 	preview.add_child(demo_viewport)
 	preview.texture = demo_viewport.get_texture()
@@ -80,12 +79,11 @@ func _ready() -> void:
 	intro_button = UI.button("PLAY INTRO",func(): intro_requested.emit(current))
 	intro_button.add_theme_font_size_override("font_size",15)
 	add_child(UI.place(intro_button,35,498,235,40))
-	for side in [-1,1]:
-		var amount: float = side*PI/6
-		var turn_button := UI.button("↶ TURN" if side < 0 else "TURN ↷",func(): presentation.turn(amount))
-		turn_button.add_theme_font_size_override("font_size",13)
-		add_child(UI.place(turn_button,1050 if side < 0 else 1152,332,92,38))
-		turn_buttons.append(turn_button)
+	var pose_button := UI.button("SIGNATURE POSE",func():
+		presentation.toggle_signature()
+		portrait_button.text = "PORTRAIT VIEW")
+	pose_button.add_theme_font_size_override("font_size",14)
+	add_child(UI.place(pose_button,1050,332,194,38))
 	portrait_button = UI.button("PORTRAIT VIEW",func():
 		presentation.set_portrait(not presentation.portrait)
 		portrait_button.text = "FULL BODY" if presentation.portrait else "PORTRAIT VIEW")
@@ -94,6 +92,12 @@ func _ready() -> void:
 	status_label = UI.label("",13,UI.MUTED)
 	add_child(UI.place(status_label,340,561,635,24))
 	add_child(UI.place(UI.label("CHOOSE YOUR FIGHTER",14,UI.CYAN),38,572,240,26))
+	buy_button = UI.button("",purchase_current)
+	buy_button.add_theme_font_size_override("font_size",15)
+	add_child(UI.place(buy_button,35,543,235,34))
+	wallet = UI.label("",16,UI.GOLD)
+	add_child(UI.place(wallet,700,35,355,32))
+	Progression.changed.connect(refresh_wallet)
 	for i in roster.size():
 		var index := i
 		var button := UI.button(roster[i].display_name.to_upper().replace(" ","\n"),func(): show_fighter(index))
@@ -106,24 +110,23 @@ func _ready() -> void:
 		hover.border_color = UI.CYAN
 		button.add_theme_stylebox_override("hover",hover)
 		button.add_theme_stylebox_override("pressed",hover)
-		add_child(UI.place(button,37+i*121,604,116,86))
+		add_child(UI.place(button,37+i*101,604,96,86))
 		fighter_buttons.append(button)
 		var portrait := FighterPortrait.new()
 		portrait.setup(roster[i])
-		button.add_child(UI.place(portrait,30,6,56,54))
+		button.add_child(UI.place(portrait,23,6,50,54))
 	show_fighter(current)
 	fighter_buttons[current].grab_focus()
 
 func show_fighter(index: int) -> void:
 	current = index
-	dragging = false
 	if portrait_button: portrait_button.text = "PORTRAIT VIEW"
 	if presentation:
 		demo_viewport.remove_child(presentation)
 		presentation.queue_free()
 	var f: Dictionary = roster[index]
 	var color := Color(f.get("accent","55d9ef"))
-	presentation = FighterPresentation.new()
+	presentation = FighterIllustration.new()
 	presentation.profile = f
 	presentation.completed.connect(show_idle)
 	demo_viewport.add_child(presentation)
@@ -141,14 +144,26 @@ func show_fighter(index: int) -> void:
 		var style := UI.style(Color("223345") if i == current else Color("121b29"),color if i == current else Color("2e3a4e"),2 if i == current else 1)
 		style.content_margin_top = 60
 		fighter_buttons[i].add_theme_stylebox_override("normal",style)
+	refresh_wallet()
 	set_sheet(false)
 	replay_presentation()
+
+func refresh_wallet() -> void:
+	wallet.text = "%d COINS · WIN +5 / LOSE +1" % Progression.coins
+	var id: String = roster[current].id
+	buy_button.visible = Progression.prices.has(id)
+	buy_button.disabled = Progression.available(id)
+	buy_button.text = "UNLOCKED ✓" if Progression.available(id) else "UNLOCK · 200 COINS"
+
+func purchase_current() -> void:
+	if not Progression.purchase(roster[current].id): status_label.text = Progression.last_error
+	refresh_wallet()
 
 func show_idle() -> void:
 	if sheet_open: return
 	preview.visible = true
 	demo_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	status_label.text = "DRAG TO ROTATE  ·  PORTRAIT / FULL BODY"
+	status_label.text = "FULL BODY · PORTRAIT · SIGNATURE POSE"
 
 func replay_presentation() -> void:
 	set_sheet(false)
@@ -165,17 +180,9 @@ func set_sheet(value: bool) -> void:
 	art.visible = value
 	preview.visible = not value
 	presentation.set_process(not value)
-	if presentation.animator: presentation.animator.active = not value
 	demo_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS if preview.visible else SubViewport.UPDATE_DISABLED
 	sheet_button.text = "BACK TO FIGHTER" if value else "ORIGINAL SHEET"
 	status_label.text = "ORIGINAL REFERENCE" if value else ("READY FOR THE CITADEL" if presentation.finished else "LEGEND PRESENTATION")
-
-func _preview_input(event: InputEvent) -> void:
-	if sheet_open: return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		dragging = event.pressed
-	elif event is InputEventMouseMotion and dragging:
-		presentation.turn(-event.relative.x*.008)
 
 func _process(_delta: float) -> void:
 	if not preview or not preview.visible: return
@@ -184,4 +191,4 @@ func _process(_delta: float) -> void:
 		demo_viewport.size = pixels
 
 func _identity(id: String) -> String:
-	return {"sharkbyte":"Ocean predator.\nLeather, fins and steel.","bullet":"The human bruiser.\nScarred fists. Red leather.","nachtelf":"The voidbringer.\nElven steel and crimson.","poisonboy":"The toxic shadow.\nStreetwear and venom.","spinegrin":"The living arsenal.\nScales, spines and instinct.","chainveil":"The iron widow.\nBlack lace and cold chains.","cheese_rat":"The big dreams.\nYellow shirt. Razor wit.","lava_stone":"Steel soul. Rock heart.\nBasalt and molten veins.","crystal_fang":"Part wolf. Part diamond.\nObsidian and amethyst.","phoenix_reign":"Born from the ashes.\nFeathers, fire and resolve."}.get(id,"")
+	return {"sharkbyte":"Ocean predator.\nLeather, fins and steel.","bullet":"The human bruiser.\nScarred fists. Red leather.","nachtelf":"The voidbringer.\nElven steel and crimson.","poisonboy":"The toxic shadow.\nStreetwear and venom.","spinegrin":"The living arsenal.\nScales, spines and instinct.","chainveil":"The iron widow.\nBlack lace and cold chains.","cheese_rat":"The big dreams.\nYellow shirt. Razor wit.","lava_stone":"Steel soul. Rock heart.\nBasalt and molten veins.","crystal_fang":"Part wolf. Part diamond.\nObsidian and amethyst.","phoenix_reign":"Born from the ashes.\nFeathers, fire and resolve.","bamboo_blade":"The crimson harvest.\nBamboo steel and spirit fruit.","sawtina":"The razor dancer.\nMagenta, saws and brass."}.get(id,"")
