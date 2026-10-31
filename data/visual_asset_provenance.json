@@ -735,6 +735,14 @@
       "reference": "User-selected B1 Levende Brug",
       "original_user_file": false,
       "date": "2026-10-31"
+    },
+    {
+      "path": "assets/arenas/crystal_mine.png",
+      "sha256": "809aaeed3d8369cbc996ee7f41674ecce1e2390375543324acdaddf05985ff45",
+      "kind": "generated_arena_plate",
+      "reference": "User-selected C1, with requested display name Crystal Fang zijn mijn",
+      "original_user_file": false,
+      "date": "2026-10-31"
     }
   ],
   "gallery_views": {

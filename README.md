@@ -7,6 +7,16 @@ Based on the supplied v1.1 Word specification and Linux starter package.
 The original design documents remain in `docs/`; the current implementation
 and its limits are described here and in `docs/TEST_LOG.md`.
 
+## Android V15 — Crystal Fang zijn mijn
+
+[Download V15-preview](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.15.0-android-preview/releases/android-v0.15.0/InfernoDuel-Android-v0.15.0-preview.apk).
+Werkt de bestaande V14-preview bij.
+
+De gekozen C1-arena staat nu in de game als **Crystal Fang zijn mijn**: een grote
+ondergrondse mijn vol gloeiende roze diamanten. Kies hem na character select,
+of laat RANDOM kiezen uit alle vier arena's. De mapkeuze toont alle vier kaarten
+volledig in beeld. [Ingame-beelden en controles](releases/android-v0.15.0/README.md).
+
 ## Android V14 — nieuwe arena's en ultimate power
 
 [Download de aparte V14-preview-app](https://github.com/Icyman86/InfernoDuel/raw/refs/tags/v0.14.0-android-preview/releases/android-v0.14.0/InfernoDuel-Android-v0.14.0-preview.apk).

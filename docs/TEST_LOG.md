@@ -859,3 +859,19 @@ De oorspronkelijke V11-keystore is niet beschikbaar. De publieke certificaatgege
 van V11 en de nieuwe lokale signer verschillen. De gebruiker koos daarom een aparte
 installeerbare preview met pakket-ID `org.infernoduel.legends.preview`. Er wordt geen
 V11-updatecompatibiliteit geclaimd en de bestaande APK/tags zijn behouden.
+
+
+# Android V15 — 31 oktober 2026
+
+C1 is toegevoegd met exact de gevraagde naam `Crystal Fang zijn mijn`. Vier
+arena's passen in de mapkeuze; miniaturen en kaartbreedte schalen mee. De nieuwe
+mijn heeft roze ambient licht/deeltjes en zit in de RANDOM-keuze.
+
+- 196 arena-/ultimate-controles geslaagd, 0 mislukt: exacte naam, vier kaartbounds,
+  daadwerkelijke klik op de vierde kaart, alle vier random-opties en gameplay.
+- 29 netwerkchecks geslaagd over drie processen; beide echte peers laden crystal_mine.
+- 1.151 bestaande checks geslaagd; alle tien films gedecodeerd; originele art behouden.
+- Touch-render van Crystal Fang in de nieuwe mijn beoordeeld. Geen fysieke telefoontest.
+- APK: vier maps plus geïmporteerde mijntextuur, ARM64/x86_64-payload, V2/V3-signing,
+  16-KiB alignment, versie 0.15.0/code 1500 en preview-pakket-ID gecontroleerd.
+- V15 behoudt aantoonbaar de signing identity van V14-preview en kan die bijwerken.

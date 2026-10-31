@@ -9,11 +9,11 @@ func capture(name: String) -> void:
 	if DisplayServer.get_name() == "headless": return
 	await get_tree().process_frame
 	await RenderingServer.frame_post_draw
-	get_viewport().get_texture().get_image().save_png("/tmp/inferno-v14/"+name+".png")
+	get_viewport().get_texture().get_image().save_png("/tmp/inferno-v15/"+name+".png")
 func _ready() -> void:
 	call_deferred("run")
 func run() -> void:
-	DirAccess.make_dir_recursive_absolute("/tmp/inferno-v14")
+	DirAccess.make_dir_recursive_absolute("/tmp/inferno-v15")
 	var game := preload("res://scenes/main.tscn").instantiate()
 	game.touch_mode = true
 	add_child(game)
@@ -21,15 +21,28 @@ func run() -> void:
 	game.screen.confirm(0)
 	game.screen.confirm(1)
 	check(game.route == "arena" and game.screen is ArenaSelect,"Android readied character selection goes to map picker")
-	check(game.screen.cards.size() == 3 and game.screen.random_button != null,"picker contains existing map, both selected designs and RANDOM")
+	check(game.screen.cards.size() == 4 and game.screen.random_button != null,"picker contains all four available maps and RANDOM")
+	check(ArenaCatalog.get_arena("crystal_mine").name == "Crystal Fang zijn mijn","mine preserves the user-requested name exactly")
+	for card in game.screen.cards:
+		check(Rect2(Vector2.ZERO,Vector2(1280,720)).encloses(Rect2(card.position,card.size)),"every map card fits fully inside the Android layout")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var mine_card: Button = game.screen.cards[3]
+	for down in [true,false]:
+		var event := InputEventMouseButton.new()
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.position = mine_card.get_global_rect().get_center()
+		event.pressed = down
+		get_viewport().push_input(event)
+	check(game.screen.selection == "crystal_mine","the fourth map is selectable through its actual on-screen card")
 	await capture("arena-picker")
-	seed(1400)
+	seed(1500)
 	var seen := {}
 	for i in 128:
 		var id := ArenaCatalog.resolve("random")
 		check(ArenaCatalog.valid(id),"random returns an available arena")
 		seen[id] = true
-	check(seen.size() == 3,"random can select each of the three available maps")
+	check(seen.size() == 4,"random can select each of the four available maps")
 	check(not ArenaCatalog.valid("../../other") and not ArenaCatalog.valid("random"),"only resolved known arena IDs are accepted for networking")
 	for entry in ArenaCatalog.entries():
 		game.show_arena()

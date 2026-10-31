@@ -16,22 +16,25 @@ func _ready() -> void:
 	add_child(UI.place(UI.label("CHOOSE YOUR ARENA",36,UI.IVORY,true),60,55,1160,65))
 	add_child(UI.place(UI.label("PICK A MAP OR LET RANDOM CHOOSE" if can_choose else "THE HOST IS CHOOSING THE ARENA",19,UI.GOLD),80,135,1120,36))
 	var entries := ArenaCatalog.entries()
+	var card_width := (1200.0-24.0*(entries.size()-1))/entries.size()
+	var art_height := minf(204.0,(card_width-12)*9.0/16.0)
 	for i in entries.size():
 		var arena: Dictionary = entries[i]
 		var id: String = arena.id
 		var card := UI.button("",func(): select(id))
 		card.disabled = not can_choose
-		add_child(UI.place(card,40+i*408,208,384,260))
+		add_child(UI.place(card,40+i*(card_width+24),208,card_width,art_height+64))
 		cards.append(card)
 		var art := TextureRect.new()
 		art.texture = load("res://"+arena.path)
 		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		card.add_child(UI.place(art,6,6,372,204))
+		card.add_child(UI.place(art,6,6,card_width-12,art_height))
 		var label := UI.label(str(arena.name).to_upper(),18,UI.IVORY,true)
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		card.add_child(UI.place(label,6,216,372,34))
+		card.add_child(UI.place(label,6,art_height+16,card_width-12,40))
 	hint = UI.label("",18,UI.MUTED)
 	add_child(UI.place(hint,60,486,1160,45))
 	random_button = UI.button("RANDOM",func(): select("random"))
